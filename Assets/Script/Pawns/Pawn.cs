@@ -4,39 +4,36 @@ using UnityEngine;
 
 public class Pawn : MonoBehaviour
 {
-    [SerializeField, Tooltip("How much health current pawn has")]
-    protected float currentHealth;
-
-    [SerializeField, Tooltip("Maximum health of current pawn")]
-    protected float maxHealth;
-
-    [SerializeField, Tooltip("How fast does pawn walk")]
-    protected float walkSpeed;
-
-    [SerializeField, Tooltip("How fast does pawn run")]
-    protected float runSpeed;
-
-    [SerializeField, Tooltip("is pawn sprinting")]
-    protected bool isSprinting;
-
-    [SerializeField, Tooltip("What is this pawns jump height")]
-    protected float jumpHeight;
-
-    [SerializeField, Tooltip("How much damage does this pawn do")]
-    protected float damage;
-
+    #region Variables
+    #region General Pawn Attributes
+    [Header("General Pawn Attributes"), SerializeField, Tooltip("How much health the pawn currently has")]
+    protected float currentHealth; //this is the current health of the pawn
+    [SerializeField, Tooltip("Maximum health of the pawn")]
+    protected float maxHealth; //this is the max health of the pawn
+    [SerializeField, Tooltip("How fast the pawn walks")]
+    protected float walkSpeed; //this determines the walk speed of the pawn
+    [SerializeField, Tooltip("How fast the pawn runs")]
+    protected float runSpeed; //this determines the run speed of the pawn
+    [SerializeField, Tooltip("This determines how high the pawn can jump")]
+    protected float jumpHeight; //this determines how high the pawn will jump
+    [SerializeField, Tooltip("The base damage the pawn does with each attack")]
+    protected float damage; //this will determine the base damage each pawn does with an attack
+    [SerializeField, Tooltip("This is the melee attack range of the pawn")]
+    protected float meleeAttackRange; //determines the range of the pawns melee attack
     [SerializeField, Tooltip("What is the attack range of pawn")]
-    protected float attackRange;
+    protected float rangedAttackRange; //determines the range of the pawns ranged attack
+    #endregion
 
-    [SerializeField, Tooltip("What is the pawn's location/rotation")]
-    protected Transform t;
+    #region Pawn Components
+    [Header("Pawn Components"), SerializeField, Tooltip("The pawn's current location/rotation")]
+    protected Transform t; //stores the transform of the current pawn
+    [SerializeField, Tooltip("This is the Pawns rigidbody component")]
+    protected Rigidbody rb; //stores the rigidbody component of the pawn
+    #endregion
+    #endregion
 
-    [SerializeField, Tooltip("Pawns rigidbody")]
-    protected Rigidbody rb;
-    
 
-
-
+    #region Functions
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -48,4 +45,5 @@ public class Pawn : MonoBehaviour
     {
         
     }
+    #endregion
 }
