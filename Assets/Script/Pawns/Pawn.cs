@@ -5,43 +5,43 @@ using UnityEngine;
 public class Pawn : MonoBehaviour
 {
     [SerializeField, Tooltip("How much health current pawn has")]
-    private float currentHealth;
+    protected float currentHealth;
 
     [SerializeField, Tooltip("Maximum health of current pawn")]
-    private float maxHealth;
+    protected float maxHealth;
 
     [SerializeField, Tooltip("How fast does pawn walk")]
-    private float walkSpeed;
+    protected float walkSpeed;
 
     [SerializeField, Tooltip("How fast does pawn run")]
-    private float runSpeed;
+    protected float runSpeed;
 
     [SerializeField, Tooltip("What is this pawns jump height")]
-    private float jumpHeight;
+    protected float jumpHeight;
 
     [SerializeField, Tooltip("How much damage does this pawn do")]
-    private float damage;
+    protected float damage;
 
     [SerializeField, Tooltip("What is the attack range of pawn")]
-    private float attackRange;
+    protected float attackRange;
 
     [SerializeField, Tooltip("What is the pawn's location/rotation")]
-    private Transform t;
+    protected Transform t;
 
     [SerializeField, Tooltip("Pawns rigidbody")]
-    private Rigidbody rb;
+    protected Rigidbody rb;
     
 
 
 
     // Start is called before the first frame update
-    public virtual void Start()
+    protected virtual void Start()
     {
         
     }
 
     // Update is called once per frame
-    public virtual void Update()
+    protected virtual void Update()
     {
         
     }

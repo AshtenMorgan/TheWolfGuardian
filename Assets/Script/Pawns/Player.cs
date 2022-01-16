@@ -5,30 +5,30 @@ using UnityEngine;
 public class Player : Pawn
 {
     [SerializeField, Tooltip("Current combo count")]
-    private float comboMeterCurrent;
+    protected float comboMeterCurrent;
 
     [SerializeField, Tooltip("Maximum count for combo meter")]
-    private float comboMeterMax;
+    protected float comboMeterMax;
 
     [SerializeField, Tooltip("Player lives remaining")]
-    private float lives;
+    protected float lives;
 
     [SerializeField, Tooltip("Is the player shapeshifted?")]
-    private bool shapeShifted;
+    protected bool shapeShifted;
 
     [SerializeField, Tooltip("Is the sword equipped?")]
-    private bool swordEquipped;
+    protected bool swordEquipped;
 
 
 
     // Start is called before the first frame update
-    public override void Start()
+    protected override void Start()
     {
 
     }
 
     // Update is called once per frame
-    public override void Update()
+    protected override void Update()
     {
 
     }

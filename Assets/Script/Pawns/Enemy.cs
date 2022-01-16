@@ -5,24 +5,24 @@ using UnityEngine;
 public class Enemy : Pawn
 {
     [SerializeField, Tooltip("Current target of enemy")]
-    private Rigidbody target;
+    protected Rigidbody target;
 
-    private int enemyLayer;//not sure what we wanted this for, maybe meant to be assigned in unity
+    private GameObject enemyLayer;//not sure what we wanted this for, maybe meant to be assigned in unity
 
     [SerializeField, Tooltip("What is the AI currently doing")]
-    private int aiState;
+    protected int aiState;
 
 
 
 
     // Start is called before the first frame update
-    public override void Start()
+    protected override void Start()
     {
         
     }
 
     // Update is called once per frame
-    public override void Update()
+    protected override void Update()
     {
         
     }
