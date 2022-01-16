@@ -16,6 +16,9 @@ public class Pawn : MonoBehaviour
     [SerializeField, Tooltip("How fast does pawn run")]
     protected float runSpeed;
 
+    [SerializeField, Tooltip("is pawn sprinting")]
+    protected bool isSprinting;
+
     [SerializeField, Tooltip("What is this pawns jump height")]
     protected float jumpHeight;
 
