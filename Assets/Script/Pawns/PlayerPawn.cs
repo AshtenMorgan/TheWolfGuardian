@@ -11,7 +11,6 @@ public class PlayerPawn : Pawn
     protected float comboMeterMax; //the maximum amount of points needed to fill the combo meter
     [SerializeField, Tooltip("The amount of extra lives the player has")]
     protected float lives; //stores the amount of extra lives the player has
-
  
     protected bool shapeShifted; //the boolean for deciding of the player is shape shifted into wolf form or not
     protected bool isSprinting; //the boolean determining if the player is sprinting or not
