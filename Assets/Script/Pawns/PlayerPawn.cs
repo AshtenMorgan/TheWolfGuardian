@@ -19,7 +19,7 @@ public class PlayerPawn : Pawn
     protected bool swordEquipped; //the boolean for deciding whether the player is holding their sword or not
 
 
-    #region these are the public properties to the private fields
+    #region Full Properties
     public int Lives
     {
         get { return _lives; }
