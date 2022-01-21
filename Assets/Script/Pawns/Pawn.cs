@@ -11,9 +11,9 @@ public class Pawn : MonoBehaviour
     [SerializeField, Tooltip("Maximum health of the pawn")]
     protected float maxHealth; //this is the max health of the pawn
     [SerializeField, Tooltip("How fast the pawn walks")]
-    protected float walkSpeed; //this determines the walk speed of the pawn
+    protected int _walkSpeed; //this determines the walk speed of the pawn
     [SerializeField, Tooltip("How fast the pawn runs")]
-    protected float runSpeed; //this determines the run speed of the pawn
+    protected int _runSpeed; //this determines the run speed of the pawn
     [SerializeField, Tooltip("This determines how high the pawn can jump")]
     protected int _jumpHeight; //this determines how high the pawn will jump
     [SerializeField, Tooltip("The base damage the pawn does with each attack")]
@@ -25,11 +25,20 @@ public class Pawn : MonoBehaviour
     #endregion
 
     #region Full Properties
-     public int JumpHeight 
+     public int JumpHeight //the accessor for _jumpHeight
     {
         get { return _jumpHeight; }
-        
         set { _jumpHeight = value; }
+    }
+    public int WalkSpeed //the accessor for _walkSpeed
+    {
+        get { return _walkSpeed; }
+        set { _walkSpeed = value; }
+    }
+    public int RunSpeed //the accessor for _runSpeed
+    {
+        get { return _runSpeed;  }
+        set { _runSpeed = value; }
     }
     #endregion
 
