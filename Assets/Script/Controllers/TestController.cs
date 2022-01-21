@@ -26,6 +26,9 @@ public class TestController : MonoBehaviour
     [Header("Jump Variables")]
     protected int verticalVelocity; //the vertical acceleration of the player pawn
     protected bool grounded; //determines if the pawn is touching the ground or not
+    protected float jumpTime;
+    protected float jumpTimeCounter;
+    protected bool stoppedJumping; //decides whether the player has stopped jumping
     [SerializeField]
     protected Transform groundCheck; //the specified location that decides whether the pawn is touching the ground or not
     [SerializeField]
@@ -55,11 +58,14 @@ public class TestController : MonoBehaviour
     }
     protected virtual void FixedUpdate() 
     {
-        #region
+        #region Jumping Updates
         grounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the player is grounded
+        #endregion
+        #region Ground Movement Updates
         walkVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
         rb2d.velocity = new Vector2(inputX * walkVelocity, rb2d.velocity.y); //moves the pawn left and right based on player input
         FlipSprite(inputX); //flips the sprite of the character when moving left
+        #endregion
     }
     #region Action Input Functions
     public virtual void Jump(InputAction.CallbackContext context)
@@ -99,6 +105,5 @@ public class TestController : MonoBehaviour
     {
         Gizmos.DrawSphere(groundCheck.position, circleRadius); //draws a sphere around our ground check empty so that we can visualize it
     }
-    #endregion
     #endregion
 }
