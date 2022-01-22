@@ -33,6 +33,9 @@ public class TestController : MonoBehaviour
     [Header("Lateral Movement Variables")]
     protected int walkVelocity; //the stand in variable for walk speed on this script
     protected int runVelocity; //the stand in variable for run speedon this script
+    protected float inputX; //stores the players x axis input
+    bool facingRight = true; //a bool that signifies whether the character is facing right, initializes as true
+
     #endregion
     #endregion
 
@@ -47,13 +50,18 @@ public class TestController : MonoBehaviour
         PlayerInputActions playerInputActions = new PlayerInputActions(); //initializes te players inputs
         playerInputActions.PlayerHuman.Enable(); //enables the players input from the specfied input actions
         playerInputActions.PlayerHuman.Jump.performed += Jump; //subscribes to the jump function
+        playerInputActions.PlayerHuman.Move.performed += Move; // subscribes to the jump function
         #endregion
     }
     protected virtual void FixedUpdate() 
     {
-        Vector2 inputVector = playerInputActions.PlayerHuman.Move.ReadValue<Vector2>();
+        #region
         grounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the player is grounded
+        walkVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
+        rb2d.velocity = new Vector2(inputX * walkVelocity, rb2d.velocity.y); //moves the pawn left and right based on player input
+        FlipSprite(inputX); //flips the sprite of the character when moving left
     }
+    #region Action Input Functions
     public virtual void Jump(InputAction.CallbackContext context)
     {
         Debug.Log(context);
@@ -61,34 +69,36 @@ public class TestController : MonoBehaviour
         {
             if (grounded) //only allows the player to jump if they're on the ground
             {
-                Debug.Log("Jump! " + context.phase);
                 verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on playerpawn
                 rb2d.velocity = Vector2.up * verticalVelocity; //applies velocity to the upward vector causing the character to jump
             }
         }
     }
 
-   /*
-    public virtual void Move(InputAction.CallbackContext context) 
+    public virtual void Move(InputAction.CallbackContext context)
     {
-        if (grounded) 
-        {
-            Debug.Log(context);
-            walkVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
-            Debug.Log("Walk Velocity is: " + walkVelocity);
-            Debug.Log("Walk Speed is: " + pawn.WalkSpeed);
-            Vector2 inputVector = context.ReadValue<Vector2>(); //acquires the movement direction we are applying to the rigidbody through the controller input
-            rb2d.velocity = new Vector2(inputVector.x, inputVector.y) * walkVelocity; //moves the character back and forth and multiplies the movement by the walkVelocity
-        }
+      inputX = context.ReadValue<Vector2>().x; //reads the value of the x input the player is using
     }
-   */
-
+    #endregion
     #endregion
 
+    #region Orientation Functions
+    protected virtual void FlipSprite(float inputX) 
+    {
+        if (inputX < 0 && facingRight || inputX > 0 && !facingRight) 
+        {
+            facingRight = !facingRight;
+            Vector3 scale = transform.localScale; //sets our variable for scacle equal to the local scale of the pawn
+            scale.x *= -1; //multiplies the x of our pawns scale by -1
+            transform.localScale = scale; //sets the local scale equal to our custom scale
+        }
+    }
+    #endregion
     #region Gizmos
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(groundCheck.position, circleRadius); //draws a sphere around our ground check empty so that we can visualize it
     }
+    #endregion
     #endregion
 }
