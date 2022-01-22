@@ -11,7 +11,6 @@ using UnityEngine.InputSystem;
 
 public class TestController : MonoBehaviour
 {
-
     #region Variables
     #region General Variables
     [Header("General Variables")]
@@ -26,6 +25,9 @@ public class TestController : MonoBehaviour
     [Header("Jump Variables")]
     protected int verticalVelocity; //the vertical acceleration of the player pawn
     protected bool grounded; //determines if the pawn is touching the ground or not
+    protected float jumpTime;
+    protected float jumpTimeCounter;
+    protected bool stoppedJumping; //decides whether the player has stopped jumping
     [SerializeField]
     protected Transform groundCheck; //the specified location that decides whether the pawn is touching the ground or not
     [SerializeField]
@@ -35,7 +37,6 @@ public class TestController : MonoBehaviour
     protected int runVelocity; //the stand in variable for run speedon this script
     protected float inputX; //stores the players x axis input
     bool facingRight = true; //a bool that signifies whether the character is facing right, initializes as true
-
     #endregion
     #endregion
 
@@ -50,16 +51,29 @@ public class TestController : MonoBehaviour
         PlayerInputActions playerInputActions = new PlayerInputActions(); //initializes te players inputs
         playerInputActions.PlayerHuman.Enable(); //enables the players input from the specfied input actions
         playerInputActions.PlayerHuman.Jump.performed += Jump; //subscribes to the jump function
-        playerInputActions.PlayerHuman.Move.performed += Move; // subscribes to the jump function
+        playerInputActions.PlayerHuman.Move.performed += Move; // subscribes to the move function
+        playerInputActions.PlayerHuman.SprintStart.performed += SprintStart; //Subscribes to the sprintstart function
+        playerInputActions.PlayerHuman.SprintEnd.performed += SprintEnd; //Subscribes to the sprintend function
         #endregion
     }
     protected virtual void FixedUpdate() 
     {
-        #region
+        #region Jumping Updates
         grounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the player is grounded
-        walkVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
-        rb2d.velocity = new Vector2(inputX * walkVelocity, rb2d.velocity.y); //moves the pawn left and right based on player input
+        #endregion
+        #region Ground Movement Updates
+        if (!pawn.IsSprinting)
+        {
+            walkVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
+            rb2d.velocity = new Vector2(inputX * walkVelocity, rb2d.velocity.y); //moves the pawn left and right based on player input and walking speed
+        }
+        if (pawn.IsSprinting)
+        {
+            runVelocity = pawn.RunSpeed; //sets the runVelocity variable equal to that of the protected variable _runSpeed on the playerpawn
+            rb2d.velocity = new Vector2(inputX * runVelocity, rb2d.velocity.y); ////moves the pawn left and right based on player input and running speed
+        }
         FlipSprite(inputX); //flips the sprite of the character when moving left
+        #endregion
     }
     #region Action Input Functions
     public virtual void Jump(InputAction.CallbackContext context)
@@ -78,6 +92,21 @@ public class TestController : MonoBehaviour
     public virtual void Move(InputAction.CallbackContext context)
     {
       inputX = context.ReadValue<Vector2>().x; //reads the value of the x input the player is using
+    }
+
+    public virtual void SprintStart(InputAction.CallbackContext context) 
+    {
+        if (grounded)
+        {
+            pawn.IsSprinting = true; //sets the isSprinting variable on the pawn to true
+        }
+    }
+    public virtual void SprintEnd(InputAction.CallbackContext context)
+    {
+        if (grounded)
+        {
+            pawn.IsSprinting = false; //sets the isSprinting variable on the pawn to false
+        }
     }
     #endregion
     #endregion
@@ -99,6 +128,5 @@ public class TestController : MonoBehaviour
     {
         Gizmos.DrawSphere(groundCheck.position, circleRadius); //draws a sphere around our ground check empty so that we can visualize it
     }
-    #endregion
     #endregion
 }

@@ -15,7 +15,7 @@ public class PlayerPawn : Pawn
     protected int _maxLives = 5;
 
     protected bool shapeShifted; //the boolean for deciding of the player is shape shifted into wolf form or not
-    protected bool isSprinting; //the boolean determining if the player is sprinting or not
+    protected bool _isSprinting; //the boolean determining if the player is sprinting or not
     protected bool swordEquipped; //the boolean for deciding whether the player is holding their sword or not
 
 
@@ -24,6 +24,12 @@ public class PlayerPawn : Pawn
     {
         get { return _lives; }
         set { _lives = value; }
+    }
+
+    public bool IsSprinting 
+    {
+        get { return _isSprinting; }
+        set { _isSprinting = value; }
     }
 
     #endregion
