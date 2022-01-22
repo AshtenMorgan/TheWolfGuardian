@@ -38,6 +38,9 @@ public class TestController : MonoBehaviour
     protected float inputX; //stores the players x axis input
     bool facingRight = true; //a bool that signifies whether the character is facing right, initializes as true
     #endregion
+
+    public Animator ani;
+
     #endregion
 
     #region Functions
@@ -60,6 +63,10 @@ public class TestController : MonoBehaviour
     {
         #region Jumping Updates
         grounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the player is grounded
+
+        //animator code
+        ani.SetBool("Jumping", Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer));//same as the above code, but check is for animator instead
+
         #endregion
         #region Ground Movement Updates
         if (!pawn.IsSprinting)
@@ -85,13 +92,22 @@ public class TestController : MonoBehaviour
             {
                 verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on playerpawn
                 rb2d.velocity = Vector2.up * verticalVelocity; //applies velocity to the upward vector causing the character to jump
+
+
+                ani.SetBool("Jumping", true);//tell the animator a jump is occuring
+
             }
         }
     }
 
     public virtual void Move(InputAction.CallbackContext context)
     {
-      inputX = context.ReadValue<Vector2>().x; //reads the value of the x input the player is using
+        inputX = context.ReadValue<Vector2>().x; //reads the value of the x input the player is using
+
+        
+        //animator code
+        ani.SetFloat("Speed", Mathf.Abs(inputX));//tell the animator we are moving
+
     }
 
     public virtual void SprintStart(InputAction.CallbackContext context) 
