@@ -15,7 +15,7 @@ public class Pawn : MonoBehaviour
     [SerializeField, Tooltip("How fast the pawn runs")]
     protected int _runSpeed; //this determines the run speed of the pawn
     [SerializeField, Tooltip("This determines how high the pawn can jump")]
-    protected int _jumpHeight; //this determines how high the pawn will jump
+    protected float _jumpHeight; //this determines how high the pawn will jump
     [SerializeField, Tooltip("The base damage the pawn does with each attack")]
     protected float damage; //this will determine the base damage each pawn does with an attack
     [SerializeField, Tooltip("This is the melee attack range of the pawn")]
@@ -25,7 +25,7 @@ public class Pawn : MonoBehaviour
     #endregion
 
     #region Full Properties
-     public int JumpHeight //the accessor for _jumpHeight
+     public float JumpHeight //the accessor for _jumpHeight
     {
         get { return _jumpHeight; }
         set { _jumpHeight = value; }

@@ -28,9 +28,18 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
             ""id"": ""9f38a19a-9ff0-4aac-a089-a5cc8dedbed1"",
             ""actions"": [
                 {
-                    ""name"": ""Jump"",
+                    ""name"": ""JumpStart"",
                     ""type"": ""Button"",
                     ""id"": ""8c929325-7d25-4982-87f7-4ae38069caaa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""JumpEnd"",
+                    ""type"": ""Button"",
+                    ""id"": ""b2e743f9-0fff-431c-9c01-fe3d4a186f2a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -69,21 +78,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""b2e71648-b59b-4992-9925-7f1817b93c72"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8dbe45bb-c969-4854-9ddd-509acd27fbe6"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
+                    ""action"": ""JumpStart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -141,6 +139,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""SprintEnd"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9e8e4d3-57aa-4069-b2d4-f172c2b86fab"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JumpEnd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -149,7 +158,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
 }");
         // PlayerHuman
         m_PlayerHuman = asset.FindActionMap("PlayerHuman", throwIfNotFound: true);
-        m_PlayerHuman_Jump = m_PlayerHuman.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerHuman_JumpStart = m_PlayerHuman.FindAction("JumpStart", throwIfNotFound: true);
+        m_PlayerHuman_JumpEnd = m_PlayerHuman.FindAction("JumpEnd", throwIfNotFound: true);
         m_PlayerHuman_Move = m_PlayerHuman.FindAction("Move", throwIfNotFound: true);
         m_PlayerHuman_SprintStart = m_PlayerHuman.FindAction("SprintStart", throwIfNotFound: true);
         m_PlayerHuman_SprintEnd = m_PlayerHuman.FindAction("SprintEnd", throwIfNotFound: true);
@@ -212,7 +222,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     // PlayerHuman
     private readonly InputActionMap m_PlayerHuman;
     private IPlayerHumanActions m_PlayerHumanActionsCallbackInterface;
-    private readonly InputAction m_PlayerHuman_Jump;
+    private readonly InputAction m_PlayerHuman_JumpStart;
+    private readonly InputAction m_PlayerHuman_JumpEnd;
     private readonly InputAction m_PlayerHuman_Move;
     private readonly InputAction m_PlayerHuman_SprintStart;
     private readonly InputAction m_PlayerHuman_SprintEnd;
@@ -220,7 +231,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerHumanActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Jump => m_Wrapper.m_PlayerHuman_Jump;
+        public InputAction @JumpStart => m_Wrapper.m_PlayerHuman_JumpStart;
+        public InputAction @JumpEnd => m_Wrapper.m_PlayerHuman_JumpEnd;
         public InputAction @Move => m_Wrapper.m_PlayerHuman_Move;
         public InputAction @SprintStart => m_Wrapper.m_PlayerHuman_SprintStart;
         public InputAction @SprintEnd => m_Wrapper.m_PlayerHuman_SprintEnd;
@@ -233,9 +245,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_PlayerHumanActionsCallbackInterface != null)
             {
-                @Jump.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnJump;
+                @JumpStart.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnJumpStart;
+                @JumpStart.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnJumpStart;
+                @JumpStart.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnJumpStart;
+                @JumpEnd.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnJumpEnd;
+                @JumpEnd.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnJumpEnd;
+                @JumpEnd.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnJumpEnd;
                 @Move.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnMove;
@@ -249,9 +264,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
             m_Wrapper.m_PlayerHumanActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
+                @JumpStart.started += instance.OnJumpStart;
+                @JumpStart.performed += instance.OnJumpStart;
+                @JumpStart.canceled += instance.OnJumpStart;
+                @JumpEnd.started += instance.OnJumpEnd;
+                @JumpEnd.performed += instance.OnJumpEnd;
+                @JumpEnd.canceled += instance.OnJumpEnd;
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
@@ -267,7 +285,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     public PlayerHumanActions @PlayerHuman => new PlayerHumanActions(this);
     public interface IPlayerHumanActions
     {
-        void OnJump(InputAction.CallbackContext context);
+        void OnJumpStart(InputAction.CallbackContext context);
+        void OnJumpEnd(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnSprintStart(InputAction.CallbackContext context);
         void OnSprintEnd(InputAction.CallbackContext context);

@@ -270,6 +270,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2158162869366023316, guid: c18958c5a322eba4db79795222ec8a18, type: 3}
+      propertyPath: _jumpHeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899080718602509165, guid: c18958c5a322eba4db79795222ec8a18, type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899080718602509165, guid: c18958c5a322eba4db79795222ec8a18, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494057420674490694, guid: c18958c5a322eba4db79795222ec8a18, type: 3}
+      propertyPath: jumpTime
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 9010625227928268883, guid: c18958c5a322eba4db79795222ec8a18, type: 3}
       propertyPath: m_RootOrder
       value: 1

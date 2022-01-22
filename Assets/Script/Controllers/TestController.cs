@@ -23,11 +23,12 @@ public class TestController : MonoBehaviour
     #endregion
     #region Jump Variables
     [Header("Jump Variables")]
-    protected int verticalVelocity; //the vertical acceleration of the player pawn
+    protected float verticalVelocity; //the vertical acceleration of the player pawn
     protected bool grounded; //determines if the pawn is touching the ground or not
-    protected float jumpTime;
-    protected float jumpTimeCounter;
-    protected bool stoppedJumping; //decides whether the player has stopped jumping
+    [SerializeField]
+    protected float jumpTime; //the time we set in the editor for the maximum amount of time we can jump into the air before we start falling
+    protected float jumpTimeCounter; //the counter that keeps track of jumpTime
+    protected bool stoppedJumping = true; //decides whether the player has stopped jumping
     [SerializeField]
     protected Transform groundCheck; //the specified location that decides whether the pawn is touching the ground or not
     [SerializeField]
@@ -47,19 +48,38 @@ public class TestController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>(); //defines the Gameobjects needed for the test character
         playerInput = GetComponent<PlayerInput>(); //defines the initial input system being used by the pawn
 
+        jumpTimeCounter = jumpTime; //sets the jumpTimeCounter
+
         #region Player Action Subscriptions
         PlayerInputActions playerInputActions = new PlayerInputActions(); //initializes te players inputs
         playerInputActions.PlayerHuman.Enable(); //enables the players input from the specfied input actions
-        playerInputActions.PlayerHuman.Jump.performed += Jump; //subscribes to the jump function
-        playerInputActions.PlayerHuman.Move.performed += Move; // subscribes to the move function
-        playerInputActions.PlayerHuman.SprintStart.performed += SprintStart; //Subscribes to the sprintstart function
-        playerInputActions.PlayerHuman.SprintEnd.performed += SprintEnd; //Subscribes to the sprintend function
+        playerInputActions.PlayerHuman.JumpStart.performed += JumpStart; //subscribes to the JumpStart function
+        playerInputActions.PlayerHuman.JumpEnd.performed += JumpEnd; //subscribes to the JumpEnd function
+        playerInputActions.PlayerHuman.Move.performed += Move; // subscribes to the Move function
+        playerInputActions.PlayerHuman.SprintStart.performed += SprintStart; //Subscribes to the SprintStart function
+        playerInputActions.PlayerHuman.SprintEnd.performed += SprintEnd; //Subscribes to the SprintEnd function
         #endregion
     }
     protected virtual void FixedUpdate() 
     {
         #region Jumping Updates
         grounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the player is grounded
+
+        if (!stoppedJumping) //if we are jumping
+        {
+            if (jumpTimeCounter > 0) //and our jump counter hasnt reached zero
+            {
+                verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on playerpawn
+                //TODO:Fix the jump velocity so the player character starts moving faster in the air and then slows down as it approaches the max height
+                rb2d.AddForce(Vector2.up * verticalVelocity, ForceMode2D.Impulse); //makes the rigidbody of the pawn jump
+                jumpTimeCounter -= Time.deltaTime; // subtracts time from the jumpTimeCounter
+            }
+        }
+        if (grounded) 
+        {
+            jumpTimeCounter = jumpTime; //if we are grounded, it sets the jumpTimeCounter back to the jumpTime variable
+        }
+
         #endregion
         #region Ground Movement Updates
         if (!pawn.IsSprinting)
@@ -76,17 +96,22 @@ public class TestController : MonoBehaviour
         #endregion
     }
     #region Action Input Functions
-    public virtual void Jump(InputAction.CallbackContext context)
+    public virtual void JumpStart(InputAction.CallbackContext context)
     {
-        Debug.Log(context);
         if (context.performed)
         {
             if (grounded) //only allows the player to jump if they're on the ground
             {
-                verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on playerpawn
-                rb2d.velocity = Vector2.up * verticalVelocity; //applies velocity to the upward vector causing the character to jump
+               verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on PlayerPawn
+                rb2d.AddForce(Vector2.up * verticalVelocity, ForceMode2D.Impulse); //makes the rigidbody of the pawn jump
+                stoppedJumping = false; //sets the stoppedJumping bool to false so that we have !stoppedJumping
             }
         }
+    }
+    public virtual void JumpEnd(InputAction.CallbackContext context) 
+    {
+        jumpTimeCounter = 0; //resets the jumpTimeCounter to zero
+        stoppedJumping = true; //sets the stoppedJumping bool to true, cause we have stopped jumping
     }
 
     public virtual void Move(InputAction.CallbackContext context)

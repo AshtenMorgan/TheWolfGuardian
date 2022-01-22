@@ -6,9 +6,18 @@
             "id": "9f38a19a-9ff0-4aac-a089-a5cc8dedbed1",
             "actions": [
                 {
-                    "name": "Jump",
+                    "name": "JumpStart",
                     "type": "Button",
                     "id": "8c929325-7d25-4982-87f7-4ae38069caaa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "JumpEnd",
+                    "type": "Button",
+                    "id": "b2e743f9-0fff-431c-9c01-fe3d4a186f2a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -47,21 +56,10 @@
                     "name": "",
                     "id": "b2e71648-b59b-4992-9925-7f1817b93c72",
                     "path": "<Keyboard>/space",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8dbe45bb-c969-4854-9ddd-509acd27fbe6",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
+                    "action": "JumpStart",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -117,6 +115,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SprintEnd",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e9e8e4d3-57aa-4069-b2d4-f172c2b86fab",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpEnd",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
