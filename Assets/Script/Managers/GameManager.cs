@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Spawn Numbers
+    [Header("Max amount of spawns"), SerializeField, Tooltip("The number of each object that will be generated on load")]
     public int enemy1Max;
     public int enemy2Max;
     public int enemy3Max;
@@ -51,22 +52,24 @@ public class GameManager : MonoBehaviour
     public int enemy7Max;
     #endregion
 
-   
-
     #region Spawn Timing
+    [Header("Timers"), SerializeField, Tooltip("Time delay between spawns")]
     public float playerSpawnDelay;
-    private float nextPlayerSpawn;
+    private float _nextPlayerSpawn;
     public float enemySpawnDelay;
-    private float nextEnemySpawn;
+    private float _nextEnemySpawn;
     public float buffSpawnDelay;
-    private float nextBuffSpawn;
+    private float _nextBuffSpawn;
     public float debuffSpawnDelay;
-    private float nextDebuffSpawn;
+    private float _nextDebuffSpawn;
+    #endregion
+    #region instance
+    public static GameManager instance { get; private set; }//allow other classes to access GM
     #endregion
 
-    public static GameManager instance { get; private set; }//allow other classes to access GM
-
+    [Header("Game Over tracker"), SerializeField, Tooltip("Tracks weather or not a game over has occured")]
     private bool gameOver;
+
     #endregion
 
 
@@ -89,23 +92,17 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-       
-
-        
-
-        
 
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (Time.time > nextPlayerSpawn)
+        if (Time.time > _nextPlayerSpawn)//check time against spawn delay
         {
-            if (!ObjectPool.instance.Player.activeInHierarchy && gameOver == false)//no player found and it is not game over
+            if (!ObjectPool.instance.Player.activeInHierarchy && gameOver == false)//no player active and it is not game over
             {
                 SpawnPlayer();//run player spawn function
-                player = FindObjectOfType<PlayerPawn>();
             }
             else if (ObjectPool.instance.Player.activeInHierarchy)//player is active
             {
@@ -115,19 +112,19 @@ public class GameManager : MonoBehaviour
             {
                 GameOver();//run game over
             }
-            nextPlayerSpawn += Time.time;
+            _nextPlayerSpawn += Time.time;//update spawn timer
         }
     }
 
     private void FixedUpdate()
     {
-        if (Time.time > nextEnemySpawn)
+        if (Time.time > _nextEnemySpawn)//check spawn timer
         {
 
-
-            if (!ObjectPool.instance.Enemy1.activeInHierarchy)
+            #region Spawning
+            if (!ObjectPool.instance.Enemy1.activeInHierarchy)//check for active enemies
             {
-                SpawnEnemy1();
+                SpawnEnemy1();//spawn enemies
             }
             if (!ObjectPool.instance.Enemy2.activeInHierarchy)
             {
@@ -153,32 +150,34 @@ public class GameManager : MonoBehaviour
             {
                 SpawnEnemy7();
             }
-            nextEnemySpawn += Time.time;
+            #endregion
+            _nextEnemySpawn += Time.time;//update spawn timer
         }
     }
 
     public void SpawnPlayer()
     {
-        if (ObjectPool.instance.Player != null)
+        if (ObjectPool.instance.Player != null)//make sure there is a player
         {
-            player = ObjectPool.instance.Player.GetComponent<PlayerPawn>();
+            player = ObjectPool.instance.Player.GetComponent<PlayerPawn>();//store player
             ObjectPool.instance.Player.transform.position = playerSpawn.transform.position;//move player
             ObjectPool.instance.Player.transform.rotation = playerSpawn.transform.rotation;//rotate player
             ObjectPool.instance.Player.SetActive(true);//activate player
-            player.Lives = player.Lives - 1;
+            player.Lives--;//decrement lives
         }
 
 
 
     }
+    #region Spawn Functions
     public void SpawnEnemy1()
     {
-        GameObject spawnedEnemy1 = ObjectPool.instance.GetEnemy1Pool();
-        if (spawnedEnemy1 != null)
+        GameObject spawnedEnemy1 = ObjectPool.instance.GetEnemy1Pool();//check spawn pool for inactive enemies
+        if (spawnedEnemy1 != null)//if inactive enemies exist in pool
         {
-            spawnedEnemy1.transform.position = enemy1Spawn[0].transform.position;
-            spawnedEnemy1.transform.rotation = enemy1Spawn[0].transform.rotation;
-            spawnedEnemy1.SetActive(true);
+            spawnedEnemy1.transform.position = enemy1Spawn[0].transform.position;//spawn enemy at position
+            spawnedEnemy1.transform.rotation = enemy1Spawn[0].transform.rotation;//spawn with rotation
+            spawnedEnemy1.SetActive(true);//activate enemy
 
         }
     }
@@ -252,18 +251,19 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
+    #endregion
 
 
     //function for pause
     public void Pause()
     {
-        
+        //pause game
     }
+
     //resume after pause
     public void Unpause()
     {
-        
+        //resume
     }
 
     public void QuitGame()
