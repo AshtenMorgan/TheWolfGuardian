@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: a1a8634efbd98c7489ae214f0750378a, type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -242,6 +242,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8c929325-7d25-4982-87f7-4ae38069caaa
     m_ActionName: PlayerHuman/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ff7ca14b-56ab-4f4e-8504-e0e1062825fd
+    m_ActionName: PlayerHuman/Move[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow,/XInputControllerWindows/leftStick,/XInputControllerWindows/dpad]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerHuman
@@ -261,8 +265,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 0
-  walkSpeed: 1
-  runSpeed: 2
+  _walkSpeed: 2
+  _runSpeed: 4
   _jumpHeight: 5
   damage: 0
   meleeAttackRange: 0

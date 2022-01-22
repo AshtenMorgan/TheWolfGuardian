@@ -44,6 +44,24 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SprintStart"",
+                    ""type"": ""Button"",
+                    ""id"": ""da7f6a79-f0f4-4057-929d-52cd96456aad"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SprintEnd"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8b75f2a-faac-46fb-a04e-c6ce471cae70"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -101,6 +119,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ac8db82-0be3-4d4a-bbcf-ee3c1d867490"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SprintStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd8c0862-8229-41c5-ac29-a307b2673593"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SprintEnd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -111,6 +151,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_PlayerHuman = asset.FindActionMap("PlayerHuman", throwIfNotFound: true);
         m_PlayerHuman_Jump = m_PlayerHuman.FindAction("Jump", throwIfNotFound: true);
         m_PlayerHuman_Move = m_PlayerHuman.FindAction("Move", throwIfNotFound: true);
+        m_PlayerHuman_SprintStart = m_PlayerHuman.FindAction("SprintStart", throwIfNotFound: true);
+        m_PlayerHuman_SprintEnd = m_PlayerHuman.FindAction("SprintEnd", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -172,12 +214,16 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private IPlayerHumanActions m_PlayerHumanActionsCallbackInterface;
     private readonly InputAction m_PlayerHuman_Jump;
     private readonly InputAction m_PlayerHuman_Move;
+    private readonly InputAction m_PlayerHuman_SprintStart;
+    private readonly InputAction m_PlayerHuman_SprintEnd;
     public struct PlayerHumanActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerHumanActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_PlayerHuman_Jump;
         public InputAction @Move => m_Wrapper.m_PlayerHuman_Move;
+        public InputAction @SprintStart => m_Wrapper.m_PlayerHuman_SprintStart;
+        public InputAction @SprintEnd => m_Wrapper.m_PlayerHuman_SprintEnd;
         public InputActionMap Get() { return m_Wrapper.m_PlayerHuman; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -193,6 +239,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnMove;
+                @SprintStart.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnSprintStart;
+                @SprintStart.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnSprintStart;
+                @SprintStart.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnSprintStart;
+                @SprintEnd.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnSprintEnd;
+                @SprintEnd.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnSprintEnd;
+                @SprintEnd.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnSprintEnd;
             }
             m_Wrapper.m_PlayerHumanActionsCallbackInterface = instance;
             if (instance != null)
@@ -203,6 +255,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @SprintStart.started += instance.OnSprintStart;
+                @SprintStart.performed += instance.OnSprintStart;
+                @SprintStart.canceled += instance.OnSprintStart;
+                @SprintEnd.started += instance.OnSprintEnd;
+                @SprintEnd.performed += instance.OnSprintEnd;
+                @SprintEnd.canceled += instance.OnSprintEnd;
             }
         }
     }
@@ -211,5 +269,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     {
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnSprintStart(InputAction.CallbackContext context);
+        void OnSprintEnd(InputAction.CallbackContext context);
     }
 }
