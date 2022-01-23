@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ashlynn
       objectReference: {fileID: 0}
+    - target: {fileID: 6960494434514254218, guid: ee412642b752bde4faab2815a382abea, type: 3}
+      propertyPath: _runSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6960494434514254221, guid: ee412642b752bde4faab2815a382abea, type: 3}
       propertyPath: m_RootOrder
       value: 1

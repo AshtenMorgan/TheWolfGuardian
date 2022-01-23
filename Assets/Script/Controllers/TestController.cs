@@ -38,10 +38,11 @@ public class TestController : MonoBehaviour
     protected int runVelocity; //the stand in variable for run speedon this script
     protected float inputX; //stores the players x axis input
     bool facingRight = true; //a bool that signifies whether the character is facing right, initializes as true
+    #region Animator Variables
+    [Header("Animator Variables")]       
+    public Animator ani;//animator code
     #endregion
-
-    //animator code
-    public Animator ani;
+    #endregion
     #endregion
 
     #region Functions
@@ -85,6 +86,7 @@ public class TestController : MonoBehaviour
 
         #endregion
         #region Ground Movement Updates
+        
         if (!pawn.IsSprinting)
         {
             walkVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
@@ -98,6 +100,7 @@ public class TestController : MonoBehaviour
         FlipSprite(inputX); //flips the sprite of the character when moving left
         #endregion
     }
+
     #region Action Input Functions
     public virtual void JumpStart(InputAction.CallbackContext context)
     {
