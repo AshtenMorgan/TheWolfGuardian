@@ -39,9 +39,6 @@ public class TestController : MonoBehaviour
     protected float inputX; //stores the players x axis input
     bool facingRight = true; //a bool that signifies whether the character is facing right, initializes as true
     #endregion
-
-    //animator
-    public Animator ani;
     #endregion
 
     #region Functions
@@ -68,9 +65,6 @@ public class TestController : MonoBehaviour
         #region Jumping Updates
         grounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the player is grounded
 
-        //animator code
-        ani.SetBool("Jumping", Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer));//same as the above code, but check is for animator instead
-
         if (!stoppedJumping) //if we are jumping
         {
             if (jumpTimeCounter > 0) //and our jump counter hasnt reached zero
@@ -79,10 +73,6 @@ public class TestController : MonoBehaviour
                 //TODO:Fix the jump velocity so the player character starts moving faster in the air and then slows down as it approaches the max height
                 rb2d.AddForce(Vector2.up * verticalVelocity, ForceMode2D.Impulse); //makes the rigidbody of the pawn jump
                 jumpTimeCounter -= Time.deltaTime; // subtracts time from the jumpTimeCounter
-
-                //animator Code
-                ani.SetBool("Jumping", true);//tell the animator a jump is occuring
-
             }
         }
         if (grounded) 
@@ -96,23 +86,11 @@ public class TestController : MonoBehaviour
         {
             walkVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
             rb2d.velocity = new Vector2(inputX * walkVelocity, rb2d.velocity.y); //moves the pawn left and right based on player input and walking speed
-
-
-            //animator code
-            ani.SetFloat("Speed", Mathf.Abs(inputX));//tell the animator we are moving
-
-
         }
         if (pawn.IsSprinting)
         {
             runVelocity = pawn.RunSpeed; //sets the runVelocity variable equal to that of the protected variable _runSpeed on the playerpawn
             rb2d.velocity = new Vector2(inputX * runVelocity, rb2d.velocity.y); ////moves the pawn left and right based on player input and running speed
-
-
-            //animator code  //this should be changed for the sprint
-            ani.SetFloat("Speed", Mathf.Abs(inputX));//tell the animator we are moving
-
-
         }
         FlipSprite(inputX); //flips the sprite of the character when moving left
         #endregion
