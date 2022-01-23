@@ -186,11 +186,33 @@
                 },
                 {
                     "name": "",
+                    "id": "4b2949dd-ca95-4c83-ade3-752ee4032ad1",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SprintStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "dd8c0862-8229-41c5-ac29-a307b2673593",
                     "path": "<Keyboard>/shift",
                     "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "Keyboard",
+                    "action": "SprintEnd",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a2c1e3c5-8057-4015-a840-fb77bf454b04",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "SprintEnd",
                     "isComposite": false,
                     "isPartOfComposite": false
