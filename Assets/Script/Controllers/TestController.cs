@@ -73,8 +73,8 @@ public class TestController : MonoBehaviour
             if (jumpTimeCounter > 0) //and our jump counter hasnt reached zero
             {
                 verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on playerpawn
-                //TODO:Fix the jump velocity so the player character starts moving faster in the air and then slows down as it approaches the max height
-                rb2d.AddForce(Vector2.up * verticalVelocity, ForceMode2D.Impulse); //makes the rigidbody of the pawn jump
+                rb2d.velocity = new Vector2(rb2d.velocity.x, verticalVelocity);
+                //rb2d.AddForce(Vector2.up * verticalVelocity, ForceMode2D.Impulse); //makes the rigidbody of the pawn jump
                 jumpTimeCounter -= Time.deltaTime; // subtracts time from the jumpTimeCounter
             }
         }
@@ -105,8 +105,9 @@ public class TestController : MonoBehaviour
         {
             if (grounded) //only allows the player to jump if they're on the ground
             {
-               verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on PlayerPawn
-                rb2d.AddForce(Vector2.up * verticalVelocity, ForceMode2D.Impulse); //makes the rigidbody of the pawn jump
+                verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on PlayerPawn
+                rb2d.velocity = new Vector2(rb2d.velocity.x, verticalVelocity);
+                //rb2d.AddForce(Vector2.up * verticalVelocity, ForceMode2D.Impulse); //makes the rigidbody of the pawn jump
                 stoppedJumping = false; //sets the stoppedJumping bool to false so that we have !stoppedJumping
 
                 //animator
