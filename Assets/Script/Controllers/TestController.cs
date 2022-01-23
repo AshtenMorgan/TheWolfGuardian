@@ -39,6 +39,9 @@ public class TestController : MonoBehaviour
     protected float inputX; //stores the players x axis input
     bool facingRight = true; //a bool that signifies whether the character is facing right, initializes as true
     #endregion
+
+    //animator code
+    public Animator ani;
     #endregion
 
     #region Functions
@@ -105,6 +108,9 @@ public class TestController : MonoBehaviour
                verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on PlayerPawn
                 rb2d.AddForce(Vector2.up * verticalVelocity, ForceMode2D.Impulse); //makes the rigidbody of the pawn jump
                 stoppedJumping = false; //sets the stoppedJumping bool to false so that we have !stoppedJumping
+
+                //animator
+                ani.SetBool("Jumping", true);//tell the animator a jump is occuring
             }
         }
     }
@@ -112,11 +118,17 @@ public class TestController : MonoBehaviour
     {
         jumpTimeCounter = 0; //resets the jumpTimeCounter to zero
         stoppedJumping = true; //sets the stoppedJumping bool to true, cause we have stopped jumping
+                              
+        //animator
+        ani.SetBool("Jumping", false);//tell the animator to stop jumping
     }
 
     public virtual void Move(InputAction.CallbackContext context)
     {
       inputX = context.ReadValue<Vector2>().x; //reads the value of the x input the player is using
+
+        //animator
+        ani.SetFloat("Speed", Mathf.Abs(inputX));//tell the animator we are moving
     }
 
     public virtual void SprintStart(InputAction.CallbackContext context) 
