@@ -13,10 +13,12 @@ GameObject:
   - component: {fileID: 6960494434514254219}
   - component: {fileID: 6960494434514254218}
   - component: {fileID: 6960494434514254217}
+  - component: {fileID: 7750430635412979326}
   - component: {fileID: 6960494434514254215}
   - component: {fileID: 6960494434514254222}
   - component: {fileID: 6960494434514254216}
   - component: {fileID: 1452905029088809866}
+  - component: {fileID: 7492090210420875519}
   m_Layer: 6
   m_Name: Ashlynn
   m_TagString: Untagged
@@ -152,14 +154,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32376d0ab1a550f44b172168efae69cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 0
+  _currentHealth: 0
+  _maxHealth: 0
   _walkSpeed: 2
   _runSpeed: 4
   _jumpHeight: 5
-  damage: 0
-  meleeAttackRange: 0
-  rangedAttackRange: 0
+  _damage: 0
+  _meleeAttackRange: 0
+  _rangedAttackRange: 0
   t: {fileID: 6960494434514254221}
   rb: {fileID: 6960494434514254215}
   comboMeterCurrent: 0
@@ -185,6 +187,32 @@ MonoBehaviour:
   groundCheck: {fileID: 6960494435128371425}
   circleRadius: 0.1
   ani: {fileID: 6960494434514254222}
+--- !u!114 &7750430635412979326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6960494434514254214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1913676f3f8314c4896656699aa17e22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDie:
+    m_PersistentCalls:
+      m_Calls: []
+  remTimer: 5
+  _health: 0
+  isDead: 0
+  audiosource: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!50 &6960494434514254215
 Rigidbody2D:
   serializedVersion: 4
@@ -267,6 +295,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.3}
   serializedVersion: 2
   m_Radius: 0.19954431
+--- !u!58 &7492090210420875519
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6960494434514254214}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.03431973, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.32431975
 --- !u!1 &6960494435128371424
 GameObject:
   m_ObjectHideFlags: 0
