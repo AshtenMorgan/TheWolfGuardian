@@ -55,9 +55,10 @@ public class GameManager : MonoBehaviour
     #region Spawn Timing
     [Header("Timers"), SerializeField, Tooltip("Time delay between spawns")]
     public float playerSpawnDelay;
-    private float _nextPlayerSpawn;
+    public float _nextPlayerSpawn;
     public float enemySpawnDelay;
-    private float _nextEnemySpawn;
+    public float _nextEnemySpawn;
+    public float current;
     public float buffSpawnDelay;
     private float _nextBuffSpawn;
     public float debuffSpawnDelay;
@@ -100,6 +101,7 @@ public class GameManager : MonoBehaviour
     {
         CheckSpawn();
         CheckEnemySpawn();
+        current = Time.time;
 
     }
 
@@ -126,7 +128,7 @@ public class GameManager : MonoBehaviour
             {
                 GameOver();//run game over
             }
-            _nextPlayerSpawn += Time.time + playerSpawnDelay;//update spawn timer
+            _nextPlayerSpawn = Time.time + playerSpawnDelay;//update spawn timer
         }
     }
     void CheckEnemySpawn()
@@ -164,7 +166,7 @@ public class GameManager : MonoBehaviour
                 SpawnEnemy7();
             }
             #endregion
-            _nextEnemySpawn += Time.time + enemySpawnDelay;//update spawn timer
+            _nextEnemySpawn = Time.time + enemySpawnDelay;//update spawn timer
         }
     }
     public void SpawnPlayer()
@@ -172,10 +174,10 @@ public class GameManager : MonoBehaviour
         if (ObjectPool.instance.Player != null)//make sure there is a player
         {
             player = ObjectPool.instance.Player.GetComponent<PlayerPawn>();//store player
-            Health playerHealthReset = player.GetComponent<Health>();//store health component
+            Health healthReset = player.GetComponent<Health>();//store health component
             ObjectPool.instance.Player.transform.position = playerSpawn.transform.position;//move player
             ObjectPool.instance.Player.transform.rotation = playerSpawn.transform.rotation;//rotate player
-            playerHealthReset.Heal(player.maxHealth);//return player to max health
+            healthReset.Heal(player.maxHealth);//return player to max health
             
             //return current health to max value
             ObjectPool.instance.Player.SetActive(true);//activate player
@@ -185,15 +187,19 @@ public class GameManager : MonoBehaviour
 
 
     }
-    #region Spawn Functions
+    #region Enemy Spawn Functions
     public void SpawnEnemy1()
     {
         GameObject spawnedEnemy1 = ObjectPool.instance.GetEnemy1Pool();//check spawn pool for inactive enemies
         if (spawnedEnemy1 != null)//if inactive enemies exist in pool
         {
+            EnemyPawn enemy = spawnedEnemy1.GetComponent<EnemyPawn>();
             spawnedEnemy1.transform.position = enemy1Spawn[0].transform.position;//spawn enemy at position
             spawnedEnemy1.transform.rotation = enemy1Spawn[0].transform.rotation;//spawn with rotation
+            Health healthReset = spawnedEnemy1.GetComponent<Health>();//store health component
+            healthReset.Heal(enemy.maxHealth);//restore health to max
             spawnedEnemy1.SetActive(true);//activate enemy
+
 
         }
     }
@@ -202,8 +208,11 @@ public class GameManager : MonoBehaviour
         GameObject spawnedEnemy2 = ObjectPool.instance.GetEnemy2Pool();
         if (spawnedEnemy2 != null)
         {
+            EnemyPawn enemy = spawnedEnemy2.GetComponent<EnemyPawn>();
             spawnedEnemy2.transform.position = enemy2Spawn[0].transform.position;
             spawnedEnemy2.transform.rotation = enemy2Spawn[0].transform.rotation;
+            Health healthReset = spawnedEnemy2.GetComponent<Health>();//store health component
+            healthReset.Heal(enemy.maxHealth);//restore health to max
             spawnedEnemy2.SetActive(true);
         }
 
@@ -213,8 +222,11 @@ public class GameManager : MonoBehaviour
         GameObject spawnedEnemy3 = ObjectPool.instance.GetEnemy3Pool();
         if (spawnedEnemy3 != null)
         {
+            EnemyPawn enemy = spawnedEnemy3.GetComponent<EnemyPawn>();
             spawnedEnemy3.transform.position = enemy3Spawn[0].transform.position;
             spawnedEnemy3.transform.rotation = enemy3Spawn[0].transform.rotation;
+            Health healthReset = spawnedEnemy3.GetComponent<Health>();//store health component
+            healthReset.Heal(enemy.maxHealth);//restore health to max
             spawnedEnemy3.SetActive(true);
 
         }
@@ -224,8 +236,11 @@ public class GameManager : MonoBehaviour
         GameObject spawnedEnemy4 = ObjectPool.instance.GetEnemy4Pool();
         if (spawnedEnemy4 != null)
         {
+            EnemyPawn enemy = spawnedEnemy4.GetComponent<EnemyPawn>();
             spawnedEnemy4.transform.position = enemy4Spawn[0].transform.position;
             spawnedEnemy4.transform.rotation = enemy4Spawn[0].transform.rotation;
+            Health healthReset = spawnedEnemy4.GetComponent<Health>();//store health component
+            healthReset.Heal(enemy.maxHealth);//restore health to max
             spawnedEnemy4.SetActive(true);
 
         }
@@ -236,8 +251,11 @@ public class GameManager : MonoBehaviour
         GameObject spawnedEnemy5 = ObjectPool.instance.GetEnemy5Pool();
         if (spawnedEnemy5 != null)
         {
+            EnemyPawn enemy = spawnedEnemy5.GetComponent<EnemyPawn>();
             spawnedEnemy5.transform.position = enemy5Spawn[0].transform.position;
             spawnedEnemy5.transform.rotation = enemy5Spawn[0].transform.rotation;
+            Health healthReset = spawnedEnemy5.GetComponent<Health>();//store health component
+            healthReset.Heal(enemy.maxHealth);//restore health to max
             spawnedEnemy5.SetActive(true);
 
         }
@@ -248,8 +266,11 @@ public class GameManager : MonoBehaviour
         GameObject spawnedEnemy6 = ObjectPool.instance.GetEnemy6Pool();
         if (spawnedEnemy6 != null)
         {
+            EnemyPawn enemy = spawnedEnemy6.GetComponent<EnemyPawn>();
             spawnedEnemy6.transform.position = enemy6Spawn[0].transform.position;
             spawnedEnemy6.transform.rotation = enemy6Spawn[0].transform.rotation;
+            Health healthReset = spawnedEnemy6.GetComponent<Health>();//store health component
+            healthReset.Heal(enemy.maxHealth);//restore health to max
             spawnedEnemy6.SetActive(true);
 
         }
@@ -260,8 +281,11 @@ public class GameManager : MonoBehaviour
         GameObject spawnedEnemy7 = ObjectPool.instance.GetEnemy7Pool();
         if (spawnedEnemy7 != null)
         {
+            EnemyPawn enemy = spawnedEnemy7.GetComponent<EnemyPawn>();
             spawnedEnemy7.transform.position = enemy7Spawn[0].transform.position;
             spawnedEnemy7.transform.rotation = enemy7Spawn[0].transform.rotation;
+            Health healthReset = spawnedEnemy7.GetComponent<Health>();//store health component
+            healthReset.Heal(enemy.maxHealth);//restore health to max
             spawnedEnemy7.SetActive(true);
 
         }

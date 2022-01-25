@@ -159,7 +159,7 @@ MonoBehaviour:
   _walkSpeed: 2
   _runSpeed: 4
   _jumpHeight: 5
-  _damage: 0
+  _damage: 15
   _meleeAttackRange: 0
   _rangedAttackRange: 0
   t: {fileID: 6960494434514254221}
@@ -221,6 +221,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   remTimer: 5
+  onRespawn:
+    m_PersistentCalls:
+      m_Calls: []
   _health: 0
   isDead: 0
   audiosource: {fileID: 0}
