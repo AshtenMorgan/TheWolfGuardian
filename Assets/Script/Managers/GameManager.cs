@@ -98,6 +98,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        CheckSpawn();
+        CheckEnemySpawn();
+
+    }
+
+    private void FixedUpdate()
+    {
+        
+    }
+
+
+
+    void CheckSpawn()
+    {
         if (Time.time > _nextPlayerSpawn)//check time against spawn delay
         {
             if (!ObjectPool.instance.Player.activeInHierarchy && gameOver == false)//no player active and it is not game over
@@ -112,11 +126,10 @@ public class GameManager : MonoBehaviour
             {
                 GameOver();//run game over
             }
-            _nextPlayerSpawn += Time.time;//update spawn timer
+            _nextPlayerSpawn += Time.time + playerSpawnDelay;//update spawn timer
         }
     }
-
-    private void FixedUpdate()
+    void CheckEnemySpawn()
     {
         if (Time.time > _nextEnemySpawn)//check spawn timer
         {
@@ -151,17 +164,20 @@ public class GameManager : MonoBehaviour
                 SpawnEnemy7();
             }
             #endregion
-            _nextEnemySpawn += Time.time;//update spawn timer
+            _nextEnemySpawn += Time.time + enemySpawnDelay;//update spawn timer
         }
     }
-
     public void SpawnPlayer()
     {
         if (ObjectPool.instance.Player != null)//make sure there is a player
         {
             player = ObjectPool.instance.Player.GetComponent<PlayerPawn>();//store player
+            Health playerHealthReset = player.GetComponent<Health>();//store health component
             ObjectPool.instance.Player.transform.position = playerSpawn.transform.position;//move player
             ObjectPool.instance.Player.transform.rotation = playerSpawn.transform.rotation;//rotate player
+            playerHealthReset.Heal(player.maxHealth);//return player to max health
+            
+            //return current health to max value
             ObjectPool.instance.Player.SetActive(true);//activate player
             player.Lives--;//decrement lives
         }

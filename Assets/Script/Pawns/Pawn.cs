@@ -63,22 +63,25 @@ public class Pawn : MonoBehaviour
 
 
     #region Functions
+    void Awake()
+    {
+        _currentHealth = _maxHealth; //set health to match maximum
+    }
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        
     }
 
     public void OnTriggerEnter2D(Collider2D col)
     {
-        Health health = col.GetComponent<Health>();
-        health.Damage(15);
+        Health health = col.GetComponent<Health>();//find the health component of what we hit
+        health.Damage(_damage);//apply damage 
           
     }
 

@@ -18,6 +18,9 @@ public class Health : Pickups
     [SerializeField, Tooltip("Seconds before death")]
     private float remTimer = 5.0f;
 
+    [SerializeField, Tooltip("Raised when object Respawns")]
+    private UnityEvent onRespawn;
+
     [SerializeField, Tooltip("Current Health")]
     private float _health;
     private float _maxHealth;
@@ -33,12 +36,16 @@ public class Health : Pickups
     public AudioSource audiosource;
     public AudioClip deathSound;
 
+    //called when script instance is being loaded
+    void Awake()
+    {
+        pawn = GetComponent<Pawn>();    //get pawn from object this script is attached to
+        _health = pawn.currentHealth;   //Set up health
+        _maxHealth = pawn.maxHealth;    //match max health
+    }
     // Start is called before the first frame update
     public override void Start()
     {
-        pawn = GetComponent<Pawn>();//get pawn from object this script is attached to
-        _health = pawn.currentHealth;//give object some life
-        _maxHealth = pawn.maxHealth;
         base.Start();
     }
 
@@ -106,4 +113,10 @@ public class Health : Pickups
         
         
     }
+
+    public void Respawn()
+    {
+        Health healthReset = gameObject.GetComponent<Health>();     
+    }
+
 }

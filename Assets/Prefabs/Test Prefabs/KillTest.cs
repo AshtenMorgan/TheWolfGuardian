@@ -13,6 +13,13 @@ public class KillTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            PlayerPawn player = FindObjectOfType<PlayerPawn>();
+            Health health = player.gameObject.GetComponent<Health>();
+            health.Damage(10);
+            Debug.Log("Health smack");
+        }
         if (Input.GetKeyDown(KeyCode.Delete))
         {
             GameManager.instance.player.gameObject.SetActive(false);
