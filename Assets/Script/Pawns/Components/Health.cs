@@ -5,37 +5,39 @@ using UnityEngine.Events;
 
 public class Health : Pickups
 {
+    #region Variables
+    #region Events
     [Header("Events")]
     [SerializeField, Tooltip("Raised when object is healed")]
     private UnityEvent onHeal;
-
     [SerializeField, Tooltip("Raised when object is damaged")]
     private UnityEvent onDamage;
-
     [SerializeField, Tooltip("Raised when object dies")]
     private UnityEvent onDie;
-
     [SerializeField, Tooltip("Seconds before death")]
     private float remTimer = 5.0f;
-
     [SerializeField, Tooltip("Raised when object Respawns")]
     private UnityEvent onRespawn;
-
-    [SerializeField, Tooltip("Current Health")]
+    #endregion
+    #region Pawn Variables
     private float _health;
-    private float _maxHealth;
-    private float percent;
-
-    private float overKill;
-    private float overHeal;
-
-    public bool isDead = false;
-    private Pawn pawn;
-
+    [SerializeField, Tooltip("Max Health")]
+    private float _maxHealth;//settable in inspector, should determine current health at start
+    private float percent;//used to get percent of total health for health bar/tracker
+    #endregion
+    #region Combat Vars
+    private float overKill;//to hold overkill value (if used)
+    private float overHeal;//to hold overheal value (if used)
+    public bool isDead = false;//death monitoring
+    private Pawn pawn;//reference parent class
+    #endregion
+    #region Audio
     [Header("Sounds")]
-    public AudioSource audiosource;
-    public AudioClip deathSound;
-
+    public AudioSource audiosource;//audio source (usually going to be on this player/enemy)
+    public AudioClip deathSound;//clip to play on death
+    #endregion
+    #endregion
+    #region Functions
     //called when script instance is being loaded
     void Awake()
     {
@@ -52,7 +54,7 @@ public class Health : Pickups
     // Update is called once per frame
     public override void Update()
     {
-        percent = _health / _maxHealth;
+        percent = _health / _maxHealth;//simple math to return percent of total health
         base.Update();
     }
 
@@ -100,23 +102,21 @@ public class Health : Pickups
     }
 
     public void Death()
-    {
-        
-        //isDead = true;//let other things know this is dead.
-        //Debug.Log("death sound would play here");
-        //audiosource.PlayOneShot(deathSound);//play death sound
+    {       
+        isDead = true;//let other things know this is dead.
 
-        Debug.Log("Made it to disable step");
-        //check timer, if time up, then kill object
-        //gameObject.SetActive(false);//hide object
-        gameObject.SetActive(false);
-        
-        
+        //audiosource.PlayOneShot(deathSound);  //play death sound
+
+        Invoke("Kill", remTimer);//Run kill function after "remTimer"   
     }
-
+    private void Kill()
+    {
+        gameObject.SetActive(false);//set object inactive
+    }
+    
     public void Respawn()
     {
         Health healthReset = gameObject.GetComponent<Health>();     
     }
-
+    #endregion
 }

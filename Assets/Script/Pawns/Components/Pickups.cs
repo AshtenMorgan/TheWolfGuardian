@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class Pickups : MonoBehaviour
 {
+
     public virtual void Start()
     {
 
@@ -12,7 +13,7 @@ public abstract class Pickups : MonoBehaviour
     }
 
     //when we enter a collision
-    public virtual void OnTriggerEnter(Collider col)
+    public virtual void OnTriggerEnter2D(Collider2D col)
     {
         PlayerPawn player = col.GetComponent<PlayerPawn>();//get colliding player pawn
         if (player)//if player pawn is found
@@ -21,8 +22,8 @@ public abstract class Pickups : MonoBehaviour
         }
     }
 
-    public virtual void OnPickup(PlayerPawn player)
+    public virtual void OnPickup(PlayerPawn player)//what happens when player hits pickup
     {
-        Destroy(gameObject);//remove this object
+        Destroy(gameObject);//remove this object (Possibly changed to disable once pickups are actually implemented)
     }
 }

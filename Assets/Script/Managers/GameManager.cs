@@ -55,14 +55,14 @@ public class GameManager : MonoBehaviour
     #region Spawn Timing
     [Header("Timers"), SerializeField, Tooltip("Time delay between spawns")]
     public float playerSpawnDelay;
-    public float _nextPlayerSpawn;
+    public float _nextPlayerSpawn;//private after tests
     public float enemySpawnDelay;
-    public float _nextEnemySpawn;
-    public float current;
+    public float _nextEnemySpawn;//private after tests
+    public float current;//Only for tests
     public float buffSpawnDelay;
-    private float _nextBuffSpawn;
+    private float _nextBuffSpawn;//private after tests
     public float debuffSpawnDelay;
-    private float _nextDebuffSpawn;
+    private float _nextDebuffSpawn;//private after tests
     #endregion
     #region instance
     public static GameManager instance { get; private set; }//allow other classes to access GM
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-
+    #region Functions
 
     //Singleton  only one instance
     private void Awake()
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
     {
         CheckSpawn();
         CheckEnemySpawn();
-        current = Time.time;
+        current = Time.time;//for testing purposes  delete after tests are complete
 
     }
 
@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-
+    #region Player Spawning
     void CheckSpawn()
     {
         if (Time.time > _nextPlayerSpawn)//check time against spawn delay
@@ -131,6 +131,28 @@ public class GameManager : MonoBehaviour
             _nextPlayerSpawn = Time.time + playerSpawnDelay;//update spawn timer
         }
     }
+
+    public void SpawnPlayer()
+    {
+        if (ObjectPool.instance.Player != null)//make sure there is a player
+        {
+            player = ObjectPool.instance.Player.GetComponent<PlayerPawn>();//store player
+            Health healthReset = player.GetComponent<Health>();//store health component
+            ObjectPool.instance.Player.transform.position = playerSpawn.transform.position;//move player
+            ObjectPool.instance.Player.transform.rotation = playerSpawn.transform.rotation;//rotate player
+            healthReset.Heal(player.maxHealth);//return player to max health
+            
+            //return current health to max value
+            ObjectPool.instance.Player.SetActive(true);//activate player
+            player.Lives--;//decrement lives
+        }
+
+
+
+    }
+    #endregion
+
+    #region Enemy Spawn Functions
     void CheckEnemySpawn()
     {
         if (Time.time > _nextEnemySpawn)//check spawn timer
@@ -169,31 +191,12 @@ public class GameManager : MonoBehaviour
             _nextEnemySpawn = Time.time + enemySpawnDelay;//update spawn timer
         }
     }
-    public void SpawnPlayer()
-    {
-        if (ObjectPool.instance.Player != null)//make sure there is a player
-        {
-            player = ObjectPool.instance.Player.GetComponent<PlayerPawn>();//store player
-            Health healthReset = player.GetComponent<Health>();//store health component
-            ObjectPool.instance.Player.transform.position = playerSpawn.transform.position;//move player
-            ObjectPool.instance.Player.transform.rotation = playerSpawn.transform.rotation;//rotate player
-            healthReset.Heal(player.maxHealth);//return player to max health
-            
-            //return current health to max value
-            ObjectPool.instance.Player.SetActive(true);//activate player
-            player.Lives--;//decrement lives
-        }
-
-
-
-    }
-    #region Enemy Spawn Functions
     public void SpawnEnemy1()
     {
         GameObject spawnedEnemy1 = ObjectPool.instance.GetEnemy1Pool();//check spawn pool for inactive enemies
         if (spawnedEnemy1 != null)//if inactive enemies exist in pool
         {
-            EnemyPawn enemy = spawnedEnemy1.GetComponent<EnemyPawn>();
+            EnemyPawn enemy = spawnedEnemy1.GetComponent<EnemyPawn>();//get pawn component from enemy
             spawnedEnemy1.transform.position = enemy1Spawn[0].transform.position;//spawn enemy at position
             spawnedEnemy1.transform.rotation = enemy1Spawn[0].transform.rotation;//spawn with rotation
             Health healthReset = spawnedEnemy1.GetComponent<Health>();//store health component
@@ -293,7 +296,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-
+    #region NYI
     //function for pause
     public void Pause()
     {
@@ -327,4 +330,6 @@ public class GameManager : MonoBehaviour
     {
         
     }
+    #endregion
+    #endregion
 }

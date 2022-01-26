@@ -35,7 +35,7 @@ public class ObjectPool : MonoBehaviour
 
     #endregion
 
-
+    #region Functions
     void Awake()
     {//make sure there is always only 1 instance
         if (ObjectPool.instance == null)
@@ -48,8 +48,6 @@ public class ObjectPool : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -211,5 +209,6 @@ public class ObjectPool : MonoBehaviour
         }
         return null;
     }
+    #endregion
     #endregion
 }
