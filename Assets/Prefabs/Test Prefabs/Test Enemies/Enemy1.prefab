@@ -181,7 +181,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   remTimer: 5
-  _health: 0
+  onRespawn:
+    m_PersistentCalls:
+      m_Calls: []
+  _maxHealth: 0
   isDead: 0
   audiosource: {fileID: 7559521895278942266}
   deathSound: {fileID: 0}

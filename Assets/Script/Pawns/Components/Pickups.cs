@@ -24,6 +24,6 @@ public abstract class Pickups : MonoBehaviour
 
     public virtual void OnPickup(PlayerPawn player)//what happens when player hits pickup
     {
-        Destroy(gameObject);//remove this object (Possibly changed to disable once pickups are actually implemented)
+        //Destroy(gameObject);//remove this object (Possibly changed to disable once pickups are actually implemented)
     }
 }

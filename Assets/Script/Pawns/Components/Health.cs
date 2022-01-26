@@ -73,6 +73,7 @@ public class Health : Pickups
             overKill = 0;//output 0
             _health = Mathf.Clamp(_health - damage, 0f, _health);//subtract damage from health, making sure not to subtract more than current health value
         }
+
         SendMessage("OnDamage", SendMessageOptions.DontRequireReceiver);
         onDamage.Invoke();
 
@@ -103,16 +104,13 @@ public class Health : Pickups
 
     public void Death()
     {       
-        isDead = true;//let other things know this is dead.
+        //isDead = true;//let other things know this is dead.
 
         //audiosource.PlayOneShot(deathSound);  //play death sound
 
-        Invoke("Kill", remTimer);//Run kill function after "remTimer"   
-    }
-    private void Kill()
-    {
         gameObject.SetActive(false);//set object inactive
     }
+    
     
     public void Respawn()
     {

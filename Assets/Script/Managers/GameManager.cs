@@ -187,10 +187,12 @@ public class GameManager : MonoBehaviour
             {
                 SpawnEnemy7();
             }
-            #endregion
+            
             _nextEnemySpawn = Time.time + enemySpawnDelay;//update spawn timer
         }
+        #endregion
     }
+
     public void SpawnEnemy1()
     {
         GameObject spawnedEnemy1 = ObjectPool.instance.GetEnemy1Pool();//check spawn pool for inactive enemies
