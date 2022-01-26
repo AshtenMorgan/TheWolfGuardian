@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6960494434514254220}
   - component: {fileID: 6960494434514254219}
   - component: {fileID: 6960494434514254218}
-  - component: {fileID: 6960494434514254217}
+  - component: {fileID: 7907193292760556754}
   - component: {fileID: 6960494434514254216}
   - component: {fileID: 6960494434514254215}
   - component: {fileID: 6960494434514254222}
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6960494434514254217}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TestController, Assembly-CSharp
         m_MethodName: Jump
         m_Mode: 1
@@ -249,7 +249,7 @@ MonoBehaviour:
   comboMeterMax: 0
   _lives: 4
   _maxLives: 5
---- !u!114 &6960494434514254217
+--- !u!114 &7907193292760556754
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6960494434514254214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c0ee8fecfef7f145a475154f5c7c2dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 4bc5719613eaf974c8d0e6d3519d891f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   groundLayer:
@@ -267,7 +267,7 @@ MonoBehaviour:
   jumpTime: 0.25
   groundCheck: {fileID: 6960494435128371425}
   circleRadius: 0.1
-  ani: {fileID: 6960494434514254222}
+  ani: {fileID: 0}
 --- !u!61 &6960494434514254216
 BoxCollider2D:
   m_ObjectHideFlags: 0
