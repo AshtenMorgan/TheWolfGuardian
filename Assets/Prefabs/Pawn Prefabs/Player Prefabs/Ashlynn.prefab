@@ -267,7 +267,7 @@ MonoBehaviour:
   jumpTime: 0.25
   groundCheck: {fileID: 6960494435128371425}
   circleRadius: 0.1
-  ani: {fileID: 0}
+  ani: {fileID: 6960494434514254222}
 --- !u!61 &6960494434514254216
 BoxCollider2D:
   m_ObjectHideFlags: 0
