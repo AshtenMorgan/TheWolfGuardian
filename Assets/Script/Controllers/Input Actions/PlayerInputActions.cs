@@ -71,6 +71,24 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CrouchStart"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd11e6b8-ff6a-467f-9fab-12fb1c810647"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CrouchEnd"",
+                    ""type"": ""Button"",
+                    ""id"": ""6b284547-5c87-4979-89d5-678e3d33c62c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -260,6 +278,50 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""JumpEnd"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e8059df-ca94-4d66-bcec-31db0654cb5a"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""CrouchStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f9f0495d-55ea-4745-871a-26546e54e807"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""CrouchStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""50cfdbb9-a7ca-4dbf-83ac-6dc5484cb20b"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""CrouchEnd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""880f7824-b76c-40d3-9d7e-2449ebfdde90"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""CrouchEnd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -296,6 +358,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_PlayerHuman_Move = m_PlayerHuman.FindAction("Move", throwIfNotFound: true);
         m_PlayerHuman_SprintStart = m_PlayerHuman.FindAction("SprintStart", throwIfNotFound: true);
         m_PlayerHuman_SprintEnd = m_PlayerHuman.FindAction("SprintEnd", throwIfNotFound: true);
+        m_PlayerHuman_CrouchStart = m_PlayerHuman.FindAction("CrouchStart", throwIfNotFound: true);
+        m_PlayerHuman_CrouchEnd = m_PlayerHuman.FindAction("CrouchEnd", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -360,6 +424,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerHuman_Move;
     private readonly InputAction m_PlayerHuman_SprintStart;
     private readonly InputAction m_PlayerHuman_SprintEnd;
+    private readonly InputAction m_PlayerHuman_CrouchStart;
+    private readonly InputAction m_PlayerHuman_CrouchEnd;
     public struct PlayerHumanActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -369,6 +435,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_PlayerHuman_Move;
         public InputAction @SprintStart => m_Wrapper.m_PlayerHuman_SprintStart;
         public InputAction @SprintEnd => m_Wrapper.m_PlayerHuman_SprintEnd;
+        public InputAction @CrouchStart => m_Wrapper.m_PlayerHuman_CrouchStart;
+        public InputAction @CrouchEnd => m_Wrapper.m_PlayerHuman_CrouchEnd;
         public InputActionMap Get() { return m_Wrapper.m_PlayerHuman; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -393,6 +461,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @SprintEnd.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnSprintEnd;
                 @SprintEnd.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnSprintEnd;
                 @SprintEnd.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnSprintEnd;
+                @CrouchStart.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnCrouchStart;
+                @CrouchStart.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnCrouchStart;
+                @CrouchStart.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnCrouchStart;
+                @CrouchEnd.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnCrouchEnd;
+                @CrouchEnd.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnCrouchEnd;
+                @CrouchEnd.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnCrouchEnd;
             }
             m_Wrapper.m_PlayerHumanActionsCallbackInterface = instance;
             if (instance != null)
@@ -412,6 +486,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @SprintEnd.started += instance.OnSprintEnd;
                 @SprintEnd.performed += instance.OnSprintEnd;
                 @SprintEnd.canceled += instance.OnSprintEnd;
+                @CrouchStart.started += instance.OnCrouchStart;
+                @CrouchStart.performed += instance.OnCrouchStart;
+                @CrouchStart.canceled += instance.OnCrouchStart;
+                @CrouchEnd.started += instance.OnCrouchEnd;
+                @CrouchEnd.performed += instance.OnCrouchEnd;
+                @CrouchEnd.canceled += instance.OnCrouchEnd;
             }
         }
     }
@@ -441,5 +521,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnSprintStart(InputAction.CallbackContext context);
         void OnSprintEnd(InputAction.CallbackContext context);
+        void OnCrouchStart(InputAction.CallbackContext context);
+        void OnCrouchEnd(InputAction.CallbackContext context);
     }
 }
