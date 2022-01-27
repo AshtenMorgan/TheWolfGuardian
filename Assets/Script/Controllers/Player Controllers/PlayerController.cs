@@ -87,23 +87,29 @@ public class PlayerController : Controller
         {
             if (grounded) //only allows the player to jump if they're on the ground
             {
-                verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on PlayerPawn
-                rb2d.velocity = new Vector2(rb2d.velocity.x, verticalVelocity);
-                //rb2d.AddForce(Vector2.up * verticalVelocity, ForceMode2D.Impulse); //makes the rigidbody of the pawn jump
-                stoppedJumping = false; //sets the stoppedJumping bool to false so that we have !stoppedJumping
+               
+                    verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on PlayerPawn
+                    rb2d.velocity = new Vector2(rb2d.velocity.x, verticalVelocity);
+                    //rb2d.AddForce(Vector2.up * verticalVelocity, ForceMode2D.Impulse); //makes the rigidbody of the pawn jump
+                    stoppedJumping = false; //sets the stoppedJumping bool to false so that we have !stoppedJumping
 
-                //animator
-                ani.SetBool("Jumping", true);//tell the animator a jump is occuring
+                    //animator
+                    ani.SetBool("Jumping", true);//tell the animator a jump is occuring
+               
+               
             }
         }
     }
     public virtual void JumpEnd(InputAction.CallbackContext context)
     {
-        jumpTimeCounter = 0; //resets the jumpTimeCounter to zero
-        stoppedJumping = true; //sets the stoppedJumping bool to true, cause we have stopped jumping
+        
+            jumpTimeCounter = 0; //resets the jumpTimeCounter to zero
+            stoppedJumping = true; //sets the stoppedJumping bool to true, cause we have stopped jumping
 
-        //animator
-        ani.SetBool("Jumping", false);//tell the animator to stop jumping
+            //animator
+            ani.SetBool("Jumping", false);//tell the animator to stop jumping
+        
+        
     }
 
     public virtual void Move(InputAction.CallbackContext context)
@@ -119,14 +125,14 @@ public class PlayerController : Controller
         if (grounded)
         {
             pawn.IsSprinting = true; //sets the isSprinting variable on the pawn to true
+            ani.SetBool("Sprinting", true);  //tell the animator we are sprinting
         }
     }
     public virtual void SprintEnd(InputAction.CallbackContext context)
     {
-        if (grounded)
-        {
+        //removed grounded check here to fix a bug
             pawn.IsSprinting = false; //sets the isSprinting variable on the pawn to false
-        }
+            ani.SetBool("Sprinting", false);//tell the animator to stop sprinting
     }
     #endregion
 
