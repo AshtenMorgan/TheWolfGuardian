@@ -83,33 +83,27 @@ public class PlayerController : Controller
     #region Action Input Functions
     public virtual void JumpStart(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            if (grounded) //only allows the player to jump if they're on the ground
-            {
-               
-                    verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on PlayerPawn
-                    rb2d.velocity = new Vector2(rb2d.velocity.x, verticalVelocity);
-                    //rb2d.AddForce(Vector2.up * verticalVelocity, ForceMode2D.Impulse); //makes the rigidbody of the pawn jump
-                    stoppedJumping = false; //sets the stoppedJumping bool to false so that we have !stoppedJumping
-
+      if (context.performed)
+      {
+         if (grounded) //only allows the player to jump if they're on the ground
+         {
+                Debug.Log(context);
+                verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on PlayerPawn
+          rb2d.velocity = new Vector2(rb2d.velocity.x, verticalVelocity);
+          stoppedJumping = false; //sets the stoppedJumping bool to false so that we have !stoppedJumping
                     //animator
-                    ani.SetBool("Jumping", true);//tell the animator a jump is occuring
-               
-               
-            }
-        }
+          ani.SetBool("Jumping", true);//tell the animator a jump is occurring
+         }
+      }
     }
     public virtual void JumpEnd(InputAction.CallbackContext context)
     {
+        Debug.Log(context);
+        jumpTimeCounter = 0; //resets the jumpTimeCounter to zero
+        stoppedJumping = true; //sets the stoppedJumping bool to true, cause we have stopped jumping
         
-            jumpTimeCounter = 0; //resets the jumpTimeCounter to zero
-            stoppedJumping = true; //sets the stoppedJumping bool to true, cause we have stopped jumping
-
-            //animator
-            ani.SetBool("Jumping", false);//tell the animator to stop jumping
-        
-        
+        //animator
+        ani.SetBool("Jumping", false);//tell the animator to stop jumping
     }
 
     public virtual void Move(InputAction.CallbackContext context)

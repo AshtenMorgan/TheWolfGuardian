@@ -10233,13 +10233,13 @@ MonoBehaviour:
   enemy6Pool: []
   enemy7Pool: []
   Player: {fileID: 1496103083}
-  Enemy1: {fileID: 0}
-  Enemy2: {fileID: 0}
-  Enemy3: {fileID: 0}
-  Enemy4: {fileID: 0}
-  Enemy5: {fileID: 0}
-  Enemy6: {fileID: 0}
-  Enemy7: {fileID: 0}
+  Enemy1: {fileID: 7559521895278942267, guid: 98eeaee8feaf768499e976a5129321d0, type: 3}
+  Enemy2: {fileID: 7662298690977891040, guid: 1e117f7eb45b7824b84f4e4fe64d0901, type: 3}
+  Enemy3: {fileID: 7662298690977891040, guid: d8e0574e5582f614496291dfae3f8e95, type: 3}
+  Enemy4: {fileID: 7662298690977891040, guid: 2ff6cd808a4bc5f41ab8220048e57965, type: 3}
+  Enemy5: {fileID: 7662298690977891040, guid: 37a7cad1a3c32134cb7e6dec954b637a, type: 3}
+  Enemy6: {fileID: 7662298690977891040, guid: 143b08700ed652f4b826c7c78a71830d, type: 3}
+  Enemy7: {fileID: 7662298690977891040, guid: 2c81bab4d0e5e6a4bacd49ab6b38db5a, type: 3}
 --- !u!114 &2095875718
 MonoBehaviour:
   m_ObjectHideFlags: 0
