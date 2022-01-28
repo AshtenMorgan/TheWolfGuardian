@@ -158,8 +158,8 @@ MonoBehaviour:
   _currentHealth: 0
   _maxHealth: 50
   _walkSpeed: 2
-  _runSpeed: 4
-  _jumpHeight: 5
+  _runSpeed: 5
+  _jumpHeight: 6
   _damage: 15
   _meleeAttackRange: 0
   _rangedAttackRange: 0
