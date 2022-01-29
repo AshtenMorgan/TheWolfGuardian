@@ -134,38 +134,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ashlynn
       objectReference: {fileID: 0}
-    - target: {fileID: 6960494434514254215, guid: ee412642b752bde4faab2815a382abea, type: 3}
-      propertyPath: m_Mass
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6960494434514254215, guid: ee412642b752bde4faab2815a382abea, type: 3}
-      propertyPath: m_LinearDrag
-      value: 1.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6960494434514254215, guid: ee412642b752bde4faab2815a382abea, type: 3}
-      propertyPath: m_AngularDrag
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 6960494434514254215, guid: ee412642b752bde4faab2815a382abea, type: 3}
-      propertyPath: m_GravityScale
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6960494434514254215, guid: ee412642b752bde4faab2815a382abea, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6960494434514254218, guid: ee412642b752bde4faab2815a382abea, type: 3}
-      propertyPath: damage
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6960494434514254218, guid: ee412642b752bde4faab2815a382abea, type: 3}
-      propertyPath: _jumpHeight
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6960494434514254220, guid: ee412642b752bde4faab2815a382abea, type: 3}
-      propertyPath: m_DrawMode
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6960494434514254221, guid: ee412642b752bde4faab2815a382abea, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -10082,51 +10050,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6960494434514254214, guid: ee412642b752bde4faab2815a382abea, type: 3}
   m_PrefabInstance: {fileID: 167585978}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1496103092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1496103083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1913676f3f8314c4896656699aa17e22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onHeal:
-    m_PersistentCalls:
-      m_Calls: []
-  onDamage:
-    m_PersistentCalls:
-      m_Calls: []
-  onDie:
-    m_PersistentCalls:
-      m_Calls: []
-  remTimer: 5
-  onRespawn:
-    m_PersistentCalls:
-      m_Calls: []
-  _maxHealth: 0
-  isDead: 0
-  audiosource: {fileID: 0}
-  deathSound: {fileID: 0}
---- !u!58 &1496103093
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1496103083}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.12, y: 0.04}
-  serializedVersion: 2
-  m_Radius: 0.39170146
 --- !u!114 &1496103094 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6960494434514254218, guid: ee412642b752bde4faab2815a382abea, type: 3}
@@ -10233,13 +10156,13 @@ MonoBehaviour:
   enemy6Pool: []
   enemy7Pool: []
   Player: {fileID: 1496103083}
-  Enemy1: {fileID: 0}
-  Enemy2: {fileID: 0}
-  Enemy3: {fileID: 0}
-  Enemy4: {fileID: 0}
-  Enemy5: {fileID: 0}
-  Enemy6: {fileID: 0}
-  Enemy7: {fileID: 0}
+  Enemy1: {fileID: 7559521895278942267, guid: 98eeaee8feaf768499e976a5129321d0, type: 3}
+  Enemy2: {fileID: 7662298690977891040, guid: 1e117f7eb45b7824b84f4e4fe64d0901, type: 3}
+  Enemy3: {fileID: 7662298690977891040, guid: d8e0574e5582f614496291dfae3f8e95, type: 3}
+  Enemy4: {fileID: 7662298690977891040, guid: 2ff6cd808a4bc5f41ab8220048e57965, type: 3}
+  Enemy5: {fileID: 7662298690977891040, guid: 37a7cad1a3c32134cb7e6dec954b637a, type: 3}
+  Enemy6: {fileID: 7662298690977891040, guid: 143b08700ed652f4b826c7c78a71830d, type: 3}
+  Enemy7: {fileID: 7662298690977891040, guid: 2c81bab4d0e5e6a4bacd49ab6b38db5a, type: 3}
 --- !u!114 &2095875718
 MonoBehaviour:
   m_ObjectHideFlags: 0
