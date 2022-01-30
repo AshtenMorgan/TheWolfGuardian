@@ -27,7 +27,7 @@ public class EnemyController : Controller
     }
     protected override void FixedUpdate()
     {
-        player = GameManager.instance.player;//get player from GameManager
+        player = GameManager.Instance.player.GetComponent<PlayerPawn>();//get player from GameManager
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, enemy.WalkSpeed * Time.deltaTime);//move towards player by "speed" units per second
         base.FixedUpdate();//call parent function   
     }

@@ -8,6 +8,7 @@ public class Controller : MonoBehaviour
     #region Variables
     #region General Variables
     [Header("General Variables")]
+    [SerializeField]
     protected Rigidbody2D rb2d; //the rigidbody of the test character
     protected PlayerPawn pawn; //the PlayerPawn class so that we can access the player characters movement data
     [SerializeField]
@@ -32,10 +33,10 @@ public class Controller : MonoBehaviour
     protected int runVelocity; //the stand in variable for run speedon this script
     protected float inputX; //stores the players x axis input
     protected bool facingRight = true; //a bool that signifies whether the character is facing right, initializes as true
+    #endregion
     #region Animator Variables
     [Header("Animator Variables")]
     public Animator ani;//animator code
-    #endregion
     #endregion
     #endregion
     #region Functions
@@ -43,6 +44,7 @@ public class Controller : MonoBehaviour
     {
         pawn = GetComponent<PlayerPawn>(); //defines the pawn needed for all stats
         rb2d = GetComponent<Rigidbody2D>(); //defines the Rigidbody needed for pawn physics
+        ani = GetComponent<Animator>();//defines the animator component
         jumpTimeCounter = jumpTime; //sets the jumpTimeCounter
     }
 

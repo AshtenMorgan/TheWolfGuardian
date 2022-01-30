@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7589080735184265228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7589080735184265227}
+  - component: {fileID: 7589080735184265226}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7589080735184265227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7589080735184265228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.7269905, y: 1.3561468, z: -36.155132}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7589080735184265226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7589080735184265228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 106709c2aa7025b4ab35b76e75c82335, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  player: {fileID: 0}
+  playerPrefab: {fileID: 0}
+  enemy1Prefab: {fileID: 0}
+  enemy2Prefab: {fileID: 0}
+  enemy3Prefab: {fileID: 0}
+  enemy4Prefab: {fileID: 0}
+  enemy5Prefab: {fileID: 0}
+  enemy6Prefab: {fileID: 0}
+  enemy7Prefab: {fileID: 0}
+  playerInstan: {fileID: 0}
+  enemyInstan: {fileID: 0}
+  playerSpawn: {fileID: 0}
+  enemy1Spawn: []
+  enemy2Spawn: []
+  enemy3Spawn: []
+  enemy4Spawn: []
+  enemy5Spawn: []
+  enemy6Spawn: []
+  enemy7Spawn: []
+  enemy1Max: 0
+  enemy2Max: 0
+  enemy3Max: 0
+  enemy4Max: 0
+  enemy5Max: 0
+  enemy6Max: 0
+  enemy7Max: 0
+  playerSpawnDelay: 0
+  _nextPlayerSpawn: 0
+  enemySpawnDelay: 0
+  _nextEnemySpawn: 0
+  current: 0
+  buffSpawnDelay: 0
+  debuffSpawnDelay: 0
+  gameOver: 0
