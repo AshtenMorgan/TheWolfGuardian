@@ -54,13 +54,15 @@ public class EnemyController : Controller
                    isWallDetected = false,
                    isEnemyDetected = false;
     #endregion
-    
+
     #endregion
     #region functions
     #region start/update
     // Start is called before the first frame update
+    Health health;
     protected override void Start()
     {
+        health = GameObject.FindWithTag("Player").GetComponent<Health>();
         facingDirection = 1;//face right
         ani = GetComponent<Animator>();//get animator component
         enemy = GetComponent<EnemyPawn>();//reference this objects pawn

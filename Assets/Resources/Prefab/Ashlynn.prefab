@@ -186,7 +186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32376d0ab1a550f44b172168efae69cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHealth: 0
   _maxHealth: 50
   _walkSpeed: 2
   _runSpeed: 5
@@ -358,6 +357,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _maxHealth: 0
+  percent: 0
   isDead: 0
   audiosource: {fileID: 6745210005853773866}
   deathSound: {fileID: 0}
@@ -470,6 +470,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.12, y: 0.04}
+  m_Offset: {x: 0.24, y: -0.11}
   serializedVersion: 2
   m_Radius: 0.39170146
