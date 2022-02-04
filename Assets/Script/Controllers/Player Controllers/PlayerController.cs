@@ -47,10 +47,10 @@ public class PlayerController : Controller
     protected override void FixedUpdate()
     {
         #region Jumping Updates
-        grounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the player is grounded
-        ani.SetBool("Grounded", grounded);//match bools
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the player is grounded
+        ani.SetBool("Grounded", isGrounded);//match bools
         
-        if (!stoppedJumping && !grounded) //if we are jumping
+        if (!isNotJumping && !isGrounded) //if we are jumping
         {
             
             if (jumpTimeCounter > 0) //and our jump counter hasnt reached zero
@@ -61,7 +61,7 @@ public class PlayerController : Controller
                 jumpTimeCounter -= Time.deltaTime; // subtracts time from the jumpTimeCounter
             }
         }
-        else if (grounded)
+        else if (isGrounded)
         {
             jumpTimeCounter = jumpTime; //if we are grounded, it sets the jumpTimeCounter back to the jumpTime variable
             ani.SetBool("Jumping", false);
@@ -73,7 +73,7 @@ public class PlayerController : Controller
 
         #endregion
         #region Ground Movement Updates
-
+        SlopeStick();
         if (!pawn.IsSprinting)
         {
             walkVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
@@ -93,9 +93,9 @@ public class PlayerController : Controller
     {
         if (context.performed)
         {
-            if (grounded) //only allows the player to jump if they're on the ground
+            if (isGrounded) //only allows the player to jump if they're on the ground
             {
-                stoppedJumping = false; //sets the stoppedJumping bool to false so that we have !stoppedJumping
+                isNotJumping = false; //sets the stoppedJumping bool to false so that we have !stoppedJumping
                 verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on PlayerPawn
                 rb2d.velocity = new Vector2(rb2d.velocity.x, verticalVelocity);
             }
@@ -104,8 +104,8 @@ public class PlayerController : Controller
     public virtual void JumpEnd(InputAction.CallbackContext context)
     {
         jumpTimeCounter = 0; //resets the jumpTimeCounter to zero
-        stoppedJumping = true; //sets the stoppedJumping bool to true, cause we have stopped jumping
-        Debug.Log(stoppedJumping);
+        isNotJumping = true; //sets the stoppedJumping bool to true, cause we have stopped jumping
+        Debug.Log(isNotJumping);
     }
     public virtual void Move(InputAction.CallbackContext context)
     {
@@ -116,7 +116,7 @@ public class PlayerController : Controller
     }
     public virtual void SprintStart(InputAction.CallbackContext context)
     {
-        if (grounded)
+        if (isGrounded)
         {
             pawn.IsSprinting = true; //sets the isSprinting variable on the pawn to true
             ani.SetBool("Sprinting", true);  //tell the animator we are sprinting
