@@ -10,8 +10,6 @@ public class EnemyBar : MonoBehaviour
     public float pct;
     [SerializeField]
     private Health health;
-    [SerializeField]
-    private Pawn pawn;
     // Start is called before the first frame update
     private void Start()
     {
@@ -28,7 +26,7 @@ public class EnemyBar : MonoBehaviour
     {
         if (health)//if there is a health component
         {
-            pct = health.currentHealth / health.maxHealth;//get a number
+            pct = health.percent;//get a number
             bar.fillAmount = pct;//set fill ammount for bar
         }
     }
