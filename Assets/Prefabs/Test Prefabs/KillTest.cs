@@ -22,7 +22,7 @@ public class KillTest : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Delete))
         {
-            GameManager.instance.player.gameObject.SetActive(false);
+            GameManager.Instance.player.gameObject.SetActive(false);
             ObjectPool.instance.enemy1Pool[1].gameObject.SetActive(false);
             ObjectPool.instance.enemy2Pool[1].gameObject.SetActive(false);
             ObjectPool.instance.enemy3Pool[1].gameObject.SetActive(false);

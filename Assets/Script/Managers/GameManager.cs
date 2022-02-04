@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,13 +10,14 @@ public class GameManager : MonoBehaviour
 
     #region Player/enemy Object
     [Header("Objects"), SerializeField, Tooltip("Drag prefabs onto these")]
-    public PlayerPawn player;
-    public EnemyPawn enemy;
-    
+    public PlayerPawn Player;
+    public GameObject player;
+    //public EnemyPawn enemy;
+
     #endregion
 
     #region Enemy objects for spawning/moving
-    [Header("Prefabs"), SerializeField, Tooltip("These are the pre-build player and enemy objects")]
+    [Header("Prefabs"), Tooltip("These are the pre-build player and enemy objects")]
     public Object playerPrefab;
     public Object enemy1Prefab;
     public Object enemy2Prefab;
@@ -65,12 +67,14 @@ public class GameManager : MonoBehaviour
     private float _nextDebuffSpawn;//private after tests
     #endregion
     #region instance
-    public static GameManager instance { get; private set; }//allow other classes to access GM
+    public static GameManager Instance { get; private set; }//allow other classes to access GM
     #endregion
 
     [Header("Game Over tracker"), SerializeField, Tooltip("Tracks weather or not a game over has occured")]
     private bool gameOver;
 
+    [SerializeField]
+    private Scene _scene;
     #endregion
 
     #region Functions
@@ -79,9 +83,9 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         //make sure there is always only 1 instance
-        if (GameManager.instance == null)
+        if (GameManager.Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -93,66 +97,81 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-
+        VarCheck();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        CheckSpawn();
-        CheckEnemySpawn();
-        current = Time.time;//for testing purposes  delete after tests are complete
 
+        VarCheck();
     }
 
     private void FixedUpdate()
     {
-        
+        VarCheck();
+        CheckSpawn();
+        //CheckEnemySpawn();  //checking if we should spawn an enemy.
+
+        current = Time.time;//for testing purposes  delete after tests are complete
     }
 
+    public void VarCheck()
+    {
+        if (!player)
+        {
+            playerPrefab = Resources.Load("Prefab/Ashlynn");
+            playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform;
+            playerInstan = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform;
 
+            //player
+            player = (GameObject)Instantiate(playerPrefab, playerInstan.position, playerInstan.rotation) as GameObject;//spawn player
+            Player = player.GetComponent<PlayerPawn>();
+            player.gameObject.SetActive(false);//everything is inactivated on initial spawn
+        }
+    }
     #region Player Spawning
     void CheckSpawn()
     {
-        if (Time.time > _nextPlayerSpawn)//check time against spawn delay
+        if (player != null)
         {
-            if (!ObjectPool.instance.Player.activeInHierarchy && gameOver == false)//no player active and it is not game over
+
+
+            if (player.activeInHierarchy != true)
             {
-                SpawnPlayer();//run player spawn function
+                if (Time.time > _nextPlayerSpawn)//check time against spawn delay
+                {
+                    if (gameOver == false)//no player active and it is not game over
+                    {
+                        SpawnPlayer();//run player spawn function
+                    }
+                    else//should only get here if game over is true
+                    {
+                        GameOver();//run game over
+                    }
+
+                    _nextPlayerSpawn = Time.time + playerSpawnDelay;//update spawn timer
+                }
             }
-            else if (ObjectPool.instance.Player.activeInHierarchy)//player is active
-            {
-                return;//do nothing
-            }
-            else//should only get here if game over is true
-            {
-                GameOver();//run game over
-            }
-            _nextPlayerSpawn = Time.time + playerSpawnDelay;//update spawn timer
         }
+
     }
 
     public void SpawnPlayer()
     {
-        if (ObjectPool.instance.Player != null)//make sure there is a player
+        if (Player != null)//make sure there is a player
         {
-            player = ObjectPool.instance.Player.GetComponent<PlayerPawn>();//store player
             Health healthReset = player.GetComponent<Health>();//store health component
-            ObjectPool.instance.Player.transform.position = playerSpawn.transform.position;//move player
-            ObjectPool.instance.Player.transform.rotation = playerSpawn.transform.rotation;//rotate player
-            healthReset.Heal(player.maxHealth);//return player to max health
-            
+            player.transform.SetPositionAndRotation(playerSpawn.transform.position, playerSpawn.transform.rotation);//Set player position/rotation
+            healthReset.Heal(Player.maxHealth);//return player to max health
+
             //return current health to max value
-            ObjectPool.instance.Player.SetActive(true);//activate player
-            player.Lives--;//decrement lives
+            player.gameObject.SetActive(true);//Appear the player
+            Player.Lives--;//decrement lives
         }
-
-
-
     }
     #endregion
-
-    #region Enemy Spawn Functions
+    #region Enemy Spawn Checks
     void CheckEnemySpawn()
     {
         if (Time.time > _nextEnemySpawn)//check spawn timer
@@ -187,20 +206,20 @@ public class GameManager : MonoBehaviour
             {
                 SpawnEnemy7();
             }
-            
+
             _nextEnemySpawn = Time.time + enemySpawnDelay;//update spawn timer
         }
         #endregion
     }
-
+    #endregion
+    #region Enemy Spawn Functions
     public void SpawnEnemy1()
     {
         GameObject spawnedEnemy1 = ObjectPool.instance.GetEnemy1Pool();//check spawn pool for inactive enemies
         if (spawnedEnemy1 != null)//if inactive enemies exist in pool
         {
             EnemyPawn enemy = spawnedEnemy1.GetComponent<EnemyPawn>();//get pawn component from enemy
-            spawnedEnemy1.transform.position = enemy1Spawn[0].transform.position;//spawn enemy at position
-            spawnedEnemy1.transform.rotation = enemy1Spawn[0].transform.rotation;//spawn with rotation
+            spawnedEnemy1.transform.SetPositionAndRotation(enemy1Spawn[0].transform.position, enemy1Spawn[0].transform.rotation);//spawn with rotation
             Health healthReset = spawnedEnemy1.GetComponent<Health>();//store health component
             healthReset.Heal(enemy.maxHealth);//restore health to max
             spawnedEnemy1.SetActive(true);//activate enemy
@@ -214,8 +233,7 @@ public class GameManager : MonoBehaviour
         if (spawnedEnemy2 != null)
         {
             EnemyPawn enemy = spawnedEnemy2.GetComponent<EnemyPawn>();
-            spawnedEnemy2.transform.position = enemy2Spawn[0].transform.position;
-            spawnedEnemy2.transform.rotation = enemy2Spawn[0].transform.rotation;
+            spawnedEnemy2.transform.SetPositionAndRotation(enemy2Spawn[0].transform.position, enemy2Spawn[0].transform.rotation);
             Health healthReset = spawnedEnemy2.GetComponent<Health>();//store health component
             healthReset.Heal(enemy.maxHealth);//restore health to max
             spawnedEnemy2.SetActive(true);
@@ -228,8 +246,7 @@ public class GameManager : MonoBehaviour
         if (spawnedEnemy3 != null)
         {
             EnemyPawn enemy = spawnedEnemy3.GetComponent<EnemyPawn>();
-            spawnedEnemy3.transform.position = enemy3Spawn[0].transform.position;
-            spawnedEnemy3.transform.rotation = enemy3Spawn[0].transform.rotation;
+            spawnedEnemy3.transform.SetPositionAndRotation(enemy3Spawn[0].transform.position, enemy3Spawn[0].transform.rotation);
             Health healthReset = spawnedEnemy3.GetComponent<Health>();//store health component
             healthReset.Heal(enemy.maxHealth);//restore health to max
             spawnedEnemy3.SetActive(true);
@@ -242,8 +259,7 @@ public class GameManager : MonoBehaviour
         if (spawnedEnemy4 != null)
         {
             EnemyPawn enemy = spawnedEnemy4.GetComponent<EnemyPawn>();
-            spawnedEnemy4.transform.position = enemy4Spawn[0].transform.position;
-            spawnedEnemy4.transform.rotation = enemy4Spawn[0].transform.rotation;
+            spawnedEnemy4.transform.SetPositionAndRotation(enemy4Spawn[0].transform.position, enemy4Spawn[0].transform.rotation);
             Health healthReset = spawnedEnemy4.GetComponent<Health>();//store health component
             healthReset.Heal(enemy.maxHealth);//restore health to max
             spawnedEnemy4.SetActive(true);
@@ -257,8 +273,7 @@ public class GameManager : MonoBehaviour
         if (spawnedEnemy5 != null)
         {
             EnemyPawn enemy = spawnedEnemy5.GetComponent<EnemyPawn>();
-            spawnedEnemy5.transform.position = enemy5Spawn[0].transform.position;
-            spawnedEnemy5.transform.rotation = enemy5Spawn[0].transform.rotation;
+            spawnedEnemy5.transform.SetPositionAndRotation(enemy5Spawn[0].transform.position, enemy5Spawn[0].transform.rotation);
             Health healthReset = spawnedEnemy5.GetComponent<Health>();//store health component
             healthReset.Heal(enemy.maxHealth);//restore health to max
             spawnedEnemy5.SetActive(true);
@@ -272,8 +287,7 @@ public class GameManager : MonoBehaviour
         if (spawnedEnemy6 != null)
         {
             EnemyPawn enemy = spawnedEnemy6.GetComponent<EnemyPawn>();
-            spawnedEnemy6.transform.position = enemy6Spawn[0].transform.position;
-            spawnedEnemy6.transform.rotation = enemy6Spawn[0].transform.rotation;
+            spawnedEnemy6.transform.SetPositionAndRotation(enemy6Spawn[0].transform.position, enemy6Spawn[0].transform.rotation);
             Health healthReset = spawnedEnemy6.GetComponent<Health>();//store health component
             healthReset.Heal(enemy.maxHealth);//restore health to max
             spawnedEnemy6.SetActive(true);
@@ -287,8 +301,7 @@ public class GameManager : MonoBehaviour
         if (spawnedEnemy7 != null)
         {
             EnemyPawn enemy = spawnedEnemy7.GetComponent<EnemyPawn>();
-            spawnedEnemy7.transform.position = enemy7Spawn[0].transform.position;
-            spawnedEnemy7.transform.rotation = enemy7Spawn[0].transform.rotation;
+            spawnedEnemy7.transform.SetPositionAndRotation(enemy7Spawn[0].transform.position, enemy7Spawn[0].transform.rotation);
             Health healthReset = spawnedEnemy7.GetComponent<Health>();//store health component
             healthReset.Heal(enemy.maxHealth);//restore health to max
             spawnedEnemy7.SetActive(true);
@@ -297,7 +310,6 @@ public class GameManager : MonoBehaviour
 
     }
     #endregion
-
     #region NYI
     //function for pause
     public void Pause()
@@ -314,8 +326,8 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();//quit game
-        
-//This only runs if we are running inside of Unity
+
+        //This only runs if we are running inside of Unity
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;//stop editor
 #endif
@@ -324,14 +336,15 @@ public class GameManager : MonoBehaviour
     //handle game over
     public void GameOver()
     {
-        
+
     }
 
     //continue after a game over
     public void GameOverResume()
     {
-        
+
     }
     #endregion
+    
     #endregion
 }
