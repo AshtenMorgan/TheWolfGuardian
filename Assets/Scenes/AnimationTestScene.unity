@@ -242,7 +242,7 @@ CompositeCollider2D:
   m_GameObject: {fileID: 178981084}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 057d3463f7a87924e87fdeab7fa5753a, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -285,7 +285,7 @@ TilemapCollider2D:
   m_GameObject: {fileID: 178981084}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 057d3463f7a87924e87fdeab7fa5753a, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -10602,7 +10602,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1999259843}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: 3.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 260081150}

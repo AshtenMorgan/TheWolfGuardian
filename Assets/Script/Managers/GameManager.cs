@@ -109,9 +109,9 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        VarCheck();
-        CheckSpawn();
-        //CheckEnemySpawn();  //checking if we should spawn an enemy.
+        VarCheck();         //make sure variables are still set
+        CheckSpawn();       //see if it is time to spawn player
+        CheckEnemySpawn();  //checking if we should spawn an enemy.
 
         current = Time.time;//for testing purposes  delete after tests are complete
     }
@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
         {
             playerPrefab = Resources.Load("Prefab/Ashlynn");
             playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform;
-            playerInstan = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform;
+            playerInstan = GameObject.FindGameObjectWithTag("PlayerInstantiate").transform;
 
             //player
             player = (GameObject)Instantiate(playerPrefab, playerInstan.position, playerInstan.rotation) as GameObject;//spawn player

@@ -17,11 +17,11 @@ public class Controller : MonoBehaviour
     #region Jump Variables
     [Header("Jump Variables")]
     protected float verticalVelocity; //the vertical acceleration of the player pawn
-    protected bool grounded; //determines if the pawn is touching the ground or not
+    protected bool isGrounded; //determines if the pawn is touching the ground or not
     [SerializeField]
     protected float jumpTime; //the time we set in the editor for the maximum amount of time we can jump into the air before we start falling
     protected float jumpTimeCounter; //the counter that keeps track of jumpTime
-    protected bool stoppedJumping = true; //decides whether the player has stopped jumping
+    protected bool isNotJumping = true; //decides whether the player has stopped jumping
     [SerializeField]
     protected Transform groundCheck; //the specified location that decides whether the pawn is touching the ground or not
     [SerializeField]
@@ -29,6 +29,10 @@ public class Controller : MonoBehaviour
     #endregion
     #region Lateral Movement Variables
     [Header("Lateral Movement Variables")]
+    [SerializeField]
+    protected PhysicsMaterial2D noFriction; //stores the friction material for normal movement
+    [SerializeField]
+    protected PhysicsMaterial2D fullFriction; //stores the friction matieral for idle movement
     protected int walkVelocity; //the stand in variable for walk speed on this script
     protected int runVelocity; //the stand in variable for run speedon this script
     protected float inputX; //stores the players x axis input
@@ -60,6 +64,17 @@ public class Controller : MonoBehaviour
     protected virtual void FixedUpdate() 
     {
         
+    }
+    protected void SlopeStick()
+    {
+        if (isGrounded && inputX == 0)
+        {
+            rb2d.sharedMaterial = fullFriction; //changes Physics Material 2D of the rigidbody to our Full Friction material
+        }
+        else
+        {
+            rb2d.sharedMaterial = noFriction; //changes Physics Material 2D of the rigidbody to our No Friction material
+        }
     }
     #endregion
 }

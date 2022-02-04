@@ -23,7 +23,7 @@ public class Health : Pickups
     private float _health;
     [SerializeField, Tooltip("Max Health")]
     private float _maxHealth;//settable in inspector, should determine current health at start
-    private float percent;//used to get percent of total health for health bar/tracker
+    public float percent;//used to get percent of total health for health bar/tracker
     #endregion
     #region Combat Vars
     private float overKill;//to hold overkill value (if used)
@@ -37,14 +37,26 @@ public class Health : Pickups
     public AudioClip deathSound;//clip to play on death
     #endregion
     #endregion
+    [SerializeField]
+    public float currentHealth //the accessor for _currentHealth
+    {
+        get => _health;
+        set { _health = value; }
+    }
+    [SerializeField]
+    public float maxHealth //the accessor for _currentHealth
+    {
+        get => _maxHealth;
+        set { _maxHealth = value; }
+    }
     #region Functions
     //called when script instance is being loaded
     void Awake()
     {
         pawn = GetComponent<Pawn>();    //get pawn from object this script is attached to
-        _health = pawn.currentHealth;   //Set up health
         _maxHealth = pawn.maxHealth;    //match max health
-    }
+        _health = _maxHealth;   //Set up health
+}
     // Start is called before the first frame update
     public override void Start()
     {
@@ -63,15 +75,15 @@ public class Health : Pickups
     {
         damage = Mathf.Max(damage, 0);//make sure damage is a positive number
 
-        if (damage > _health)//if damage is greater than current health
+        if (damage > currentHealth)//if damage is greater than current health
         {
-            overKill = damage - _health;//get the amount of overkill damage
-            _health = Mathf.Clamp(_health - damage, 0f, _health);//subtract damage from health, making sure not to subtract more than current health value
+            overKill = damage - currentHealth;//get the amount of overkill damage
+            currentHealth = Mathf.Clamp(currentHealth - damage, 0f, currentHealth);//subtract damage from health, making sure not to subtract more than current health value
         }
         else//damage not more than current health
         {
             overKill = 0;//output 0
-            _health = Mathf.Clamp(_health - damage, 0f, _health);//subtract damage from health, making sure not to subtract more than current health value
+            currentHealth = Mathf.Clamp(currentHealth - damage, 0f, currentHealth);//subtract damage from health, making sure not to subtract more than current health value
         }
 
         SendMessage("OnDamage", SendMessageOptions.DontRequireReceiver);
@@ -89,24 +101,24 @@ public class Health : Pickups
     {
         heal = Mathf.Max(heal, 0);//make sure the number is positive
 
-        if (heal > (_maxHealth - _health))//if the ammount healed would put the target over max health
+        if (heal > (maxHealth - currentHealth))//if the ammount healed would put the target over max health
         {
-            overHeal = heal - (_maxHealth - _health);//get amount of overhealing
+            overHeal = heal - (maxHealth - currentHealth);//get amount of overhealing
         }
         else//if healing does not result in over heal
         {
             overHeal = 0;//no overheal
         }
-        _health = Mathf.Clamp(_health + heal, 0, _maxHealth);//heal for an ammount not to exceed max health
+        currentHealth = Mathf.Clamp(currentHealth + heal, 0, maxHealth);//heal for an ammount not to exceed max health
         SendMessage("OnHeal", SendMessageOptions.DontRequireReceiver);//tell every object this is attched to to look for its onDie method no error if not found
         onHeal.Invoke();
     }
 
     public void Death()
     {       
-        //isDead = true;//let other things know this is dead.
+        isDead = true;//let other things know this is dead.
 
-        //audiosource.PlayOneShot(deathSound);  //play death sound
+        audiosource.PlayOneShot(deathSound);  //play death sound
 
         gameObject.SetActive(false);//set object inactive
     }
