@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5504270766283932674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9158741620778514115}
+  m_Layer: 0
+  m_Name: slopeRaycastPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9158741620778514115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5504270766283932674}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.4966, z: 0}
+  m_LocalScale: {x: 0.9946291, y: 0.98396146, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6960494434514254221}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6960494434514254214
 GameObject:
   m_ObjectHideFlags: 0
@@ -21,6 +51,7 @@ GameObject:
   - component: {fileID: 7195886823197694787}
   - component: {fileID: 3427134282439517032}
   - component: {fileID: 1496103093}
+  - component: {fileID: 1083220462796469880}
   m_Layer: 0
   m_Name: Ashlynn
   m_TagString: Untagged
@@ -40,6 +71,7 @@ Transform:
   m_LocalScale: {x: 1.0054, y: 1.0163, z: 1}
   m_Children:
   - {fileID: 6960494435128371425}
+  - {fileID: 9158741620778514115}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -188,6 +220,9 @@ MonoBehaviour:
   jumpTime: 0.25
   groundCheck: {fileID: 6960494435128371425}
   circleRadius: 0.1
+  slopeCheckDistance: 0.75
+  noFriction: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
+  fullFriction: {fileID: 6200000, guid: 48626c08f0a6277489a9387662b457ac, type: 2}
   ani: {fileID: 6960494434514254222}
 --- !u!61 &6960494434514254216
 BoxCollider2D:
@@ -440,6 +475,22 @@ CircleCollider2D:
   m_Offset: {x: 0.12, y: 0.04}
   serializedVersion: 2
   m_Radius: 0.39170146
+--- !u!70 &1083220462796469880
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6960494434514254214}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.385}
+  m_Size: {x: 0.2, y: 0.2}
+  m_Direction: 0
 --- !u!1 &6960494435128371424
 GameObject:
   m_ObjectHideFlags: 0

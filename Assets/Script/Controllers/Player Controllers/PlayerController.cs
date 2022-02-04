@@ -46,9 +46,10 @@ public class PlayerController : Controller
 
     protected override void FixedUpdate()
     {
+        Debug.Log(isOnSlope);
         #region Jumping Updates
-        grounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the player is grounded
-        if (!stoppedJumping && !grounded) //if we are jumping
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the player is grounded
+        if (!isNotJumping && !isGrounded) //if we are jumping
         {
             ani.SetBool("Jumping", true);//tell the animator a jump is occurring
             if (jumpTimeCounter > 0) //and our jump counter hasnt reached zero
@@ -59,7 +60,7 @@ public class PlayerController : Controller
             }
         }
 
-        if (grounded)
+        if (isGrounded)
         {
             jumpTimeCounter = jumpTime; //if we are grounded, it sets the jumpTimeCounter back to the jumpTime variable
             ani.SetBool("Jumping", false);//tell the animator to stop jumping
@@ -68,17 +69,24 @@ public class PlayerController : Controller
         #endregion
         #region Ground Movement Updates
 
+        SlopeCheck(); //checks for slopes
+
+        FlipSprite(inputX); //flips the sprite of the character when moving left
+
+
         if (!pawn.IsSprinting)
         {
             walkVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
-            rb2d.velocity = new Vector2(inputX * walkVelocity, rb2d.velocity.y); //moves the pawn left and right based on player input and walking speed
+            newVelocity.Set(inputX * walkVelocity, rb2d.velocity.y); //moves the pawn left and right based on player input and walking speed
+            rb2d.velocity = newVelocity; //sets the pawns rigidbody equal to newVelocity
         }
         if (pawn.IsSprinting)
         {
             runVelocity = pawn.RunSpeed; //sets the runVelocity variable equal to that of the protected variable _runSpeed on the playerpawn
-            rb2d.velocity = new Vector2(inputX * runVelocity, rb2d.velocity.y); ////moves the pawn left and right based on player input and running speed
+            newVelocity.Set(inputX * runVelocity, rb2d.velocity.y); //moves the pawn left and right based on player input and running speed
+            rb2d.velocity = newVelocity; //sets the pawns rigidbody equal to newVelocity
         }
-        FlipSprite(inputX); //flips the sprite of the character when moving left
+        
         #endregion
     }
     #region Action Input Functions
@@ -86,9 +94,9 @@ public class PlayerController : Controller
     {
       if (context.performed)
       {
-            if (grounded) //only allows the player to jump if they're on the ground
+            if (isGrounded) //only allows the player to jump if they're on the ground
             {
-            stoppedJumping = false; //sets the stoppedJumping bool to false so that we have !stoppedJumping
+            isNotJumping = false; //sets the isNotJumping bool to false so that we have !isNotJumping
             verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on PlayerPawn
             rb2d.velocity = new Vector2(rb2d.velocity.x, verticalVelocity);
             }
@@ -97,8 +105,7 @@ public class PlayerController : Controller
     public virtual void JumpEnd(InputAction.CallbackContext context)
     {
         jumpTimeCounter = 0; //resets the jumpTimeCounter to zero
-        stoppedJumping = true; //sets the stoppedJumping bool to true, cause we have stopped jumping
-        Debug.Log(stoppedJumping); 
+        isNotJumping = true; //sets the stoppedJumping bool to true, cause we have stopped jumping
     }
 
     public virtual void Move(InputAction.CallbackContext context)
@@ -111,7 +118,7 @@ public class PlayerController : Controller
 
     public virtual void SprintStart(InputAction.CallbackContext context)
     {
-        if (grounded)
+        if (isGrounded)
         {
             pawn.IsSprinting = true; //sets the isSprinting variable on the pawn to true
             ani.SetBool("Sprinting", true);  //tell the animator we are sprinting
@@ -128,14 +135,15 @@ public class PlayerController : Controller
     #region Orientation Functions
     protected virtual void FlipSprite(float inputX)
     {
-        if (inputX < 0 && facingRight || inputX > 0 && !facingRight)
+        if (inputX < 0 && isFacingRight || inputX > 0 && !isFacingRight)
         {
-            facingRight = !facingRight;
+            isFacingRight = !isFacingRight;
             Vector3 scale = transform.localScale; //sets our variable for scacle equal to the local scale of the pawn
             scale.x *= -1; //multiplies the x of our pawns scale by -1
             transform.localScale = scale; //sets the local scale equal to our custom scale
         }
     }
+
     #endregion
     #region Gizmos
     private void OnDrawGizmos()
