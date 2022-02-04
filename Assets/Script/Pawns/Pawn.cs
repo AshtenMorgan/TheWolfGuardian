@@ -6,8 +6,7 @@ public class Pawn : MonoBehaviour
 {
     #region Variables
     #region General Pawn Attributes
-    [Header("General Pawn Attributes"), SerializeField, Tooltip("How much health the pawn currently has")]
-    protected float _currentHealth; //this is the current health of the pawn
+    [Header("General Pawn Attributes")]
     [SerializeField, Tooltip("Maximum health of the pawn")]
     protected float _maxHealth; //this is the max health of the pawn
     [SerializeField, Tooltip("How fast the pawn walks")]
@@ -40,11 +39,7 @@ public class Pawn : MonoBehaviour
         get { return _runSpeed;  }
         set { _runSpeed = value; }
     }
-    public float currentHealth //the accessor for _currentHealth
-    {
-        get { return _currentHealth; }
-        set { _currentHealth = value; } 
-    }
+
     public float maxHealth //the accessor for _maxHealth
     {
         get { return _maxHealth; }
@@ -65,7 +60,6 @@ public class Pawn : MonoBehaviour
     #region Functions
     void Awake()
     {
-        _currentHealth = _maxHealth; //set health to match maximum
     }
     // Start is called before the first frame update
     protected virtual void Start()
@@ -76,6 +70,7 @@ public class Pawn : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        
     }
 
     public void OnTriggerEnter2D(Collider2D col)

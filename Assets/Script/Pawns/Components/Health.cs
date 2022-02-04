@@ -37,14 +37,24 @@ public class Health : Pickups
     public AudioClip deathSound;//clip to play on death
     #endregion
     #endregion
+    public float currentHealth //the accessor for _currentHealth
+    {
+        get { return _health; }
+        set { _health = value; }
+    }
+    public float maxHealth //the accessor for _currentHealth
+    {
+        get { return _maxHealth; }
+        set { _maxHealth = value; }
+    }
     #region Functions
     //called when script instance is being loaded
     void Awake()
     {
         pawn = GetComponent<Pawn>();    //get pawn from object this script is attached to
-        _health = pawn.currentHealth;   //Set up health
         _maxHealth = pawn.maxHealth;    //match max health
-    }
+        _health = _maxHealth;   //Set up health
+}
     // Start is called before the first frame update
     public override void Start()
     {
@@ -104,9 +114,9 @@ public class Health : Pickups
 
     public void Death()
     {       
-        //isDead = true;//let other things know this is dead.
+        isDead = true;//let other things know this is dead.
 
-        //audiosource.PlayOneShot(deathSound);  //play death sound
+        audiosource.PlayOneShot(deathSound);  //play death sound
 
         gameObject.SetActive(false);//set object inactive
     }
