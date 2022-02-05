@@ -9,13 +9,14 @@ public class HealthBar : MonoBehaviour
 
     public Health health;
 
-    private void Awake()
+    private void Start()
     {
-        health = GameObject.FindWithTag("Player").GetComponent<Health>();
+        
     }
 
-    public void SetHealth()
+    public void Update()
     {
+        health = GameObject.FindWithTag("Player").GetComponent<Health>(); // Only place we can get it to work for now
         healthSlider.value = health.percent;
     }
 

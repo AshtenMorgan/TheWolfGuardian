@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 8220314773378661367}
   m_Layer: 6
   m_Name: Ashlynn
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -186,7 +186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32376d0ab1a550f44b172168efae69cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHealth: 0
   _maxHealth: 50
   _walkSpeed: 2
   _runSpeed: 5
@@ -358,6 +357,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _maxHealth: 0
+  percent: 0
   isDead: 0
   audiosource: {fileID: 6745210005853773866}
   deathSound: {fileID: 0}
