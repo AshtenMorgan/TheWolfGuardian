@@ -28,7 +28,9 @@ public class EnemyController : Controller
     [SerializeField]
     EnemyPawn enemy;
     [SerializeField]
-    protected Transform wallCheck;
+    protected Transform wallCheck,
+        eGroundCheck;
+
     [SerializeField, Header("Movement stats")]
     protected Vector2 movement,
                       knockBack;
@@ -67,10 +69,18 @@ public class EnemyController : Controller
         ani = GetComponent<Animator>();//get animator component
         enemy = GetComponent<EnemyPawn>();//reference this objects pawn
         target = GameManager.Instance.Player;//get player from game manager
-        groundCheck = GetComponent("GroundCheck").transform;//reference ground check
-        wallCheck = GetComponent("WallCheck").transform; ;//get wall check component
-        base.Start();//call parents start function
+        if (!eGroundCheck)
+        {
+            eGroundCheck = GetComponent("GroundCheck").transform;//reference ground check
+        }
+        if (!wallCheck)
+        {
+            wallCheck = GetComponent("WallCheck").transform; ;//get wall check component
+        }
+        
+
         StateManager(State.Patrol);//start patrol
+        base.Start();//call parents start function
     }
 
     // Update is called once per frame

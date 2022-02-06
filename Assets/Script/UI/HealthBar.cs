@@ -16,8 +16,15 @@ public class HealthBar : MonoBehaviour
 
     public void Update()
     {
-        health = GameObject.FindWithTag("Player").GetComponent<Health>(); // Only place we can get it to work for now
-        healthSlider.value = health.percent;
+        if (!health)
+        {
+            health = GameObject.Find("Ashlynn(Clone)").GetComponent<Health>(); // Only place we can get it to work for now
+        }
+        else
+        {
+            healthSlider.value = health.percent;
+        }
+        
     }
 
     public void SetMaxHealth(int health)

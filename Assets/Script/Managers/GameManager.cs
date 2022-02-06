@@ -19,13 +19,13 @@ public class GameManager : MonoBehaviour
     #region Enemy objects for spawning/moving
     [Header("Prefabs"), Tooltip("These are the pre-build player and enemy objects")]
     public Object playerPrefab;
-    public Object enemy1Prefab;
-    public Object enemy2Prefab;
-    public Object enemy3Prefab;
-    public Object enemy4Prefab;
-    public Object enemy5Prefab;
-    public Object enemy6Prefab;
-    public Object enemy7Prefab;
+    public Object enemy1Prefab,
+        enemy2Prefab,
+        enemy3Prefab,
+        enemy4Prefab,
+        enemy5Prefab,
+        enemy6Prefab,
+        enemy7Prefab;
     #endregion
 
     #region Spawn Points
@@ -34,37 +34,40 @@ public class GameManager : MonoBehaviour
     public Transform enemyInstan;
     [Header("Spawn Points"), SerializeField, Tooltip("All the places where the enemies or player will be spawned")]
     public Transform playerSpawn;
-    public Transform[] enemy1Spawn;
-    public Transform[] enemy2Spawn;
-    public Transform[] enemy3Spawn;
-    public Transform[] enemy4Spawn;
-    public Transform[] enemy5Spawn;
-    public Transform[] enemy6Spawn;
-    public Transform[] enemy7Spawn;
+    public Transform[] enemy1Spawn,
+        enemy2Spawn,
+        enemy3Spawn,
+        enemy4Spawn,
+        enemy5Spawn,
+        enemy6Spawn,
+        enemy7Spawn;
     #endregion
 
     #region Spawn Numbers
     [Header("Max amount of spawns"), SerializeField, Tooltip("The number of each object that will be generated on load")]
     public int enemy1Max;
-    public int enemy2Max;
-    public int enemy3Max;
-    public int enemy4Max;
-    public int enemy5Max;
-    public int enemy6Max;
-    public int enemy7Max;
+    public int enemy2Max,
+        enemy3Max,
+        enemy4Max,
+        enemy5Max,
+        enemy6Max,
+        enemy7Max;
     #endregion
 
     #region Spawn Timing
     [Header("Timers"), SerializeField, Tooltip("Time delay between spawns")]
-    public float playerSpawnDelay;
-    public float _nextPlayerSpawn;//private after tests
-    public float enemySpawnDelay;
-    public float _nextEnemySpawn;//private after tests
-    public float current;//Only for tests
-    public float buffSpawnDelay;
-    private float _nextBuffSpawn;//private after tests
-    public float debuffSpawnDelay;
-    private float _nextDebuffSpawn;//private after tests
+    private float _nextEnemySpawn;//the time when the next spawn will occur
+    private float _nextPlayerSpawn,    
+        _nextBuffSpawn,    
+        _nextDebuffSpawn,
+        //delay timers
+        playerSpawnDelay,  
+        enemySpawnDelay,    
+        debuffSpawnDelay,   
+        buffSpawnDelay,
+        //current time
+        current;
+
     #endregion
     #region instance
     public static GameManager Instance { get; private set; }//allow other classes to access GM
