@@ -56,8 +56,8 @@ public class GameManager : MonoBehaviour
 
     #region Spawn Timing
     [Header("Timers"), SerializeField, Tooltip("Time delay between spawns")]
-    private float _nextEnemySpawn;//the time when the next spawn will occur
-    private float _nextPlayerSpawn,    
+    private float _nextEnemySpawn,//the time when the next spawn will occur
+        _nextPlayerSpawn,    
         _nextBuffSpawn,    
         _nextDebuffSpawn,
         //delay timers
