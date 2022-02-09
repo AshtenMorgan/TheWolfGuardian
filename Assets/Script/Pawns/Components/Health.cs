@@ -37,6 +37,7 @@ public class Health : Pickups
     public AudioClip deathSound;//clip to play on death
     #endregion
     #endregion
+    #region Full Properties
     [SerializeField]
     public float currentHealth //the accessor for _currentHealth
     {
@@ -49,12 +50,13 @@ public class Health : Pickups
         get => _maxHealth;
         set { _maxHealth = value; }
     }
+    #endregion
     #region Functions
     //called when script instance is being loaded
     void Awake()
     {
-        pawn = GetComponent<Pawn>();    //get pawn from object this script is attached to
-        _maxHealth = pawn.maxHealth;    //match max health
+        pawn = GetComponent<PlayerPawn>();    //get pawn from object this script is attached to
+        _maxHealth = pawn.MaxHealth;    //match max health
         _health = _maxHealth;   //Set up health
 }
     // Start is called before the first frame update

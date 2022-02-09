@@ -40,7 +40,7 @@ public class Pawn : MonoBehaviour
         set { _runSpeed = value; }
     }
 
-    public float maxHealth //the accessor for _maxHealth
+    public float MaxHealth //the accessor for _maxHealth
     {
         get { return _maxHealth; }
         set { _maxHealth = value; }

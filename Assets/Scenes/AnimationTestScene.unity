@@ -10123,7 +10123,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 34.6
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -10323,6 +10323,14 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8095834687417382761, guid: 5fc935f5583da384797a97b5304d9c6f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095834687417382761, guid: 5fc935f5583da384797a97b5304d9c6f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fc935f5583da384797a97b5304d9c6f, type: 3}
 --- !u!1 &1054861912
@@ -10416,6 +10424,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53f149ff56800594ca8025e4ae3e7a2e, type: 3}
+--- !u!1 &1590090190 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1336663593021864644, guid: 53f149ff56800594ca8025e4ae3e7a2e, type: 3}
+  m_PrefabInstance: {fileID: 1186014870}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1590090200 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1336663593021864648, guid: 53f149ff56800594ca8025e4ae3e7a2e, type: 3}
+  m_PrefabInstance: {fileID: 1186014870}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590090190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32376d0ab1a550f44b172168efae69cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1590090203 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1336663593021864655, guid: 53f149ff56800594ca8025e4ae3e7a2e, type: 3}
+  m_PrefabInstance: {fileID: 1186014870}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1999259843
 GameObject:
   m_ObjectHideFlags: 0
@@ -10540,9 +10569,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 106709c2aa7025b4ab35b76e75c82335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  player: {fileID: 0}
-  playerPrefab: {fileID: 0}
+  Player: {fileID: 1590090200}
+  player: {fileID: 1590090190}
+  playerPrefab: {fileID: 1590090190}
   enemy1Prefab: {fileID: 0}
   enemy2Prefab: {fileID: 0}
   enemy3Prefab: {fileID: 0}
@@ -10550,9 +10579,9 @@ MonoBehaviour:
   enemy5Prefab: {fileID: 0}
   enemy6Prefab: {fileID: 0}
   enemy7Prefab: {fileID: 0}
-  playerInstan: {fileID: 0}
+  playerInstan: {fileID: 1054861913}
   enemyInstan: {fileID: 0}
-  playerSpawn: {fileID: 0}
+  playerSpawn: {fileID: 1590090203}
   enemy1Spawn: []
   enemy2Spawn: []
   enemy3Spawn: []
