@@ -149,13 +149,20 @@ public class EnemyController : Controller
         {
             Flip();//turn around
         }
+        else if (isGroundDetected && isWallDetected)//there is a ground and a wall
+        {
+            Flip();
+        }
+        else if (isGroundDetected && isEnemyDetected)//there is a ground and another enemy
+        {
+            Flip();
+        }
         else if (isPlayerDetected)//we see the player
         {
             StateManager(State.Chase);
         }
-        else 
+        else if (isGroundDetected && !isWallDetected && !isEnemyDetected)//we have a ground, no wall, and no enemy
         {
-  
             movement.Set(enemy.WalkSpeed * facingDirection, rb2d.velocity.y);//walk
             rb2d.velocity = movement;//set velocity to movement speed/direction
         }
@@ -176,7 +183,7 @@ public class EnemyController : Controller
     {
         if (isPlayerDetected)
         {
-            isPlayerDetected = Physics2D.Raycast(wallCheck.position, transform.right, playerCheckDistance, playerLayer);//look for player
+            isPlayerDetected = Physics2D.Raycast(wallCheck.position, transform.forward, playerCheckDistance, playerLayer);//look for player
             movement.Set(enemy.RunSpeed * facingDirection, rb2d.velocity.y);//Run towards player
             rb2d.velocity = movement;//set velocity to movement speed/direction
             //transform.position = Vector3.MoveTowards(transform.position, target.transform.position, enemy.RunSpeed * Time.deltaTime);//Chase player (alt method)
@@ -348,7 +355,11 @@ public class EnemyController : Controller
     protected virtual void Flip()
     {
         facingDirection *= -1;
-        transform.Rotate(0, 180, 0);
+        transform.rotation = Quaternion.Euler(0, 180f, 0);
+        //gameObject.transform.Rotate(0, 180, 0);
+        //Vector2 newScale = gameObject.transform.localScale;
+        //newScale.x *= -1;
+        //gameObject.transform.localScale = newScale;
     }
 
     protected virtual PlayerPawn Locate()
