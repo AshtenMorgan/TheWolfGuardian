@@ -26,7 +26,7 @@ public class EnemyBar : MonoBehaviour
     {
         if (health)//if there is a health component
         {
-            pct = health.percent;//get a number
+            pct = health.GetPercent();//get a number
             bar.fillAmount = pct;//set fill ammount for bar
         }
     }

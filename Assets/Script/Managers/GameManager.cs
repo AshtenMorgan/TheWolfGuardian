@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
         {
             Health healthReset = player.GetComponent<Health>();//store health component
             player.transform.SetPositionAndRotation(playerSpawn.transform.position, playerSpawn.transform.rotation);//Set player position/rotation
-            healthReset.Heal(Player.MaxHealth);//return player to max health
+            healthReset.FullHeal();//return player to max health
 
             //return current health to max value
             player.gameObject.SetActive(true);//Appear the player
