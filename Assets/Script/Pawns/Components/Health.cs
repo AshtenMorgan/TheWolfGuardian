@@ -55,7 +55,7 @@ public class Health : Pickups
     //called when script instance is being loaded
     void Awake()
     {
-        pawn = GetComponent<PlayerPawn>();    //get pawn from object this script is attached to
+        pawn = GetComponent<Pawn>();    //get pawn from object this script is attached to
         _maxHealth = pawn.MaxHealth;    //match max health
         _health = _maxHealth;   //Set up health
 }

@@ -72,14 +72,5 @@ public class Pawn : MonoBehaviour
     {
         
     }
-
-    public void OnTriggerEnter2D(Collider2D col)
-    {
-        Health health = col.GetComponent<Health>();//find the health component of what we hit
-        health.Damage(_damage);//apply damage 
-          
-    }
-
-
     #endregion
 }

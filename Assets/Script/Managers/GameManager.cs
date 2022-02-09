@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
     {
         VarCheck();         //make sure variables are still set
         CheckSpawn();       //see if it is time to spawn player
-        CheckEnemySpawn();  //checking if we should spawn an enemy.
+        //CheckEnemySpawn();  //checking if we should spawn an enemy.
 
         current = Time.time;//for testing purposes  delete after tests are complete
     }
@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
     {
         if (!player)
         {
-            playerPrefab = Resources.Load("Prefab/Ashlynn");
+            playerPrefab = Resources.Load("Prefabs/Pawn Prefabs/Player Prefabs/Ashlynn");
             playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform;
             playerInstan = GameObject.FindGameObjectWithTag("PlayerInstantiate").transform;
 
@@ -171,9 +171,11 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
+    /*
     #region Enemy Spawn Checks
     void CheckEnemySpawn()
     {
+        
         if (Time.time > _nextEnemySpawn)//check spawn timer
         {
 
@@ -208,6 +210,7 @@ public class GameManager : MonoBehaviour
             }
 
             _nextEnemySpawn = Time.time + enemySpawnDelay;//update spawn timer
+        
         }
         #endregion
     }
@@ -310,6 +313,7 @@ public class GameManager : MonoBehaviour
 
     }
     #endregion
+    */
     #region NYI
     //function for pause
     public void Pause()

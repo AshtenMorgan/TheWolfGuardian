@@ -11,12 +11,12 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
-        
+        health = GameObject.FindWithTag("Player").GetComponent<Health>(); //assigns the player Health component to the healthbar
     }
 
     public void Update()
     {
-        health = GameObject.FindWithTag("Player").GetComponent<Health>(); // Only place we can get it to work for now
+        
         healthSlider.value = health.percent;
     }
 
