@@ -1,132 +1,144 @@
+/*This script contains functionalities for health in a video game
+ * Such as, getters and setters for current health, max health, and a percentage value of health
+ * It also contains functions for healing, taking damage, and dying
+ * 
+ * Just add this component to anything you want to be able to die or take damage.
+ * Adding a correlating display is easy with the getter and setter functions
+ * 
+ * It is older than this project would have you believe so I do not remember what the Invoking functions are for
+ * this part of the description will remain until I discover it again
+ * 
+ * James Pope 9/25/21 and Modified by John Pope 2/8/22
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Health : Pickups
+public class Health : MonoBehaviour
 {
-    #region Variables
-    #region Events
+    [Header("Health Values")]
+    [SerializeField, Tooltip("Max health of the player")]
+    private float MaxHealth = 100f;
+    [SerializeField, Tooltip("Current health of the player")]
+    private float currentHealth = 100f;
+    private float percent; //percentage of health
+
     [Header("Events")]
-    [SerializeField, Tooltip("Raised when object is healed")]
+    [SerializeField, Tooltip("Called every time the object is healed.")]
     private UnityEvent onHeal;
-    [SerializeField, Tooltip("Raised when object is damaged")]
+    [SerializeField, Tooltip("Called every time the object is damaged.")]
     private UnityEvent onDamage;
-    [SerializeField, Tooltip("Raised when object dies")]
-    private UnityEvent onDie;
-    [SerializeField, Tooltip("Seconds before death")]
-    private float remTimer = 5.0f;
-    [SerializeField, Tooltip("Raised when object Respawns")]
-    private UnityEvent onRespawn;
-    #endregion
-    #region Pawn Variables
-    private float _health;
-    [SerializeField, Tooltip("Max Health")]
-    private float _maxHealth;//settable in inspector, should determine current health at start
-    public float percent;//used to get percent of total health for health bar/tracker
-    #endregion
-    #region Combat Vars
-    private float overKill;//to hold overkill value (if used)
-    private float overHeal;//to hold overheal value (if used)
-    public bool isDead = false;//death monitoring
-    private Pawn pawn;//reference parent class
-    #endregion
-    #region Audio
-    [Header("Sounds")]
-    public AudioSource audiosource;//audio source (usually going to be on this player/enemy)
-    public AudioClip deathSound;//clip to play on death
-    #endregion
-    #endregion
-    [SerializeField]
-    public float currentHealth //the accessor for _currentHealth
+    [SerializeField, Tooltip("Called once when the object's health reaches 0.")]
+    private UnityEvent onDeath;
+
+    /// <summary>
+    /// Gets the current health of the player
+    /// </summary>
+    /// <returns>float</returns>
+    public float GetHealth()
     {
-        get => _health;
-        set { _health = value; }
-    }
-    [SerializeField]
-    public float maxHealth //the accessor for _currentHealth
-    {
-        get => _maxHealth;
-        set { _maxHealth = value; }
-    }
-    #region Functions
-    //called when script instance is being loaded
-    void Awake()
-    {
-        pawn = GetComponent<Pawn>();    //get pawn from object this script is attached to
-        _maxHealth = pawn.maxHealth;    //match max health
-        _health = _maxHealth;   //Set up health
-}
-    // Start is called before the first frame update
-    public override void Start()
-    {
-        base.Start();
+        return currentHealth;
     }
 
-    // Update is called once per frame
-    public override void Update()
+    /// <summary>
+    /// Sets the health of the player to the float parameter value
+    /// </summary>
+    /// <param name="value"></param>
+    public void SetHealth(float value)
     {
-        percent = _health / _maxHealth;//simple math to return percent of total health
-        base.Update();
+        currentHealth = value;
     }
 
-    //how to handle damage
-    public void Damage(float damage)
+    /// <summary>
+    /// Gets the max health of the player
+    /// </summary>
+    /// <returns>float</returns>
+    public float GetMaxHealth()
     {
-        damage = Mathf.Max(damage, 0);//make sure damage is a positive number
-
-        if (damage > currentHealth)//if damage is greater than current health
-        {
-            overKill = damage - currentHealth;//get the amount of overkill damage
-            currentHealth = Mathf.Clamp(currentHealth - damage, 0f, currentHealth);//subtract damage from health, making sure not to subtract more than current health value
-        }
-        else//damage not more than current health
-        {
-            overKill = 0;//output 0
-            currentHealth = Mathf.Clamp(currentHealth - damage, 0f, currentHealth);//subtract damage from health, making sure not to subtract more than current health value
-        }
-
-        SendMessage("OnDamage", SendMessageOptions.DontRequireReceiver);
-        onDamage.Invoke();
-
-        if (_health == 0)//if health reaches 0
-        {
-            SendMessage("onDie", SendMessageOptions.DontRequireReceiver);//tell every object this is attched to to look for its onDie method -dont error if none
-            onDie.Invoke();//call onDie
-        }
+        return MaxHealth;
     }
 
-    //how to handle healing
+    /// <summary>
+    /// Sets the max health of the player to float parameter value
+    /// </summary>
+    /// <param name="value"></param>
+    public void SetMaxHealth(float value)
+    {
+        MaxHealth = value;
+    }
+
+    /// <summary>
+    /// Gets the percentage of the current player's health
+    /// </summary>
+    /// <returns>float</returns>
+    public float GetPercent()
+    {
+        percent = currentHealth / MaxHealth;
+        return percent;
+    }
+
+    /// <summary>
+    /// Sets the percentage value of the players health. Mostly used to update displays and trigger effects.
+    /// </summary>
+    private void SetPercent()
+    {
+        percent = currentHealth / MaxHealth;
+    }
+
+    /// <summary>
+    /// Restores the player's health by the parameter value, clamped between 0 and max health
+    /// </summary>
+    /// <param name="heal"></param>
     public void Heal(float heal)
     {
-        heal = Mathf.Max(heal, 0);//make sure the number is positive
-
-        if (heal > (maxHealth - currentHealth))//if the ammount healed would put the target over max health
-        {
-            overHeal = heal - (maxHealth - currentHealth);//get amount of overhealing
-        }
-        else//if healing does not result in over heal
-        {
-            overHeal = 0;//no overheal
-        }
-        currentHealth = Mathf.Clamp(currentHealth + heal, 0, maxHealth);//heal for an ammount not to exceed max health
-        SendMessage("OnHeal", SendMessageOptions.DontRequireReceiver);//tell every object this is attched to to look for its onDie method no error if not found
-        onHeal.Invoke();
+        heal = Mathf.Max(heal, 0f);
+        currentHealth = Mathf.Clamp(currentHealth + heal, 0f, MaxHealth);
+        SendMessage("onHeal", SendMessageOptions.DontRequireReceiver);
     }
 
-    public void Death()
-    {       
-        isDead = true;//let other things know this is dead.
-
-        audiosource.PlayOneShot(deathSound);  //play death sound
-
-        gameObject.SetActive(false);//set object inactive
+    /// <summary>
+    /// Sets the current health equal to the players max health
+    /// </summary>
+    public void FullHeal()
+    {
+        currentHealth = MaxHealth;
     }
-    
-    
+
+    /// <summary>
+    /// Subtracts the float value of damage from the players health clamped between 0 and max health
+    /// </summary>
+    /// <param name="damage"></param>
+    public void Damage(float damage)
+    {
+        damage = Mathf.Max(damage, 0f);
+        currentHealth = Mathf.Clamp(currentHealth - damage, 0f, MaxHealth);
+        if (currentHealth <= 0f)
+        {
+            onDeath.Invoke();
+        }
+    }
+
+    /// <summary>
+    /// Sets the players health to zero, in its current state it is dangerous as it destroys the game object it is attached to.
+    /// </summary>
+    public void Kill()
+    {
+        currentHealth = 0;
+        Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// This exists to call player death on this object instead of a prefab
+    /// </summary>
+    public void Die()
+    {
+        //Object Pull or destroy
+        Destroy(gameObject);
+    }
+
     public void Respawn()
     {
-        Health healthReset = gameObject.GetComponent<Health>();     
+    Health healthReset = gameObject.GetComponent<Health>();
     }
-    #endregion
 }

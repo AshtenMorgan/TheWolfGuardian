@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class HealthBar : MonoBehaviour
 {
@@ -11,20 +12,12 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
-        
+        health = GameManager.Instance.Player.GetComponent<Health>(); //assigns the player Health component to the healthbar
     }
 
     public void Update()
     {
-        if (!health)
-        {
-            health = GameObject.Find("Ashlynn(Clone)").GetComponent<Health>(); // Only place we can get it to work for now
-        }
-        else
-        {
-            healthSlider.value = health.percent;
-        }
-        
+        healthSlider.value = health.GetPercent();
     }
 
     public void SetMaxHealth(int health)
