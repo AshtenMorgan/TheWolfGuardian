@@ -218,7 +218,20 @@ public class UIManager : MonoBehaviour
     //start the game
     public void StartGame()
     {
-        SceneManager.LoadScene("AnimationTestScene");
+        if (SceneManager.GetActiveScene().name == ("MainMenu"))
+        {
+            SceneManager.LoadScene("AnimationTestScene");
+        }
+        else
+        {
+            gm.player.gameObject.SetActive(false);
+            Time.timeScale = 1.0f;//restart time
+            DisableBackground();
+            DisableMain();
+        }
+               
+        
+
     }
 
     //resume from game over screen
@@ -303,12 +316,13 @@ public class UIManager : MonoBehaviour
     public void BackToMain()
     {
         //maybe just pause and show main menu
-        SceneManager.LoadScene("MainMenu");
-        mainMenu.gameObject.SetActive(true);
-        BackgroundImage.gameObject.SetActive(true);
-        pauseMenu.gameObject.SetActive(false);
-        optionsMenu.gameObject.SetActive(false);
-        gameOverMenu.gameObject.SetActive(false);
+        //SceneManager.LoadScene("MainMenu");
+        EnableMain();
+        EnableBackground();
+        DisablePauseMenu();
+        DisableHUD();
+        DisableOptions();
+        DisableGameOver(); 
     }
     public void EnableMain()
     {
