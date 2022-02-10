@@ -18,6 +18,7 @@ public class HealthBar : MonoBehaviour
     public void Update()
     {
         healthSlider.value = health.GetPercent();
+
     }
 
     public void SetMaxHealth(int health)

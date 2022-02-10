@@ -164,7 +164,6 @@ public class GameManager : MonoBehaviour
             Health healthReset = player.GetComponent<Health>();//store health component
             player.transform.SetPositionAndRotation(playerSpawn.transform.position, playerSpawn.transform.rotation);//Set player position/rotation
             healthReset.FullHeal();//return player to max health
-
             //return current health to max value
             player.gameObject.SetActive(true);//Appear the player
             Player.Lives--;//decrement lives
