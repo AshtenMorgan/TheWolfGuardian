@@ -186,7 +186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32376d0ab1a550f44b172168efae69cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 50
   _walkSpeed: 2
   _runSpeed: 5
   _jumpHeight: 8
@@ -260,9 +259,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.33}
+  m_Offset: {x: 0, y: -0.33850452}
   serializedVersion: 2
-  m_Radius: 0.15313146
+  m_Radius: 0.16172478
 --- !u!50 &1336663593021864645
 Rigidbody2D:
   serializedVersion: 4
@@ -331,36 +330,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1913676f3f8314c4896656699aa17e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHealth: 100
+  currentHealth: 100
   onHeal:
     m_PersistentCalls:
       m_Calls: []
   onDamage:
     m_PersistentCalls:
       m_Calls: []
-  onDie:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1281415155016603649}
-        m_TargetAssemblyTypeName: Health, Assembly-CSharp
-        m_MethodName: Death
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  remTimer: 5
-  onRespawn:
+  onDeath:
     m_PersistentCalls:
       m_Calls: []
-  _maxHealth: 0
-  percent: 0
-  isDead: 0
-  audiosource: {fileID: 6745210005853773866}
-  deathSound: {fileID: 0}
 --- !u!82 &6745210005853773866
 AudioSource:
   m_ObjectHideFlags: 0
