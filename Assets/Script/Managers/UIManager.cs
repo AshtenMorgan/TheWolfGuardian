@@ -88,53 +88,53 @@ public class UIManager : MonoBehaviour
             //and only the first time
             if (loaded == false)
             {
-            //setup components (Not scene specific)
-            //runs before they are disabled
-            masterVolumeSlider = GameObject.FindGameObjectWithTag("MasterSlider").GetComponent<Slider>();
-            musicVolumeSlider = GameObject.FindGameObjectWithTag("MusicSlider").GetComponent<Slider>();
-            healthSlider = GameObject.FindGameObjectWithTag("HealthSlider").GetComponent<Slider>();
-            effectsVolumeSlider = GameObject.FindGameObjectWithTag("EffectsSlider").GetComponent<Slider>();
-            fullScreenToggle = GameObject.FindGameObjectWithTag("FSToggle").GetComponent<Toggle>();
-            resolutionDropDown = GameObject.FindGameObjectWithTag("ResolutionDrop").GetComponent<TMPro.TMP_Dropdown>();
-            qualityDropDown = GameObject.FindGameObjectWithTag("QualityDrop").GetComponent<TMPro.TMP_Dropdown>();
-            audioSource = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
-            //canvases
-            mainMenu = GameObject.FindGameObjectWithTag("MainMenuCanvas").GetComponent<Canvas>();
-            optionsMenu = GameObject.FindGameObjectWithTag("OptionsCanvas").GetComponent<Canvas>();
-            BackgroundImage = GameObject.FindGameObjectWithTag("BackgroundCanvas").GetComponent<Canvas>();
-            pauseMenu = GameObject.FindGameObjectWithTag("PauseCanvas").GetComponent<Canvas>();
-            gameOverMenu = GameObject.FindGameObjectWithTag("GameOverCanvas").GetComponent<Canvas>();
-            optionsMenu = GameObject.FindGameObjectWithTag("OptionsCanvas").GetComponent<Canvas>();
-            HUD = GameObject.FindGameObjectWithTag("HUDCanvas").GetComponent<Canvas>();
+                //setup components (Not scene specific)
+                //runs before they are disabled
+                masterVolumeSlider = GameObject.FindGameObjectWithTag("MasterSlider").GetComponent<Slider>();
+                musicVolumeSlider = GameObject.FindGameObjectWithTag("MusicSlider").GetComponent<Slider>();
+                healthSlider = GameObject.FindGameObjectWithTag("HealthSlider").GetComponent<Slider>();
+                effectsVolumeSlider = GameObject.FindGameObjectWithTag("EffectsSlider").GetComponent<Slider>();
+                fullScreenToggle = GameObject.FindGameObjectWithTag("FSToggle").GetComponent<Toggle>();
+                resolutionDropDown = GameObject.FindGameObjectWithTag("ResolutionDrop").GetComponent<TMPro.TMP_Dropdown>();
+                qualityDropDown = GameObject.FindGameObjectWithTag("QualityDrop").GetComponent<TMPro.TMP_Dropdown>();
+                audioSource = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
+                //canvases
+                mainMenu = GameObject.FindGameObjectWithTag("MainMenuCanvas").GetComponent<Canvas>();
+                optionsMenu = GameObject.FindGameObjectWithTag("OptionsCanvas").GetComponent<Canvas>();
+                BackgroundImage = GameObject.FindGameObjectWithTag("BackgroundCanvas").GetComponent<Canvas>();
+                pauseMenu = GameObject.FindGameObjectWithTag("PauseCanvas").GetComponent<Canvas>();
+                gameOverMenu = GameObject.FindGameObjectWithTag("GameOverCanvas").GetComponent<Canvas>();
+                optionsMenu = GameObject.FindGameObjectWithTag("OptionsCanvas").GetComponent<Canvas>();
+                HUD = GameObject.FindGameObjectWithTag("HUDCanvas").GetComponent<Canvas>();
 
-            resolutions = Screen.resolutions;//get resolution array
-                                             //build dropdown for screen resolutions and quality levels
+                resolutions = Screen.resolutions;//get resolution array
+                                                 //build dropdown for screen resolutions and quality levels
 
-            List<string> options = new List<string>();//create list to hold resolutions
+                List<string> options = new List<string>();//create list to hold resolutions
 
-            resolutionDropDown.ClearOptions();//clear anything that might be there
+                resolutionDropDown.ClearOptions();//clear anything that might be there
 
-            for (int index = 0; index < resolutions.Length; index++)//loop through all possible resolutions system can use
-            {
-                options.Add(string.Format("{0} x {1}", resolutions[index].width, resolutions[index].height));//add each to the list
-            }
+                for (int index = 0; index < resolutions.Length; index++)//loop through all possible resolutions system can use
+                {
+                    options.Add(string.Format("{0} x {1}", resolutions[index].width, resolutions[index].height));//add each to the list
+                }
 
-            resolutionDropDown.AddOptions(options);//add list to the dropdown
+                resolutionDropDown.AddOptions(options);//add list to the dropdown
 
-            // Build quality levels
-            qualityDropDown.ClearOptions();//clear anything that might already exist
-            qualityDropDown.AddOptions(QualitySettings.names.ToList());//add the quality levels to the dropdown
-
-
+                // Build quality levels
+                qualityDropDown.ClearOptions();//clear anything that might already exist
+                qualityDropDown.AddOptions(QualitySettings.names.ToList());//add the quality levels to the dropdown
 
 
-            //hide canvas
-            DisableOptions();
-            DisablePauseMenu();
-            DisableGameOver();
-            DisableHUD();
 
-                loaded = true; 
+
+                //hide canvas
+                DisableOptions();
+                DisablePauseMenu();
+                DisableGameOver();
+                DisableHUD();
+
+                loaded = true;
             }
         }
 
@@ -146,13 +146,13 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-
+        gm = GameManager.Instance;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused && !gm.gameOver)
@@ -174,10 +174,10 @@ public class UIManager : MonoBehaviour
             */
             if (gm)//we have an active game manager
             {
-            healthSlider.value = gm.percent;//update health bar
+                healthSlider.value = gm.percent;//update health bar
             }
-            
-            
+
+
 
         }
 
@@ -222,7 +222,7 @@ public class UIManager : MonoBehaviour
     }
 
     //resume from game over screen
-    
+
 
     #region Menu Controls
     #region Options
