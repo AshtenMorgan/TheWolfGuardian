@@ -43,12 +43,12 @@ GameObject:
   - component: {fileID: 1336663593021864649}
   - component: {fileID: 1336663593021864648}
   - component: {fileID: 2283205010652522384}
+  - component: {fileID: 1281415155016603649}
   - component: {fileID: 1336663593021864650}
   - component: {fileID: 6156520705936279337}
   - component: {fileID: 1336663593021864645}
   - component: {fileID: 7037613383121356572}
   - component: {fileID: 1336663593021864652}
-  - component: {fileID: 1281415155016603649}
   - component: {fileID: 6745210005853773866}
   - component: {fileID: 8220314773378661367}
   m_Layer: 6
@@ -186,7 +186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32376d0ab1a550f44b172168efae69cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 50
   _walkSpeed: 2
   _runSpeed: 5
   _jumpHeight: 8
@@ -197,7 +196,7 @@ MonoBehaviour:
   rb: {fileID: 1336663593021864645}
   comboMeterCurrent: 0
   comboMeterMax: 0
-  _lives: -109275
+  _lives: 5
   _maxLives: 5
 --- !u!114 &2283205010652522384
 MonoBehaviour:
@@ -221,6 +220,48 @@ MonoBehaviour:
   noFriction: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
   fullFriction: {fileID: 6200000, guid: 48626c08f0a6277489a9387662b457ac, type: 2}
   ani: {fileID: 1336663593021864652}
+--- !u!114 &1281415155016603649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336663593021864644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1913676f3f8314c4896656699aa17e22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDie:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1281415155016603649}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  remTimer: 5
+  onRespawn:
+    m_PersistentCalls:
+      m_Calls: []
+  _maxHealth: 100
+  percent: 100
+  isDead: 0
+  audiosource: {fileID: 6745210005853773866}
+  deathSound: {fileID: 0}
 --- !u!61 &1336663593021864650
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -319,48 +360,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1281415155016603649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1336663593021864644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1913676f3f8314c4896656699aa17e22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onHeal:
-    m_PersistentCalls:
-      m_Calls: []
-  onDamage:
-    m_PersistentCalls:
-      m_Calls: []
-  onDie:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1281415155016603649}
-        m_TargetAssemblyTypeName: Health, Assembly-CSharp
-        m_MethodName: Death
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  remTimer: 5
-  onRespawn:
-    m_PersistentCalls:
-      m_Calls: []
-  _maxHealth: 0
-  percent: 0
-  isDead: 0
-  audiosource: {fileID: 6745210005853773866}
-  deathSound: {fileID: 0}
 --- !u!82 &6745210005853773866
 AudioSource:
   m_ObjectHideFlags: 0
