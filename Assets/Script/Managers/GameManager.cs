@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
     private void FixedUpdate()
     {
         CheckSpawn();       //see if it is time to spawn player
-        CheckEnemySpawn();  //checking if we should spawn an enemy.
+        //CheckEnemySpawn();  //checking if we should spawn an enemy.
 
         current = Time.time;//for testing purposes  delete after tests are complete
     }
@@ -223,6 +223,7 @@ public class GameManager : MonoBehaviour
 
     }
     #endregion
+    /*
     #region Enemy Spawn Checks
     void CheckEnemySpawn()
     {
@@ -363,7 +364,7 @@ public class GameManager : MonoBehaviour
 
     }
     #endregion
-
+    */
     //handle game over
     public void GameOver()
     {

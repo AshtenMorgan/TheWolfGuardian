@@ -105,7 +105,6 @@ public class PlayerController : Controller
     {
         jumpTimeCounter = 0; //resets the jumpTimeCounter to zero
         isNotJumping = true; //sets the stoppedJumping bool to true, cause we have stopped jumping
-        Debug.Log(isNotJumping);
     }
     public virtual void Move(InputAction.CallbackContext context)
     {
