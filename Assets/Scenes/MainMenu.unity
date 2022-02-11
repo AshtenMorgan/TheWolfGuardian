@@ -310,6 +310,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2851775160387162638, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2851775160387163316, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

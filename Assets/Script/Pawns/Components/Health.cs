@@ -72,6 +72,7 @@ public class Health : Pickups
     //how to handle damage
     public void Damage(float damage)
     {
+        Debug.Log("Hit");
         damage = Mathf.Max(damage, 0);//make sure damage is a positive number
 
         if (damage > currentHealth)//if damage is greater than current health

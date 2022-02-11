@@ -20,6 +20,8 @@ public class PlayerController : Controller
         pawn = GetComponent<PlayerPawn>(); //defines the pawn needed for all stats
         rb2d = GetComponent<Rigidbody2D>(); //defines the Rigidbody needed for pawn physics
         playerInput = GetComponent<PlayerInput>(); //defines the initial input system being used by the pawn
+        ani = GetComponent<Animator>(); //defines the animator for the pawn
+        combat = GetComponent<Combat>(); //gets the combat script on the pawn
         jumpTimeCounter = jumpTime; //sets the jumpTimeCounter
 
         #region Player Action Subscriptions
@@ -30,6 +32,7 @@ public class PlayerController : Controller
         playerInputActions.PlayerHuman.Move.performed += Move; // subscribes to the Move function
         playerInputActions.PlayerHuman.SprintStart.performed += SprintStart; //Subscribes to the SprintStart function
         playerInputActions.PlayerHuman.SprintEnd.performed += SprintEnd; //Subscribes to the SprintEnd function
+        playerInputActions.PlayerHuman.LeftPunch.performed += LeftPunch; //subscribes to the LeftPunch function
         #endregion
     }
 
@@ -127,6 +130,13 @@ public class PlayerController : Controller
         pawn.IsSprinting = false; //sets the isSprinting variable on the pawn to false
         ani.SetBool("Sprinting", false);//tell the animator to stop sprinting
     }
+
+    #region Combat Functions
+    public virtual void LeftPunch(InputAction.CallbackContext context) 
+    {
+        combat.HitA();
+    }
+    #endregion
     #endregion
 
     #region Orientation Functions

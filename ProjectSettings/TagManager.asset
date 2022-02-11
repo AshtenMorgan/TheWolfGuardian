@@ -23,6 +23,7 @@ TagManager:
   - QualityDrop
   - UIAudio
   - HealthSlider
+  - HitA
   layers:
   - Default
   - TransparentFX

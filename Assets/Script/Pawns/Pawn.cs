@@ -14,7 +14,7 @@ public class Pawn : MonoBehaviour
     [SerializeField, Tooltip("This determines how high the pawn can jump")]
     protected float _jumpHeight; //this determines how high the pawn will jump
     [SerializeField, Tooltip("The base damage the pawn does with each attack")]
-    protected float _damage; //this will determine the base damage each pawn does with an attack
+    protected int _damage; //this will determine the base damage each pawn does with an attack
     [SerializeField, Tooltip("This is the melee attack range of the pawn")]
     protected float _meleeAttackRange; //determines the range of the pawns melee attack
     [SerializeField, Tooltip("What is the attack range of pawn")]
@@ -37,6 +37,11 @@ public class Pawn : MonoBehaviour
         get { return _runSpeed;  }
         set { _runSpeed = value; }
     }
+    public int Damage //the accessor for _runSpeed
+    {
+        get { return _damage; }
+        set { _damage = value; }
+    }
     #endregion
 
     #region Pawn Components
@@ -44,7 +49,7 @@ public class Pawn : MonoBehaviour
     protected Transform t; //stores the transform of the current pawn
     [SerializeField, Tooltip("This is the Pawns rigidbody component")]
     protected Rigidbody2D rb; //stores the rigidbody component of the pawn
-
+    protected Animator ani; //stores the animator for the pawn
     #endregion
     #endregion
 

@@ -89,6 +89,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftPunch"",
+                    ""type"": ""Button"",
+                    ""id"": ""9a17f8bb-a15f-4b29-acc9-30ff27dda7ec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -322,6 +331,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""CrouchEnd"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dcf521fe-6347-4571-950f-35b442333504"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftPunch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -360,6 +380,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_PlayerHuman_SprintEnd = m_PlayerHuman.FindAction("SprintEnd", throwIfNotFound: true);
         m_PlayerHuman_CrouchStart = m_PlayerHuman.FindAction("CrouchStart", throwIfNotFound: true);
         m_PlayerHuman_CrouchEnd = m_PlayerHuman.FindAction("CrouchEnd", throwIfNotFound: true);
+        m_PlayerHuman_LeftPunch = m_PlayerHuman.FindAction("LeftPunch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -426,6 +447,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerHuman_SprintEnd;
     private readonly InputAction m_PlayerHuman_CrouchStart;
     private readonly InputAction m_PlayerHuman_CrouchEnd;
+    private readonly InputAction m_PlayerHuman_LeftPunch;
     public struct PlayerHumanActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -437,6 +459,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @SprintEnd => m_Wrapper.m_PlayerHuman_SprintEnd;
         public InputAction @CrouchStart => m_Wrapper.m_PlayerHuman_CrouchStart;
         public InputAction @CrouchEnd => m_Wrapper.m_PlayerHuman_CrouchEnd;
+        public InputAction @LeftPunch => m_Wrapper.m_PlayerHuman_LeftPunch;
         public InputActionMap Get() { return m_Wrapper.m_PlayerHuman; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -467,6 +490,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @CrouchEnd.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnCrouchEnd;
                 @CrouchEnd.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnCrouchEnd;
                 @CrouchEnd.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnCrouchEnd;
+                @LeftPunch.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnLeftPunch;
+                @LeftPunch.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnLeftPunch;
+                @LeftPunch.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnLeftPunch;
             }
             m_Wrapper.m_PlayerHumanActionsCallbackInterface = instance;
             if (instance != null)
@@ -492,6 +518,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @CrouchEnd.started += instance.OnCrouchEnd;
                 @CrouchEnd.performed += instance.OnCrouchEnd;
                 @CrouchEnd.canceled += instance.OnCrouchEnd;
+                @LeftPunch.started += instance.OnLeftPunch;
+                @LeftPunch.performed += instance.OnLeftPunch;
+                @LeftPunch.canceled += instance.OnLeftPunch;
             }
         }
     }
@@ -523,5 +552,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnSprintEnd(InputAction.CallbackContext context);
         void OnCrouchStart(InputAction.CallbackContext context);
         void OnCrouchEnd(InputAction.CallbackContext context);
+        void OnLeftPunch(InputAction.CallbackContext context);
     }
 }
