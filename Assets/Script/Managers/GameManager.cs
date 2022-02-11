@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
     private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode mode)
     {
 
-        if (scene.name == "AnimationTestScene")
+        if (scene.name != "MainMenu")
         {
 
           VarCheck();
@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
     private void FixedUpdate()
     {
         CheckSpawn();       //see if it is time to spawn player
-        //CheckEnemySpawn();  //checking if we should spawn an enemy.
+        CheckEnemySpawn();  //checking if we should spawn an enemy.
 
         current = Time.time;//for testing purposes  delete after tests are complete
     }
@@ -203,7 +203,7 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
+    
     public void SpawnPlayer()
     {
         if (lives > 0)
@@ -223,7 +223,6 @@ public class GameManager : MonoBehaviour
 
     }
     #endregion
-    /*
     #region Enemy Spawn Checks
     void CheckEnemySpawn()
     {
@@ -276,7 +275,7 @@ public class GameManager : MonoBehaviour
             EnemyPawn enemy = spawnedEnemy1.GetComponent<EnemyPawn>();//get pawn component from enemy
             spawnedEnemy1.transform.SetPositionAndRotation(enemy1Spawn[0].transform.position, enemy1Spawn[0].transform.rotation);//spawn with rotation
             Health healthReset = spawnedEnemy1.GetComponent<Health>();//store health component
-            healthReset.Heal(enemy.MaxHealth);//restore health to max
+            healthReset.Respawn();//restore health to max
             spawnedEnemy1.SetActive(true);//activate enemy
 
 
@@ -290,7 +289,7 @@ public class GameManager : MonoBehaviour
             EnemyPawn enemy = spawnedEnemy2.GetComponent<EnemyPawn>();
             spawnedEnemy2.transform.SetPositionAndRotation(enemy2Spawn[0].transform.position, enemy2Spawn[0].transform.rotation);
             Health healthReset = spawnedEnemy2.GetComponent<Health>();//store health component
-            healthReset.Heal(enemy.MaxHealth);//restore health to max
+            healthReset.Respawn();//restore health to max
             spawnedEnemy2.SetActive(true);
         }
 
@@ -303,7 +302,7 @@ public class GameManager : MonoBehaviour
             EnemyPawn enemy = spawnedEnemy3.GetComponent<EnemyPawn>();
             spawnedEnemy3.transform.SetPositionAndRotation(enemy3Spawn[0].transform.position, enemy3Spawn[0].transform.rotation);
             Health healthReset = spawnedEnemy3.GetComponent<Health>();//store health component
-            healthReset.Heal(enemy.MaxHealth);//restore health to max
+            healthReset.Respawn();//restore health to max
             spawnedEnemy3.SetActive(true);
 
         }
@@ -316,7 +315,7 @@ public class GameManager : MonoBehaviour
             EnemyPawn enemy = spawnedEnemy4.GetComponent<EnemyPawn>();
             spawnedEnemy4.transform.SetPositionAndRotation(enemy4Spawn[0].transform.position, enemy4Spawn[0].transform.rotation);
             Health healthReset = spawnedEnemy4.GetComponent<Health>();//store health component
-            healthReset.Heal(enemy.MaxHealth);//restore health to max
+            healthReset.Respawn();//restore health to max
             spawnedEnemy4.SetActive(true);
 
         }
@@ -330,7 +329,7 @@ public class GameManager : MonoBehaviour
             EnemyPawn enemy = spawnedEnemy5.GetComponent<EnemyPawn>();
             spawnedEnemy5.transform.SetPositionAndRotation(enemy5Spawn[0].transform.position, enemy5Spawn[0].transform.rotation);
             Health healthReset = spawnedEnemy5.GetComponent<Health>();//store health component
-            healthReset.Heal(enemy.MaxHealth);//restore health to max
+            healthReset.Respawn();//restore health to max
             spawnedEnemy5.SetActive(true);
 
         }
@@ -344,7 +343,7 @@ public class GameManager : MonoBehaviour
             EnemyPawn enemy = spawnedEnemy6.GetComponent<EnemyPawn>();
             spawnedEnemy6.transform.SetPositionAndRotation(enemy6Spawn[0].transform.position, enemy6Spawn[0].transform.rotation);
             Health healthReset = spawnedEnemy6.GetComponent<Health>();//store health component
-            healthReset.Heal(enemy.MaxHealth);//restore health to max
+            healthReset.Respawn();//restore health to max
             spawnedEnemy6.SetActive(true);
 
         }
@@ -358,14 +357,12 @@ public class GameManager : MonoBehaviour
             EnemyPawn enemy = spawnedEnemy7.GetComponent<EnemyPawn>();
             spawnedEnemy7.transform.SetPositionAndRotation(enemy7Spawn[0].transform.position, enemy7Spawn[0].transform.rotation);
             Health healthReset = spawnedEnemy7.GetComponent<Health>();//store health component
-            healthReset.Heal(enemy.MaxHealth);//restore health to max
+            healthReset.Respawn();//restore health to max
             spawnedEnemy7.SetActive(true);
-
         }
 
     }
     #endregion
-    */
 
     //handle game over
     public void GameOver()
