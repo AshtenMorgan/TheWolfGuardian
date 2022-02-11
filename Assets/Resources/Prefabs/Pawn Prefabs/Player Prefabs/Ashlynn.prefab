@@ -196,7 +196,7 @@ MonoBehaviour:
   rb: {fileID: 1336663593021864645}
   comboMeterCurrent: 0
   comboMeterMax: 0
-  _lives: 5
+  _lives: 3
   _maxLives: 5
 --- !u!114 &2283205010652522384
 MonoBehaviour:
@@ -253,7 +253,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  remTimer: 5
   onRespawn:
     m_PersistentCalls:
       m_Calls: []
