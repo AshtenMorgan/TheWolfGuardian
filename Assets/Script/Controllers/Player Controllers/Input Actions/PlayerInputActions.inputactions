@@ -313,10 +313,21 @@
                 {
                     "name": "",
                     "id": "dcf521fe-6347-4571-950f-35b442333504",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Keyboard>/j",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
+                    "action": "LeftPunch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e4060e1f-10be-4ff8-b462-2d999256bb43",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "LeftPunch",
                     "isComposite": false,
                     "isPartOfComposite": false
