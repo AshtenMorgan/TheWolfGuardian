@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
     private void FixedUpdate()
     {
         CheckSpawn();       //see if it is time to spawn player
-        CheckEnemySpawn();  //checking if we should spawn an enemy.
+        //CheckEnemySpawn();  //checking if we should spawn an enemy.
 
         current = Time.time;//for testing purposes  delete after tests are complete
     }
@@ -182,8 +182,6 @@ public class GameManager : MonoBehaviour
     {
         if (player != null)
         {
-
-
             if (player.activeInHierarchy != true)
             {
                 if (Time.time > _nextPlayerSpawn)//check time against spawn delay
@@ -191,10 +189,6 @@ public class GameManager : MonoBehaviour
                     if (gameOver == false)//no player active and it is not game over
                     {
                         SpawnPlayer();//run player spawn function
-                    }
-                    else//should only get here if game over is true
-                    {
-                        GameOver();//run game over
                     }
 
                     _nextPlayerSpawn = Time.time + playerSpawnDelay;//update spawn timer
@@ -218,11 +212,12 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            gameOver = true;
+            GameOver();
         }
 
     }
     #endregion
+    /*
     #region Enemy Spawn Checks
     void CheckEnemySpawn()
     {
@@ -363,7 +358,7 @@ public class GameManager : MonoBehaviour
 
     }
     #endregion
-
+    */
     //handle game over
     public void GameOver()
     {
