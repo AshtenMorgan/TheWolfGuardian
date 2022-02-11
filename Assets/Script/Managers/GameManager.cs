@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [Header("Objects"), SerializeField, Tooltip("Drag prefabs onto these")]
     public PlayerPawn Player;
     public GameObject player;
+    public Health playerHealth;
     //public EnemyPawn enemy;
 
     #endregion
@@ -19,13 +20,13 @@ public class GameManager : MonoBehaviour
     #region Enemy objects for spawning/moving
     [Header("Prefabs"), Tooltip("These are the pre-build player and enemy objects")]
     public Object playerPrefab;
-    public Object enemy1Prefab;
-    public Object enemy2Prefab;
-    public Object enemy3Prefab;
-    public Object enemy4Prefab;
-    public Object enemy5Prefab;
-    public Object enemy6Prefab;
-    public Object enemy7Prefab;
+    public Object enemy1Prefab,
+        enemy2Prefab,
+        enemy3Prefab,
+        enemy4Prefab,
+        enemy5Prefab,
+        enemy6Prefab,
+        enemy7Prefab;
     #endregion
 
     #region Spawn Points
@@ -34,50 +35,83 @@ public class GameManager : MonoBehaviour
     public Transform enemyInstan;
     [Header("Spawn Points"), SerializeField, Tooltip("All the places where the enemies or player will be spawned")]
     public Transform playerSpawn;
-    public Transform[] enemy1Spawn;
-    public Transform[] enemy2Spawn;
-    public Transform[] enemy3Spawn;
-    public Transform[] enemy4Spawn;
-    public Transform[] enemy5Spawn;
-    public Transform[] enemy6Spawn;
-    public Transform[] enemy7Spawn;
+    public Transform[] enemy1Spawn,
+        enemy2Spawn,
+        enemy3Spawn,
+        enemy4Spawn,
+        enemy5Spawn,
+        enemy6Spawn,
+        enemy7Spawn;
     #endregion
 
     #region Spawn Numbers
     [Header("Max amount of spawns"), SerializeField, Tooltip("The number of each object that will be generated on load")]
     public int enemy1Max;
-    public int enemy2Max;
-    public int enemy3Max;
-    public int enemy4Max;
-    public int enemy5Max;
-    public int enemy6Max;
-    public int enemy7Max;
+    public int enemy2Max,
+        enemy3Max,
+        enemy4Max,
+        enemy5Max,
+        enemy6Max,
+        enemy7Max;
     #endregion
 
     #region Spawn Timing
     [Header("Timers"), SerializeField, Tooltip("Time delay between spawns")]
-    public float playerSpawnDelay;
-    public float _nextPlayerSpawn;//private after tests
-    public float enemySpawnDelay;
-    public float _nextEnemySpawn;//private after tests
-    public float current;//Only for tests
-    public float buffSpawnDelay;
-    private float _nextBuffSpawn;//private after tests
-    public float debuffSpawnDelay;
-    private float _nextDebuffSpawn;//private after tests
+    private float _nextEnemySpawn,//the time when the next spawn will occur
+        _nextPlayerSpawn,
+        _nextBuffSpawn,
+        _nextDebuffSpawn,
+        //delay timers
+        playerSpawnDelay,
+        enemySpawnDelay,
+        debuffSpawnDelay,
+        buffSpawnDelay,
+        //current time
+        current;
+
     #endregion
     #region instance
     public static GameManager Instance { get; private set; }//allow other classes to access GM
     #endregion
+    #region PlayerVars
+    public int lives;
+    public float percent;
+    public float maxHealth;
+    public float currentHealth;
+    #endregion
 
     [Header("Game Over tracker"), SerializeField, Tooltip("Tracks weather or not a game over has occured")]
-    private bool gameOver;
+    public bool gameOver;
 
     [SerializeField]
     private Scene _scene;
     #endregion
 
+
     #region Functions
+
+    private void OnEnable()
+    {
+        
+    
+
+    }
+
+    private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+
+        if (scene.name == "AnimationTestScene")
+        {
+
+          VarCheck();
+
+        }
+        else if (scene.name == "MainMenu")
+        {
+
+        }
+        
+    }
 
     //Singleton  only one instance
     private void Awake()
@@ -92,24 +126,35 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
     }
 
     // Use this for initialization
     private void Start()
     {
-        VarCheck();
+
     }
 
     // Update is called once per frame
     private void Update()
     {
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name != "MainMenu")
+        {
+            currentHealth = playerHealth.currentHealth;
+            maxHealth = playerHealth.maxHealth;
+            percent = currentHealth / maxHealth;
+        }
+        else
+        {
+            return;
+        }
 
-        VarCheck();
     }
 
     private void FixedUpdate()
     {
-        VarCheck();         //make sure variables are still set
         CheckSpawn();       //see if it is time to spawn player
         //CheckEnemySpawn();  //checking if we should spawn an enemy.
 
@@ -118,17 +163,19 @@ public class GameManager : MonoBehaviour
 
     public void VarCheck()
     {
-        if (!player)
-        {
-            playerPrefab = Resources.Load("Prefabs/Pawn Prefabs/Player Prefabs/Ashlynn");
-            playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform;
-            playerInstan = GameObject.FindGameObjectWithTag("PlayerInstantiate").transform;
 
-            //player
-            player = (GameObject)Instantiate(playerPrefab, playerInstan.position, playerInstan.rotation) as GameObject;//spawn player
-            Player = player.GetComponent<PlayerPawn>();
-            player.gameObject.SetActive(false);//everything is inactivated on initial spawn
-        }
+        //set objects
+        playerPrefab = Resources.Load("Prefabs/Pawn Prefabs/Player Prefabs/Ashlynn");
+        playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform;
+        playerInstan = GameObject.FindGameObjectWithTag("PlayerInstantiate").transform;
+
+        //player
+        player = (GameObject)Instantiate(playerPrefab, playerInstan.position, playerInstan.rotation) as GameObject;//spawn player
+        Player = player.GetComponent<PlayerPawn>();
+        playerHealth = Player.GetComponent<Health>();
+        lives = Player.Lives;
+        player.gameObject.SetActive(false);//everything is inactivated on initial spawn
+
     }
     #region Player Spawning
     void CheckSpawn()
@@ -159,15 +206,21 @@ public class GameManager : MonoBehaviour
 
     public void SpawnPlayer()
     {
-        if (Player != null)//make sure there is a player
+        if (lives > 0)
         {
-            Health healthReset = player.GetComponent<Health>();//store health component
             player.transform.SetPositionAndRotation(playerSpawn.transform.position, playerSpawn.transform.rotation);//Set player position/rotation
-            healthReset.FullHeal();//return player to max health
+            playerHealth.Respawn();//return player to max health
+
             //return current health to max value
             player.gameObject.SetActive(true);//Appear the player
             Player.Lives--;//decrement lives
+            lives = Player.Lives;//track how many lives
         }
+        else
+        {
+            gameOver = true;
+        }
+
     }
     #endregion
     /*
@@ -313,41 +366,13 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     */
-    #region NYI
-    //function for pause
-    public void Pause()
-    {
-        //pause game
-    }
-
-    //resume after pause
-    public void Unpause()
-    {
-        //resume
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();//quit game
-
-        //This only runs if we are running inside of Unity
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;//stop editor
-#endif
-    }
 
     //handle game over
     public void GameOver()
     {
-
+        Time.timeScale = 0.0f;//stop time;//stop time
+        UIManager.Instance.EnableGameOverMenu();//show gameover
     }
-
-    //continue after a game over
-    public void GameOverResume()
-    {
-
-    }
-    #endregion
 
     #endregion
 }

@@ -18,7 +18,8 @@ public class EnemyController : Controller
         Hurt,
         Dead
     }
-    protected State currentState;
+    [SerializeField]
+    protected State currentState = State.Patrol;
     #endregion
 
     #region objects
@@ -28,14 +29,17 @@ public class EnemyController : Controller
     [SerializeField]
     EnemyPawn enemy;
     [SerializeField]
-    protected Transform wallCheck;
+    protected Transform wallCheck,
+                        eGroundCheck;
+
     [SerializeField, Header("Movement stats")]
     protected Vector2 movement,
                       knockBack;
 
     //LayerMask groundLayer
     [SerializeField]
-    private LayerMask enemyLayer;
+    private LayerMask enemyLayer,
+                      playerLayer;
     #endregion
     #region General variables
     [SerializeField]
@@ -44,33 +48,44 @@ public class EnemyController : Controller
 
     [SerializeField]
     protected float patrolRange = 5.0f,
-                    groundCheckDistance = .5f,
-                    wallCheckDistance = .5f,
+                    groundCheckDistance = 1.0f,
+                    wallCheckDistance = 1.0f,
+                    playerCheckDistance = 1.0f,
+                    enemyCheckDistance = 1.0f,
                     harmStart,
                     harmDuration;
 
     [SerializeField]
     protected bool isGroundDetected = true,
                    isWallDetected = false,
-                   isEnemyDetected = false;
+                   isEnemyDetected = false,
+                   isPlayerDetected = false;
     #endregion
 
     #endregion
+
     #region functions
+
     #region start/update
     // Start is called before the first frame update
-    Health health;
+   
     protected override void Start()
     {
-        health = GameObject.FindWithTag("Player").GetComponent<Health>();
-        facingDirection = 1;//face right
+        base.Start();//call parents start function
+        
         ani = GetComponent<Animator>();//get animator component
         enemy = GetComponent<EnemyPawn>();//reference this objects pawn
         target = GameManager.Instance.Player;//get player from game manager
-        groundCheck = GetComponent("GroundCheck").transform;//reference ground check
-        wallCheck = GetComponent("WallCheck").transform; ;//get wall check component
-        base.Start();//call parents start function
-        StateManager(State.Patrol);//start patrol
+
+        if (!eGroundCheck)
+        {
+            eGroundCheck = GetComponent("GroundCheck").transform;//reference ground check
+        }
+        if (!wallCheck)
+        {
+            wallCheck = GetComponent("WallCheck").transform; ;//get wall check component
+        }
+        facingDirection = 1;
     }
 
     // Update is called once per frame
@@ -99,12 +114,12 @@ public class EnemyController : Controller
                 break;
         }
         #endregion
-
         base.Update();//calls whatever is in parents update function
     }
 
     protected override void FixedUpdate()
     {
+
         base.FixedUpdate();//call parent function   
     }
     #endregion
@@ -121,18 +136,26 @@ public class EnemyController : Controller
     protected virtual void UpdatePatrolState()
     {
         isGroundDetected = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);//raycast for ground
+        Debug.DrawRay(groundCheck.position, Vector2.down * groundCheckDistance, Color.green);
         isWallDetected = Physics2D.Raycast(wallCheck.position, transform.right, wallCheckDistance, groundLayer);//raycast for wall
+        Debug.DrawRay(wallCheck.position, transform.right * wallCheckDistance, Color.red);
         isEnemyDetected = Physics2D.Raycast(wallCheck.position, transform.right, wallCheckDistance, enemyLayer);//look for other enemies
+        Debug.DrawRay(wallCheck.position, transform.right * enemyCheckDistance, Color.blue);
+        isPlayerDetected = Physics2D.Raycast(wallCheck.position, transform.right, playerCheckDistance, playerLayer);//look for player
+        //Debug.DrawRay(wallCheck.position, transform.right * playerCheckDistance, Color.yellow);
 
-        if (!isGroundDetected || isWallDetected || isEnemyDetected)//there is no ground or there is a wall
+        if (!isGroundDetected || isWallDetected || isEnemyDetected)//there is no ground or there is a wall or enemy
         {
             Flip();//turn around
         }
-        else
+        else if (isPlayerDetected)//we see the player
         {
-            //transform.position = Vector3.MoveTowards(transform.position, target.transform.position, enemy.WalkSpeed * Time.deltaTime);//move towards player by "speed" units per second
-            movement.Set(enemy.WalkSpeed * facingDirection, rb2d.velocity.y);
-            rb2d.velocity = movement;
+            StateManager(State.Chase);
+        }
+        else//we have a ground, no wall, and no enemy, no player
+        {
+            movement.Set(enemy.WalkSpeed * facingDirection, rb2d.velocity.y);//set speed to walk
+            rb2d.velocity = movement;//set velocity to movement speed/direction
         }
     }
     protected virtual void ExitPatrolState()
@@ -149,6 +172,17 @@ public class EnemyController : Controller
     }
     protected virtual void UpdateChaseState()
     {
+        if (isPlayerDetected)
+        {
+            isPlayerDetected = Physics2D.Raycast(wallCheck.position, transform.right, playerCheckDistance, playerLayer);//look for player
+            movement.Set(enemy.RunSpeed * facingDirection, rb2d.velocity.y);//set movement speed to run towards player
+            rb2d.velocity = movement;//set velocity to movement speed/direction
+            //transform.position = Vector3.MoveTowards(transform.position, target.transform.position, enemy.RunSpeed * Time.deltaTime);//Chase player (alt method)
+        }
+        else if (!isPlayerDetected)
+        {
+            StateManager(State.Patrol);//return to patrol if we cant see player anymore
+        }
 
     }
     protected virtual void ExitChaseState()
@@ -311,8 +345,19 @@ public class EnemyController : Controller
 
     protected virtual void Flip()
     {
+
+
+        gameObject.transform.Rotate(0, 180, 0);
         facingDirection *= -1;
-        gameObject.transform.Rotate(0, 180, 0);//rotate this game object 180 degrees (y)
+        movement.Set(enemy.WalkSpeed * facingDirection, rb2d.velocity.y);//set speed to walk
+        rb2d.velocity = movement;//set velocity to movement speed/direction
+
+
+        //
+        //transform.rotation = Quaternion.Euler(0, 180f, 0);
+        //Vector2 newScale = gameObject.transform.localScale;
+        //newScale.x *= -1;
+        //gameObject.transform.localScale = newScale;
     }
 
     protected virtual PlayerPawn Locate()
