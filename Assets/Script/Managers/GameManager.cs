@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public PlayerPawn Player;
     public GameObject player;
     public Health playerHealth;
+    #region Hitboxes
+    public GameObject hitACollider; //stores colliders for HitA
+    #endregion
     //public EnemyPawn enemy;
 
     #endregion
@@ -174,6 +177,7 @@ public class GameManager : MonoBehaviour
         Player = player.GetComponent<PlayerPawn>();
         playerHealth = Player.GetComponent<Health>();
         lives = Player.Lives;
+        hitACollider = GameObject.FindGameObjectWithTag("HitA");
         player.gameObject.SetActive(false);//everything is inactivated on initial spawn
 
     }

@@ -11,6 +11,7 @@ public class Controller : MonoBehaviour
     [SerializeField]
     protected Rigidbody2D rb2d; //the rigidbody of the test character
     protected PlayerPawn pawn; //the PlayerPawn class so that we can access the player characters movement data
+    protected Combat combat; //stores the combat script for the pawn
     [SerializeField]
     protected LayerMask groundLayer; //The layer mask for what is considered "the ground" in the game
     #endregion
