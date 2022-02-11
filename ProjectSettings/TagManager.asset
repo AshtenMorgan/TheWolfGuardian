@@ -9,6 +9,20 @@ TagManager:
   - WallCheck
   - GroundCheck
   - GameManager
+  - OptionsCanvas
+  - HUDCanvas
+  - GameOverCanvas
+  - BackgroundCanvas
+  - MainMenuCanvas
+  - PauseCanvas
+  - MasterSlider
+  - MusicSlider
+  - EffectsSlider
+  - FSToggle
+  - ResolutionDrop
+  - QualityDrop
+  - UIAudio
+  - HealthSlider
   layers:
   - Default
   - TransparentFX
