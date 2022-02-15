@@ -24,6 +24,7 @@ TagManager:
   - UIAudio
   - HealthSlider
   - HitA
+  - OptionsBKG
   layers:
   - Default
   - TransparentFX
