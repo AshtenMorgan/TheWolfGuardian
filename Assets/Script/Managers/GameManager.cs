@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour
     
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        _scene = scene;//update what scene we are in
 
         if (scene.name != "MainMenu")
         {
@@ -130,10 +131,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        current = Time.time;//for testing purposes  delete after tests are complete
-        UpdateHealthBar();
-        CheckSpawn();       //see if it is time to spawn player
-        CheckEnemySpawn();  //checking if we should spawn an enemy.
+        if (_scene.name != "MainMenu")//make sure we should have stuff
+        {
+            current = Time.time;//for testing purposes  delete after tests are complete
+            CheckSpawn();       //see if it is time to spawn player  //maybe trigger this on death
+            CheckEnemySpawn();  //checking if we should spawn an enemy.
+            UpdateHealthBar();
+        }
+        
     }
 
     private void FixedUpdate()

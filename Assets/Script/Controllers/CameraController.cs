@@ -19,7 +19,11 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cameraPos = new Vector3(gm.player.transform.position.x, gm.player.transform.position.y, -10f);//store player position as vector3
-        transform.position = Vector3.SmoothDamp(gameObject.transform.position, cameraPos, ref velocity, dampTime);//move camera to match player, delayed a bit by dampTime
+        if (gm.player)
+        {
+            cameraPos = new Vector3(gm.player.transform.position.x, gm.player.transform.position.y, -10f);//store player position as vector3
+            transform.position = Vector3.SmoothDamp(gameObject.transform.position, cameraPos, ref velocity, dampTime);//move camera to match player, delayed a bit by dampTime
+        }
+        
     }
 }

@@ -63,6 +63,7 @@ public class UIManager : MonoBehaviour
     #endregion
     private void OnEnable()
     {
+        //check what scene and run scenloaded functions.  This should load every time a scene change occurs
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     private void Awake()
@@ -224,10 +225,13 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            
+            /*
             gm.player.gameObject.SetActive(false);
             Time.timeScale = 1.0f;//restart time
             DisableBackground();
             DisableMain();
+            */
         }
                
         
@@ -256,6 +260,8 @@ public class UIManager : MonoBehaviour
     }
     public void EnableOptionsPause()
     {
+        SceneManager.LoadScene("MainMenu");
+        /*
         cameFrom = "Pause";
         optionsMenu.gameObject.SetActive(true);
 
@@ -266,7 +272,7 @@ public class UIManager : MonoBehaviour
 
         fullScreenToggle.isOn = Screen.fullScreen;//check or uncheck box based on screen status
         qualityDropDown.value = QualitySettings.GetQualityLevel();//set dropdown to current state
-
+        */
     }
     public void EnableOptionsGameOver()
     {
