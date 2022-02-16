@@ -28,6 +28,7 @@ public class EnemyController : Controller
     PlayerPawn target;
     [SerializeField]
     EnemyPawn enemy;
+    EnemyPawn pawn;
     [SerializeField]
     protected Transform wallCheck,
                         eGroundCheck;
@@ -72,14 +73,18 @@ public class EnemyController : Controller
     protected override void Start()
     {
         base.Start();//call parents start function
-        
+        pawn = GetComponent<EnemyPawn>();//refrence this objects enemy pawn
         ani = GetComponent<Animator>();//get animator component
         enemy = GetComponent<EnemyPawn>();//reference this objects pawn
         target = GameManager.Instance.Player;//get player from game manager
 
         if (!eGroundCheck)
         {
-            eGroundCheck = GetComponent("GroundCheck").transform;//reference ground check
+            eGroundCheck = GetComponent("eGroundCheck").transform;//reference enemy ground check
+        }
+        if (!groundCheck)
+        {
+            groundCheck = GetComponent("GroundCheck").transform;//get ground check
         }
         if (!wallCheck)
         {
@@ -144,19 +149,24 @@ public class EnemyController : Controller
         isPlayerDetected = Physics2D.Raycast(wallCheck.position, transform.right, playerCheckDistance, playerLayer);//look for player
         //Debug.DrawRay(wallCheck.position, transform.right * playerCheckDistance, Color.yellow);
 
-        if (!isGroundDetected || isWallDetected || isEnemyDetected)//there is no ground or there is a wall or enemy
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the pawn is grounded
+        if (isGrounded)//only do actions while on the ground
         {
-            Flip();//turn around
+            if (!isGroundDetected || isWallDetected || isEnemyDetected)//there is no ground or there is a wall or enemy
+            {
+                Flip();//turn around
+            }
+            else if (isPlayerDetected)//we see the player
+            {
+                StateManager(State.Chase);
+            }
+            else//we have a ground, no wall, and no enemy, no player
+            {
+                movement.Set(enemy.WalkSpeed * facingDirection, rb2d.velocity.y);//set speed to walk
+                rb2d.velocity = movement;//set velocity to movement speed/direction
+            }
         }
-        else if (isPlayerDetected)//we see the player
-        {
-            StateManager(State.Chase);
-        }
-        else//we have a ground, no wall, and no enemy, no player
-        {
-            movement.Set(enemy.WalkSpeed * facingDirection, rb2d.velocity.y);//set speed to walk
-            rb2d.velocity = movement;//set velocity to movement speed/direction
-        }
+        
     }
     protected virtual void ExitPatrolState()
     {

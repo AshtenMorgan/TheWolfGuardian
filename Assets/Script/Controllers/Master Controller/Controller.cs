@@ -10,7 +10,7 @@ public class Controller : MonoBehaviour
     [Header("General Variables")]
     [SerializeField]
     protected Rigidbody2D rb2d; //the rigidbody of the test character
-    protected PlayerPawn pawn; //the PlayerPawn class so that we can access the player characters movement data
+    
     protected Combat combat; //stores the combat script for the pawn
     [SerializeField]
     protected LayerMask groundLayer; //The layer mask for what is considered "the ground" in the game
@@ -47,24 +47,24 @@ public class Controller : MonoBehaviour
     #region Functions
     protected virtual void Awake()
     {
-        pawn = GetComponent<PlayerPawn>(); //defines the pawn needed for all stats
+        
         rb2d = GetComponent<Rigidbody2D>(); //defines the Rigidbody needed for pawn physics
         ani = GetComponent<Animator>();//defines the animator component
         jumpTimeCounter = jumpTime; //sets the jumpTimeCounter
     }
 
-    protected virtual void Start() 
+    protected virtual void Start()
     {
-    
+
     }
 
     protected virtual void Update()
     {
-        
+
     }
-    protected virtual void FixedUpdate() 
+    protected virtual void FixedUpdate()
     {
-        
+
     }
     protected void SlopeStick()
     {

@@ -16,26 +16,19 @@ public class GameManager : MonoBehaviour
     #region Hitboxes
     public GameObject hitACollider; //stores colliders for HitA
     #endregion
-    //public EnemyPawn enemy;
+    public EnemyPawn[] enemy;
 
     #endregion
 
     #region Enemy objects for spawning/moving
     [Header("Prefabs"), Tooltip("These are the pre-build player and enemy objects")]
     public Object playerPrefab;
-    public Object enemy1Prefab,
-        enemy2Prefab,
-        enemy3Prefab,
-        enemy4Prefab,
-        enemy5Prefab,
-        enemy6Prefab,
-        enemy7Prefab;
+    
     #endregion
 
     #region Spawn Points
-    [Header("Initial Spawn Points"), SerializeField, Tooltip("This is where the initial instantiated objects will be placed")]
-    public Transform playerInstan;
-    public Transform enemyInstan;
+    [Header("Initial Spawn Point"), SerializeField, Tooltip("This is where the initial instantiated objects will be placed")]
+    public Transform instanPoint;
     [Header("Spawn Points"), SerializeField, Tooltip("All the places where the enemies or player will be spawned")]
     public Transform playerSpawn;
     public Transform[] enemy1Spawn,
@@ -95,19 +88,16 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        
-    
-
+        //check what scene and run scenloaded functions.  This should load every time a scene change occurs
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
-
-    private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode mode)
+    
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
 
         if (scene.name != "MainMenu")
         {
-
           VarCheck();
-
         }
         else if (scene.name == "MainMenu")
         {
@@ -129,39 +119,26 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
     }
 
     // Use this for initialization
     private void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     private void Update()
     {
-        Scene scene = SceneManager.GetActiveScene();
-        if (scene.name != "MainMenu")
-        {
-            currentHealth = playerHealth.currentHealth;
-            maxHealth = playerHealth.maxHealth;
-            percent = currentHealth / maxHealth;
-        }
-        else
-        {
-            return;
-        }
-
+        current = Time.time;//for testing purposes  delete after tests are complete
+        UpdateHealthBar();
+        CheckSpawn();       //see if it is time to spawn player
+        CheckEnemySpawn();  //checking if we should spawn an enemy.
     }
 
     private void FixedUpdate()
     {
-        CheckSpawn();       //see if it is time to spawn player
-        //CheckEnemySpawn();  //checking if we should spawn an enemy.
 
-        current = Time.time;//for testing purposes  delete after tests are complete
     }
 
     public void VarCheck()
@@ -169,17 +146,30 @@ public class GameManager : MonoBehaviour
 
         //set objects
         playerPrefab = Resources.Load("Prefabs/Pawn Prefabs/Player Prefabs/Ashlynn");
+        //instantiation point
+        instanPoint = GameObject.FindGameObjectWithTag("InstanPoint").transform;
+        //spawn points
         playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform;
-        playerInstan = GameObject.FindGameObjectWithTag("PlayerInstantiate").transform;
+        //set these to individual spawn points once we have them set up, for now they all default to 1 enemy spawn point
+        enemy1Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawnPoint").transform;
+        enemy2Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawnPoint").transform;
+        enemy3Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawnPoint").transform;
+        enemy4Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawnPoint").transform;
+        enemy5Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawnPoint").transform;
+        enemy6Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawnPoint").transform;
+        enemy7Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawnPoint").transform;
 
-        //player
-        player = (GameObject)Instantiate(playerPrefab, playerInstan.position, playerInstan.rotation) as GameObject;//spawn player
-        Player = player.GetComponent<PlayerPawn>();
-        playerHealth = Player.GetComponent<Health>();
-        lives = Player.Lives;
-        hitACollider = GameObject.FindGameObjectWithTag("HitA");
-        player.gameObject.SetActive(false);//everything is inactivated on initial spawn
-
+        //set up player
+        if (player == null)
+        {
+            player = (GameObject)Instantiate(playerPrefab, instanPoint.position, instanPoint.rotation) as GameObject;//spawn player
+            Player = player.GetComponent<PlayerPawn>();
+            playerHealth = Player.GetComponent<Health>();
+            lives = Player.Lives;
+            hitACollider = GameObject.FindGameObjectWithTag("HitA");
+            player.gameObject.SetActive(false);//everything is inactivated on initial spawn
+        }
+        
     }
     #region Player Spawning
     void CheckSpawn()
@@ -198,6 +188,10 @@ public class GameManager : MonoBehaviour
                     _nextPlayerSpawn = Time.time + playerSpawnDelay;//update spawn timer
                 }
             }
+        }
+        else
+        {
+            
         }
 
     }
@@ -221,7 +215,7 @@ public class GameManager : MonoBehaviour
 
     }
     #endregion
-    /*
+    
     #region Enemy Spawn Checks
     void CheckEnemySpawn()
     {
@@ -362,12 +356,33 @@ public class GameManager : MonoBehaviour
 
     }
     #endregion
-    */
+   
+    public void UpdateHealthBar()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name != "MainMenu")
+        {
+            currentHealth = playerHealth.currentHealth;
+            maxHealth = playerHealth.maxHealth;
+            percent = currentHealth / maxHealth;
+        }
+        else
+        {
+            return;
+        }
+    }
     //handle game over
     public void GameOver()
     {
         Time.timeScale = 0.0f;//stop time;//stop time
         UIManager.Instance.EnableGameOverMenu();//show gameover
+    }
+
+    
+    public void OnDisable()
+    {
+        //just because it is proper to unsub delegates
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     #endregion

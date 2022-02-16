@@ -11,6 +11,7 @@ public class PlayerController : Controller
     [Header("General Player Variables")]
     protected PlayerInput playerInput; //defines the input that the pawn is utlizing 
     protected PlayerInputActions playerInputActions; //variable for storing the input schemes the pawn will be using
+    protected PlayerPawn pawn;//variable for storing the pawn
     #endregion
     #endregion
     #region Functions
@@ -52,10 +53,10 @@ public class PlayerController : Controller
         #region Jumping Updates
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the player is grounded
         ani.SetBool("Grounded", isGrounded);//match bools
-        
+
         if (!isNotJumping && !isGrounded) //if we are jumping
         {
-            
+
             if (jumpTimeCounter > 0) //and our jump counter hasnt reached zero
             {
                 ani.SetBool("Jumping", true);//tell the animator to start jumping
@@ -132,7 +133,7 @@ public class PlayerController : Controller
     }
 
     #region Combat Functions
-    public virtual void LeftPunch(InputAction.CallbackContext context) 
+    public virtual void LeftPunch(InputAction.CallbackContext context)
     {
         combat.HitA();
     }

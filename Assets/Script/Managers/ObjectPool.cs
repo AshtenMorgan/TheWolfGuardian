@@ -7,7 +7,7 @@ public class ObjectPool : MonoBehaviour
     #region variables
 
     #region Pools
-    [Header("Lists"), SerializeField,Tooltip("This is all of the enemy spawn pools")]
+    [Header("Lists"), SerializeField, Tooltip("This is all of the enemy spawn pools")]
     public List<GameObject> enemy1Pool;
     public List<GameObject> enemy2Pool;
     public List<GameObject> enemy3Pool;
@@ -61,64 +61,77 @@ public class ObjectPool : MonoBehaviour
         enemy7Pool = new List<GameObject>();
 
         //initial spawning for object pooling
+
         //enemies
-        #region Enemy Spawns
+        //fill in enemys with prefab objects
+        //  Prefabs/Test Prefabs/Test Enemies/enemy
+        Enemy1 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy1") as GameObject;
+        Enemy2 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy2") as GameObject;
+        Enemy3 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy3") as GameObject;
+        Enemy4 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy4") as GameObject;
+        Enemy5 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy5") as GameObject;
+        Enemy6 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy6") as GameObject;
+        Enemy7 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy7") as GameObject;
+
+        #region Object Creation
         GameObject tmp;//create a temporary game object to hold each new instantiated object
 
         //loop to create all the enemies for a pool
-        
+
         //enemy 1
         for (int i = 0; i < GameManager.Instance.enemy1Max; i++)
         {
-            tmp = Instantiate(Enemy1, GameManager.Instance.enemyInstan.position, GameManager.Instance.enemyInstan.rotation);//instantiate enemy, hold it in tmp GO
+           
+            tmp = Instantiate(Enemy1, GameManager.Instance.instanPoint.position, GameManager.Instance.instanPoint.rotation) as GameObject;//instantiate enemy, hold it in tmp GO
             tmp.SetActive(false);//hide and disable the enemy
             enemy1Pool.Add(tmp);//add enemy to pool
         }
         //enemy 2
         for (int i = 0; i < GameManager.Instance.enemy2Max; i++)
         {
-            tmp = Instantiate(Enemy2, GameManager.Instance.enemyInstan.position, GameManager.Instance.enemyInstan.rotation);
+            tmp = Instantiate(Enemy2, GameManager.Instance.instanPoint.position, GameManager.Instance.instanPoint.rotation);
             tmp.SetActive(false);
             enemy2Pool.Add(tmp);
         }
         //enemy 3
         for (int i = 0; i < GameManager.Instance.enemy3Max; i++)
         {
-            tmp = Instantiate(Enemy3, GameManager.Instance.enemyInstan.position, GameManager.Instance.enemyInstan.rotation);
+            tmp = Instantiate(Enemy3, GameManager.Instance.instanPoint.position, GameManager.Instance.instanPoint.rotation);
             tmp.SetActive(false);
             enemy3Pool.Add(tmp);
         }
         //enemy 4
         for (int i = 0; i < GameManager.Instance.enemy4Max; i++)
         {
-            tmp = Instantiate(Enemy4, GameManager.Instance.enemyInstan.position, GameManager.Instance.enemyInstan.rotation);
+            tmp = Instantiate(Enemy4, GameManager.Instance.instanPoint.position, GameManager.Instance.instanPoint.rotation);
             tmp.SetActive(false);
             enemy4Pool.Add(tmp);
         }
         //enemy 5
         for (int i = 0; i < GameManager.Instance.enemy5Max; i++)
         {
-            tmp = Instantiate(Enemy5, GameManager.Instance.enemyInstan.position, GameManager.Instance.enemyInstan.rotation);
+            tmp = Instantiate(Enemy5, GameManager.Instance.instanPoint.position, GameManager.Instance.instanPoint.rotation);
             tmp.SetActive(false);
             enemy5Pool.Add(tmp);
         }
         //enemy 1
         for (int i = 0; i < GameManager.Instance.enemy6Max; i++)
         {
-            tmp = Instantiate(Enemy6, GameManager.Instance.enemyInstan.position, GameManager.Instance.enemyInstan.rotation);
+            tmp = Instantiate(Enemy6, GameManager.Instance.instanPoint.position, GameManager.Instance.instanPoint.rotation);
             tmp.SetActive(false);
             enemy6Pool.Add(tmp);
         }
         //enemy 7
         for (int i = 0; i < GameManager.Instance.enemy7Max; i++)
         {
-            tmp = Instantiate(Enemy7, GameManager.Instance.enemyInstan.position, GameManager.Instance.enemyInstan.rotation);
+            tmp = Instantiate(Enemy7, GameManager.Instance.instanPoint.position, GameManager.Instance.instanPoint.rotation);
             tmp.SetActive(false);
             enemy7Pool.Add(tmp);
         }
         #endregion
     }
     #region Enemy Pool checks
+    //check active enemies against "max enemy"s and enable if necessary
     public GameObject GetEnemy1Pool()
     {
         for (int i = 0; i < GameManager.Instance.enemy1Max; i++)
@@ -127,7 +140,7 @@ public class ObjectPool : MonoBehaviour
             {
                 return enemy1Pool[i];
             }
-            
+
         }
         return null;
     }

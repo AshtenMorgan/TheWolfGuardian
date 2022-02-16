@@ -29,7 +29,7 @@ Transform:
   m_Children:
   - {fileID: 2681458160917347089}
   m_Father: {fileID: 7559521895278942268}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1512417986340991083
 GameObject:
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4630394010730151543}
   - component: {fileID: 2775364748381269082}
   - component: {fileID: 7282795300279746711}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 3681592088428277015}
   - component: {fileID: 3716887823812233681}
   m_Layer: 7
-  m_Name: GroundCheck
+  m_Name: eGroundCheck
   m_TagString: GroundCheck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2920632571202009231}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.53, y: -0.8, z: 0}
+  m_LocalPosition: {x: -0.639, y: -0.838, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7559521895278942268}
@@ -204,6 +204,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &3773648527952399376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3074418356939845758}
+  m_Layer: 7
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3074418356939845758
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3773648527952399376}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.05, y: -0.874, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7559521895278942268}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7173817792947858477
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,10 +367,11 @@ Transform:
   m_GameObject: {fileID: 7559521895278942267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: -0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 3681592088428277015}
   - {fileID: 5905235548942711787}
+  - {fileID: 3074418356939845758}
   - {fileID: 2111785464981105184}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -490,9 +521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d4ef9076b25f2f4daa7053ffdca4d1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 60
   _walkSpeed: 3
-  _runSpeed: 10
+  _runSpeed: 5
   _jumpHeight: 4
   _damage: 0
   _meleeAttackRange: 0
@@ -533,7 +563,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  remTimer: 5
   onRespawn:
     m_PersistentCalls:
       m_Calls: []
@@ -559,8 +588,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   jumpTime: 0
-  groundCheck: {fileID: 3681592088428277015}
-  circleRadius: 0
+  groundCheck: {fileID: 3074418356939845758}
+  circleRadius: 0.1
   noFriction: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
   fullFriction: {fileID: 6200000, guid: 48626c08f0a6277489a9387662b457ac, type: 2}
   ani: {fileID: 4396794124818487122}
@@ -581,9 +610,9 @@ MonoBehaviour:
   damageDirection: 0
   patrolRange: 5
   groundCheckDistance: 1
-  wallCheckDistance: 2
-  playerCheckDistance: 5
-  enemyCheckDistance: 3
+  wallCheckDistance: 1
+  playerCheckDistance: 2
+  enemyCheckDistance: 0.5
   harmStart: 0
   harmDuration: 0
   isGroundDetected: 1
@@ -615,7 +644,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8879414767259118104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.59, y: -0.32, z: 0}
+  m_LocalPosition: {x: -0.59, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7559521895278942268}
