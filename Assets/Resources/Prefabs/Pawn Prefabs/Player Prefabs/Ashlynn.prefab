@@ -454,7 +454,7 @@ MonoBehaviour:
   damage: 10
   animTimer: 15
   hitAPos: {fileID: 651217628918886266}
-  hitAVector: {x: 0.6, y: 0.25, z: 0}
+  hitAVector: {x: 0.6, y: 0.2, z: 0}
 --- !u!1 &1845089198985879403
 GameObject:
   m_ObjectHideFlags: 0
