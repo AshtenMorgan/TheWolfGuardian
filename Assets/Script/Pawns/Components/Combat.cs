@@ -7,9 +7,11 @@ public class Combat : MonoBehaviour
 {
     #region Variables
     #region General Variables
+    [Header("General Pawn Attributes")]
     protected Pawn pawn; //stores the pawn of our combatant
     protected bool _canAttack; //when this says hit you say how hard
     protected Animator ani; //stores the animator of the combatant
+    protected LayerMask enemyLayer; //the layer masks that all enemies are on
     [SerializeField]
     protected float damage; //the damage our combatant does
     #endregion
@@ -19,8 +21,14 @@ public class Combat : MonoBehaviour
     protected float animCounter; //actually does the counting for animTimer
     #endregion
     #region Colliders
-    [SerializeField]
-    GameObject hitACollider;
+    [Header("Hitbox A Attributes")]
+    [Header("Hitbox Attributes")]
+    #region Hitbox A
+    [SerializeField, Tooltip("the position of Hit A's hitbox.")]
+    protected Transform hitAPos; //the position of hit A's hitbox
+    [SerializeField, Tooltip("the length and width of Hit A's hitbox.")]
+    protected Vector3 hitAVector; //the radius of hit A's circle
+    #endregion
     #endregion
     #endregion
     #region Functions
@@ -41,7 +49,7 @@ public class Combat : MonoBehaviour
         else if (animCounter <= 0)
         {
             ani.SetBool("HitA", false);
-            hitACollider.SetActive(false);
+            
         }
         
     }
@@ -52,6 +60,7 @@ public class Combat : MonoBehaviour
     {
         _canAttack = true; //gives us permission to hit the things
     }
+    /*
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         var hit = other.GetComponent<Health>();
@@ -61,14 +70,35 @@ public class Combat : MonoBehaviour
             _canAttack = false;
         }
     }
+    */
     #endregion
     #region Terrestrial Melee Attacks
     public virtual void HitA() 
     {
         ani.SetBool("HitA", true);
-        hitACollider.SetActive(true);
         animCounter = animTimer;
+        //create a circle and return all the colliders within the area into an array
+        Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitAPos.position, hitAVector, enemyLayer);
+        OnDrawGizmosSelected();
+        //for every collider in that array
+        for (int i = 0; i < enemiesToDamage.Length; i++)
+        {
+            enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+            Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
+            _canAttack = false;
+        }
+        Debug.Log("Hit A Complete!");
     }
     #endregion
-    #endregion
+    #region Gizmos
+    /// <summary>
+    /// Gizmo for visually displaying the attack range
+    /// </summary>
+    protected void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(hitAPos.position, hitAVector);
+    }
 }
+    #endregion
+    #endregion
