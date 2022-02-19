@@ -8,9 +8,12 @@ public class Combat : MonoBehaviour
     #region Variables
     #region General Variables
     [Header("General Pawn Attributes")]
-    protected Pawn pawn; //stores the pawn of our combatant
     protected bool _canAttack; //when this says hit you say how hard
+    protected Pawn pawn; //stores the pawn of our combatant
     protected Animator ani; //stores the animator of the combatant
+    protected Controller controller; //stores 
+    protected bool isGrounded; //saves the grounded status of the pawn from the controller
+    [SerializeField]
     protected LayerMask enemyLayer; //the layer masks that all enemies are on
     [SerializeField]
     protected float damage; //the damage our combatant does
@@ -27,7 +30,11 @@ public class Combat : MonoBehaviour
     [SerializeField, Tooltip("the position of Hit A's hitbox.")]
     protected Transform hitAPos; //the position of hit A's hitbox
     [SerializeField, Tooltip("the length and width of Hit A's hitbox.")]
-    protected Vector3 hitAVector; //the radius of hit A's circle
+    protected Vector3 hitAVector; //the size of hit A's hitbox
+    [SerializeField, Tooltip("the position of Hit A's hitbox in the air.")]
+    protected Transform hitAJumpPos; //the position of hit A's hitbox in the air
+    [SerializeField, Tooltip("the length and width of Hit A's hitbox in the air.")]
+    protected Vector3 hitAJumpVector; //the size of hit A's hitbox in the air
     #endregion
     #endregion
     #endregion
@@ -35,13 +42,16 @@ public class Combat : MonoBehaviour
     #region Startup Functions
     protected virtual void Awake()
     {
-        pawn = GetComponent<PlayerPawn>(); //defines the pawn of the combatant
+        pawn = GetComponent<Pawn>(); //defines the pawn of the combatant
         ani = GetComponent<Animator>(); //defines the animator for the Combatant
+        controller = GetComponent<Controller>();//defines the controller of the combatant
         animCounter = 0f;
     }
     protected virtual void Update() 
-    {   
-        
+    {
+        isGrounded = controller.IsGrounded;
+
+
         if (animCounter > 0) 
         {
             animCounter -= Time.time; //decrements animCounter
@@ -75,17 +85,33 @@ public class Combat : MonoBehaviour
     #region Terrestrial Melee Attacks
     public virtual void HitA() 
     {
-        ani.SetBool("HitA", true);
-        animCounter = animTimer;
-        //create a circle and return all the colliders within the area into an array
-        Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitAPos.position, hitAVector, enemyLayer);
-        OnDrawGizmosSelected();
-        //for every collider in that array
-        for (int i = 0; i < enemiesToDamage.Length; i++)
+        if (isGrounded)
         {
-            enemiesToDamage[i].GetComponent<Health>().Damage(damage);
-            Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
-            _canAttack = false;
+            ani.SetBool("HitA", true);
+            animCounter = animTimer;
+            //create a circle and return all the colliders within the area into an array
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitAPos.position, hitAVector, enemyLayer);
+            //for every collider in that array
+            for (int i = 0; i < enemiesToDamage.Length; i++)
+            {
+                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+                Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
+                _canAttack = false;
+            }
+        }
+        if (!isGrounded)
+        {
+            ani.SetBool("HitA", true);
+            animCounter = animTimer;
+            //create a circle and return all the colliders within the area into an array
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitAJumpPos.position, hitAJumpVector, enemyLayer);
+            //for every collider in that array
+            for (int i = 0; i < enemiesToDamage.Length; i++)
+            {
+                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+                Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
+                _canAttack = false;
+            }
         }
         Debug.Log("Hit A Complete!");
     }
@@ -96,8 +122,9 @@ public class Combat : MonoBehaviour
     /// </summary>
     protected void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(hitAPos.position, hitAVector);
+        Gizmos.color = Color.red; //makes Gizmo for Hitbox A red
+        //Gizmos.DrawWireCube(hitAPos.position, hitAVector); //displays the size and shape of hitbox A
+        Gizmos.DrawWireCube(hitAJumpPos.position, hitAJumpVector); //displays the size and shape of hitbox A in the air
     }
 }
     #endregion

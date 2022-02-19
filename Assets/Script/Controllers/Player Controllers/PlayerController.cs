@@ -33,6 +33,8 @@ public class PlayerController : Controller
         playerInputActions.PlayerHuman.Move.performed += Move; // subscribes to the Move function
         playerInputActions.PlayerHuman.SprintStart.performed += SprintStart; //Subscribes to the SprintStart function
         playerInputActions.PlayerHuman.SprintEnd.performed += SprintEnd; //Subscribes to the SprintEnd function
+        playerInputActions.PlayerHuman.CrouchStart.performed += CrouchStart; //Subscribes to the CrouchStart function
+        playerInputActions.PlayerHuman.CrouchEnd.performed += CrouchEnd; //Subscribes to the CrouchStart function
         playerInputActions.PlayerHuman.LeftPunch.performed += LeftPunch; //subscribes to the LeftPunch function
         #endregion
     }
@@ -132,6 +134,24 @@ public class PlayerController : Controller
         ani.SetBool("Sprinting", false);//tell the animator to stop sprinting
     }
 
+    public virtual void CrouchStart(InputAction.CallbackContext context) 
+    {
+        if (isGrounded)
+        {
+            isCrouching = true; //sets the crouching bool to true
+            ani.SetBool("Crouched",true);
+        }
+    }
+
+    public virtual void CrouchEnd(InputAction.CallbackContext context)
+    {
+        if (isGrounded)
+        {
+            isCrouching = false; //sets the crouching bool to false
+            ani.SetBool("Crouched", false);
+        }
+    }
+
     #region Combat Functions
     public virtual void LeftPunch(InputAction.CallbackContext context)
     {
@@ -155,7 +175,7 @@ public class PlayerController : Controller
     #region Gizmos
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(groundCheck.position, circleRadius); //draws a sphere around our ground check empty so that we can visualize it
+        //Gizmos.DrawSphere(groundCheck.position, circleRadius); //draws a sphere around our ground check empty so that we can visualize it
     }
     #endregion
     #endregion

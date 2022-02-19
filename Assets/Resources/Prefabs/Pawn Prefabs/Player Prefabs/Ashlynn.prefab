@@ -43,13 +43,13 @@ GameObject:
   - component: {fileID: 1336663593021864649}
   - component: {fileID: 1336663593021864648}
   - component: {fileID: 2283205010652522384}
+  - component: {fileID: 2845223548025021877}
   - component: {fileID: 1281415155016603649}
   - component: {fileID: 1336663593021864650}
   - component: {fileID: 6156520705936279337}
   - component: {fileID: 1336663593021864645}
   - component: {fileID: 1336663593021864652}
   - component: {fileID: 6745210005853773866}
-  - component: {fileID: 2845223548025021877}
   m_Layer: 6
   m_Name: Ashlynn
   m_TagString: Player
@@ -220,6 +220,27 @@ MonoBehaviour:
   noFriction: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
   fullFriction: {fileID: 6200000, guid: 48626c08f0a6277489a9387662b457ac, type: 2}
   ani: {fileID: 1336663593021864652}
+--- !u!114 &2845223548025021877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336663593021864644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af2805f09363134984210f9de725f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  damage: 10
+  animTimer: 15
+  hitAPos: {fileID: 651217628918886266}
+  hitAVector: {x: 0.45, y: 0.2, z: 0}
+  hitAJumpPos: {fileID: 1411941365596092865}
+  hitAJumpVector: {x: 0.25, y: 0.25, z: 0}
 --- !u!114 &1281415155016603649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,22 +460,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2845223548025021877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1336663593021864644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5af2805f09363134984210f9de725f7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  animTimer: 15
-  hitAPos: {fileID: 651217628918886266}
-  hitAVector: {x: 0.6, y: 0.2, z: 0}
 --- !u!1 &1845089198985879403
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,9 +484,40 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845089198985879403}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.307, y: 0.2, z: 0}
+  m_LocalPosition: {x: 0.378, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1411941365596092865}
   m_Father: {fileID: 1336663593021864655}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4139996214536790316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1411941365596092865}
+  m_Layer: 6
+  m_Name: HitAJumpPos
+  m_TagString: HitA
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1411941365596092865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4139996214536790316}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.048, y: -0.368, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 651217628918886266}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
