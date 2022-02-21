@@ -35,7 +35,9 @@ public class PlayerController : Controller
         playerInputActions.PlayerHuman.SprintEnd.performed += SprintEnd; //Subscribes to the SprintEnd function
         playerInputActions.PlayerHuman.CrouchStart.performed += CrouchStart; //Subscribes to the CrouchStart function
         playerInputActions.PlayerHuman.CrouchEnd.performed += CrouchEnd; //Subscribes to the CrouchStart function
-        playerInputActions.PlayerHuman.LeftPunch.performed += LeftPunch; //subscribes to the LeftPunch function
+        playerInputActions.PlayerHuman.LightPunch.performed += LightPunch; //subscribes to the LightPunch function
+        playerInputActions.PlayerHuman.HeavyPunch.performed += HeavyPunch; //subscribes to the HeavyPunch function
+        playerInputActions.PlayerHuman.Kick.performed += Kick; //subscribes to the HeavyPunch function
         #endregion
     }
 
@@ -153,9 +155,17 @@ public class PlayerController : Controller
     }
 
     #region Combat Functions
-    public virtual void LeftPunch(InputAction.CallbackContext context)
+    public virtual void LightPunch(InputAction.CallbackContext context)
     {
         combat.HitA();
+    }
+    public virtual void HeavyPunch(InputAction.CallbackContext context)
+    {
+        combat.HitB();
+    }
+    public virtual void Kick(InputAction.CallbackContext context)
+    {
+        combat.HitC();
     }
     #endregion
     #endregion

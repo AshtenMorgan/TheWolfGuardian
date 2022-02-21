@@ -49,6 +49,10 @@ public class Controller : MonoBehaviour
     {
         get { return isGrounded; }
     }
+    public bool IsCrouching
+    {
+        get { return isCrouching; }
+    }
 
     #endregion
     #endregion

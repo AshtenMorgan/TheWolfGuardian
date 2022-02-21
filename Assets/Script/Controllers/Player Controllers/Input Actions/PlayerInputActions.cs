@@ -91,9 +91,27 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""LeftPunch"",
+                    ""name"": ""LightPunch"",
                     ""type"": ""Button"",
                     ""id"": ""9a17f8bb-a15f-4b29-acc9-30ff27dda7ec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HeavyPunch"",
+                    ""type"": ""Button"",
+                    ""id"": ""a298b093-ad70-477e-b1af-5992dacdd897"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Kick"",
+                    ""type"": ""Button"",
+                    ""id"": ""1208cb74-8552-4fbf-a92c-fcae4276c885"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -339,7 +357,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""LeftPunch"",
+                    ""action"": ""LightPunch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -350,7 +368,51 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""LeftPunch"",
+                    ""action"": ""LightPunch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b6104fe-6478-451f-ba8a-a964a9dff6d9"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""HeavyPunch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ceca4902-f86d-4663-8e1c-7f9779305587"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""HeavyPunch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa38bbbb-e727-4ab3-83c5-d3e160bc782b"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Kick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""252e636f-51a2-4e9a-82c1-05272fce2930"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Kick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -391,7 +453,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_PlayerHuman_SprintEnd = m_PlayerHuman.FindAction("SprintEnd", throwIfNotFound: true);
         m_PlayerHuman_CrouchStart = m_PlayerHuman.FindAction("CrouchStart", throwIfNotFound: true);
         m_PlayerHuman_CrouchEnd = m_PlayerHuman.FindAction("CrouchEnd", throwIfNotFound: true);
-        m_PlayerHuman_LeftPunch = m_PlayerHuman.FindAction("LeftPunch", throwIfNotFound: true);
+        m_PlayerHuman_LightPunch = m_PlayerHuman.FindAction("LightPunch", throwIfNotFound: true);
+        m_PlayerHuman_HeavyPunch = m_PlayerHuman.FindAction("HeavyPunch", throwIfNotFound: true);
+        m_PlayerHuman_Kick = m_PlayerHuman.FindAction("Kick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -458,7 +522,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerHuman_SprintEnd;
     private readonly InputAction m_PlayerHuman_CrouchStart;
     private readonly InputAction m_PlayerHuman_CrouchEnd;
-    private readonly InputAction m_PlayerHuman_LeftPunch;
+    private readonly InputAction m_PlayerHuman_LightPunch;
+    private readonly InputAction m_PlayerHuman_HeavyPunch;
+    private readonly InputAction m_PlayerHuman_Kick;
     public struct PlayerHumanActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -470,7 +536,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @SprintEnd => m_Wrapper.m_PlayerHuman_SprintEnd;
         public InputAction @CrouchStart => m_Wrapper.m_PlayerHuman_CrouchStart;
         public InputAction @CrouchEnd => m_Wrapper.m_PlayerHuman_CrouchEnd;
-        public InputAction @LeftPunch => m_Wrapper.m_PlayerHuman_LeftPunch;
+        public InputAction @LightPunch => m_Wrapper.m_PlayerHuman_LightPunch;
+        public InputAction @HeavyPunch => m_Wrapper.m_PlayerHuman_HeavyPunch;
+        public InputAction @Kick => m_Wrapper.m_PlayerHuman_Kick;
         public InputActionMap Get() { return m_Wrapper.m_PlayerHuman; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -501,9 +569,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @CrouchEnd.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnCrouchEnd;
                 @CrouchEnd.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnCrouchEnd;
                 @CrouchEnd.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnCrouchEnd;
-                @LeftPunch.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnLeftPunch;
-                @LeftPunch.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnLeftPunch;
-                @LeftPunch.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnLeftPunch;
+                @LightPunch.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnLightPunch;
+                @LightPunch.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnLightPunch;
+                @LightPunch.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnLightPunch;
+                @HeavyPunch.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnHeavyPunch;
+                @HeavyPunch.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnHeavyPunch;
+                @HeavyPunch.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnHeavyPunch;
+                @Kick.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnKick;
+                @Kick.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnKick;
+                @Kick.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnKick;
             }
             m_Wrapper.m_PlayerHumanActionsCallbackInterface = instance;
             if (instance != null)
@@ -529,9 +603,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @CrouchEnd.started += instance.OnCrouchEnd;
                 @CrouchEnd.performed += instance.OnCrouchEnd;
                 @CrouchEnd.canceled += instance.OnCrouchEnd;
-                @LeftPunch.started += instance.OnLeftPunch;
-                @LeftPunch.performed += instance.OnLeftPunch;
-                @LeftPunch.canceled += instance.OnLeftPunch;
+                @LightPunch.started += instance.OnLightPunch;
+                @LightPunch.performed += instance.OnLightPunch;
+                @LightPunch.canceled += instance.OnLightPunch;
+                @HeavyPunch.started += instance.OnHeavyPunch;
+                @HeavyPunch.performed += instance.OnHeavyPunch;
+                @HeavyPunch.canceled += instance.OnHeavyPunch;
+                @Kick.started += instance.OnKick;
+                @Kick.performed += instance.OnKick;
+                @Kick.canceled += instance.OnKick;
             }
         }
     }
@@ -563,6 +643,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnSprintEnd(InputAction.CallbackContext context);
         void OnCrouchStart(InputAction.CallbackContext context);
         void OnCrouchEnd(InputAction.CallbackContext context);
-        void OnLeftPunch(InputAction.CallbackContext context);
+        void OnLightPunch(InputAction.CallbackContext context);
+        void OnHeavyPunch(InputAction.CallbackContext context);
+        void OnKick(InputAction.CallbackContext context);
     }
 }

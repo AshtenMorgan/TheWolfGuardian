@@ -13,6 +13,7 @@ public class Combat : MonoBehaviour
     protected Animator ani; //stores the animator of the combatant
     protected Controller controller; //stores 
     protected bool isGrounded; //saves the grounded status of the pawn from the controller
+    protected bool isCrouching; //determines if the pawn is crouching
     [SerializeField]
     protected LayerMask enemyLayer; //the layer masks that all enemies are on
     [SerializeField]
@@ -35,6 +36,20 @@ public class Combat : MonoBehaviour
     protected Transform hitAJumpPos; //the position of hit A's hitbox in the air
     [SerializeField, Tooltip("the length and width of Hit A's hitbox in the air.")]
     protected Vector3 hitAJumpVector; //the size of hit A's hitbox in the air
+    [SerializeField, Tooltip("the position of Hit A's hitbox while crouched.")]
+    protected Transform hitACrouchPos; //the position of hit A's hitbox while crouched
+    [SerializeField, Tooltip("the length and width of Hit A's hitbox while crouched.")]
+    protected Vector3 hitACrouchVector; //the size of hit A's hitbox while crouched
+    [Header("Hitbox B Attributes")]
+    [SerializeField, Tooltip("the position of Hit B's hitbox.")]
+    protected Transform hitBPos; //the position of hit B's hitbox
+    [SerializeField, Tooltip("the length and width of Hit B's hitbox.")]
+    protected Vector3 hitBVector; //The length and width of Hit B's hitbox
+    [Header("Hitbox C Attributes")]
+    [SerializeField, Tooltip("the position of Hit C's hitbox.")]
+    protected Transform hitCPos; //the position of hit C's hitbox
+    [SerializeField, Tooltip("the length and width of Hit C's hitbox.")]
+    protected Vector3 hitCVector; //The length and width of Hit C's hitbox
     #endregion
     #endregion
     #endregion
@@ -50,7 +65,7 @@ public class Combat : MonoBehaviour
     protected virtual void Update() 
     {
         isGrounded = controller.IsGrounded;
-
+        isCrouching = controller.IsCrouching;
 
         if (animCounter > 0) 
         {
@@ -59,7 +74,8 @@ public class Combat : MonoBehaviour
         else if (animCounter <= 0)
         {
             ani.SetBool("HitA", false);
-            
+            ani.SetBool("HitB", false);
+            ani.SetBool("HitC", false);
         }
         
     }
@@ -82,7 +98,8 @@ public class Combat : MonoBehaviour
     }
     */
     #endregion
-    #region Terrestrial Melee Attacks
+    #region Combo Attack Functions
+    #region Hit A Function
     public virtual void HitA() 
     {
         if (isGrounded)
@@ -113,8 +130,60 @@ public class Combat : MonoBehaviour
                 _canAttack = false;
             }
         }
-        Debug.Log("Hit A Complete!");
+        if (isGrounded && isCrouching)
+        {
+            ani.SetBool("HitA", true);
+            animCounter = animTimer;
+            //create a circle and return all the colliders within the area into an array
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitACrouchPos.position, hitACrouchVector, enemyLayer);
+            //for every collider in that array
+            for (int i = 0; i < enemiesToDamage.Length; i++)
+            {
+                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+                Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
+                _canAttack = false;
+            }
+        }
     }
+    #endregion
+    #region Hit B Function
+    public virtual void HitB()
+    {
+        if (isGrounded)
+        {
+            ani.SetBool("HitB", true);
+            animCounter = animTimer;
+            //create a circle and return all the colliders within the area into an array
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitBPos.position, hitBVector, enemyLayer);
+            //for every collider in that array
+            for (int i = 0; i < enemiesToDamage.Length; i++)
+            {
+                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+                Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
+                _canAttack = false;
+            }
+        }
+    }
+    #endregion
+    #region Hit B Function
+    public virtual void HitC()
+    {
+        if (isGrounded)
+        {
+            ani.SetBool("HitC", true);
+            animCounter = animTimer;
+            //create a circle and return all the colliders within the area into an array
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitCPos.position, hitCVector, enemyLayer);
+            //for every collider in that array
+            for (int i = 0; i < enemiesToDamage.Length; i++)
+            {
+                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+                Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
+                _canAttack = false;
+            }
+        }
+    }
+    #endregion
     #endregion
     #region Gizmos
     /// <summary>
@@ -122,9 +191,18 @@ public class Combat : MonoBehaviour
     /// </summary>
     protected void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red; //makes Gizmo for Hitbox A red
+        Gizmos.color = Color.red; //makes Gizmo for Hitboxes red
+        #region Hitbox A Gizmos
         //Gizmos.DrawWireCube(hitAPos.position, hitAVector); //displays the size and shape of hitbox A
-        Gizmos.DrawWireCube(hitAJumpPos.position, hitAJumpVector); //displays the size and shape of hitbox A in the air
+        //Gizmos.DrawWireCube(hitAJumpPos.position, hitAJumpVector); //displays the size and shape of hitbox A in the air
+        //Gizmos.DrawWireCube(hitACrouchPos.position, hitACrouchVector); //displays the size and shape of hitbox A while crouching
+        #endregion
+        #region#region Hitbox B Gizmos
+        //Gizmos.DrawWireCube(hitBPos.position, hitBVector);// displays the size and shape of Hitbox B
+        #endregion
+        #region#region Hitbox C Gizmos
+        Gizmos.DrawWireCube(hitCPos.position, hitCVector);// displays the size and shape of Hitbox B
+        #endregion
     }
 }
     #endregion
