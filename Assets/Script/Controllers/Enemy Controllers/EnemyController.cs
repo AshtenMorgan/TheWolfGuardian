@@ -27,7 +27,6 @@ public class EnemyController : Controller
     [SerializeField]
     PlayerPawn target;
     [SerializeField]
-    EnemyPawn enemy;
     EnemyPawn pawn;
     [SerializeField]
     protected Transform eyeball,
@@ -81,7 +80,6 @@ public class EnemyController : Controller
         base.Start();//call parents start function
         pawn = GetComponent<EnemyPawn>();//refrence this objects enemy pawn
         ani = GetComponent<Animator>();//get animator component
-        enemy = GetComponent<EnemyPawn>();//reference this objects pawn
         target = GameManager.Instance.Player;//get player from game manager
         facingDirection = 1;//face right
     }
@@ -312,7 +310,7 @@ public class EnemyController : Controller
     {
         gameObject.transform.Rotate(0, 180, 0);
         facingDirection *= -1;
-        movement.Set(enemy.WalkSpeed * facingDirection, rb2d.velocity.y);//set speed to walk
+        movement.Set(pawn.WalkSpeed * facingDirection, rb2d.velocity.y);//set speed to walk
         rb2d.velocity = movement;//set velocity to movement speed/direction
     }
     protected virtual void StepDetection()
@@ -336,7 +334,7 @@ public class EnemyController : Controller
             }
             else//we have a ground, no wall, and no enemy, no player
             {
-                movement.Set(enemy.WalkSpeed * facingDirection, rb2d.velocity.y);//set speed to walk
+                movement.Set(pawn.WalkSpeed * facingDirection, rb2d.velocity.y);//set speed to walk
                 rb2d.velocity = movement;//set velocity to movement speed/direction
             }
         }
@@ -347,7 +345,7 @@ public class EnemyController : Controller
         Locate();//continue looking for player
         if (isPlayerDetected)
         {
-            movement.Set(enemy.RunSpeed * facingDirection, rb2d.velocity.y);//set movement speed to run towards player
+            movement.Set(pawn.RunSpeed * facingDirection, rb2d.velocity.y);//set movement speed to run towards player
             rb2d.velocity = movement;//set velocity to movement speed/direction
 
             if (!isGroundDetected)
@@ -362,35 +360,18 @@ public class EnemyController : Controller
     }
     protected virtual void Locate()
     {
-        Collider2D[] Collider = Physics2D.OverlapBoxAll(playerCheck.position, playerCheckDistance, playerLayer);
+        Collider2D[] Collider = Physics2D.OverlapBoxAll(playerCheck.position, playerCheckDistance, 0, playerLayer);
         //Collider2D[] Collider = Physics2D.OverlapCollider(VisionCone, playerLayer);
-
         if (Collider.Length > 0)//overlap hit something
         {
-            for (int i = 0; i < Collider.Length; i++)
-            {
-                if (Collider[i].CompareTag("Player"))//player is inside of detection range
-                {
-                    isPlayerDetected = Physics2D.Raycast(eyeball.position, transform.right, playerSeeDistance, playerLayer);//raycast for enemy
-                    Debug.DrawLine(eyeball.position, transform.right * playerSeeDistance, Color.red);
-                }
-                else if (Collider[i].CompareTag("Enemy"))
-                {
-                   isEnemyDetected = Physics2D.Raycast(eyeball.position, transform.right, enemyCheckDistance, enemyLayer);//raycast for enemy
-                    Debug.DrawLine(eyeball.position, transform.right * enemyCheckDistance, Color.green);
-                }
-                else if (Collider[i].CompareTag("Untagged"))
-                {
-                    isPlayerDetected = false;
-                }
-                else
-                {
-                    isPlayerDetected = false;
-                }
-            }
-
+            isPlayerDetected = Physics2D.Raycast(eyeball.position, target.transform.position - eyeball.position, playerSeeDistance, playerLayer);
+            Debug.DrawRay(eyeball.position, (target.transform.position - eyeball.position) * playerSeeDistance, Color.red);
         }
-    
+        else
+        {
+            isPlayerDetected = false;
+        }
+
     }
 
 

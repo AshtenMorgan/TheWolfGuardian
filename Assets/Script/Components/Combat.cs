@@ -135,7 +135,7 @@ public class Combat : MonoBehaviour
             ani.SetBool("HitA", true);
             animCounter = animTimer;
             //create a circle and return all the colliders within the area into an array
-            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitACrouchPos.position, hitACrouchVector, enemyLayer);
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitACrouchPos.position, hitACrouchVector, 0, enemyLayer);//this fixes your layer problem
             //for every collider in that array
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
@@ -154,13 +154,18 @@ public class Combat : MonoBehaviour
             ani.SetBool("HitB", true);
             animCounter = animTimer;
             //create a circle and return all the colliders within the area into an array
-            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitBPos.position, hitBVector, enemyLayer);
+            //enemy layer check is a good idea, but what about when we want to hit breakable walls?
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitBPos.position, hitBVector, enemyLayer);//<-- This is where your problem is, it is registering enemyLayer as an angle
             //for every collider in that array
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
-                Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
-                _canAttack = false;
+                if  (enemiesToDamage[i].CompareTag("Enemy"))//make sure this is tagged as enemy
+                {
+                    enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+                    Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
+                    _canAttack = false;
+                }
+                
             }
         }
     }
