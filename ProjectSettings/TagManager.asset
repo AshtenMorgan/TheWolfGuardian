@@ -26,7 +26,6 @@ TagManager:
   - OptionsBKG
   - InstanPoint
   - EnemySpawnPoint
-  - eGroundCheck
   - Enemy
   layers:
   - Default
@@ -73,4 +72,7 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 2855587509
+    locked: 0
+  - name: Enemy
+    uniqueID: 3073164019
     locked: 0

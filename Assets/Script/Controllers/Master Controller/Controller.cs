@@ -19,6 +19,7 @@ public class Controller : MonoBehaviour
     [Header("Jump Variables")]
     protected float verticalVelocity; //the vertical acceleration of the player pawn
     protected bool isGrounded; //determines if the pawn is touching the ground or not
+    protected bool isCrouching; //determines if the pawn is crouching
     [SerializeField]
     protected float jumpTime; //the time we set in the editor for the maximum amount of time we can jump into the air before we start falling
     protected float jumpTimeCounter; //the counter that keeps track of jumpTime
@@ -42,6 +43,17 @@ public class Controller : MonoBehaviour
     #region Animator Variables
     [Header("Animator Variables")]
     public Animator ani;//animator code
+    #endregion
+    #region Full Properties
+    public bool IsGrounded
+    {
+        get { return isGrounded; }
+    }
+    public bool IsCrouching
+    {
+        get { return isCrouching; }
+    }
+
     #endregion
     #endregion
     #region Functions
