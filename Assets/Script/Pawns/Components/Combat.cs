@@ -11,6 +11,7 @@ public class Combat : MonoBehaviour
     protected Pawn pawn; //stores the pawn of our combatant
     protected bool _canAttack; //when this says hit you say how hard
     protected Animator ani; //stores the animator of the combatant
+    [SerializeField]
     protected LayerMask enemyLayer; //the layer masks that all enemies are on
     [SerializeField]
     protected float damage; //the damage our combatant does
@@ -83,9 +84,13 @@ public class Combat : MonoBehaviour
         //for every collider in that array
         for (int i = 0; i < enemiesToDamage.Length; i++)
         {
-            enemiesToDamage[i].GetComponent<Health>().Damage(damage);
-            Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
-            _canAttack = false;
+            if (enemiesToDamage[i].GetComponent<Health>())
+            {
+                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+                Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
+                _canAttack = false;
+            }
+            
         }
         Debug.Log("Hit A Complete!");
     }

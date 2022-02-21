@@ -26,6 +26,8 @@ TagManager:
   - OptionsBKG
   - InstanPoint
   - EnemySpawnPoint
+  - eGroundCheck
+  - Enemy
   layers:
   - Default
   - TransparentFX
