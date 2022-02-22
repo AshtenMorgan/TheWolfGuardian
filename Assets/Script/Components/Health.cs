@@ -20,9 +20,9 @@ public class Health : Pickups
     private UnityEvent onRespawn;
     #endregion
     #region Pawn Variables
-    private float _health;
+    public float _health;
     [SerializeField, Tooltip("Max Health")]
-    private float _maxHealth = 100;//settable in inspector, should determine current health at start
+    private float _maxHealth;//settable in inspector, should determine current health at start
     public float percent;//used to get percent of total health for health bar/tracker
     #endregion
     #region Combat Vars
@@ -121,19 +121,21 @@ public class Health : Pickups
     {
         isDead = true;//let other things know this is dead.
 
-        audiosource.PlayOneShot(deathSound);  //play death sound
+        audiosource.PlayOneShot(deathSound); //play death sound
 
         gameObject.SetActive(false);//set object inactive
     }
 
     public float GetPercent()
     {
-        float percent = maxHealth / currentHealth;
+        float percent = _health / _maxHealth;
         return percent;
     }
+
     public void Respawn()
     {
         currentHealth = maxHealth;
+        isDead = false;
     }
     #endregion
 }
