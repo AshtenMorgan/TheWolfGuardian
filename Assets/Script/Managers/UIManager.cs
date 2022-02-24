@@ -20,8 +20,12 @@ public class UIManager : MonoBehaviour
     private AudioMixer mixer;
     [SerializeField, Tooltip("The slider value vs decibel volume curve")]
     private AnimationCurve volumeVsDecibels;
+    public AudioSource musicSource;
+    public AudioSource fxSource;
     public AudioClip buttonClick;
     public AudioClip buttonHover;
+    public AudioClip menu;
+    public AudioClip scene1;
     #endregion
 
     #region HUD Icons
@@ -54,7 +58,6 @@ public class UIManager : MonoBehaviour
     public Toggle fullScreenToggle;
     public TMPro.TMP_Dropdown resolutionDropDown;
     public TMPro.TMP_Dropdown qualityDropDown;
-    public AudioSource audioSource;
     public Slider healthSlider;
     public Resolution[] resolutions;
     #endregion
@@ -98,7 +101,7 @@ public class UIManager : MonoBehaviour
                 fullScreenToggle = GameObject.FindGameObjectWithTag("FSToggle").GetComponent<Toggle>();
                 resolutionDropDown = GameObject.FindGameObjectWithTag("ResolutionDrop").GetComponent<TMPro.TMP_Dropdown>();
                 qualityDropDown = GameObject.FindGameObjectWithTag("QualityDrop").GetComponent<TMPro.TMP_Dropdown>();
-                audioSource = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
+                fxSource = GameObject.FindGameObjectWithTag("MasterCanvas").GetComponent<AudioSource>();
                 //canvases
                 mainMenu = GameObject.FindGameObjectWithTag("MainMenuCanvas").GetComponent<Canvas>();
                 optionsMenu = GameObject.FindGameObjectWithTag("OptionsCanvas").GetComponent<Canvas>();
@@ -108,23 +111,7 @@ public class UIManager : MonoBehaviour
                 optionsMenu = GameObject.FindGameObjectWithTag("OptionsCanvas").GetComponent<Canvas>();
                 HUD = GameObject.FindGameObjectWithTag("HUDCanvas").GetComponent<Canvas>();
 
-                resolutions = Screen.resolutions;//get resolution array
-                                                 //build dropdown for screen resolutions and quality levels
-
-                List<string> options = new List<string>();//create list to hold resolutions
-
-                resolutionDropDown.ClearOptions();//clear anything that might be there
-
-                for (int index = 0; index < resolutions.Length; index++)//loop through all possible resolutions system can use
-                {
-                    options.Add(string.Format("{0} x {1}", resolutions[index].width, resolutions[index].height));//add each to the list
-                }
-
-                resolutionDropDown.AddOptions(options);//add list to the dropdown
-
-                // Build quality levels
-                qualityDropDown.ClearOptions();//clear anything that might already exist
-                qualityDropDown.AddOptions(QualitySettings.names.ToList());//add the quality levels to the dropdown
+                
 
 
 
@@ -137,8 +124,16 @@ public class UIManager : MonoBehaviour
 
                 loaded = true;
             }
+            musicSource = Camera.main.GetComponent<AudioSource>();
+            musicSource.clip = menu;//load main menu audio
+            musicSource.Play(0);//play aiduo
         }
-
+        else//we are not in main menu
+        {
+            musicSource = Camera.main.GetComponent<AudioSource>();
+            musicSource.clip = scene1;
+            musicSource.Play(0);
+        }
 
 
 
@@ -147,7 +142,33 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        gm = GameManager.Instance;
+        gm = GameManager.Instance;//reference game manager
+
+        //set up screen resolutions for dropdown
+        resolutions = Screen.resolutions;//get resolution array
+
+        //build dropdown for screen resolutions and quality levels
+        List<string> options = new List<string>();//create list to hold resolutions
+
+        resolutionDropDown.ClearOptions();//clear anything that might be there
+
+        for (int index = 0; index < resolutions.Length; index++)//loop through all possible resolutions system can use
+        {
+            options.Add(string.Format("{0} x {1}", resolutions[index].width, resolutions[index].height));//add each to the list
+        }
+
+        resolutionDropDown.AddOptions(options);//add list to the dropdown
+
+        // Build quality levels
+        qualityDropDown.ClearOptions();//clear anything that might already exist
+        qualityDropDown.AddOptions(QualitySettings.names.ToList());//add the quality levels to the dropdown
+
+        //set values to match what will be seen on options screen
+        masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume", 0.5f);//get palyerprefs value, if it doesnt exist, default to .5
+        musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        effectsVolumeSlider.value = PlayerPrefs.GetFloat("EffectsVolume", 0.5f);
+        resolutionDropDown.value = PlayerPrefs.GetInt("ResIndex");
+
     }
 
     // Update is called once per frame
@@ -182,15 +203,6 @@ public class UIManager : MonoBehaviour
 
         }
 
-    }
-
-    public void OnMouseOver()
-    {
-        audioSource.PlayOneShot(buttonHover);//play sound when a button is hovered
-    }
-    public void ButtonClick()
-    {
-        audioSource.PlayOneShot(buttonClick);//play click sound
     }
     //show pause menu
     public void EnablePauseMenu()
@@ -244,16 +256,19 @@ public class UIManager : MonoBehaviour
     #region Menu Controls
     #region Options
     //show settings menue
-    public void EnableOptionsMain()
+    public void EnableOptions()
     {
-        cameFrom = "Main";
+        
         optionsMenu.gameObject.SetActive(true);
 
+        /*
         //set volume sliders to whatever they are in player prefs
-        masterVolumeSlider.value = PlayerPrefs.GetFloat("Master Volume", masterVolumeSlider.value);
-        musicVolumeSlider.value = PlayerPrefs.GetFloat("Music Volume", musicVolumeSlider.value);
-        effectsVolumeSlider.value = PlayerPrefs.GetFloat("Effects Volume", effectsVolumeSlider.value);
+        masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume", masterVolumeSlider.value);
+        musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", musicVolumeSlider.value);
+        effectsVolumeSlider.value = PlayerPrefs.GetFloat("EffectsVolume", effectsVolumeSlider.value);
+        */
 
+        //add this to playerprefs as well
         fullScreenToggle.isOn = Screen.fullScreen;//check or uncheck box based on screen status
         qualityDropDown.value = QualitySettings.GetQualityLevel();//set dropdown to current state
 
@@ -297,25 +312,7 @@ public class UIManager : MonoBehaviour
 
     public void OptionsBack()
     {
-        if (cameFrom == "Main")
-        {
-            EnableMain();
-            cameFrom = "-1";
-        }
-        else if (cameFrom == "Pause")
-        {
-            EnablePauseMenu();
-            cameFrom = "-1";
-        }
-        else if (cameFrom == "GameOver")
-        {
-            EnableGameOverMenu();
-            cameFrom = "-1";
-        }
-        else
-        {
-            return;
-        }
+        EnableMain();
     }
     #endregion
     #region Main Menu
@@ -371,7 +368,7 @@ public class UIManager : MonoBehaviour
     }
     public void DisableHUD()
     {
-        HUD?.gameObject.SetActive(false);
+        HUD.gameObject.SetActive(false);
     }
 
     #endregion
@@ -383,6 +380,8 @@ public class UIManager : MonoBehaviour
     public void SetQuality(int index)
     {
         QualitySettings.SetQualityLevel(index);//pass the dropdown selection to qualitylevel
+        PlayerPrefs.SetFloat("QualityLevel", index);//save in playerprefs
+        PlayerPrefs.Save();//save playerprefs
     }
     #endregion
 
@@ -391,6 +390,8 @@ public class UIManager : MonoBehaviour
     {
         Resolution resolution = resolutions[index];//pass index to resolution array
         Screen.SetResolution(resolution.width, resolution.height, fullScreenToggle);//set resolution and fullscreen
+        PlayerPrefs.SetInt("ResIndex", index);
+        PlayerPrefs.Save();//save playerprefs
     }
     public void ScreenToggle(bool toggle)
     {
@@ -400,15 +401,18 @@ public class UIManager : MonoBehaviour
     #region Volume Bars
     public void BarUpdate()
     {
-        mixer.SetFloat("masterVolume", volumeVsDecibels.Evaluate(masterVolumeSlider.value));//use the animation curve to set volume
-        mixer.SetFloat("musicVolume", volumeVsDecibels.Evaluate(musicVolumeSlider.value));
-        mixer.SetFloat("effectsVolume", volumeVsDecibels.Evaluate(effectsVolumeSlider.value));
+        //this works better than using an animation curve, min value must be above 0
+        mixer.SetFloat("masterVolume", Mathf.Log10(masterVolumeSlider.value) * 20);
+        mixer.SetFloat("musicVolume", Mathf.Log10(musicVolumeSlider.value) * 20);
+        mixer.SetFloat("effectsVolume", Mathf.Log10(effectsVolumeSlider.value) * 20);
+
         //save playerprefs
         //set volume sliders to whatever they are in player prefs, if non existant, set to max value
-        PlayerPrefs.SetFloat("Master Volume", masterVolumeSlider.value);
-        PlayerPrefs.SetFloat("Music Volume", musicVolumeSlider.value);
-        PlayerPrefs.SetFloat("Effects Volume", effectsVolumeSlider.value);
+        PlayerPrefs.SetFloat("MasterVolume", masterVolumeSlider.value);
+        PlayerPrefs.SetFloat("MusicVolume", musicVolumeSlider.value);
+        PlayerPrefs.SetFloat("EffectsVolume", effectsVolumeSlider.value);
         PlayerPrefs.Save();//save playerprefs
+        
     }
     #endregion
     #endregion
@@ -427,4 +431,12 @@ public class UIManager : MonoBehaviour
         isPaused = false;
     }
     #endregion
+    public void ButtonHighlight()
+    {
+        fxSource.PlayOneShot(buttonHover);
+    }
+    public void ButtonClick()
+    {
+        fxSource.PlayOneShot(buttonClick);
+    }
 }

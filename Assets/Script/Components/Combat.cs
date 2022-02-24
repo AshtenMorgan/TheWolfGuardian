@@ -61,6 +61,7 @@ public class Combat : MonoBehaviour
         ani = GetComponent<Animator>(); //defines the animator for the Combatant
         controller = GetComponent<Controller>();//defines the controller of the combatant
         animCounter = 0f;
+        damage = pawn.Damage;
     }
     protected virtual void Update() 
     {

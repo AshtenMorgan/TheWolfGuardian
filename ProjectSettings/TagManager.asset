@@ -27,6 +27,8 @@ TagManager:
   - InstanPoint
   - EnemySpawnPoint
   - Enemy
+  - eGroundCheck
+  - MasterCanvas
   layers:
   - Default
   - TransparentFX

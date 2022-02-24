@@ -14,7 +14,8 @@ public class EnemyController : Controller
         Patrol,
         Chase,
         Flee,
-        Attack,
+        MeleeAttack,
+        RangedAttack,
         Hurt,
         Dead
     }
@@ -53,18 +54,24 @@ public class EnemyController : Controller
                     groundCheckDistance = 1.0f,
                     wallCheckDistance = 1.0f,
                     enemyCheckDistance = 1.0f,
-                    playerSeeDistance = 5.0f,
                     harmStart,
-                    harmDuration;
+                    harmDuration,
+                    meleeDistance = 1.0f,
+                    rangedDistance = 3.0f,
+                    fleeDistance = 5.0f;
 
     [SerializeField]
     public bool isGroundDetected = true,
                    isWallDetected = false,
                    isEnemyDetected = false,
-                   isPlayerDetected = false;
+                   isPlayerDetected = false,
+                   hasRangedAttack = false,
+                   isInMeleeRange = false,
+                   isInRangedRange = false;
 
     [SerializeField]
     protected Vector3 playerCheckDistance;
+
 
     #endregion
 
@@ -82,6 +89,7 @@ public class EnemyController : Controller
         ani = GetComponent<Animator>();//get animator component
         target = GameManager.Instance.Player;//get player from game manager
         facingDirection = 1;//face right
+;
     }
 
     // Update is called once per frame
@@ -99,8 +107,11 @@ public class EnemyController : Controller
             case State.Flee:
                 UpdateFleeState();
                 break;
-            case State.Attack:
-                UpdateAttackState();
+            case State.MeleeAttack:
+                UpdateMeleeAttackState();
+                break;
+            case State.RangedAttack:
+                UpdateRangedAttackState();
                 break;
             case State.Hurt:
                 UpdateHurtState();
@@ -164,7 +175,7 @@ public class EnemyController : Controller
     }
     protected virtual void UpdateFleeState()
     {
-
+        Flee();
     }
     protected virtual void ExitFleeState()
     {
@@ -173,15 +184,28 @@ public class EnemyController : Controller
     #endregion
 
     #region Attack
-    protected virtual void EnterAttackState()
+    protected virtual void EnterMeleeAttackState()
     {
 
     }
-    protected virtual void UpdateAttackState()
+    protected virtual void UpdateMeleeAttackState()
+    {
+        MeleeAttack();
+    }
+    protected virtual void ExitMeleeAttackState()
     {
 
     }
-    protected virtual void ExitAttackState()
+
+    protected virtual void EnterRangedAttackState()
+    {
+
+    }
+    protected virtual void UpdateRangedAttackState()
+    {
+        RangedAttack();
+    }
+    protected virtual void ExitRangedAttackState()
     {
 
     }
@@ -240,8 +264,11 @@ public class EnemyController : Controller
             case State.Flee:
                 ExitFleeState();
                 break;
-            case State.Attack:
-                ExitAttackState();
+            case State.MeleeAttack:
+                ExitMeleeAttackState();
+                break;
+            case State.RangedAttack:
+                ExitRangedAttackState();
                 break;
             case State.Hurt:
                 ExitHurtState();
@@ -263,8 +290,11 @@ public class EnemyController : Controller
             case State.Flee:
                 EnterFleeState();
                 break;
-            case State.Attack:
-                EnterAttackState();
+            case State.MeleeAttack:
+                EnterMeleeAttackState();
+                break;
+            case State.RangedAttack:
+                EnterRangedAttackState();
                 break;
             case State.Hurt:
                 EnterHurtState();
@@ -345,6 +375,7 @@ public class EnemyController : Controller
         Locate();//continue looking for player
         if (isPlayerDetected)
         {
+            RangeCheck();
             movement.Set(pawn.RunSpeed * facingDirection, rb2d.velocity.y);//set movement speed to run towards player
             rb2d.velocity = movement;//set velocity to movement speed/direction
 
@@ -360,12 +391,10 @@ public class EnemyController : Controller
     }
     protected virtual void Locate()
     {
-        Collider2D[] Collider = Physics2D.OverlapBoxAll(playerCheck.position, playerCheckDistance, 0, playerLayer);
-        //Collider2D[] Collider = Physics2D.OverlapCollider(VisionCone, playerLayer);
-        if (Collider.Length > 0)//overlap hit something
-        {
-            isPlayerDetected = Physics2D.Raycast(eyeball.position, target.transform.position - eyeball.position, playerSeeDistance, playerLayer);
-            Debug.DrawRay(eyeball.position, (target.transform.position - eyeball.position) * playerSeeDistance, Color.red);
+        Collider2D Collider = Physics2D.OverlapBox(playerCheck.position, playerCheckDistance, 0, playerLayer);
+        if (Collider != null)//overlap hit something
+        {         
+            isPlayerDetected = Physics2D.Raycast(eyeball.transform.position, target.transform.position, playerLayer);
         }
         else
         {
@@ -374,7 +403,32 @@ public class EnemyController : Controller
 
     }
 
+    protected virtual void RangeCheck()
+    {
+        //look for player
+        //type 1
+        //isInRangedRange = Physics2D.Raycast(eyeball.position, Vector2.right, rangedDistance, playerLayer);//found in ranged distance
+        //isInMeleeRange = Physics2D.Raycast(eyeball.position, Vector2.right, meleeDistance, playerLayer);//found in melee distance
+        //type 2
+        isInRangedRange = Physics2D.OverlapCircle(eyeball.position, rangedDistance, playerLayer);
+        isInMeleeRange = Physics2D.OverlapCircle(eyeball.position, meleeDistance, playerLayer);
 
+        if (isInMeleeRange)
+        {
+            StateManager(State.MeleeAttack);
+        }
+        else if (isInRangedRange)
+        {
+            StateManager(State.RangedAttack);
+        }
+        else
+        {
+            StateManager(State.Patrol);
+        }
+        
+        
+
+    }
     protected virtual void Jump()
     {
         if (isGrounded) //must be on the ground
@@ -383,6 +437,28 @@ public class EnemyController : Controller
             rb2d.velocity = new Vector2(rb2d.velocity.x, verticalVelocity);
         }
     }
+
+    protected virtual void Flee()
+    {
+        Vector2 vectorToTarget = target.transform.position - pawn.transform.position; // Vector from ai to target        
+        Vector2 vectorAwayFromTarget = -1 * vectorToTarget; //Reverse vector        
+        vectorAwayFromTarget.Normalize(); //Normalize vector      
+        vectorAwayFromTarget *= fleeDistance;//set vector length to flee distance
+        rb2d.velocity = new Vector2(vectorAwayFromTarget.x * pawn.RunSpeed, rb2d.velocity.y);//run away at runspeed
+            
+    }
+    protected virtual void MeleeAttack()
+    {
+        RangeCheck();
+        Debug.Log("Melee attack here");
+        //combat.HitA();
+    }
+    protected virtual void RangedAttack()
+    {
+        RangeCheck();
+        Debug.Log("Ranged Attack Here");
+    }
+
     #endregion
 
     #region gizmo

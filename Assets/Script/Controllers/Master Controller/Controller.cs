@@ -62,6 +62,7 @@ public class Controller : MonoBehaviour
         
         rb2d = GetComponent<Rigidbody2D>(); //defines the Rigidbody needed for pawn physics
         ani = GetComponent<Animator>();//defines the animator component
+        combat = GetComponent<Combat>();
         jumpTimeCounter = jumpTime; //sets the jumpTimeCounter
     }
 

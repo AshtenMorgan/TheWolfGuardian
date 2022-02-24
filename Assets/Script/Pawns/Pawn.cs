@@ -61,7 +61,9 @@ public class Pawn : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-       
+       ani = GetComponent<Animator>();
+        t = gameObject.transform;
+        rb= GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
