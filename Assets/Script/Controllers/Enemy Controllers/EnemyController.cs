@@ -26,9 +26,11 @@ public class EnemyController : Controller
     #region objects
     [Header("Enemy Variables")]
     [SerializeField]
-    PlayerPawn target;
+    protected PlayerPawn target;
     [SerializeField]
-    EnemyPawn pawn;
+    protected EnemyPawn pawn;
+    [SerializeField]
+    protected Health health;
     [SerializeField]
     protected Transform eyeball,
                         eGroundCheck,
@@ -86,6 +88,7 @@ public class EnemyController : Controller
     {
         base.Start();//call parents start function
         pawn = GetComponent<EnemyPawn>();//refrence this objects enemy pawn
+        health = GetComponent<Health>();//get health object
         ani = GetComponent<Animator>();//get animator component
         target = GameManager.Instance.Player;//get player from game manager
         facingDirection = 1;//face right
@@ -94,6 +97,11 @@ public class EnemyController : Controller
 
     // Update is called once per frame
     protected override void Update()
+    {
+        base.Update();//calls whatever is in parents update function
+    }
+
+    protected override void FixedUpdate()
     {
         #region State Machine
         switch (currentState)
@@ -121,11 +129,6 @@ public class EnemyController : Controller
                 break;
         }
         #endregion
-        base.Update();//calls whatever is in parents update function
-    }
-
-    protected override void FixedUpdate()
-    {
         base.FixedUpdate();//call parent function   
     }
     #endregion
@@ -159,7 +162,6 @@ public class EnemyController : Controller
     protected virtual void UpdateChaseState()
     {
         Chase();
-
     }
     protected virtual void ExitChaseState()
     {
@@ -225,6 +227,10 @@ public class EnemyController : Controller
         {
             StateManager(State.Patrol);
         }
+        if (health.percent >= .15)
+        {
+            StateManager(State.Flee);
+        }
     }
     protected virtual void ExitHurtState()
     {
@@ -237,6 +243,7 @@ public class EnemyController : Controller
     protected virtual void EnterDeadState()
     {
         //stuff to do on death
+        //this is already mostly handled by object pool and health kill function already
     }
     protected virtual void UpdateDeadState()
     {
@@ -253,7 +260,7 @@ public class EnemyController : Controller
     protected virtual void StateManager(State state)
     {
         //exit current state
-        switch (currentState)
+        switch (state)
         {
             case State.Patrol:
                 ExitPatrolState();
@@ -338,7 +345,9 @@ public class EnemyController : Controller
     #region Motions
     protected virtual void Flip()
     {
-        gameObject.transform.Rotate(0, 180, 0);
+        Vector2 flip = gameObject.transform.localScale;
+        flip.x *= -1;
+        gameObject.transform.localScale = flip;
         facingDirection *= -1;
         movement.Set(pawn.WalkSpeed * facingDirection, rb2d.velocity.y);//set speed to walk
         rb2d.velocity = movement;//set velocity to movement speed/direction
@@ -371,11 +380,11 @@ public class EnemyController : Controller
     }
     protected virtual void Chase()
     {
-        StepDetection();//run checks for continued movement
         Locate();//continue looking for player
         if (isPlayerDetected)
         {
             RangeCheck();
+            StepDetection();
             movement.Set(pawn.RunSpeed * facingDirection, rb2d.velocity.y);//set movement speed to run towards player
             rb2d.velocity = movement;//set velocity to movement speed/direction
 
@@ -405,29 +414,22 @@ public class EnemyController : Controller
 
     protected virtual void RangeCheck()
     {
-        //look for player
-        //type 1
-        //isInRangedRange = Physics2D.Raycast(eyeball.position, Vector2.right, rangedDistance, playerLayer);//found in ranged distance
-        //isInMeleeRange = Physics2D.Raycast(eyeball.position, Vector2.right, meleeDistance, playerLayer);//found in melee distance
-        //type 2
         isInRangedRange = Physics2D.OverlapCircle(eyeball.position, rangedDistance, playerLayer);
         isInMeleeRange = Physics2D.OverlapCircle(eyeball.position, meleeDistance, playerLayer);
+        Locate();
 
-        if (isInMeleeRange)
+        if (isInMeleeRange && isPlayerDetected)
         {
             StateManager(State.MeleeAttack);
         }
-        else if (isInRangedRange)
+        else if (isInRangedRange && isPlayerDetected)
         {
             StateManager(State.RangedAttack);
         }
         else
         {
-            StateManager(State.Patrol);
+            StateManager(State.Chase);
         }
-        
-        
-
     }
     protected virtual void Jump()
     {
@@ -437,7 +439,6 @@ public class EnemyController : Controller
             rb2d.velocity = new Vector2(rb2d.velocity.x, verticalVelocity);
         }
     }
-
     protected virtual void Flee()
     {
         Vector2 vectorToTarget = target.transform.position - pawn.transform.position; // Vector from ai to target        

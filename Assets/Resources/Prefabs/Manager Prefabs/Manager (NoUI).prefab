@@ -492,8 +492,8 @@ GameObject:
   - component: {fileID: 1863688934748052729}
   - component: {fileID: 1863688934748053154}
   - component: {fileID: 1863688934748053176}
-  - component: {fileID: 1863688934748053175}
   - component: {fileID: 1863688934748052933}
+  - component: {fileID: 1095652506}
   m_Layer: 5
   m_Name: Manager (NoUI)
   m_TagString: GameManager
@@ -554,7 +554,7 @@ MonoBehaviour:
   - {fileID: 0}
   enemy7Spawn:
   - {fileID: 0}
-  enemy1Max: 0
+  enemy1Max: 3
   enemy2Max: 0
   enemy3Max: 0
   enemy4Max: 0
@@ -566,7 +566,7 @@ MonoBehaviour:
   _nextBuffSpawn: 0
   _nextDebuffSpawn: 0
   playerSpawnDelay: 0
-  enemySpawnDelay: 0
+  enemySpawnDelay: 1
   debuffSpawnDelay: 0
   buffSpawnDelay: 0
   current: 0
@@ -589,63 +589,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abc65fb6fb707024bb2733a70cf815c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1863688934748053175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1863688934748052932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f1518a7c03f8334dbd5eab7104065a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 82b28ca709d2b6948a56b947d13c163c, type: 2}
-  volumeVsDecibels:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  buttonClick: {fileID: 8300000, guid: fd6aa78a14342794aaf1e6d7cf8fd898, type: 3}
-  buttonHover: {fileID: 8300000, guid: 056f233ce6095d24b8d37065ae12c66c, type: 3}
-  unusedIcon: {fileID: 0}
-  lifeText: {fileID: 0}
-  mainMenu: {fileID: 0}
-  pauseMenu: {fileID: 0}
-  gameOverMenu: {fileID: 0}
-  optionsMenu: {fileID: 0}
-  BackgroundImage: {fileID: 0}
-  HUD: {fileID: 0}
-  cameFrom: 
-  isPaused: 0
-  masterVolumeSlider: {fileID: 0}
-  musicVolumeSlider: {fileID: 0}
-  effectsVolumeSlider: {fileID: 0}
-  fullScreenToggle: {fileID: 0}
-  resolutionDropDown: {fileID: 0}
-  qualityDropDown: {fileID: 0}
-  audioSource: {fileID: 0}
-  healthSlider: {fileID: 0}
 --- !u!114 &1863688934748052933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,13 +608,109 @@ MonoBehaviour:
   enemy5Pool: []
   enemy6Pool: []
   enemy7Pool: []
-  Enemy1: {fileID: 0}
+  Enemy1: {fileID: 7559521895278942267, guid: 98eeaee8feaf768499e976a5129321d0, type: 3}
   Enemy2: {fileID: 0}
   Enemy3: {fileID: 0}
   Enemy4: {fileID: 0}
   Enemy5: {fileID: 0}
   Enemy6: {fileID: 0}
   Enemy7: {fileID: 0}
+--- !u!82 &1095652506
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863688934748052932}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -8451379802888782675, guid: 82b28ca709d2b6948a56b947d13c163c, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2643528012948395353
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,7 +820,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6365681840086051460}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: EnemySpawn (1)
   m_TagString: EnemySpawnPoint
   m_Icon: {fileID: 0}
@@ -796,7 +835,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6365681840086051463}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 3.99, z: 0}
+  m_LocalPosition: {x: -5.17, y: 3.68, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1863688934748052729}
@@ -856,7 +895,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6365681841573254355}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.86, y: 1.45, z: 0}
+  m_LocalPosition: {x: -8.76, y: 3.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1863688934748052729}
