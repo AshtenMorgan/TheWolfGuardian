@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &62492112997336029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6119192399633889560}
+  m_Layer: 0
+  m_Name: HitA1Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6119192399633889560
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62492112997336029}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.037, y: 0.155, z: -0.97746587}
+  m_LocalScale: {x: 0.9946291, y: 0.98396146, z: 1}
+  m_Children: []
+  m_Father: {fileID: 651217628918886266}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1336663592562666402
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,12 +269,15 @@ MonoBehaviour:
     m_Bits: 128
   damage: 10
   animTimer: 15
+  comboTimer: 10
   hitAPos: {fileID: 651217628918886266}
   hitAVector: {x: 0.45, y: 0.2, z: 0}
   hitAJumpPos: {fileID: 1411941365596092865}
   hitAJumpVector: {x: 0.25, y: 0.25, z: 0}
   hitACrouchPos: {fileID: 2085176574033807524}
   hitACrouchVector: {x: 0.45, y: 0.2, z: 0}
+  hitA1Pos: {fileID: 6119192399633889560}
+  hitA1Vector: {x: 0.25, y: 0.25, z: 0}
   hitBPos: {fileID: 1582143866818022629}
   hitBVector: {x: 0.5, y: 0.25, z: 0}
   hitCPos: {fileID: 6504136024550080444}
@@ -495,6 +528,7 @@ Transform:
   m_LocalPosition: {x: 0.378, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 6119192399633889560}
   - {fileID: 1411941365596092865}
   - {fileID: 2085176574033807524}
   m_Father: {fileID: 1336663593021864655}
@@ -528,7 +562,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 651217628918886266}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4139996214536790316
 GameObject:
@@ -558,7 +592,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 651217628918886266}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6907385764299168043
 GameObject:
