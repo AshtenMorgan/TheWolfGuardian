@@ -378,6 +378,14 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 929456131755109671, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: menu
+      value: 
+      objectReference: {fileID: 8300000, guid: 1d89dc162879bba4ab38837957b93750, type: 3}
+    - target: {fileID: 929456131755109671, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: scene1
+      value: 
+      objectReference: {fileID: 8300000, guid: a2352d7505b255b4da7c8b33abf19fc0, type: 3}
     - target: {fileID: 929456131755109972, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
       propertyPath: m_Name
       value: Manager(UI)
