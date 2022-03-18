@@ -269,7 +269,7 @@ MonoBehaviour:
     m_Bits: 128
   damage: 10
   animTimer: 15
-  comboTimer: 10
+  comboTimer: 30
   hitAPos: {fileID: 651217628918886266}
   hitAVector: {x: 0.45, y: 0.2, z: 0}
   hitAJumpPos: {fileID: 1411941365596092865}

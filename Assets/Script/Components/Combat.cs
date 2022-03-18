@@ -73,6 +73,7 @@ public class Combat : MonoBehaviour
     }
     protected virtual void Update() 
     {
+        Debug.Log(hitAComboCounter);
         isGrounded = controller.IsGrounded;
         isCrouching = controller.IsCrouching;
 
@@ -89,7 +90,7 @@ public class Combat : MonoBehaviour
         }
         if (comboCounter > 0)
         {
-            comboCounter -= Time.time; //decrements the comboCounter
+            InvokeRepeating("SubtractComboCounter",2.0f,0.3f); //decrements the comboCounter
         }
         else if (comboCounter <= 0)
         {
@@ -125,6 +126,8 @@ public class Combat : MonoBehaviour
         {
             ani.SetBool("HitA", true);
             animCounter = animTimer;
+            comboCounter = comboTimer;
+            hitAComboCounter++; //incrememnts the hitAComboCounter
             //create a circle and return all the colliders within the area into an array
             Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitAPos.position, hitAVector, enemyLayer);
             //for every collider in that array
@@ -134,8 +137,6 @@ public class Combat : MonoBehaviour
                 Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
                 _canAttack = false;
             }
-            hitAComboCounter++; //incrememnts the hitAComboCounter
-            comboCounter = comboTimer;
         }
 
         if (isGrounded && hitAComboCounter == 2)
@@ -221,6 +222,12 @@ public class Combat : MonoBehaviour
         }
     }
     #endregion
+    #endregion
+    #region Combo Tools
+    protected virtual void SubtractComboCounter() 
+    {
+        comboCounter--; //decrements the combo counter
+    }
     #endregion
     #region Gizmos
     /// <summary>
