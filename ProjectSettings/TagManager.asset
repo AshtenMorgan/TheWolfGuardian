@@ -8,12 +8,6 @@ TagManager:
   - WallCheck
   - GroundCheck
   - GameManager
-  - OptionsCanvas
-  - HUDCanvas
-  - GameOverCanvas
-  - BackgroundCanvas
-  - MainMenuCanvas
-  - PauseCanvas
   - MasterSlider
   - MusicSlider
   - EffectsSlider
@@ -27,6 +21,14 @@ TagManager:
   - InstanPoint
   - EnemySpawnPoint
   - Enemy
+  - eGroundCheck
+  - GameOverCanvas
+  - HUDCanvas
+  - PauseCanvas
+  - MainMenuCanvas
+  - BackgroundCanvas
+  - MasterCanvas
+  - OptionsCanvas
   layers:
   - Default
   - TransparentFX
