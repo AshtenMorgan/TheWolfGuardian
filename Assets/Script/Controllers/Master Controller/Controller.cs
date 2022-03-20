@@ -73,7 +73,7 @@ public class Controller : MonoBehaviour
 
     protected virtual void Update()
     {
-
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the pawn is grounded
     }
     protected virtual void FixedUpdate()
     {

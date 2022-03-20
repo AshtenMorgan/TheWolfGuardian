@@ -65,7 +65,7 @@ public class ObjectPool : MonoBehaviour
         //enemies
         //fill in enemys with prefab objects
         //  Prefabs/Test Prefabs/Test Enemies/enemy
-        Enemy1 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy1") as GameObject;
+        Enemy1 = Resources.Load("Prefabs/Pawn Prefabs/Beastiary Prefabs/Unseelie Fey/Beast_UF_Redcap") as GameObject;
         Enemy2 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy2") as GameObject;
         Enemy3 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy3") as GameObject;
         Enemy4 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy4") as GameObject;

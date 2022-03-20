@@ -13,8 +13,12 @@ public class Pawn : MonoBehaviour
     protected int _runSpeed; //this determines the run speed of the pawn
     [SerializeField, Tooltip("This determines how high the pawn can jump")]
     protected float _jumpHeight; //this determines how high the pawn will jump
-    [SerializeField, Tooltip("The base damage the pawn does with each attack")]
-    protected int _damage; //this will determine the base damage each pawn does with an attack
+    [SerializeField, Tooltip("The base damage the pawn does with each HITA")]
+    protected int _damageA; //this will determine the base damage each pawn does with an attack
+    [SerializeField, Tooltip("The base damage the pawn does with each HITB")]
+    protected int _damageB; //this will determine the base damage each pawn does with an attack
+    [SerializeField, Tooltip("The base damage the pawn does with each HITC")]
+    protected int _damageC; //this will determine the base damage each pawn does with an attack
     [SerializeField, Tooltip("This is the melee attack range of the pawn")]
     protected float _meleeAttackRange; //determines the range of the pawns melee attack
     [SerializeField, Tooltip("What is the attack range of pawn")]
@@ -37,10 +41,20 @@ public class Pawn : MonoBehaviour
         get { return _runSpeed;  }
         set { _runSpeed = value; }
     }
-    public int Damage //the accessor for _runSpeed
+    public int DamageA 
     {
-        get { return _damage; }
-        set { _damage = value; }
+        get { return _damageA; }
+        set { _damageA = value; }
+    }
+    public int DamageB 
+    {
+        get { return _damageB; }
+        set { _damageB = value; }
+    }
+    public int DamageC 
+    {
+        get { return _damageC; }
+        set { _damageC = value; }
     }
     #endregion
 
