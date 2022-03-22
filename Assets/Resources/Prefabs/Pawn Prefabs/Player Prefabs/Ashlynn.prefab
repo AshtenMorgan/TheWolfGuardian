@@ -191,9 +191,9 @@ MonoBehaviour:
   _walkSpeed: 2
   _runSpeed: 5
   _jumpHeight: 8
-  _damageA: 0
-  _damageB: 0
-  _damageC: 0
+  _damageA: 5
+  _damageB: 10
+  _damageC: 25
   _meleeAttackRange: 0
   _rangedAttackRange: 0
   t: {fileID: 1336663593021864655}

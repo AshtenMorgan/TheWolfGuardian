@@ -15,12 +15,17 @@ public class UIManager : MonoBehaviour
     [SerializeField, Tooltip("Main audio control for everything")]
     private AudioMixer mixer;
     [Header("Audio components")]
-    public AudioSource musicSource;
-    public AudioSource fxSource;
-    public AudioClip buttonClick;
-    public AudioClip buttonHover;
-    public AudioClip menu;
-    public AudioClip scene1;
+    public AudioSource musicSource,
+        fxSource;
+
+    public AudioClip buttonClick,
+        buttonHover,
+        menu,
+        scene1,
+        back,
+        quitGame,
+        load,
+        newGame;
     #endregion
 
     #region HUD Icons
