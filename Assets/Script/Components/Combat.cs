@@ -17,7 +17,9 @@ public class Combat : MonoBehaviour
     [SerializeField]
     protected LayerMask enemyLayer; //the layer masks that all enemies are on
     [SerializeField]
-    protected float damage; //the damage our combatant does
+    protected float damageA,
+        damageB,
+        damageC; //the damage our combatant does
     #endregion
     #region Timers
     [SerializeField]
@@ -61,7 +63,9 @@ public class Combat : MonoBehaviour
         ani = GetComponent<Animator>(); //defines the animator for the Combatant
         controller = GetComponent<Controller>();//defines the controller of the combatant
         animCounter = 0f;
-        damage = pawn.Damage;
+        damageA = pawn.DamageA;
+        damageB = pawn.DamageB;
+        damageC = pawn.DamageC;
     }
     protected virtual void Update() 
     {
@@ -112,7 +116,7 @@ public class Combat : MonoBehaviour
             //for every collider in that array
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+                enemiesToDamage[i].GetComponent<Health>().Damage(damageA);
                 Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
                 _canAttack = false;
             }
@@ -126,7 +130,7 @@ public class Combat : MonoBehaviour
             //for every collider in that array
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+                enemiesToDamage[i].GetComponent<Health>().Damage(damageA);
                 Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
                 _canAttack = false;
             }
@@ -140,7 +144,7 @@ public class Combat : MonoBehaviour
             //for every collider in that array
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+                enemiesToDamage[i].GetComponent<Health>().Damage(damageA);
                 Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
                 _canAttack = false;
             }
@@ -162,7 +166,7 @@ public class Combat : MonoBehaviour
             {
                 if  (enemiesToDamage[i].CompareTag("Enemy"))//make sure this is tagged as enemy
                 {
-                    enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+                    enemiesToDamage[i].GetComponent<Health>().Damage(damageB);
                     Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
                     _canAttack = false;
                 }
@@ -183,7 +187,7 @@ public class Combat : MonoBehaviour
             //for every collider in that array
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+                enemiesToDamage[i].GetComponent<Health>().Damage(damageC);
                 Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
                 _canAttack = false;
             }

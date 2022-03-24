@@ -379,6 +379,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 929456131755109671, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: back
+      value: 
+      objectReference: {fileID: 8300000, guid: 85fd17bf146e08649acb1a4772dcb063, type: 3}
+    - target: {fileID: 929456131755109671, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: load
+      value: 
+      objectReference: {fileID: 8300000, guid: e5f12c2ee438e5e41b4ac850f1679f7b, type: 3}
+    - target: {fileID: 929456131755109671, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
       propertyPath: menu
       value: 
       objectReference: {fileID: 8300000, guid: 1d89dc162879bba4ab38837957b93750, type: 3}
@@ -386,6 +394,26 @@ PrefabInstance:
       propertyPath: scene1
       value: 
       objectReference: {fileID: 8300000, guid: a2352d7505b255b4da7c8b33abf19fc0, type: 3}
+    - target: {fileID: 929456131755109671, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: newGame
+      value: 
+      objectReference: {fileID: 8300000, guid: 20060aeb60fc86a4aa57e36ff73a4bdd, type: 3}
+    - target: {fileID: 929456131755109671, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: quitGame
+      value: 
+      objectReference: {fileID: 8300000, guid: 826694467dcafa24fa5a2acd75d2236a, type: 3}
+    - target: {fileID: 929456131755109671, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: buttonClick
+      value: 
+      objectReference: {fileID: 8300000, guid: f27e9ab631747d94dbf4a2a1165f0d68, type: 3}
+    - target: {fileID: 929456131755109671, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: buttonHover
+      value: 
+      objectReference: {fileID: 8300000, guid: ae7f7927483fac547a0d68f55fde8761, type: 3}
+    - target: {fileID: 929456131755109671, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: musicSource
+      value: 
+      objectReference: {fileID: 380857678}
     - target: {fileID: 929456131755109972, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
       propertyPath: m_Name
       value: Manager(UI)

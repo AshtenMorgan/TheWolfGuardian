@@ -191,7 +191,9 @@ MonoBehaviour:
   _walkSpeed: 2
   _runSpeed: 5
   _jumpHeight: 8
-  _damage: 0
+  _damageA: 5
+  _damageB: 10
+  _damageC: 25
   _meleeAttackRange: 0
   _rangedAttackRange: 0
   t: {fileID: 1336663593021864655}
@@ -237,7 +239,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  damage: 10
+  damageA: 0
+  damageB: 0
+  damageC: 0
   animTimer: 15
   hitAPos: {fileID: 651217628918886266}
   hitAVector: {x: 0.45, y: 0.2, z: 0}
@@ -285,6 +289,7 @@ MonoBehaviour:
   onRespawn:
     m_PersistentCalls:
       m_Calls: []
+  _health: 0
   _maxHealth: 100
   percent: 100
   isDead: 0

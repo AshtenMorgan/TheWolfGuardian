@@ -32,11 +32,11 @@ public class EnemyController : Controller
     [SerializeField]
     protected Health health;
     [SerializeField]
+    protected ECombat eCombat;
+    [SerializeField]
     protected Transform eyeball,
-                        eGroundCheck,
-                        playerCheck;
-
-
+        eGroundCheck,
+        playerCheck;
     [SerializeField, Header("Movement stats")]
     protected Vector2 movement,
                       knockBack;
@@ -44,32 +44,32 @@ public class EnemyController : Controller
     //LayerMask groundLayer
     [SerializeField]
     private LayerMask enemyLayer,
-                      playerLayer;
+        playerLayer;
     #endregion
     #region General variables
     [SerializeField]
     protected int facingDirection,
-                    damageDirection;
+        damageDirection;
 
     [SerializeField]
     protected float patrolRange = 5.0f,
-                    groundCheckDistance = 1.0f,
-                    wallCheckDistance = 1.0f,
-                    enemyCheckDistance = 1.0f,
-                    harmStart,
-                    harmDuration,
-                    meleeDistance = 1.0f,
-                    rangedDistance = 3.0f,
-                    fleeDistance = 5.0f;
+        groundCheckDistance = 1.0f,
+        wallCheckDistance = 1.0f,
+        enemyCheckDistance = 1.0f,
+        harmStart,
+        harmDuration,
+        meleeDistance = 1.0f,
+        rangedDistance = 3.0f,
+        fleeDistance = 5.0f;
 
     [SerializeField]
     public bool isGroundDetected = true,
-                   isWallDetected = false,
-                   isEnemyDetected = false,
-                   isPlayerDetected = false,
-                   hasRangedAttack = false,
-                   isInMeleeRange = false,
-                   isInRangedRange = false;
+        isWallDetected = false,
+        isEnemyDetected = false,
+        isPlayerDetected = false,
+        hasRangedAttack = false,
+        isInMeleeRange = false,
+        isInRangedRange = false;
 
     [SerializeField]
     protected Vector3 playerCheckDistance;
@@ -90,6 +90,7 @@ public class EnemyController : Controller
         pawn = GetComponent<EnemyPawn>();//refrence this objects enemy pawn
         health = GetComponent<Health>();//get health object
         ani = GetComponent<Animator>();//get animator component
+        eCombat = GetComponent<ECombat>();
         target = GameManager.Instance.Player;//get player from game manager
         facingDirection = 1;//face right
 ;
@@ -255,7 +256,6 @@ public class EnemyController : Controller
     }
     #endregion
     #endregion
-
     #region State Manager
     protected virtual void StateManager(State state)
     {
@@ -354,7 +354,6 @@ public class EnemyController : Controller
     }
     protected virtual void StepDetection()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the pawn is grounded
         isGroundDetected = Physics2D.Raycast(eGroundCheck.position, Vector2.down, groundCheckDistance, groundLayer);//raycast for ground
         isWallDetected = Physics2D.Raycast(eyeball.position, transform.right, wallCheckDistance, groundLayer);//raycast for wall
     }
@@ -411,7 +410,6 @@ public class EnemyController : Controller
         }
 
     }
-
     protected virtual void RangeCheck()
     {
         isInRangedRange = Physics2D.OverlapCircle(eyeball.position, rangedDistance, playerLayer);
@@ -424,7 +422,11 @@ public class EnemyController : Controller
         }
         else if (isInRangedRange && isPlayerDetected)
         {
-            StateManager(State.RangedAttack);
+            if (hasRangedAttack == true)
+            {
+                StateManager(State.RangedAttack);
+            }
+            
         }
         else
         {
@@ -450,9 +452,11 @@ public class EnemyController : Controller
     }
     protected virtual void MeleeAttack()
     {
+        //face player
+        //keep distance
         RangeCheck();
-        Debug.Log("Melee attack here");
-        //combat.HitA();
+        eCombat.ECombo1();
+
     }
     protected virtual void RangedAttack()
     {
@@ -461,7 +465,6 @@ public class EnemyController : Controller
     }
 
     #endregion
-
     #region gizmo
     protected void OnDrawGizmosSelected()
     {
