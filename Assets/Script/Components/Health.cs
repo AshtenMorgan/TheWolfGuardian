@@ -72,20 +72,17 @@ public class Health : Pickups
     //how to handle damage
     public void Damage(float damage)
     {
-        Debug.Log("Hit");
         damage = Mathf.Max(damage, 0);//make sure damage is a positive number
 
         if (damage > currentHealth)//if damage is greater than current health
         {
             overKill = damage - currentHealth;//get the amount of overkill damage
             currentHealth = Mathf.Clamp(currentHealth - damage, 0f, currentHealth);//subtract damage from health, making sure not to subtract more than current health value
-            Debug.Log(currentHealth);
         }
         else//damage not more than current health
         {
             overKill = 0;//output 0
             currentHealth = Mathf.Clamp(currentHealth - damage, 0f, currentHealth);//subtract damage from health, making sure not to subtract more than current health value
-            Debug.Log(currentHealth);
         }
 
         SendMessage("OnDamage", SendMessageOptions.DontRequireReceiver);
@@ -95,7 +92,6 @@ public class Health : Pickups
         {
             SendMessage("onDie", SendMessageOptions.DontRequireReceiver);//tell every object this is attched to to look for its onDie method -dont error if none
             onDie.Invoke();//call onDie
-            Debug.Log(currentHealth);
         }
     }
 

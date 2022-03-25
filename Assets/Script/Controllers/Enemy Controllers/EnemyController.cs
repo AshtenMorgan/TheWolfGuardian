@@ -32,11 +32,11 @@ public class EnemyController : Controller
     [SerializeField]
     protected Health health;
     [SerializeField]
+    protected ECombat eCombat;
+    [SerializeField]
     protected Transform eyeball,
-                        eGroundCheck,
-                        playerCheck;
-
-
+        eGroundCheck,
+        playerCheck;
     [SerializeField, Header("Movement stats")]
     protected Vector2 movement,
                       knockBack;
@@ -44,32 +44,32 @@ public class EnemyController : Controller
     //LayerMask groundLayer
     [SerializeField]
     private LayerMask enemyLayer,
-                      playerLayer;
+        playerLayer;
     #endregion
     #region General variables
     [SerializeField]
     protected int facingDirection,
-                    damageDirection;
+        damageDirection;
 
     [SerializeField]
     protected float patrolRange = 5.0f,
-                    groundCheckDistance = 1.0f,
-                    wallCheckDistance = 1.0f,
-                    enemyCheckDistance = 1.0f,
-                    harmStart,
-                    harmDuration,
-                    meleeDistance = 1.0f,
-                    rangedDistance = 3.0f,
-                    fleeDistance = 5.0f;
+        groundCheckDistance = 1.0f,
+        wallCheckDistance = 1.0f,
+        enemyCheckDistance = 1.0f,
+        harmStart,
+        harmDuration,
+        meleeDistance = 1.0f,
+        rangedDistance = 3.0f,
+        fleeDistance = 5.0f;
 
     [SerializeField]
     public bool isGroundDetected = true,
-                   isWallDetected = false,
-                   isEnemyDetected = false,
-                   isPlayerDetected = false,
-                   hasRangedAttack = false,
-                   isInMeleeRange = false,
-                   isInRangedRange = false;
+        isWallDetected = false,
+        shouldMove = false,
+        isPlayerDetected = false,
+        hasRangedAttack = false,
+        isInMeleeRange = false,
+        isInRangedRange = false;
 
     [SerializeField]
     protected Vector3 playerCheckDistance;
@@ -90,6 +90,7 @@ public class EnemyController : Controller
         pawn = GetComponent<EnemyPawn>();//refrence this objects enemy pawn
         health = GetComponent<Health>();//get health object
         ani = GetComponent<Animator>();//get animator component
+        eCombat = GetComponent<ECombat>();
         target = GameManager.Instance.Player;//get player from game manager
         facingDirection = 1;//face right
 ;
@@ -192,7 +193,8 @@ public class EnemyController : Controller
     }
     protected virtual void UpdateMeleeAttackState()
     {
-        MeleeAttack();
+        Chase();//continue running towards player
+        MeleeAttack();//attack player
     }
     protected virtual void ExitMeleeAttackState()
     {
@@ -255,7 +257,6 @@ public class EnemyController : Controller
     }
     #endregion
     #endregion
-
     #region State Manager
     protected virtual void StateManager(State state)
     {
@@ -354,7 +355,6 @@ public class EnemyController : Controller
     }
     protected virtual void StepDetection()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the pawn is grounded
         isGroundDetected = Physics2D.Raycast(eGroundCheck.position, Vector2.down, groundCheckDistance, groundLayer);//raycast for ground
         isWallDetected = Physics2D.Raycast(eyeball.position, transform.right, wallCheckDistance, groundLayer);//raycast for wall
     }
@@ -363,7 +363,7 @@ public class EnemyController : Controller
         if (isGrounded)//only do actions while on the ground
         {
             Locate();//look for obstacles
-            if (!isGroundDetected || isWallDetected || isEnemyDetected)//there is no ground or there is a wall or enemy
+            if (!isGroundDetected || isWallDetected)//there is no ground or there is a wall
             {
                 Flip();//turn around
             }
@@ -383,14 +383,20 @@ public class EnemyController : Controller
         Locate();//continue looking for player
         if (isPlayerDetected)
         {
-            RangeCheck();
+            FacePlayer();//look at player
+            RangeCheck();//check distance
+            MoveRangeCheck();
             StepDetection();
-            movement.Set(pawn.RunSpeed * facingDirection, rb2d.velocity.y);//set movement speed to run towards player
-            rb2d.velocity = movement;//set velocity to movement speed/direction
-
-            if (!isGroundDetected)
+            if (shouldMove)
             {
-                Jump();//should attempt to jump gaps
+                movement.Set(pawn.RunSpeed * facingDirection, rb2d.velocity.y);//set movement speed to run
+                rb2d.velocity = movement;//set velocity to movement speed/direction
+
+
+                if (!isGroundDetected)
+                {
+                    Jump();//should attempt to jump gaps
+                }
             }
         }
         else if (!isPlayerDetected)
@@ -402,16 +408,33 @@ public class EnemyController : Controller
     {
         Collider2D Collider = Physics2D.OverlapBox(playerCheck.position, playerCheckDistance, 0, playerLayer);
         if (Collider != null)//overlap hit something
-        {         
+        {
             isPlayerDetected = Physics2D.Raycast(eyeball.transform.position, target.transform.position, playerLayer);
         }
         else
         {
             isPlayerDetected = false;
         }
-
     }
-
+    protected virtual void FacePlayer()
+    {
+        if ((target.transform.position.x < transform.position.x) && (facingDirection == 1))//player is on the left of enemy, and enemy is facing right
+        {
+            Flip();
+        }
+        else if ((target.transform.position.x < transform.position.x) && (facingDirection == -1))//player on left, enemy facing left
+        {
+            return; //do nothing
+        }
+        else if ((target.transform.position.x > transform.position.x) && (facingDirection == -1))//player on right, facing left
+        {
+            Flip();
+        }
+        else // player on right, facing right
+        {
+            return; //do nothing
+        }
+    }
     protected virtual void RangeCheck()
     {
         isInRangedRange = Physics2D.OverlapCircle(eyeball.position, rangedDistance, playerLayer);
@@ -421,14 +444,34 @@ public class EnemyController : Controller
         if (isInMeleeRange && isPlayerDetected)
         {
             StateManager(State.MeleeAttack);
+            
         }
         else if (isInRangedRange && isPlayerDetected)
         {
-            StateManager(State.RangedAttack);
+            if (hasRangedAttack == true)
+            {
+                StateManager(State.RangedAttack);
+
+            }
+            
         }
         else
         {
             StateManager(State.Chase);
+        }
+    }
+    protected virtual void MoveRangeCheck()
+    {
+        float distanceFromTarget = Mathf.Abs(target.transform.position.x) - Mathf.Abs(transform.position.x);
+        distanceFromTarget = Mathf.Abs(distanceFromTarget);
+
+        if (distanceFromTarget <= 0.5f)  // Within .3 of target
+        {
+            shouldMove = false;
+        }
+        else
+        {
+            shouldMove = true;
         }
     }
     protected virtual void Jump()
@@ -451,8 +494,7 @@ public class EnemyController : Controller
     protected virtual void MeleeAttack()
     {
         RangeCheck();
-        Debug.Log("Melee attack here");
-        //combat.HitA();
+        eCombat.ECombo1();
     }
     protected virtual void RangedAttack()
     {
@@ -461,7 +503,6 @@ public class EnemyController : Controller
     }
 
     #endregion
-
     #region gizmo
     protected void OnDrawGizmosSelected()
     {

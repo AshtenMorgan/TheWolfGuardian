@@ -17,21 +17,19 @@ public class Combat : MonoBehaviour
     [SerializeField]
     protected LayerMask enemyLayer; //the layer masks that all enemies are on
     [SerializeField]
-    protected float damage; //the damage our combatant does
+    protected float damageA,
+        damageB,
+        damageC; //the damage our combatant does
     #endregion
     #region Timers
     [SerializeField]
     protected float animTimer; //Tracks the amount of time before the animation of an attack resets
     protected float animCounter; //actually does the counting for animTimer
-    [SerializeField]
-    protected float comboTimer; //the set time before your combos restart
-    protected float comboCounter; //the counter for the combo timer.
     #endregion
     #region Colliders
     [Header("Hitbox A Attributes")]
     [Header("Hitbox Attributes")]
     #region Hitbox A
-    protected float hitAComboCounter; //the counter that allows for combos within the Hit A chain
     [SerializeField, Tooltip("the position of Hit A's hitbox.")]
     protected Transform hitAPos; //the position of hit A's hitbox
     [SerializeField, Tooltip("the length and width of Hit A's hitbox.")]
@@ -44,10 +42,6 @@ public class Combat : MonoBehaviour
     protected Transform hitACrouchPos; //the position of hit A's hitbox while crouched
     [SerializeField, Tooltip("the length and width of Hit A's hitbox while crouched.")]
     protected Vector3 hitACrouchVector; //the size of hit A's hitbox while crouched
-    [SerializeField, Tooltip("the position of Hit A 1's hitbox.")]
-    protected Transform hitA1Pos; //the position of hit A 1's hitbox
-    [SerializeField, Tooltip("the length and width of Hit A 1's hitbox.")]
-    protected Vector3 hitA1Vector; //the size of hit A 1's hitbox
     [Header("Hitbox B Attributes")]
     [SerializeField, Tooltip("the position of Hit B's hitbox.")]
     protected Transform hitBPos; //the position of hit B's hitbox
@@ -69,11 +63,12 @@ public class Combat : MonoBehaviour
         ani = GetComponent<Animator>(); //defines the animator for the Combatant
         controller = GetComponent<Controller>();//defines the controller of the combatant
         animCounter = 0f;
-        comboCounter = 0f;
+        damageA = pawn.DamageA;
+        damageB = pawn.DamageB;
+        damageC = pawn.DamageC;
     }
     protected virtual void Update() 
     {
-        Debug.Log(hitAComboCounter);
         isGrounded = controller.IsGrounded;
         isCrouching = controller.IsCrouching;
 
@@ -84,20 +79,10 @@ public class Combat : MonoBehaviour
         else if (animCounter <= 0)
         {
             ani.SetBool("HitA", false);
-            ani.SetBool("HitA1", false);
             ani.SetBool("HitB", false);
             ani.SetBool("HitC", false);
         }
-        if (comboCounter > 0)
-        {
-            InvokeRepeating("SubtractComboCounter",2.0f,0.3f); //decrements the comboCounter
-        }
-        else if (comboCounter <= 0)
-        {
-            hitAComboCounter = 0;
-        }
-
-
+        
     }
     #endregion
     
@@ -126,44 +111,26 @@ public class Combat : MonoBehaviour
         {
             ani.SetBool("HitA", true);
             animCounter = animTimer;
-            comboCounter = comboTimer;
-            hitAComboCounter++; //incrememnts the hitAComboCounter
             //create a circle and return all the colliders within the area into an array
-            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitAPos.position, hitAVector, enemyLayer);
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitAPos.position, hitAVector, 0, enemyLayer);
             //for every collider in that array
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+                enemiesToDamage[i].GetComponent<Health>().Damage(damageA);
                 Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
                 _canAttack = false;
             }
         }
-
-        if (isGrounded && hitAComboCounter == 2)
-        {
-            ani.SetBool("HitA1", true);
-            animCounter = animTimer;
-            //create a circle and return all the colliders within the area into an array
-            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitA1Pos.position, hitA1Vector, enemyLayer);
-            //for every collider in that array
-            for (int i = 0; i < enemiesToDamage.Length; i++)
-            {
-                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
-                Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
-                _canAttack = false;
-            }
-            hitAComboCounter = 0f;
-        }
-            if (!isGrounded)
+        if (!isGrounded)
         {
             ani.SetBool("HitA", true);
             animCounter = animTimer;
             //create a circle and return all the colliders within the area into an array
-            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitAJumpPos.position, hitAJumpVector, enemyLayer);
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitAJumpPos.position, hitAJumpVector, 0, enemyLayer);
             //for every collider in that array
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+                enemiesToDamage[i].GetComponent<Health>().Damage(damageA);
                 Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
                 _canAttack = false;
             }
@@ -173,11 +140,11 @@ public class Combat : MonoBehaviour
             ani.SetBool("HitA", true);
             animCounter = animTimer;
             //create a circle and return all the colliders within the area into an array
-            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitACrouchPos.position, hitACrouchVector, enemyLayer);
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitACrouchPos.position, hitACrouchVector, 0, enemyLayer);//this fixes your layer problem
             //for every collider in that array
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+                enemiesToDamage[i].GetComponent<Health>().Damage(damageA);
                 Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
                 _canAttack = false;
             }
@@ -192,13 +159,18 @@ public class Combat : MonoBehaviour
             ani.SetBool("HitB", true);
             animCounter = animTimer;
             //create a circle and return all the colliders within the area into an array
-            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitBPos.position, hitBVector, enemyLayer);
+            //enemy layer check is a good idea, but what about when we want to hit breakable walls?
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitBPos.position, hitBVector, 0, enemyLayer);//<-- This is where your problem is, it is registering enemyLayer as an angle
             //for every collider in that array
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
-                Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
-                _canAttack = false;
+                if  (enemiesToDamage[i].CompareTag("Enemy"))//make sure this is tagged as enemy
+                {
+                    enemiesToDamage[i].GetComponent<Health>().Damage(damageB);
+                    Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
+                    _canAttack = false;
+                }
+                
             }
         }
     }
@@ -211,23 +183,17 @@ public class Combat : MonoBehaviour
             ani.SetBool("HitC", true);
             animCounter = animTimer;
             //create a circle and return all the colliders within the area into an array
-            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitCPos.position, hitCVector, enemyLayer);
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitCPos.position, hitCVector, 0, enemyLayer);
             //for every collider in that array
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<Health>().Damage(damage);
+                enemiesToDamage[i].GetComponent<Health>().Damage(damageC);
                 Debug.Log("Hit Enemy: " + enemiesToDamage[i].name);
                 _canAttack = false;
             }
         }
     }
     #endregion
-    #endregion
-    #region Combo Tools
-    protected virtual void SubtractComboCounter() 
-    {
-        comboCounter--; //decrements the combo counter
-    }
     #endregion
     #region Gizmos
     /// <summary>
@@ -238,7 +204,6 @@ public class Combat : MonoBehaviour
         Gizmos.color = Color.red; //makes Gizmo for Hitboxes red
         #region Hitbox A Gizmos
         //Gizmos.DrawWireCube(hitAPos.position, hitAVector); //displays the size and shape of hitbox A
-        Gizmos.DrawWireCube(hitA1Pos.position, hitA1Vector); //displays the size and shape of hitbox A1
         //Gizmos.DrawWireCube(hitAJumpPos.position, hitAJumpVector); //displays the size and shape of hitbox A in the air
         //Gizmos.DrawWireCube(hitACrouchPos.position, hitACrouchVector); //displays the size and shape of hitbox A while crouching
         #endregion
@@ -246,7 +211,7 @@ public class Combat : MonoBehaviour
         //Gizmos.DrawWireCube(hitBPos.position, hitBVector);// displays the size and shape of Hitbox B
         #endregion
         #region#region Hitbox C Gizmos
-        //Gizmos.DrawWireCube(hitCPos.position, hitCVector);// displays the size and shape of Hitbox C
+        Gizmos.DrawWireCube(hitCPos.position, hitCVector);// displays the size and shape of Hitbox B
         #endregion
     }
 }

@@ -123,11 +123,11 @@ public class PlayerController : Controller
     }
     public virtual void SprintStart(InputAction.CallbackContext context)
     {
-        if (isGrounded)
-        {
+       //if (isGrounded)
+        //{
             pawn.IsSprinting = true; //sets the isSprinting variable on the pawn to true
             ani.SetBool("Sprinting", true);  //tell the animator we are sprinting
-        }
+        //}
     }
     public virtual void SprintEnd(InputAction.CallbackContext context)
     {
