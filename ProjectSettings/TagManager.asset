@@ -19,7 +19,6 @@ TagManager:
   - HitA
   - OptionsBKG
   - InstanPoint
-  - EnemySpawnPoint
   - Enemy
   - eGroundCheck
   - GameOverCanvas
@@ -29,6 +28,13 @@ TagManager:
   - BackgroundCanvas
   - MasterCanvas
   - OptionsCanvas
+  - EnemySpawn1
+  - EnemySpawn2
+  - EnemySpawn3
+  - EnemySpawn4
+  - EnemySpawn5
+  - EnemySpawn6
+  - EnemySpawn7
   layers:
   - Default
   - TransparentFX

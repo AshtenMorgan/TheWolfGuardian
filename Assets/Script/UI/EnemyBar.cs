@@ -16,12 +16,6 @@ public class EnemyBar : MonoBehaviour
         health = transform.root.GetComponent<Health>();
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-    }
-
-
     private void LateUpdate()
     {
         if (health)//if there is a health component

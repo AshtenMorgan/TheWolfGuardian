@@ -118,14 +118,8 @@ public class UIManager : MonoBehaviour
             musicSource = Camera.main.GetComponent<AudioSource>();
             musicSource.clip = scene1;
             musicSource.Play(0);
-            SetUpOptions();
+            //SetUpOptions();
         }
-        
-    }
-
-    // Start is called before the first frame update
-    private void Start()
-    {
         
     }
 
@@ -189,7 +183,7 @@ public class UIManager : MonoBehaviour
     public void StartGame()
     {
         //load whatever scene our zone1 is
-        SceneManager.LoadScene("AnimationTestScene");
+        SceneManager.LoadScene(1);
     }
     #region Menu Controls
     #region Options
@@ -197,13 +191,13 @@ public class UIManager : MonoBehaviour
     public void EnableOptionsMain()
     { 
         optionsCanvas.gameObject.SetActive(true);
-        optionsBKG.gameObject.SetActive(false);
+        optionsBKG.SetActive(false);
         cameFrom = 1;
     }
     public void EnableOptionsPlay()
     {
         optionsCanvas.gameObject.SetActive(true);
-        optionsBKG.gameObject.SetActive(true);
+        optionsBKG.SetActive(true);
         cameFrom = 2;
     }
     //hides Optons menu
@@ -405,9 +399,11 @@ public class UIManager : MonoBehaviour
         List<Resolution> uniqueResolutionList = new List<Resolution>(uniqueResolutions.Count);
         foreach (System.Tuple<int, int> resolution in uniqueResolutions)
         {
-            Resolution newResolution = new Resolution();
-            newResolution.width = resolution.Item1;
-            newResolution.height = resolution.Item2;
+            Resolution newResolution = new Resolution
+            {
+                width = resolution.Item1,
+                height = resolution.Item2
+            };
             if (maxRefreshRates.TryGetValue(resolution, out int refreshRate))
             {
                 newResolution.refreshRate = refreshRate;

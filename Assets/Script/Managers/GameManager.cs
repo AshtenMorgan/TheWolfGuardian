@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
     public bool gameOver;
 
     [SerializeField]
-    private Scene _scene;
+    public Scene scene;
     #endregion
 
 
@@ -92,13 +92,15 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene loaded, LoadSceneMode mode)
     {
-        _scene = scene;//update what scene we are in
+        scene = loaded;//update what scene we are in
 
         if (scene.name != "MainMenu")
         {
+          ObjectPool.instance.PoolSetup();
           VarCheck();
+            
         }
         else if (scene.name == "MainMenu")
         {
@@ -131,7 +133,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (_scene.name != "MainMenu")//make sure we should have stuff
+        if (scene.name != "MainMenu")//make sure we should have stuff
         {
             current = Time.time;//for testing purposes  delete after tests are complete
             CheckSpawn();       //see if it is time to spawn player  //maybe trigger this on death
@@ -156,14 +158,35 @@ public class GameManager : MonoBehaviour
         //spawn points
         playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform;
         //set these to individual spawn points once we have them set up, for now they all default to 1 enemy spawn point
-        enemy1Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawnPoint").transform;
-        enemy2Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawnPoint").transform;
-        enemy3Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawnPoint").transform;
-        enemy4Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawnPoint").transform;
-        enemy5Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawnPoint").transform;
-        enemy6Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawnPoint").transform;
-        enemy7Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawnPoint").transform;
-
+        if (enemy1Spawn.Length > 0)
+        {
+            enemy1Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawn1").transform;
+        }
+        if (enemy2Spawn.Length > 0)
+        {
+            enemy2Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawn2").transform;
+        }
+        if (enemy3Spawn.Length > 0)
+        {
+            enemy3Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawn3").transform;
+        }
+        if (enemy4Spawn.Length > 0)
+        {
+            enemy4Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawn4").transform;
+        }
+        if (enemy5Spawn.Length > 0)
+        {
+            enemy5Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawn5").transform;
+        }
+        if (enemy6Spawn.Length > 0)
+        {
+            enemy6Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawn6").transform;
+        }
+        if (enemy7Spawn.Length > 0)
+        {
+            enemy7Spawn[0] = GameObject.FindGameObjectWithTag("EnemySpawn7").transform;
+        }
+        
         //set up player
         if (player == null)
         {
@@ -222,7 +245,7 @@ public class GameManager : MonoBehaviour
     #endregion
     
     #region Enemy Spawn Checks
-    void CheckEnemySpawn()
+    public void CheckEnemySpawn()
     {
         
         if (Time.time > _nextEnemySpawn)//check spawn timer
