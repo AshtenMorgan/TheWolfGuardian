@@ -198,6 +198,18 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 929456131755109686, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: m_MaxValue
+      value: 0.999
+      objectReference: {fileID: 0}
+    - target: {fileID: 929456131755109688, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: m_MaxValue
+      value: 0.999
+      objectReference: {fileID: 0}
+    - target: {fileID: 929456131755109692, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: m_MaxValue
+      value: 0.999
+      objectReference: {fileID: 0}
     - target: {fileID: 929456131755109972, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
       propertyPath: m_Name
       value: Manager(UI)

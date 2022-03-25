@@ -122,7 +122,10 @@ public class UIManager : MonoBehaviour
         }
         
     }
-
+    private void Start()
+    {
+        LoadPlayerPrefs();
+    }
     // Update is called once per frame
     private void Update()
     {
@@ -153,6 +156,17 @@ public class UIManager : MonoBehaviour
             }
         }
 
+    }
+    private void LoadPlayerPrefs()
+    {
+        /*
+        PlayerPrefs.SetInt("ResIndex", index);
+        PlayerPrefs.SetInt("FullScreen", BoolToInt(toggle));
+        PlayerPrefs.SetInt("QualityLevel", index);
+        PlayerPrefs.SetFloat("MasterVolume", masterVolumeSlider.value);
+        PlayerPrefs.SetFloat("MusicVolume", musicVolumeSlider.value);
+        PlayerPrefs.SetFloat("EffectsVolume", effectsVolumeSlider.value);
+        */
     }
     //show pause menu
     public void EnablePauseMenu()
@@ -449,11 +463,17 @@ public class UIManager : MonoBehaviour
 
         //setup options to match what is saved in playerprefs
         masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume", 0.5f);//get palyerprefs value, if it doesnt exist, default to .5
+        mixer.SetFloat("masterVolume", Mathf.Log10(masterVolumeSlider.value) * 20);
         musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        mixer.SetFloat("musicVolume", Mathf.Log10(musicVolumeSlider.value) * 20);
         effectsVolumeSlider.value = PlayerPrefs.GetFloat("EffectsVolume", 0.5f);
-        resolutionDropDown.value = PlayerPrefs.GetInt("ResIndex");
-        fullScreenToggle.isOn = IntToBool(PlayerPrefs.GetInt("FullScreen"));
-        qualityDropDown.value = PlayerPrefs.GetInt("QualityLevel");//get setting from playerprefs
+        mixer.SetFloat("effectsVolume", Mathf.Log10(effectsVolumeSlider.value) * 20);
+        resolutionDropDown.value = PlayerPrefs.GetInt("ResIndex", 0);
+        SetResolution(resolutionDropDown.value);
+        fullScreenToggle.isOn = IntToBool(PlayerPrefs.GetInt("FullScreen", 1));
+        ScreenToggle(fullScreenToggle.isOn);
+        qualityDropDown.value = PlayerPrefs.GetInt("QualityLevel", 5);//get setting from playerprefs
+        SetQuality(qualityDropDown.value);
     }
     #endregion
 }
