@@ -118,17 +118,14 @@ public class UIManager : MonoBehaviour
             musicSource = Camera.main.GetComponent<AudioSource>();
             musicSource.clip = scene1;
             musicSource.Play(0);
-            SetUpOptions();
+            //SetUpOptions();
         }
         
     }
-
-    // Start is called before the first frame update
     private void Start()
     {
-        
+        LoadPlayerPrefs();
     }
-
     // Update is called once per frame
     private void Update()
     {
@@ -160,6 +157,17 @@ public class UIManager : MonoBehaviour
         }
 
     }
+    private void LoadPlayerPrefs()
+    {
+        /*
+        PlayerPrefs.SetInt("ResIndex", index);
+        PlayerPrefs.SetInt("FullScreen", BoolToInt(toggle));
+        PlayerPrefs.SetInt("QualityLevel", index);
+        PlayerPrefs.SetFloat("MasterVolume", masterVolumeSlider.value);
+        PlayerPrefs.SetFloat("MusicVolume", musicVolumeSlider.value);
+        PlayerPrefs.SetFloat("EffectsVolume", effectsVolumeSlider.value);
+        */
+    }
     //show pause menu
     public void EnablePauseMenu()
     {
@@ -189,7 +197,7 @@ public class UIManager : MonoBehaviour
     public void StartGame()
     {
         //load whatever scene our zone1 is
-        SceneManager.LoadScene("AnimationTestScene");
+        SceneManager.LoadScene(1);
     }
     #region Menu Controls
     #region Options
@@ -197,13 +205,13 @@ public class UIManager : MonoBehaviour
     public void EnableOptionsMain()
     { 
         optionsCanvas.gameObject.SetActive(true);
-        optionsBKG.gameObject.SetActive(false);
+        optionsBKG.SetActive(false);
         cameFrom = 1;
     }
     public void EnableOptionsPlay()
     {
         optionsCanvas.gameObject.SetActive(true);
-        optionsBKG.gameObject.SetActive(true);
+        optionsBKG.SetActive(true);
         cameFrom = 2;
     }
     //hides Optons menu
@@ -405,9 +413,11 @@ public class UIManager : MonoBehaviour
         List<Resolution> uniqueResolutionList = new List<Resolution>(uniqueResolutions.Count);
         foreach (System.Tuple<int, int> resolution in uniqueResolutions)
         {
-            Resolution newResolution = new Resolution();
-            newResolution.width = resolution.Item1;
-            newResolution.height = resolution.Item2;
+            Resolution newResolution = new Resolution
+            {
+                width = resolution.Item1,
+                height = resolution.Item2
+            };
             if (maxRefreshRates.TryGetValue(resolution, out int refreshRate))
             {
                 newResolution.refreshRate = refreshRate;
@@ -453,11 +463,17 @@ public class UIManager : MonoBehaviour
 
         //setup options to match what is saved in playerprefs
         masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume", 0.5f);//get palyerprefs value, if it doesnt exist, default to .5
+        mixer.SetFloat("masterVolume", Mathf.Log10(masterVolumeSlider.value) * 20);
         musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        mixer.SetFloat("musicVolume", Mathf.Log10(musicVolumeSlider.value) * 20);
         effectsVolumeSlider.value = PlayerPrefs.GetFloat("EffectsVolume", 0.5f);
-        resolutionDropDown.value = PlayerPrefs.GetInt("ResIndex");
-        fullScreenToggle.isOn = IntToBool(PlayerPrefs.GetInt("FullScreen"));
-        qualityDropDown.value = PlayerPrefs.GetInt("QualityLevel");//get setting from playerprefs
+        mixer.SetFloat("effectsVolume", Mathf.Log10(effectsVolumeSlider.value) * 20);
+        resolutionDropDown.value = PlayerPrefs.GetInt("ResIndex", 0);
+        SetResolution(resolutionDropDown.value);
+        fullScreenToggle.isOn = IntToBool(PlayerPrefs.GetInt("FullScreen", 1));
+        ScreenToggle(fullScreenToggle.isOn);
+        qualityDropDown.value = PlayerPrefs.GetInt("QualityLevel", 5);//get setting from playerprefs
+        SetQuality(qualityDropDown.value);
     }
     #endregion
 }

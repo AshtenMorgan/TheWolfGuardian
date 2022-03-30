@@ -65,7 +65,7 @@ public class EnemyController : Controller
     [SerializeField]
     public bool isGroundDetected = true,
         isWallDetected = false,
-        isEnemyDetected = false,
+        shouldMove = false,
         isPlayerDetected = false,
         hasRangedAttack = false,
         isInMeleeRange = false,
@@ -193,7 +193,8 @@ public class EnemyController : Controller
     }
     protected virtual void UpdateMeleeAttackState()
     {
-        MeleeAttack();
+        Chase();//continue running towards player
+        MeleeAttack();//attack player
     }
     protected virtual void ExitMeleeAttackState()
     {
@@ -362,7 +363,7 @@ public class EnemyController : Controller
         if (isGrounded)//only do actions while on the ground
         {
             Locate();//look for obstacles
-            if (!isGroundDetected || isWallDetected || isEnemyDetected)//there is no ground or there is a wall or enemy
+            if (!isGroundDetected || isWallDetected)//there is no ground or there is a wall
             {
                 Flip();//turn around
             }
@@ -382,14 +383,20 @@ public class EnemyController : Controller
         Locate();//continue looking for player
         if (isPlayerDetected)
         {
-            RangeCheck();
+            FacePlayer();//look at player
+            RangeCheck();//check distance
+            MoveRangeCheck();
             StepDetection();
-            movement.Set(pawn.RunSpeed * facingDirection, rb2d.velocity.y);//set movement speed to run towards player
-            rb2d.velocity = movement;//set velocity to movement speed/direction
-
-            if (!isGroundDetected)
+            if (shouldMove)
             {
-                Jump();//should attempt to jump gaps
+                movement.Set(pawn.RunSpeed * facingDirection, rb2d.velocity.y);//set movement speed to run
+                rb2d.velocity = movement;//set velocity to movement speed/direction
+
+
+                if (!isGroundDetected)
+                {
+                    Jump();//should attempt to jump gaps
+                }
             }
         }
         else if (!isPlayerDetected)
@@ -401,14 +408,32 @@ public class EnemyController : Controller
     {
         Collider2D Collider = Physics2D.OverlapBox(playerCheck.position, playerCheckDistance, 0, playerLayer);
         if (Collider != null)//overlap hit something
-        {         
+        {
             isPlayerDetected = Physics2D.Raycast(eyeball.transform.position, target.transform.position, playerLayer);
         }
         else
         {
             isPlayerDetected = false;
         }
-
+    }
+    protected virtual void FacePlayer()
+    {
+        if ((target.transform.position.x < transform.position.x) && (facingDirection == 1))//player is on the left of enemy, and enemy is facing right
+        {
+            Flip();
+        }
+        else if ((target.transform.position.x < transform.position.x) && (facingDirection == -1))//player on left, enemy facing left
+        {
+            return; //do nothing
+        }
+        else if ((target.transform.position.x > transform.position.x) && (facingDirection == -1))//player on right, facing left
+        {
+            Flip();
+        }
+        else // player on right, facing right
+        {
+            return; //do nothing
+        }
     }
     protected virtual void RangeCheck()
     {
@@ -419,18 +444,34 @@ public class EnemyController : Controller
         if (isInMeleeRange && isPlayerDetected)
         {
             StateManager(State.MeleeAttack);
+            
         }
         else if (isInRangedRange && isPlayerDetected)
         {
             if (hasRangedAttack == true)
             {
                 StateManager(State.RangedAttack);
+
             }
             
         }
         else
         {
             StateManager(State.Chase);
+        }
+    }
+    protected virtual void MoveRangeCheck()
+    {
+        float distanceFromTarget = Mathf.Abs(target.transform.position.x) - Mathf.Abs(transform.position.x);
+        distanceFromTarget = Mathf.Abs(distanceFromTarget);
+
+        if (distanceFromTarget <= 0.5f)  // Within .3 of target
+        {
+            shouldMove = false;
+        }
+        else
+        {
+            shouldMove = true;
         }
     }
     protected virtual void Jump()
@@ -452,11 +493,8 @@ public class EnemyController : Controller
     }
     protected virtual void MeleeAttack()
     {
-        //face player
-        //keep distance
         RangeCheck();
         eCombat.ECombo1();
-
     }
     protected virtual void RangedAttack()
     {

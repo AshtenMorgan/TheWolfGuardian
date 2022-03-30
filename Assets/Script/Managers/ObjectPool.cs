@@ -48,8 +48,8 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    #region Enemy Pool checks
+    public void PoolSetup()
     {
         //create pool lists
         enemy1Pool = new List<GameObject>();
@@ -59,21 +59,18 @@ public class ObjectPool : MonoBehaviour
         enemy5Pool = new List<GameObject>();
         enemy6Pool = new List<GameObject>();
         enemy7Pool = new List<GameObject>();
-
-        //initial spawning for object pooling
-
-        //enemies
-        //fill in enemys with prefab objects
-        //  Prefabs/Test Prefabs/Test Enemies/enemy
-        Enemy1 = Resources.Load("Prefabs/Pawn Prefabs/Beastiary Prefabs/Unseelie Fey/Beast_UF_Redcap") as GameObject;
-        Enemy2 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy2") as GameObject;
-        Enemy3 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy3") as GameObject;
-        Enemy4 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy4") as GameObject;
-        Enemy5 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy5") as GameObject;
-        Enemy6 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy6") as GameObject;
-        Enemy7 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy7") as GameObject;
-
         #region Object Creation
+        //initial spawning for object pooling
+        //enemies
+        // Enemy1 = Resources.Load("Prefabs/Test Prefabs/Test Enemies/Enemy1") as GameObject;
+        Enemy1 = Resources.Load("Prefabs/Pawn Prefabs/Beastiary Prefabs/Unseelie Fey/Beast_UF_Redcap") as GameObject;
+        Enemy2 = Resources.Load("Prefabs/Pawn Prefabs/Beastiary Prefabs/Unseelie Fey/Beast_UF_Redcap") as GameObject;
+        Enemy3 = Resources.Load("Prefabs/Pawn Prefabs/Beastiary Prefabs/Unseelie Fey/Beast_UF_Redcap") as GameObject;
+        Enemy4 = Resources.Load("Prefabs/Pawn Prefabs/Beastiary Prefabs/Unseelie Fey/Beast_UF_Redcap") as GameObject;
+        Enemy5 = Resources.Load("Prefabs/Pawn Prefabs/Beastiary Prefabs/Unseelie Fey/Beast_UF_Redcap") as GameObject;
+        Enemy6 = Resources.Load("Prefabs/Pawn Prefabs/Beastiary Prefabs/Unseelie Fey/Beast_UF_Redcap") as GameObject;
+        Enemy7 = Resources.Load("Prefabs/Pawn Prefabs/Beastiary Prefabs/Unseelie Fey/Beast_UF_Redcap") as GameObject;
+
         GameObject tmp;//create a temporary game object to hold each new instantiated object
 
         //loop to create all the enemies for a pool
@@ -81,7 +78,7 @@ public class ObjectPool : MonoBehaviour
         //enemy 1
         for (int i = 0; i < GameManager.Instance.enemy1Max; i++)
         {
-           
+
             tmp = Instantiate(Enemy1, GameManager.Instance.instanPoint.position, GameManager.Instance.instanPoint.rotation) as GameObject;//instantiate enemy, hold it in tmp GO
             tmp.SetActive(false);//hide and disable the enemy
             enemy1Pool.Add(tmp);//add enemy to pool
@@ -130,7 +127,6 @@ public class ObjectPool : MonoBehaviour
         }
         #endregion
     }
-    #region Enemy Pool checks
     //check active enemies against "max enemy"s and enable if necessary
     public GameObject GetEnemy1Pool()
     {

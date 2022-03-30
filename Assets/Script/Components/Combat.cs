@@ -112,7 +112,7 @@ public class Combat : MonoBehaviour
             ani.SetBool("HitA", true);
             animCounter = animTimer;
             //create a circle and return all the colliders within the area into an array
-            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitAPos.position, hitAVector, enemyLayer);
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitAPos.position, hitAVector, 0, enemyLayer);
             //for every collider in that array
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
@@ -126,7 +126,7 @@ public class Combat : MonoBehaviour
             ani.SetBool("HitA", true);
             animCounter = animTimer;
             //create a circle and return all the colliders within the area into an array
-            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitAJumpPos.position, hitAJumpVector, enemyLayer);
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitAJumpPos.position, hitAJumpVector, 0, enemyLayer);
             //for every collider in that array
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
@@ -160,7 +160,7 @@ public class Combat : MonoBehaviour
             animCounter = animTimer;
             //create a circle and return all the colliders within the area into an array
             //enemy layer check is a good idea, but what about when we want to hit breakable walls?
-            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitBPos.position, hitBVector, enemyLayer);//<-- This is where your problem is, it is registering enemyLayer as an angle
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitBPos.position, hitBVector, 0, enemyLayer);//<-- This is where your problem is, it is registering enemyLayer as an angle
             //for every collider in that array
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
@@ -183,7 +183,7 @@ public class Combat : MonoBehaviour
             ani.SetBool("HitC", true);
             animCounter = animTimer;
             //create a circle and return all the colliders within the area into an array
-            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitCPos.position, hitCVector, enemyLayer);
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(hitCPos.position, hitCVector, 0, enemyLayer);
             //for every collider in that array
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
