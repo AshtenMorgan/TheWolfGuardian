@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : Controller
 {
-
     #region Variables
     #region General Player Variables
     [Header("General Player Variables")]
@@ -157,15 +156,15 @@ public class PlayerController : Controller
     #region Combat Functions
     public virtual void LightPunch(InputAction.CallbackContext context)
     {
-        combat.HitA();
+        //combat.HitA();
     }
     public virtual void HeavyPunch(InputAction.CallbackContext context)
     {
-        combat.HitB();
+        //combat.HitB();
     }
     public virtual void Kick(InputAction.CallbackContext context)
     {
-        combat.HitC();
+        //combat.HitC();
     }
     #endregion
     #endregion
