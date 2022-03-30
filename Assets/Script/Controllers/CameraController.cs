@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
         gm = GameManager.Instance;
     }
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (gm.player)
         {
