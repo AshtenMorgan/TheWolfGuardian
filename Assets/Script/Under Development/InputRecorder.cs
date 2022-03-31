@@ -38,7 +38,7 @@ public class InputRecorder : MonoBehaviour
             {
                 KeysPressed.Add(kcode); //add it to the list
 
-                if (!movesManager.CanMove(KeysPressed)) //if there are no moves available from the buttons pressed, reset the list
+                if (!movesManager.IsMoveAvailable(KeysPressed)) //if there are no moves available from the buttons pressed, reset the list
                     StopAllCoroutines();
 
                 StartCoroutine(ResetComboTimer()); //this starts the list reset
@@ -46,7 +46,7 @@ public class InputRecorder : MonoBehaviour
         }
     }
 
-    protected virtual void ResetCombo() //the function that resets the keys pressed list
+    public void ResetCombo() //the function that resets the keys pressed list
     {
         KeysPressed.Clear();
     }
