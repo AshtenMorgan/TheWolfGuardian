@@ -102,9 +102,9 @@ public class Controller : MonoBehaviour
             ani.ResetTrigger(parameter.name);
         }
     }
-    public void PlayMove(Moves move, int ComboPriority) //Get the Move and the Priorty
+    public void PlayMove(Moveset move, int ComboPriority) //Get the Move and the Priorty
     {
-        if (Moves.None != move) //if the move is none ignore the function
+        if (Moveset.None != move) //if the move is none ignore the function
         {
             if (ComboPriority >= CurrentComboPriority) //if the new move is higher Priorty play it and ignore everything else
             {
@@ -118,40 +118,40 @@ public class Controller : MonoBehaviour
             //Set the Animation Triggers
             switch (move)
             {
-                case Moves.HitA0:
+                case Moveset.HitA0:
                     ani.SetTrigger("HitA0");
                     break;
-                case Moves.HitA1:
+                case Moveset.HitA1:
                     ani.SetTrigger("HitA1");
                     break;
-                case Moves.HitA2:
+                case Moveset.HitA2:
                     ani.SetTrigger("HitA2");
                     break;
-                case Moves.HitA3:
+                case Moveset.HitA3:
                     ani.SetTrigger("HitA3");
                     break;
-                case Moves.HitB0:
+                case Moveset.HitB0:
                     ani.SetTrigger("HitB0");
                     break;
-                case Moves.HitB1:
+                case Moveset.HitB1:
                     ani.SetTrigger("HitB1");
                     break;
-                case Moves.HitB2:
+                case Moveset.HitB2:
                     ani.SetTrigger("HitB2");
                     break;
-                case Moves.HitB3:
+                case Moveset.HitB3:
                     ani.SetTrigger("HitB3");
                     break;
-                case Moves.HitC0:
+                case Moveset.HitC0:
                     ani.SetTrigger("HitC0");
                     break;
-                case Moves.HitC1:
+                case Moveset.HitC1:
                     ani.SetTrigger("HitC1");
                     break;
-                case Moves.HitC2:
+                case Moveset.HitC2:
                     ani.SetTrigger("HitC2");
                     break;
-                case Moves.HitC3:
+                case Moveset.HitC3:
                     ani.SetTrigger("HitC3");
                     break;
             }

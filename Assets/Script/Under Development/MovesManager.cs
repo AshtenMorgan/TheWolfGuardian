@@ -20,7 +20,7 @@ public class MovesManager : MonoBehaviour
     {
         foreach (Move move in availableMoves) 
         {
-            if (move.isMoveAvailable(keycodes))
+            if (move.IsMoveAvailable(keycodes))
                 return true;
         }
         return false;
@@ -30,7 +30,7 @@ public class MovesManager : MonoBehaviour
     {
         foreach (Move move in availableMoves) 
         {
-            if (move.isMoveAvailable(keycodes)) 
+            if (move.IsMoveAvailable(keycodes)) 
             {
                 controller.PlayMove(move.GetMove(), move.GetMoveComboPriority());
                 break;

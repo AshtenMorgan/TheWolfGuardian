@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Move", menuName = "New Move")]
 public class Move : ScriptableObject
 {
     [SerializeField] List<KeyCode> movesKeyCodes;
-    [SerializeField] Move moveType;
+    [SerializeField] Moveset moveType;
     [SerializeField] int ComboPriority = 0;
 
-    public bool isMoveAvailable(List<KeyCode> playerKeyCodes)
+    public bool IsMoveAvailable(List<KeyCode> playerKeyCodes)
     {
         int comboIndex = 0;
 
@@ -39,7 +40,7 @@ public class Move : ScriptableObject
         return ComboPriority;
     }
 
-    public Move GetMove()
+    public Moveset GetMove()
     {
         return moveType;
     }
