@@ -212,7 +212,7 @@ public class Combat : MonoBehaviour
         //Gizmos.DrawWireCube(hitBPos.position, hitBVector);// displays the size and shape of Hitbox B
         #endregion
         #region#region Hitbox C Gizmos
-        Gizmos.DrawWireCube(hitCPos.position, hitCVector);// displays the size and shape of Hitbox B
+        //Gizmos.DrawWireCube(hitCPos.position, hitCVector);// displays the size and shape of Hitbox B
         #endregion
     }
     #endregion
