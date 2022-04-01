@@ -12,6 +12,7 @@ public class PlayerController : Controller
     protected PlayerInput playerInput; //defines the input that the pawn is utlizing 
     protected PlayerInputActions playerInputActions; //variable for storing the input schemes the pawn will be using
     protected PlayerPawn pawn;//variable for storing the pawn
+    public bool isInInteractRange { get; set; } //triggers controls for interacting with objects
     #endregion
     #endregion
     #region Functions
@@ -55,30 +56,32 @@ public class PlayerController : Controller
     protected override void FixedUpdate()
     {
         #region Jumping Updates
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the player is grounded
-        ani.SetBool("Grounded", isGrounded);//match bools
-
-        if (!isNotJumping && !isGrounded) //if we are jumping
+        if (isInInteractRange == false)
         {
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the player is grounded
+            ani.SetBool("Grounded", isGrounded);//match bools
 
-            if (jumpTimeCounter > 0) //and our jump counter hasnt reached zero
+            if (!isNotJumping && !isGrounded) //if we are jumping
             {
-                ani.SetBool("Jumping", true);//tell the animator to start jumping
-                verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on playerpawn
-                rb2d.velocity = new Vector2(rb2d.velocity.x, verticalVelocity);
-                jumpTimeCounter -= Time.deltaTime; // subtracts time from the jumpTimeCounter
+
+                if (jumpTimeCounter > 0) //and our jump counter hasnt reached zero
+                {
+                    ani.SetBool("Jumping", true);//tell the animator to start jumping
+                    verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on playerpawn
+                    rb2d.velocity = new Vector2(rb2d.velocity.x, verticalVelocity);
+                    jumpTimeCounter -= Time.fixedDeltaTime; // subtracts time from the jumpTimeCounter
+                }
+            }
+            else if (isGrounded)
+            {
+                jumpTimeCounter = jumpTime; //if we are grounded, it sets the jumpTimeCounter back to the jumpTime variable
+                ani.SetBool("Jumping", false);
+            }
+            else
+            {
+                //do nothing
             }
         }
-        else if (isGrounded)
-        {
-            jumpTimeCounter = jumpTime; //if we are grounded, it sets the jumpTimeCounter back to the jumpTime variable
-            ani.SetBool("Jumping", false);
-        }
-        else
-        {
-            //do nothing
-        }
-
         #endregion
         #region Ground Movement Updates
         SlopeStick();

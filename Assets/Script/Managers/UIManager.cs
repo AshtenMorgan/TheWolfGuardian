@@ -65,6 +65,7 @@ public class UIManager : MonoBehaviour
     private int cameFrom;
     private Scene currentScene;
     private bool loaded = false;
+    private string mainMenuName = "MainMenu"; //name of the main menu scene as a string
 
     #endregion
     private void OnEnable()
@@ -90,7 +91,7 @@ public class UIManager : MonoBehaviour
     {
         currentScene = scene;
         //only load on main menu
-        if (scene.name == "MainMenu")
+        if (scene.name == mainMenuName)
         {
             if (loaded == false)
             {
@@ -132,7 +133,7 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (currentScene.name != "MainMenu")
+            if (currentScene.name != mainMenuName)
             {
                 if (isPaused && !GameManager.Instance.gameOver)
                 {
@@ -144,7 +145,7 @@ public class UIManager : MonoBehaviour
                 }
             }
         }
-        if (SceneManager.GetActiveScene().name != ("MainMenu"))//make sure we are not in main menu
+        if (SceneManager.GetActiveScene().name != (mainMenuName))//make sure we are not in main menu
         {
              //these should be moved out of update when possible
             if (GameManager.Instance)//we have an active game manager
@@ -243,7 +244,7 @@ public class UIManager : MonoBehaviour
     #region Main Menu
     public void BackToMain()
     {    
-        SceneManager.LoadScene("MainMenu");//load scene main
+        SceneManager.LoadScene(mainMenuName);//load scene main
         EnableMain();
         EnableBackground();
         DisablePauseMenu();
