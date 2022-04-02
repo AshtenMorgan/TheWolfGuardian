@@ -127,7 +127,8 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        
+        VarCheck();
+        ObjectPool.instance.PoolSetup();
     }
 
     // Update is called once per frame
