@@ -184,7 +184,7 @@ public class PlayerController : Controller
     #region Gizmos
     private void OnDrawGizmos()
     {
-        //Gizmos.DrawSphere(groundCheck.position, circleRadius); //draws a sphere around our ground check empty so that we can visualize it
+        Gizmos.DrawSphere(groundCheck.position, circleRadius); //draws a sphere around our ground check empty so that we can visualize it
     }
     #endregion
     #endregion

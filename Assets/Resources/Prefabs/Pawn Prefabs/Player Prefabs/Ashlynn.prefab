@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336663592562666402}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0292, y: -1.071, z: 0}
+  m_LocalPosition: {x: 0.016, y: -0.999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1336663593021864655}
@@ -93,7 +93,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -114,12 +114,12 @@ SpriteRenderer:
   m_SortingLayerID: 1563904803
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 82337864152c6334f87f798109079cdd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c84acd647c92b4f4581945ff5da369bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -217,9 +217,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  jumpTime: 0.15
+  jumpTime: 0.08
   groundCheck: {fileID: 1336663592562666403}
-  circleRadius: 0.26
+  circleRadius: 0.25
   noFriction: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
   fullFriction: {fileID: 6200000, guid: 48626c08f0a6277489a9387662b457ac, type: 2}
   ani: {fileID: 1336663593021864652}
@@ -235,23 +235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af2805f09363134984210f9de725f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  damageA: 0
-  damageB: 0
-  damageC: 0
-  animTimer: 15
-  hitAPos: {fileID: 651217628918886266}
-  hitAVector: {x: 0.7535, y: 0.2, z: 0}
-  hitAJumpPos: {fileID: 1411941365596092865}
-  hitAJumpVector: {x: 0.25, y: 0.25, z: 0}
-  hitACrouchPos: {fileID: 2085176574033807524}
-  hitACrouchVector: {x: 0.75, y: 0.2, z: 0}
-  hitBPos: {fileID: 1582143866818022629}
-  hitBVector: {x: 0.7535, y: 0.25, z: 0}
-  hitCPos: {fileID: 6504136024550080444}
-  hitCVector: {x: 0.25, y: 0.25, z: 0}
 --- !u!114 &1281415155016603649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,7 +292,7 @@ Rigidbody2D:
   m_Mass: 6
   m_LinearDrag: 1.7
   m_AngularDrag: 16
-  m_GravityScale: 4
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -448,7 +431,7 @@ PolygonCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 2}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
