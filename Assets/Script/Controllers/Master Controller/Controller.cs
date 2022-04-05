@@ -29,7 +29,8 @@ public class Controller : MonoBehaviour
     [SerializeField]
     protected Transform groundCheck; //the specified location that decides whether the pawn is touching the ground or not
     [SerializeField]
-    protected float circleRadius; //determines the size of the capsule at the feet of the pawn
+    protected Vector2 boxSize; //the size of the square for the groundCheck detection box
+ 
     #endregion
     #region Lateral Movement Variables
     [Header("Lateral Movement Variables")]
@@ -78,7 +79,7 @@ public class Controller : MonoBehaviour
 
     protected virtual void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the pawn is grounded
+        isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer); //this update checks to see if the pawn is grounded
     }
     protected virtual void FixedUpdate()
     {

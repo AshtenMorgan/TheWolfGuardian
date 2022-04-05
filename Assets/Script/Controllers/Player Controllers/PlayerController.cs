@@ -54,7 +54,7 @@ public class PlayerController : Controller
     protected override void FixedUpdate()
     {
         #region Jumping Updates
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer); //this update checks to see if the player is grounded
+        isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer); //this update checks to see if the player is grounded
         ani.SetBool("Grounded", isGrounded);//match bools
 
         if (!isNotJumping && !isGrounded) //if we are jumping
@@ -184,7 +184,7 @@ public class PlayerController : Controller
     #region Gizmos
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(groundCheck.position, circleRadius); //draws a sphere around our ground check empty so that we can visualize it
+        Gizmos.DrawCube(groundCheck.position, boxSize); //draws a square around our ground check empty so that we can visualize it
     }
     #endregion
     #endregion
