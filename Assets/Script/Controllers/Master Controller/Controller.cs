@@ -14,6 +14,8 @@ public class Controller : MonoBehaviour
     protected Combat combat; //stores the combat script for the pawn
     [SerializeField]
     protected LayerMask groundLayer; //The layer mask for what is considered "the ground" in the game
+    InputRecorder inputRecorder; //assigns the input recorder script so the controller can properly do combos
+    int CurrentComboPriority = 0;
     #endregion
     #region Jump Variables
     [Header("Jump Variables")]
@@ -61,8 +63,11 @@ public class Controller : MonoBehaviour
     {
         
         rb2d = GetComponent<Rigidbody2D>(); //defines the Rigidbody needed for pawn physics
-        ani = GetComponent<Animator>();//defines the animator component
         combat = GetComponent<Combat>();
+        if (ani == null)
+            ani = GetComponent<Animator>();
+        if (inputRecorder == null)
+            inputRecorder = FindObjectOfType<InputRecorder>();
         jumpTimeCounter = jumpTime; //sets the jumpTimeCounter
     }
 
@@ -88,6 +93,70 @@ public class Controller : MonoBehaviour
         else
         {
             rb2d.sharedMaterial = noFriction; //changes Physics Material 2D of the rigidbody to our No Friction material
+        }
+    }
+    void ResetTriggers() //Reset All the Animation Triggers so we don't have overlapping animations
+    {
+        foreach (AnimatorControllerParameter parameter in ani.parameters)
+        {
+            ani.ResetTrigger(parameter.name);
+        }
+    }
+    public void PlayMove(Moveset move, int ComboPriority) //Get the Move and the Priorty
+    {
+        if (Moveset.None != move) //if the move is none ignore the function
+        {
+            if (ComboPriority >= CurrentComboPriority) //if the new move is higher Priorty play it and ignore everything else
+            {
+                CurrentComboPriority = ComboPriority; //Set the new Combo
+                ResetTriggers(); //Reset All Animation Triggers
+                inputRecorder.ResetCombo(); //Reset the List in the ControlsManager
+            }
+            else
+                return;
+
+            //Set the Animation Triggers
+            switch (move)
+            {
+                case Moveset.HitA0:
+                    ani.SetTrigger("HitA0");
+                    break;
+                case Moveset.HitA1:
+                    ani.SetTrigger("HitA1");
+                    break;
+                case Moveset.HitA2:
+                    ani.SetTrigger("HitA2");
+                    break;
+                case Moveset.HitA3:
+                    ani.SetTrigger("HitA3");
+                    break;
+                case Moveset.HitB0:
+                    ani.SetTrigger("HitB0");
+                    break;
+                case Moveset.HitB1:
+                    ani.SetTrigger("HitB1");
+                    break;
+                case Moveset.HitB2:
+                    ani.SetTrigger("HitB2");
+                    break;
+                case Moveset.HitB3:
+                    ani.SetTrigger("HitB3");
+                    break;
+                case Moveset.HitC0:
+                    ani.SetTrigger("HitC0");
+                    break;
+                case Moveset.HitC1:
+                    ani.SetTrigger("HitC1");
+                    break;
+                case Moveset.HitC2:
+                    ani.SetTrigger("HitC2");
+                    break;
+                case Moveset.HitC3:
+                    ani.SetTrigger("HitC3");
+                    break;
+            }
+
+            CurrentComboPriority = 0; //Reset the Combo Priorty
         }
     }
     #endregion

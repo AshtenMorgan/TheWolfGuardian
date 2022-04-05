@@ -2359,8 +2359,7 @@ TextureImporter:
       physicsShape:
       - - {x: -16, y: -16}
         - {x: -16, y: -2}
-        - {x: 14, y: 13}
-        - {x: 16, y: 13}
+        - {x: 16, y: 14}
         - {x: 16, y: -16}
       tessellationDetail: 0
       bones: []
@@ -2384,8 +2383,7 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -16, y: -16}
-        - {x: -16, y: 13}
-        - {x: -14, y: 13}
+        - {x: -16, y: 14}
         - {x: 16, y: -2}
         - {x: 16, y: -16}
       tessellationDetail: 0

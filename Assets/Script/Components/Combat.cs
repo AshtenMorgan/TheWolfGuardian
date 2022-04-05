@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class Combat : MonoBehaviour
-{
+{ //temporarily disabling class until new mechanics are put in place
+    /*
     #region Variables
     #region General Variables
     [Header("General Pawn Attributes")]
@@ -101,7 +102,7 @@ public class Combat : MonoBehaviour
             _canAttack = false;
         }
     }
-    */
+    
     #endregion
     #region Combo Attack Functions
     #region Hit A Function
@@ -211,9 +212,11 @@ public class Combat : MonoBehaviour
         //Gizmos.DrawWireCube(hitBPos.position, hitBVector);// displays the size and shape of Hitbox B
         #endregion
         #region#region Hitbox C Gizmos
-        Gizmos.DrawWireCube(hitCPos.position, hitCVector);// displays the size and shape of Hitbox B
+        //Gizmos.DrawWireCube(hitCPos.position, hitCVector);// displays the size and shape of Hitbox B
         #endregion
     }
+    #endregion
+    #endregion
+    */
 }
-    #endregion
-    #endregion
+
