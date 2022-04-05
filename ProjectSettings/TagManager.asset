@@ -35,6 +35,7 @@ TagManager:
   - EnemySpawn5
   - EnemySpawn6
   - EnemySpawn7
+  - EnemySpawnPoint
   layers:
   - Default
   - TransparentFX
@@ -75,11 +76,11 @@ TagManager:
   - name: BKG
     uniqueID: 473817421
     locked: 0
-  - name: Player
-    uniqueID: 1563904803
-    locked: 0
   - name: Ground
     uniqueID: 2855587509
+    locked: 0
+  - name: Player
+    uniqueID: 1563904803
     locked: 0
   - name: Enemy
     uniqueID: 3073164019

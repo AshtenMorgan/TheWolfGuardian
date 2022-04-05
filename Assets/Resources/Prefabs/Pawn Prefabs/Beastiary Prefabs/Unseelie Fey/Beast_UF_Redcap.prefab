@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2920632571202009231}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.245, y: -0.434, z: 0}
+  m_LocalPosition: {x: 0.304, y: -0.863, z: 0}
   m_LocalScale: {x: -0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 5892724463852865911}
@@ -258,7 +258,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3773648527952399376}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.026, y: -0.432, z: 0}
+  m_LocalPosition: {x: -0.081, y: -0.952, z: 0}
   m_LocalScale: {x: -0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 5892724463852865911}
@@ -574,7 +574,7 @@ SpriteRenderer:
   m_SortingLayerID: -1221803277
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 47703fb609ab43e41adaa3dd460565e6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2f4eb0c57e1c6974499304db1dad6705, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -619,9 +619,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.016028553, y: -0.30271587}
+  m_Offset: {x: -0.04, y: -0.66}
   serializedVersion: 2
-  m_Radius: 0.12743554
+  m_Radius: 0.21
 --- !u!61 &5305113423755613386
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -635,18 +635,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.032770395, y: -0.20545858}
+  m_Offset: {x: -0.03621556, y: -0.4219692}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.875, y: 0.875}
+    oldSize: {x: 1.75, y: 1.75}
     newSize: {x: 0.875, y: 0.875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.22230339, y: 0.45678174}
+  m_Size: {x: 0.5103079, y: 0.8996921}
   m_EdgeRadius: 0
 --- !u!95 &4396794124818487122
 Animator:
@@ -879,7 +879,7 @@ MonoBehaviour:
   fleeDistance: 5
   isGroundDetected: 1
   isWallDetected: 0
-  isEnemyDetected: 0
+  shouldMove: 0
   isPlayerDetected: 0
   hasRangedAttack: 0
   isInMeleeRange: 0
@@ -935,7 +935,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8879414767259118104}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.122, y: -0.064, z: 0}
+  m_LocalPosition: {x: 0.346, y: -0.084, z: 0}
   m_LocalScale: {x: -0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 5892724463852865911}
@@ -1016,7 +1016,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8944748442071309543}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.168, y: -0.046, z: 0}
+  m_LocalPosition: {x: 0.251, y: -0.074, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5892724463852865911}
