@@ -58,7 +58,7 @@ public class InputRecorder : MonoBehaviour
         KeysPressed.Clear();
     }
 
-    protected virtual void PrintControls() //this prints the inputs recorded on the screen
+    public virtual void PrintControls() //this prints the inputs recorded on the screen
     {
         controlsTestText.text = "Buttons Pressed:\n";
         foreach (KeyCode kcode in KeysPressed)
