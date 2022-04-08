@@ -960,7 +960,7 @@ AnimatorStateMachine:
     m_Position: {x: 400, y: 720, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6984111992333116138}
-    m_Position: {x: 1350, y: -40, z: 0}
+    m_Position: {x: 1250, y: -40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4679598246690331259}
     m_Position: {x: -500, y: -30, z: 0}
@@ -972,7 +972,7 @@ AnimatorStateMachine:
     m_Position: {x: 90, y: -260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2278690502235620802}
-    m_Position: {x: 1640, y: -40, z: 0}
+    m_Position: {x: 1520, y: -40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2556019259223829551}
     m_Position: {x: 760, y: 800, z: 0}
@@ -1006,7 +1006,7 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 2
+  - m_ConditionMode: 1
     m_ConditionEvent: Jumping
     m_EventTreshold: 0
   - m_ConditionMode: 2
