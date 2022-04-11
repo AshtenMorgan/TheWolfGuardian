@@ -13,7 +13,7 @@ public class InputRecorder : MonoBehaviour
 {
     [SerializeField] float ComboResetTime; //this is the timer that resets combos when it reaches zero
     [SerializeField] List<KeyCode> KeysPressed; //lists all the keys pressed by the pawn 
-    [SerializeField] Text controlsTestText; //prints the pressed controls so that I can see whats happening
+    [SerializeField] TMPro.TMP_Text inputText; //prints the pressed controls so that I can see whats happening
 
     MovesManager movesManager;
 
@@ -60,9 +60,9 @@ public class InputRecorder : MonoBehaviour
 
     public virtual void PrintControls() //this prints the inputs recorded on the screen
     {
-        controlsTestText.text = "Buttons Pressed:\n";
+        inputText.text = "Buttons Pressed:\n";
         foreach (KeyCode kcode in KeysPressed)
-            controlsTestText.text += kcode;
-        controlsTestText.text += "\n";
+            inputText.text += kcode;
+            inputText.text += "\n";
     }
 }
