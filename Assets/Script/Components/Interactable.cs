@@ -24,7 +24,7 @@ public class Interactable : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerController pc = other.GetComponent<PlayerController>();
-            pc.isInInteractRange = true;
+            pc.InteractRange = true;
             //GameManager.Instance.NotifyPlayer();
             notificationIcon.enabled = true;
         }
@@ -35,7 +35,7 @@ public class Interactable : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerController pc = other.GetComponent<PlayerController>();
-            pc.isInInteractRange = false;
+            pc.InteractRange = false;
             //GameManager.Instance.DeNotifyPlayer();
             notificationIcon.enabled = false;
         }

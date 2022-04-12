@@ -11,6 +11,12 @@ public class PlayerController : Controller
     protected PlayerInput playerInput; //defines the input that the pawn is utlizing 
     protected PlayerInputActions playerInputActions; //variable for storing the input schemes the pawn will be using
     protected PlayerPawn pawn;//variable for storing the pawn
+    private bool _interactRange = false;
+    public bool InteractRange 
+    {
+        get { return _interactRange; }
+        set { _interactRange = value; }
+    }
     #endregion
     #endregion
     #region Functions
@@ -65,7 +71,7 @@ public class PlayerController : Controller
                 ani.SetBool("Jumping", true);//tell the animator to start jumping
                 verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on playerpawn
                 rb2d.velocity = new Vector2(rb2d.velocity.x, verticalVelocity);
-                jumpTimeCounter -= Time.deltaTime; // subtracts time from the jumpTimeCounter
+                jumpTimeCounter -= Time.fixedDeltaTime; // subtracts time from the jumpTimeCounter
             }
         }
         else if (isGrounded)
