@@ -116,6 +116,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""21578e8f-f5c5-46a1-94e1-6b9f2db6784b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -415,6 +424,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Kick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab317875-3ae9-43aa-af84-6e2ef2315e4b"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3853897c-23f7-4604-bbe2-f2f1201a0467"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -456,6 +487,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_PlayerHuman_LightPunch = m_PlayerHuman.FindAction("LightPunch", throwIfNotFound: true);
         m_PlayerHuman_HeavyPunch = m_PlayerHuman.FindAction("HeavyPunch", throwIfNotFound: true);
         m_PlayerHuman_Kick = m_PlayerHuman.FindAction("Kick", throwIfNotFound: true);
+        m_PlayerHuman_Interact = m_PlayerHuman.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -525,6 +557,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerHuman_LightPunch;
     private readonly InputAction m_PlayerHuman_HeavyPunch;
     private readonly InputAction m_PlayerHuman_Kick;
+    private readonly InputAction m_PlayerHuman_Interact;
     public struct PlayerHumanActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -539,6 +572,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @LightPunch => m_Wrapper.m_PlayerHuman_LightPunch;
         public InputAction @HeavyPunch => m_Wrapper.m_PlayerHuman_HeavyPunch;
         public InputAction @Kick => m_Wrapper.m_PlayerHuman_Kick;
+        public InputAction @Interact => m_Wrapper.m_PlayerHuman_Interact;
         public InputActionMap Get() { return m_Wrapper.m_PlayerHuman; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -578,6 +612,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Kick.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnKick;
                 @Kick.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnKick;
                 @Kick.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnKick;
+                @Interact.started -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerHumanActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerHumanActionsCallbackInterface = instance;
             if (instance != null)
@@ -612,6 +649,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Kick.started += instance.OnKick;
                 @Kick.performed += instance.OnKick;
                 @Kick.canceled += instance.OnKick;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -646,5 +686,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnLightPunch(InputAction.CallbackContext context);
         void OnHeavyPunch(InputAction.CallbackContext context);
         void OnKick(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

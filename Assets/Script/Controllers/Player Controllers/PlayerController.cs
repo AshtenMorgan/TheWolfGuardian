@@ -11,6 +11,13 @@ public class PlayerController : Controller
     protected PlayerInput playerInput; //defines the input that the pawn is utlizing 
     protected PlayerInputActions playerInputActions; //variable for storing the input schemes the pawn will be using
     protected PlayerPawn pawn;//variable for storing the pawn
+    private bool _interactRange = false;
+    private float currentVelocity; //stores the player's current velocity 
+    public bool InteractRange 
+    {
+        get { return _interactRange; }
+        set { _interactRange = value; }
+    }
     #endregion
     #endregion
     #region Functions
@@ -57,20 +64,20 @@ public class PlayerController : Controller
         isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer); //this update checks to see if the player is grounded
         ani.SetBool("Grounded", isGrounded);//match bools
 
+        rb2d.velocity = new Vector2(inputX * currentVelocity, rb2d.velocity.y); //moves the pawn left and right based on player input and running speed
+
         if (!isNotJumping && !isGrounded) //if we are jumping
         {
-
             if (jumpTimeCounter > 0) //and our jump counter hasnt reached zero
             {
                 ani.SetBool("Jumping", true);//tell the animator to start jumping
                 verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on playerpawn
-                rb2d.velocity = new Vector2(rb2d.velocity.x, verticalVelocity);
-                jumpTimeCounter -= Time.deltaTime; // subtracts time from the jumpTimeCounter
+                rb2d.velocity += new Vector2(0, verticalVelocity);
+                jumpTimeCounter -= Time.fixedDeltaTime; // subtracts time from the jumpTimeCounter
             }
         }
         else if (isGrounded)
         {
-            jumpTimeCounter = jumpTime; //if we are grounded, it sets the jumpTimeCounter back to the jumpTime variable
             ani.SetBool("Jumping", false);
         }
         else
@@ -81,15 +88,13 @@ public class PlayerController : Controller
         #endregion
         #region Ground Movement Updates
         SlopeStick();
-        if (!pawn.IsSprinting)
+        if (!pawn.IsSprinting && isGrounded)
         {
-            walkVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
-            rb2d.velocity = new Vector2(inputX * walkVelocity, rb2d.velocity.y); //moves the pawn left and right based on player input and walking speed
+            currentVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
         }
-        if (pawn.IsSprinting)
+        if (pawn.IsSprinting && isGrounded)
         {
-            runVelocity = pawn.RunSpeed; //sets the runVelocity variable equal to that of the protected variable _runSpeed on the playerpawn
-            rb2d.velocity = new Vector2(inputX * runVelocity, rb2d.velocity.y); ////moves the pawn left and right based on player input and running speed
+            currentVelocity = pawn.RunSpeed; //sets the runVelocity variable equal to that of the protected variable _runSpeed on the playerpawn
         }
         FlipSprite(inputX); //flips the sprite of the character when moving left
         #endregion
@@ -102,9 +107,10 @@ public class PlayerController : Controller
         {
             if (isGrounded) //only allows the player to jump if they're on the ground
             {
+                jumpTimeCounter = jumpTime; //if we are grounded, it sets the jumpTimeCounter back to the jumpTime variable
                 isNotJumping = false; //sets the stoppedJumping bool to false so that we have !stoppedJumping
                 verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on PlayerPawn
-                rb2d.velocity = new Vector2(rb2d.velocity.x, verticalVelocity);
+                rb2d.velocity = new Vector2(0, verticalVelocity);
             }
         }
     }
