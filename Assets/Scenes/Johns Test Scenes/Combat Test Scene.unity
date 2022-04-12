@@ -130,6 +130,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 49763244855843432, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 49763244855843432, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 49763244855843432, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 49763244855843432, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 49763244855843432, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 49763244855843432, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -163
+      objectReference: {fileID: 0}
     - target: {fileID: 1863688934748052729, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -185,6 +209,10 @@ PrefabInstance:
     - target: {fileID: 1863688934748053388, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643528012948395353, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
+      propertyPath: m_TagString
+      value: MasterCanvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
@@ -343,7 +371,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1439379787
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
