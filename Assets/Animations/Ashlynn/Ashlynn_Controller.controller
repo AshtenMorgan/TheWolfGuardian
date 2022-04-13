@@ -34,7 +34,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: HitA
+    m_ConditionEvent: HitA0
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Crouched
@@ -162,7 +162,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: HitA
+    m_ConditionEvent: HitA0
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Crouched
@@ -239,7 +239,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: HitB
+    m_ConditionEvent: HitB0
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5292790366285000633}
@@ -264,7 +264,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: HitC
+    m_ConditionEvent: HitC0
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Grounded
@@ -411,7 +411,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: HitA
+    m_ConditionEvent: HitA0
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Grounded
@@ -467,7 +467,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: HitA
+    m_ConditionEvent: HitA0
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Grounded
@@ -554,7 +554,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: HitA
+    m_ConditionEvent: HitA0
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Grounded
@@ -582,7 +582,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: HitA
+    m_ConditionEvent: HitA0
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Grounded
@@ -613,7 +613,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Jumping
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: HitA
+    m_ConditionEvent: HitA0
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6984111992333116138}
@@ -643,55 +643,55 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Jumping
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Sprinting
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Grounded
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Crouched
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: HitA
+    m_Controller: {fileID: 0}
+  - m_Name: HitA0
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: HitB
+    m_Controller: {fileID: 0}
+  - m_Name: HitB0
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: HitC
+    m_Controller: {fileID: 0}
+  - m_Name: HitC0
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: HitA1
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Movement
@@ -772,7 +772,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: HitC
+    m_ConditionEvent: HitC0
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Grounded
@@ -828,7 +828,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: HitB
+    m_ConditionEvent: HitB0
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Grounded
@@ -881,7 +881,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: HitC
+    m_ConditionEvent: HitC0
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Grounded
@@ -1044,7 +1044,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: HitB
+    m_ConditionEvent: HitB0
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Grounded
@@ -1103,7 +1103,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: HitC
+    m_ConditionEvent: HitC0
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Grounded
@@ -1448,7 +1448,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: HitB
+    m_ConditionEvent: HitB0
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4886908862619405379}
@@ -1526,7 +1526,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: HitA
+    m_ConditionEvent: HitA0
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Jumping

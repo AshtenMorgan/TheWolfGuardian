@@ -13,4 +13,6 @@ public enum Moveset
     HitC1,
     HitC2,
     HitC3,
+    SpecialMove0,
+    SpecialMove1,
 }

@@ -41,7 +41,7 @@ public class InputRecorder : MonoBehaviour
                 if (!movesManager.IsMoveAvailable(KeysPressed)) //if there are no moves available from the buttons pressed, reset the list
                     StopAllCoroutines();
 
-                StartCoroutine(ResetComboTimer()); //this starts the list reset
+                    StartCoroutine(ResetComboTimer()); //this starts the list reset
             }
         }
     }
@@ -63,6 +63,5 @@ public class InputRecorder : MonoBehaviour
         inputText.text = "Buttons Pressed:\n";
         foreach (KeyCode kcode in KeysPressed)
             inputText.text += kcode;
-            inputText.text += "\n";
     }
 }
