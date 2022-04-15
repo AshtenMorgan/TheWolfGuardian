@@ -513,7 +513,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5723497773128222801}
+  - {fileID: 2577482029832910531}
   - {fileID: 6365681841573254352}
   - {fileID: 6365681840086051460}
   - {fileID: 6365681841529043822}
@@ -540,7 +540,7 @@ MonoBehaviour:
   hitACollider: {fileID: 0}
   enemy: []
   playerPrefab: {fileID: 0}
-  instanPoint: {fileID: 0}
+  instanPoint: {fileID: 6365681841573254352}
   playerSpawn: {fileID: 0}
   enemy1Spawn:
   - {fileID: 0}
@@ -897,11 +897,43 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6365681841573254355}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.76, y: 3.82, z: 0}
+  m_LocalPosition: {x: -5.06, y: 1.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1863688934748052729}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6432349809362674731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2577482029832910531}
+  m_Layer: 0
+  m_Name: Combat Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2577482029832910531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6432349809362674731}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 731.6894, y: 267.9999, z: -0.008938502}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5723497773128222801}
+  - {fileID: 1656979230538649039}
+  m_Father: {fileID: 1863688934748052729}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6716947007194264783
 GameObject:
@@ -1062,10 +1094,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7489150596096885837}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 342, y: 240, z: 0}
+  m_LocalPosition: {x: -389.6894, y: -27.999908, z: 0.008938502}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1863688934748052729}
+  m_Father: {fileID: 2577482029832910531}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &327659866916740563
@@ -1080,6 +1112,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 241ad861a583e9e428e09b2b609416e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ComboResetTime: 0
+  ComboResetTime: 5
   KeysPressed: 
   inputText: {fileID: 6450713295187106642}
+--- !u!1 &8938531774504234447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1656979230538649039}
+  - component: {fileID: 1429028442858632010}
+  m_Layer: 0
+  m_Name: MovesManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1656979230538649039
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8938531774504234447}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2577482029832910531}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1429028442858632010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8938531774504234447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a9eea4754178fc4683c91e75bf1a35e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  availableMoves:
+  - {fileID: 11400000, guid: feb581a86bf24c24bbd130ce7e3471d0, type: 2}
+  - {fileID: 11400000, guid: 2ff6a7baa1473574e94aaf85adb93ed5, type: 2}
+  - {fileID: 11400000, guid: 4b867f186d4105443af62206a81e67fa, type: 2}
+  - {fileID: 11400000, guid: 3315a1a39619d354c9427305898d3bc9, type: 2}
+  - {fileID: 11400000, guid: 65e1d91edb075e740ae21085387ca3cf, type: 2}
+  - {fileID: 11400000, guid: 7140594141f4a6e49b2d622f35875200, type: 2}

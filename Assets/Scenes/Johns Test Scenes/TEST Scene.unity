@@ -178,6 +178,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager (NoUI)
       objectReference: {fileID: 0}
+    - target: {fileID: 1863688934748052933, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
+      propertyPath: Enemy1
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1863688934748053154, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
+      propertyPath: playerSpawn
+      value: 
+      objectReference: {fileID: 790449865}
     - target: {fileID: 1863688934748053388, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -188,6 +196,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
+--- !u!4 &790449865 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6365681841573254352, guid: f99c70ac15be85e4c8922cad069dea9b, type: 3}
+  m_PrefabInstance: {fileID: 389841214}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &985349564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -361,7 +374,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1439379787
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

@@ -56,7 +56,7 @@ public class PlayerController : Controller
     // Update is called once per frame
     protected override void Update()
     {
-        isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer); //this update checks to see if the pawn is grounded
+        base.Update();
     }
 
     protected override void FixedUpdate()
