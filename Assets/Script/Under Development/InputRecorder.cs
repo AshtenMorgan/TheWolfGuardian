@@ -15,7 +15,7 @@ public class InputRecorder : MonoBehaviour
     [SerializeField] List<KeyCode> KeysPressed; //lists all the keys pressed by the pawn 
     [SerializeField] TMPro.TMP_Text inputText; //prints the pressed controls so that I can see whats happening
 
-    MovesManager movesManager;
+    [SerializeField] MovesManager movesManager;
 
     void Awake()
     {
