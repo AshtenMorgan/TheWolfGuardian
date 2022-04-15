@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 905596fc4da21d2448d57698f48c835e, type: 3}
-  m_Name: SpecialMove0
+  m_Name: HitAS2
   m_EditorClassIdentifier: 
-  movesKeyCodes: 
-  moveType: 13
+  movesKeyCodes: 6a0000006a0000006c000000
+  moveType: 3
   ComboPriority: 1

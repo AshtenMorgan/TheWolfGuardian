@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 905596fc4da21d2448d57698f48c835e, type: 3}
-  m_Name: HitB0
+  m_Name: HitCS0
   m_EditorClassIdentifier: 
   movesKeyCodes: 6b000000
-  moveType: 5
-  ComboPriority: 4
+  moveType: 7
+  ComboPriority: 0

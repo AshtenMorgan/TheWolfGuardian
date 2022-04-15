@@ -14,8 +14,6 @@ public class Controller : MonoBehaviour
     protected Combat combat; //stores the combat script for the pawn
     [SerializeField]
     protected LayerMask groundLayer; //The layer mask for what is considered "the ground" in the game
-    InputRecorder inputRecorder; //assigns the input recorder script so the controller can properly do combos
-    int CurrentComboPriority = 0;
     #endregion
     #region Jump Variables
     [Header("Jump Variables")]
@@ -47,6 +45,13 @@ public class Controller : MonoBehaviour
     [Header("Animator Variables")]
     public Animator ani;//animator code
     #endregion
+    #region Combat Variables
+    InputRecorder inputRecorder; //assigns the input recorder script so the controller can properly do combos
+    MovesManager movesManager;
+    int CurrentComboPriority = 0;
+    int ComboPriority;
+    [SerializeField]
+    Moveset move; //stores the Moveset enum
     #region Full Properties
     public bool IsGrounded
     {
@@ -62,14 +67,16 @@ public class Controller : MonoBehaviour
     #region Functions
     protected virtual void Awake()
     {
-        
+        if (inputRecorder == null)
+            inputRecorder = FindObjectOfType<InputRecorder>();
+        if (movesManager == null)
+            movesManager = FindObjectOfType<MovesManager>();
         rb2d = GetComponent<Rigidbody2D>(); //defines the Rigidbody needed for pawn physics
         combat = GetComponent<Combat>();
         if (ani == null)
             ani = GetComponent<Animator>();
-        if (inputRecorder == null)
-            inputRecorder = FindObjectOfType<InputRecorder>();
         jumpTimeCounter = jumpTime; //sets the jumpTimeCounter
+        
     }
 
     protected virtual void Start()
@@ -80,6 +87,7 @@ public class Controller : MonoBehaviour
     protected virtual void Update()
     {
         isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer); //this update checks to see if the pawn is grounded
+        PlayMove(move, ComboPriority);
     }
     protected virtual void FixedUpdate()
     {
@@ -96,13 +104,7 @@ public class Controller : MonoBehaviour
             rb2d.sharedMaterial = noFriction; //changes Physics Material 2D of the rigidbody to our No Friction material
         }
     }
-    void ResetTriggers() //Reset All the Animation Triggers so we don't have overlapping animations
-    {
-        foreach (AnimatorControllerParameter parameter in ani.parameters)
-        {
-            ani.ResetTrigger(parameter.name);
-        }
-    }
+    #region Combat Functions
     public void PlayMove(Moveset move, int ComboPriority) //Get the Move and the Priorty
     {
         if (Moveset.None != move) //if the move is none ignore the function
@@ -119,46 +121,37 @@ public class Controller : MonoBehaviour
             //Set the Animation Triggers
             switch (move)
             {
-                case Moveset.HitA0:
-                    ani.SetTrigger("HitA0");
+                case Moveset.HitAS0:
+                    ani.SetTrigger("HitAS0");
                     break;
-                case Moveset.HitA1:
-                    ani.SetTrigger("HitA1");
+                case Moveset.HitAS2:
+                    ani.SetTrigger("HitAS2");
                     break;
-                case Moveset.HitA2:
-                    ani.SetTrigger("HitA2");
+                case Moveset.HitAS3:
+                    ani.SetTrigger("HitAS3");
                     break;
-                case Moveset.HitA3:
-                    ani.SetTrigger("HitA3");
+                case Moveset.HitAA0:
+                    ani.SetTrigger("HitAA0");
                     break;
-                case Moveset.HitB0:
-                    ani.SetTrigger("HitB0");
+                case Moveset.HitAC0:
+                    ani.SetTrigger("HitAA0");
                     break;
-                case Moveset.HitB1:
-                    ani.SetTrigger("HitB1");
-                    break;
-                case Moveset.HitB2:
-                    ani.SetTrigger("HitB2");
-                    break;
-                case Moveset.HitB3:
-                    ani.SetTrigger("HitB3");
-                    break;
-                case Moveset.HitC0:
+                case Moveset.HitCS0:
                     ani.SetTrigger("HitC0");
-                    break;
-                case Moveset.HitC1:
-                    ani.SetTrigger("HitC1");
-                    break;
-                case Moveset.HitC2:
-                    ani.SetTrigger("HitC2");
-                    break;
-                case Moveset.HitC3:
-                    ani.SetTrigger("HitC3");
                     break;
             }
 
             CurrentComboPriority = 0; //Reset the Combo Priorty
         }
     }
+    void ResetTriggers() //Reset All the Animation Triggers so we don't have overlapping animations
+    {
+        foreach (AnimatorControllerParameter parameter in ani.parameters)
+        {
+            ani.ResetTrigger(parameter.name);
+        }
+    }
+    #endregion
+    #endregion
     #endregion
 }

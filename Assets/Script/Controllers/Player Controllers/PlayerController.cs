@@ -18,6 +18,7 @@ public class PlayerController : Controller
         get { return _interactRange; }
         set { _interactRange = value; }
     }
+
     #endregion
     #endregion
     #region Functions
@@ -55,7 +56,7 @@ public class PlayerController : Controller
     // Update is called once per frame
     protected override void Update()
     {
-        base.Update();
+        isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer); //this update checks to see if the pawn is grounded
     }
 
     protected override void FixedUpdate()
@@ -187,6 +188,7 @@ public class PlayerController : Controller
         }
     }
     #endregion
+
     #region Gizmos
     private void OnDrawGizmos()
     {
