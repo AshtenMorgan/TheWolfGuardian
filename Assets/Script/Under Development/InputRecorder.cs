@@ -21,6 +21,8 @@ public class InputRecorder : MonoBehaviour
     {
         if (movesManager == null)
             movesManager = FindObjectOfType<MovesManager>(); //assigns a moves manager script if one is not assigned
+        if (inputText == null)
+            inputText = GameObject.FindGameObjectWithTag("Inputs").GetComponent<TMPro.TMP_Text>();
     }
 
    
