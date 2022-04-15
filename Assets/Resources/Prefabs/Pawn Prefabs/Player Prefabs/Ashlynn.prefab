@@ -220,7 +220,7 @@ MonoBehaviour:
     m_Bits: 8
   jumpTime: 0.08
   groundCheck: {fileID: 1336663592562666403}
-  boxSize: {x: 0.565, y: 0.127}
+  boxSize: {x: 0.565, y: 0.01}
   noFriction: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
   fullFriction: {fileID: 6200000, guid: 48626c08f0a6277489a9387662b457ac, type: 2}
   ani: {fileID: 1336663593021864652}

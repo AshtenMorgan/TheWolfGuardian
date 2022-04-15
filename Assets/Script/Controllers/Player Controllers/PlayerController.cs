@@ -89,14 +89,18 @@ public class PlayerController : Controller
         #endregion
         #region Ground Movement Updates
         SlopeStick();
-        if (!pawn.IsSprinting && isGrounded)
-        {
-            currentVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
-        }
-        if (pawn.IsSprinting && isGrounded)
-        {
-            currentVelocity = pawn.RunSpeed; //sets the runVelocity variable equal to that of the protected variable _runSpeed on the playerpawn
-        }
+        if(!isCrouching)
+        
+            {
+                if (!pawn.IsSprinting && isGrounded)
+                {
+                    currentVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
+                }
+                if (pawn.IsSprinting && isGrounded)
+                {
+                    currentVelocity = pawn.RunSpeed; //sets the runVelocity variable equal to that of the protected variable _runSpeed on the playerpawn
+                }
+            }
         FlipSprite(inputX); //flips the sprite of the character when moving left
         #endregion
     }
@@ -106,7 +110,7 @@ public class PlayerController : Controller
     {
         if (context.performed)
         {
-            if (isGrounded) //only allows the player to jump if they're on the ground
+            if (isGrounded && !isCrouching) //only allows the player to jump if they're on the ground
             {
                 jumpTimeCounter = jumpTime; //if we are grounded, it sets the jumpTimeCounter back to the jumpTime variable
                 isNotJumping = false; //sets the stoppedJumping bool to false so that we have !stoppedJumping
@@ -122,8 +126,10 @@ public class PlayerController : Controller
     }
     public virtual void Move(InputAction.CallbackContext context)
     {
-        inputX = context.ReadValue<Vector2>().x; //reads the value of the x input the player is using
-
+        if (!isCrouching)
+        {
+            inputX = context.ReadValue<Vector2>().x; //reads the value of the x input the player is using
+        }
         //animator
         ani.SetFloat("Speed", Mathf.Abs(inputX));//tell the animator we are moving
     }
