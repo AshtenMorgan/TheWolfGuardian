@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ashlynn_JumpPunch
+  m_Name: HitA2
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: c198c4e551b04bf47913b706891a2d49, type: 3}
+      value: {fileID: 21300000, guid: c2df7dcbb775c1848839ae1d797ef29b, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: 5f2fe0787228bd04d9136044f89ffcb6, type: 3}
+      value: {fileID: 21300000, guid: 59c8bd85d1830cc4e84de800b52ae654, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: ce09091568b1f844db5a9ed2e118d5a7, type: 3}
+      value: {fileID: 21300000, guid: 736cdd5645f1db440b5bc65b137e5e48, type: 3}
+    - time: 0.25
+      value: {fileID: 21300000, guid: 05ecdae999cb2c249aae8648d03f750c, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,15 +46,16 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: c198c4e551b04bf47913b706891a2d49, type: 3}
-    - {fileID: 21300000, guid: 5f2fe0787228bd04d9136044f89ffcb6, type: 3}
-    - {fileID: 21300000, guid: ce09091568b1f844db5a9ed2e118d5a7, type: 3}
+    - {fileID: 21300000, guid: c2df7dcbb775c1848839ae1d797ef29b, type: 3}
+    - {fileID: 21300000, guid: 59c8bd85d1830cc4e84de800b52ae654, type: 3}
+    - {fileID: 21300000, guid: 736cdd5645f1db440b5bc65b137e5e48, type: 3}
+    - {fileID: 21300000, guid: 05ecdae999cb2c249aae8648d03f750c, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.25
+    m_StopTime: 0.33333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
