@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Parllax : MonoBehaviour
+public class Parallax : MonoBehaviour
 {
-    protected float length,
-        startpos;
+    
+    protected float lengthx,
+        lengthy,
+        startposx,
+        startposy;
     [Header("How fast this section moves"), SerializeField, Tooltip("The closer the section, the lower the number should be")]
     public float parallaxFactor;
     [Header("Camera to add parallax to"), SerializeField, Tooltip("This should be the Cinemachine Virtual Camera, NOT Main Camera.")]
@@ -15,27 +18,33 @@ public class Parllax : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startpos = transform.position.x;
-        length = GetComponent<SpriteRenderer>().bounds.size.x;
+        startposx = transform.position.x;
+        startposy = transform.position.y;
+        lengthx = GetComponent<SpriteRenderer>().bounds.size.x;
+        lengthy = GetComponent<SpriteRenderer>().bounds.size.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float temp = cam.transform.position.x * (1 - parallaxFactor);
-        float distance = cam.transform.position.x * parallaxFactor;
+        float tempx = cam.transform.position.x * (1 - parallaxFactor);
+        float distancex = cam.transform.position.x * parallaxFactor;
+        float tempy = cam.transform.position.y * (1 - parallaxFactor);
+        float distancey = cam.transform.position.y * parallaxFactor;
 
-        Vector3 newPosition = new Vector3(startpos + distance, transform.position.y, transform.position.z);
+        Vector3 newPosition = new Vector3(startposx + distancex, startposy + distancey, transform.position.z);
         transform.position = PixelPerfectClamp(newPosition, pixelsPerUnit);
 
-        if (temp > startpos + (length / 2))
-        {
-            startpos += length;
-        }
-        else if (temp < startpos - (length / 2))
-        {
-            startpos -= length;
-        }
+        if (tempx > startposx + (lengthx / 2))
+            startposx += lengthx;
+        else if (tempx < startposx - (lengthx / 2))
+            startposx -= lengthx;
+        if (tempy > startposy + (lengthy / 2))
+            startposy += lengthy;
+        else if (tempy < startposy - (lengthy / 2))
+            startposy -= lengthy;
+
+
     }
     private Vector3 PixelPerfectClamp(Vector3 locationVector, float pixelsPerUnit)
     {

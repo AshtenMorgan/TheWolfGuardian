@@ -21,6 +21,8 @@ public class InputRecorder : MonoBehaviour
     {
         if (movesManager == null)
             movesManager = FindObjectOfType<MovesManager>(); //assigns a moves manager script if one is not assigned
+        if (inputText == null)
+            inputText = GameObject.FindGameObjectWithTag("Inputs").GetComponent<TMPro.TMP_Text>();
     }
 
    
@@ -30,7 +32,7 @@ public class InputRecorder : MonoBehaviour
         PrintControls();
     }
 
-    protected virtual void DetectPressedKey() 
+    public virtual void DetectPressedKey() 
     {
         foreach (KeyCode kcode in Enum.GetValues(typeof(KeyCode))) //this will go through every key pressed
         {

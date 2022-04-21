@@ -64,6 +64,7 @@ public class Controller : MonoBehaviour
 
     #endregion
     #endregion
+    #endregion
     #region Functions
     protected virtual void Awake()
     {
@@ -159,5 +160,5 @@ public class Controller : MonoBehaviour
     }
     #endregion
     #endregion
-    #endregion
+    
 }

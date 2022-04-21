@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     public Scene scene;
-    private string mainMenu = "James Test"; //name of the main menu scene as a string
+    //private string mainMenu = "James Test"; //name of the main menu scene as a string
     #endregion
 
 
@@ -97,13 +97,13 @@ public class GameManager : MonoBehaviour
     {
         scene = loaded;//update what scene we are in
 
-        if (scene.name != mainMenu)
+        if (scene.name != "Main Menu")
         {
           ObjectPool.instance.PoolSetup();
           VarCheck();
             
         }
-        else if (scene.name == mainMenu)
+        else if (scene.name == "Main Menu")
         {
 
         }
@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (scene.name != mainMenu)//make sure we should have stuff
+        if (scene.name != "Main Menu")//make sure we should have stuff
         {
             current = Time.time;//for testing purposes  delete after tests are complete
             CheckSpawn();       //see if it is time to spawn player  //maybe trigger this on death
@@ -390,7 +390,7 @@ public class GameManager : MonoBehaviour
     public void UpdateHealthBar()
     {
         Scene scene = SceneManager.GetActiveScene();
-        if (scene.name != mainMenu)
+        if (scene.name != "Main Menu")
         {
             currentHealth = playerHealth.currentHealth;
             maxHealth = playerHealth.maxHealth;
