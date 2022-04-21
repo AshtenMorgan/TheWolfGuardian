@@ -32,7 +32,7 @@ public class InputRecorder : MonoBehaviour
         PrintControls();
     }
 
-    protected virtual void DetectPressedKey() 
+    public virtual void DetectPressedKey() 
     {
         foreach (KeyCode kcode in Enum.GetValues(typeof(KeyCode))) //this will go through every key pressed
         {

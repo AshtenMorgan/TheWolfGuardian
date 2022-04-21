@@ -426,6 +426,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1453045356511503218, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: availableMoves.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453045356511503218, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: availableMoves.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: feb581a86bf24c24bbd130ce7e3471d0, type: 2}
+    - target: {fileID: 1453045356511503218, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: availableMoves.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2ff6a7baa1473574e94aaf85adb93ed5, type: 2}
+    - target: {fileID: 1453045356511503218, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: availableMoves.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b867f186d4105443af62206a81e67fa, type: 2}
+    - target: {fileID: 1453045356511503218, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: availableMoves.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3315a1a39619d354c9427305898d3bc9, type: 2}
+    - target: {fileID: 1453045356511503218, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: availableMoves.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 65e1d91edb075e740ae21085387ca3cf, type: 2}
+    - target: {fileID: 1453045356511503218, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: availableMoves.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7140594141f4a6e49b2d622f35875200, type: 2}
+    - target: {fileID: 1453045356511503218, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: availableMoves.Array.data[7]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3460795040269741011, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
       propertyPath: m_TagString
       value: Inputs
