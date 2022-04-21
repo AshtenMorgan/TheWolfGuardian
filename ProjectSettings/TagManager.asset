@@ -37,6 +37,7 @@ TagManager:
   - EnemySpawn7
   - EnemySpawnPoint
   - Inputs
+  - CombatManager
   layers:
   - Default
   - TransparentFX

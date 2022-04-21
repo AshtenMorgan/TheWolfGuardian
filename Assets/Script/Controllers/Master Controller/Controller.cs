@@ -46,7 +46,7 @@ public class Controller : MonoBehaviour
     public Animator ani;//animator code
     #endregion
     #region Combat Variables
-    InputRecorder inputRecorder; //assigns the input recorder script so the controller can properly do combos
+    [SerializeField]InputRecorder inputRecorder; //assigns the input recorder script so the controller can properly do combos
     MovesManager movesManager;
     int CurrentComboPriority = 0;
     int ComboPriority;
