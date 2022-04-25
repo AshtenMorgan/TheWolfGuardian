@@ -10,7 +10,8 @@ public class Parallax : MonoBehaviour
         startposx,
         startposy;
     [Header("How fast this section moves"), SerializeField, Tooltip("The closer the section, the lower the number should be")]
-    public float parallaxFactor;
+    public float parallaxFactorX,
+        parallaxFactorY;
     [Header("Camera to add parallax to"), SerializeField, Tooltip("This should be the Cinemachine Virtual Camera, NOT Main Camera.")]
     public GameObject cam;
     [Header("PPU"), SerializeField, Tooltip("This should match the pixels per unit of the project")]
@@ -27,10 +28,10 @@ public class Parallax : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float tempx = cam.transform.position.x * (1 - parallaxFactor);
-        float distancex = cam.transform.position.x * parallaxFactor;
-        float tempy = cam.transform.position.y * (1 - parallaxFactor);
-        float distancey = cam.transform.position.y * parallaxFactor;
+        float tempx = cam.transform.position.x * (1 - parallaxFactorX);
+        float distancex = cam.transform.position.x * parallaxFactorX;
+        float tempy = cam.transform.position.y * (1 - parallaxFactorY);
+        float distancey = cam.transform.position.y * parallaxFactorY;
 
         Vector3 newPosition = new Vector3(startposx + distancex, startposy + distancey, transform.position.z);
         transform.position = PixelPerfectClamp(newPosition, pixelsPerUnit);
