@@ -498,5 +498,13 @@ PrefabInstance:
       propertyPath: availableMoves.Array.data[5]
       value: 
       objectReference: {fileID: 11400000, guid: 7140594141f4a6e49b2d622f35875200, type: 2}
+    - target: {fileID: 9179242101021406245, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -26.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 9179242101021406245, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -24.16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
