@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movesKeyCodes: 00000000
   moveType: 0
-  ComboPriority: 9
+  ComboPriority: 0
