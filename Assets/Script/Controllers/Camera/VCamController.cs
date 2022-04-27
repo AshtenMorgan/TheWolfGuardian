@@ -24,7 +24,7 @@ public class VCamController : MonoBehaviour
 
     void Update()
     {
-        transform.position = PixelPerfectClamp(gm.player.transform.position, pixelsPerUnit);
+        //transform.position = PixelPerfectClamp(gm.player.transform.position, pixelsPerUnit);
     }
 
     private Vector3 PixelPerfectClamp(Vector3 moveVector, float pixelsPerUnit)
@@ -32,11 +32,5 @@ public class VCamController : MonoBehaviour
         Vector3 vectorInPixels = new Vector3(Mathf.CeilToInt(moveVector.x * pixelsPerUnit), Mathf.CeilToInt(moveVector.y * pixelsPerUnit), Mathf.CeilToInt(moveVector.z * pixelsPerUnit));
         return vectorInPixels / pixelsPerUnit;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<SuperGrid>())
-        {
-            confiner.m_BoundingShape2D = collision.GetComponent<PolygonCollider2D>();
-        }
-    }
+
 }
