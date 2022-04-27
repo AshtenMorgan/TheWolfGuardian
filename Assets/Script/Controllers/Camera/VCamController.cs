@@ -24,13 +24,15 @@ public class VCamController : MonoBehaviour
 
     void Update()
     {
-        //transform.position = PixelPerfectClamp(gm.player.transform.position, pixelsPerUnit);
+        transform.position = PixelPerfectClamp(gm.player.transform.position, pixelsPerUnit);
     }
 
+    
     private Vector3 PixelPerfectClamp(Vector3 moveVector, float pixelsPerUnit)
     {
         Vector3 vectorInPixels = new Vector3(Mathf.CeilToInt(moveVector.x * pixelsPerUnit), Mathf.CeilToInt(moveVector.y * pixelsPerUnit), Mathf.CeilToInt(moveVector.z * pixelsPerUnit));
         return vectorInPixels / pixelsPerUnit;
     }
+    
 
 }

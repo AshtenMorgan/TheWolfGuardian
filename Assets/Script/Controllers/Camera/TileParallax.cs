@@ -23,6 +23,8 @@ public class TileParallax : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Camera.main.transform.position.x <= -39.9)
+            return;
         float temp = cam.transform.position.x * (1 - parallaxFactor);
         float distance = cam.transform.position.x * parallaxFactor;
         
