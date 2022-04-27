@@ -16,6 +16,10 @@ public class Parallax : MonoBehaviour
     public GameObject cam;
     [Header("PPU"), Tooltip("This should match the pixels per unit of the project")]
     public float pixelsPerUnit;
+    private float tempx,
+        tempy,
+        distancex,
+        distancey;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,26 +32,37 @@ public class Parallax : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        tempy = cam.transform.position.y * (1 - parallaxFactorY);
+        distancey = cam.transform.position.y * parallaxFactorY;
+        tempx = cam.transform.position.x * (1 - parallaxFactorX);
+        distancex = cam.transform.position.x * parallaxFactorX;
+        UpdateY();
+
         if (Camera.main.transform.position.x <= -39.9)
             return;
-        float tempx = cam.transform.position.x * (1 - parallaxFactorX);
-        float distancex = cam.transform.position.x * parallaxFactorX;
-        float tempy = cam.transform.position.y * (1 - parallaxFactorY);
-        float distancey = cam.transform.position.y * parallaxFactorY;
 
-        Vector3 newPosition = new Vector3(startposx + distancex, startposy + distancey, transform.position.z);
+        UpdateX();
+        
+    }
+    void UpdateX()
+    {
+        Vector3 newPosition = new Vector3(startposx + distancex, transform.position.y, transform.position.z);
         transform.position = PixelPerfectClamp(newPosition, pixelsPerUnit);
 
         if (tempx > startposx + (lengthx / 2))
             startposx += lengthx;
         else if (tempx < startposx - (lengthx / 2))
             startposx -= lengthx;
-        if (tempy > startposy + (lengthy / 3))
+    }
+    void UpdateY()
+    {
+        Vector3 newPosition = new Vector3(transform.position.x, startposy + distancey, transform.position.z);
+        transform.position = PixelPerfectClamp(newPosition, pixelsPerUnit);
+
+        if (tempy > startposy + (lengthy / 1.5))
             startposy += lengthy;
-        else if (tempy < startposy - (lengthy / 3))
+        else if (tempy < startposy - (lengthy / 1.5))
             startposy -= lengthy;
-
-
     }
     private Vector3 PixelPerfectClamp(Vector3 locationVector, float pixelsPerUnit)
     {
