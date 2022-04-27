@@ -5,13 +5,13 @@ using UnityEngine;
 public class MovesManager : MonoBehaviour
 {
     [SerializeField] List<Move> availableMoves;
-    Controller controller;
-    InputRecorder inputRecorder;
+    [SerializeField] Controller controller;
+    [SerializeField] InputRecorder inputRecorder;
     // Start is called before the first frame update
     void Awake()
     {
-        controller = FindObjectOfType<Controller>();
-        inputRecorder = FindObjectOfType<InputRecorder>();
+        controller = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        inputRecorder = GameObject.FindGameObjectWithTag("Player").GetComponent<InputRecorder>();
 
         availableMoves.Sort(Compare); //Sorts all the moves based on their priority
     }

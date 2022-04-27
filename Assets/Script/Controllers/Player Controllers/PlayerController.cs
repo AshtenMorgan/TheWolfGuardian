@@ -18,6 +18,7 @@ public class PlayerController : Controller
         get { return _interactRange; }
         set { _interactRange = value; }
     }
+
     #endregion
     #endregion
     #region Functions
@@ -193,6 +194,7 @@ public class PlayerController : Controller
         }
     }
     #endregion
+
     #region Gizmos
     private void OnDrawGizmos()
     {

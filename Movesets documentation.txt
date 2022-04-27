@@ -1,0 +1,23 @@
+The naming convention as follows:
+the naming system starts with the word Hit to signify what type of attack it is. Hit is a melee attack, Range is a ranged attack
+Utility is a support type attack, and Guard is a defensive combo.
+
+The First letter, which is signified by the letters A, B or C, signifies which button is pressed to start the combo
+Whether or not the actual attack is activated by that button
+
+The next letter is going to be either A, S or C they signify as follows:
+
+
+Explanation 
+Standing attacks
+HitAS0 - Light Punch - basic light punch, first punch in the combo
+HitAS1 - Light Jab - light left jab, secondary punch
+HitAS2 - Strong Punch - Strong Heavy Punch 
+HitAS3 - Uppercut - Ashlynns Uppercut
+HitCS0 - High Kick -ashlynns high kick
+
+Crouched attacks
+HitAC0 - Crouch Punch - The basic light punched while crouched
+
+Jumping Attacks
+HitAA0 - Air Punch - the basic punch while in the air 

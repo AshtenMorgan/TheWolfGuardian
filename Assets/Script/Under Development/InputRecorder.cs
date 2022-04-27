@@ -12,10 +12,8 @@ using UnityEngine.UI;
 public class InputRecorder : MonoBehaviour
 {
     [SerializeField] float ComboResetTime; //this is the timer that resets combos when it reaches zero
-    [SerializeField] List<KeyCode> KeysPressed; //lists all the keys pressed by the pawn 
-    [SerializeField] TMPro.TMP_Text inputText; //prints the pressed controls so that I can see whats happening
-
-    MovesManager movesManager;
+    [SerializeField] public List<KeyCode> KeysPressed; //lists all the keys pressed by the pawn 
+    [SerializeField] MovesManager movesManager;
 
     void Awake()
     {
@@ -27,10 +25,9 @@ public class InputRecorder : MonoBehaviour
     void Update()
     {
         DetectPressedKey();
-        PrintControls();
     }
 
-    protected virtual void DetectPressedKey() 
+    public virtual void DetectPressedKey() 
     {
         foreach (KeyCode kcode in Enum.GetValues(typeof(KeyCode))) //this will go through every key pressed
         {
@@ -58,10 +55,5 @@ public class InputRecorder : MonoBehaviour
         KeysPressed.Clear();
     }
 
-    public virtual void PrintControls() //this prints the inputs recorded on the screen
-    {
-        inputText.text = "Buttons Pressed:\n";
-        foreach (KeyCode kcode in KeysPressed)
-            inputText.text += kcode;
-    }
+
 }
