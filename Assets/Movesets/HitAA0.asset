@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905596fc4da21d2448d57698f48c835e, type: 3}
   m_Name: HitAA0
   m_EditorClassIdentifier: 
-  movesKeyCodes: 6a000000
+  movesKeyCodes: 75000000
   moveType: 5
-  ComboPriority: 1
+  ComboPriority: 0

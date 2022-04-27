@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905596fc4da21d2448d57698f48c835e, type: 3}
   m_Name: HitAS3
   m_EditorClassIdentifier: 
-  movesKeyCodes: 770000006a000000
+  movesKeyCodes: 69000000
   moveType: 4
   ComboPriority: 1

@@ -123,8 +123,8 @@ public class Controller : MonoBehaviour
             switch (move)
             {
                 case Moveset.HitAS0:
-                    Debug.Log("Playing Move HitAS0!");
-                    ani.SetTrigger("HitAS0");
+                        Debug.Log("Playing Move HitAS0!");
+                        ani.SetTrigger("HitAS0");
                     break;
                 case Moveset.HitAS2:
                     Debug.Log("Playing Move HitAS2!");
@@ -135,12 +135,12 @@ public class Controller : MonoBehaviour
                     ani.SetTrigger("HitAS3");
                     break;
                 case Moveset.HitAA0:
-                    Debug.Log("Playing Move HitAA0!");
-                    ani.SetTrigger("HitAA0");
+                        Debug.Log("Playing Move HitAA0!");
+                        ani.SetTrigger("HitAA0");
                     break;
                 case Moveset.HitAC0:
-                    Debug.Log("Playing Move HitAC0!");
-                    ani.SetTrigger("HitAC0");
+                        Debug.Log("Playing Move HitAC0!");
+                        ani.SetTrigger("HitAC0");
                     break;
                 case Moveset.HitCS0:
                     Debug.Log("Playing Move HitCS0!");
