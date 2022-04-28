@@ -101,6 +101,12 @@ MonoBehaviour:
   parallaxFactorY: 0
   cam: {fileID: 0}
   pixelsPerUnit: 32
+  tempx: 0
+  tempy: 0
+  distancex: 0
+  distancey: 0
+  prevCamX: 0
+  prevCamY: 0
 --- !u!1 &568589381104916455
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +208,12 @@ MonoBehaviour:
   parallaxFactorY: 0
   cam: {fileID: 0}
   pixelsPerUnit: 32
+  tempx: 0
+  tempy: 0
+  distancex: 0
+  distancey: 0
+  prevCamX: 0
+  prevCamY: 0
 --- !u!1 &568589381130461641
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +315,12 @@ MonoBehaviour:
   parallaxFactorY: 0
   cam: {fileID: 0}
   pixelsPerUnit: 32
+  tempx: 0
+  tempy: 0
+  distancex: 0
+  distancey: 0
+  prevCamX: 0
+  prevCamY: 0
 --- !u!1 &568589381192955956
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,6 +504,12 @@ MonoBehaviour:
   parallaxFactorY: 0
   cam: {fileID: 0}
   pixelsPerUnit: 32
+  tempx: 0
+  tempy: 0
+  distancex: 0
+  distancey: 0
+  prevCamX: 0
+  prevCamY: 0
 --- !u!1 &568589381364516375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,6 +1186,12 @@ MonoBehaviour:
   parallaxFactorY: 0
   cam: {fileID: 0}
   pixelsPerUnit: 32
+  tempx: 0
+  tempy: 0
+  distancex: 0
+  distancey: 0
+  prevCamX: 0
+  prevCamY: 0
 --- !u!1 &568589382191816608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1263,6 +1293,12 @@ MonoBehaviour:
   parallaxFactorY: 0
   cam: {fileID: 0}
   pixelsPerUnit: 32
+  tempx: 0
+  tempy: 0
+  distancex: 0
+  distancey: 0
+  prevCamX: 0
+  prevCamY: 0
 --- !u!1 &568589382231121323
 GameObject:
   m_ObjectHideFlags: 0
@@ -1892,3 +1928,9 @@ MonoBehaviour:
   parallaxFactorY: 0
   cam: {fileID: 0}
   pixelsPerUnit: 32
+  tempx: 0
+  tempy: 0
+  distancex: 0
+  distancey: 0
+  prevCamX: 0
+  prevCamY: 0

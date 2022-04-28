@@ -78,8 +78,11 @@ TagManager:
   - name: BKG
     uniqueID: 473817421
     locked: 0
-  - name: Foliage
+  - name: Decals Back
     uniqueID: 3417238943
+    locked: 0
+  - name: Decals Front
+    uniqueID: 4276989641
     locked: 0
   - name: Enemy
     uniqueID: 3073164019

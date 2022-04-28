@@ -1002,6 +1002,10 @@ PrefabInstance:
       propertyPath: m_enableAutoSizing
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 929456131755109671, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: scene1
+      value: 
+      objectReference: {fileID: 8300000, guid: 89ea5a45b341f414b964f9df26f84244, type: 3}
     - target: {fileID: 929456131755109680, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
       propertyPath: m_text
       value: Volume
@@ -1300,11 +1304,15 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 7140594141f4a6e49b2d622f35875200, type: 2}
     - target: {fileID: 9179242101021406245, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1
+      value: 1.9
       objectReference: {fileID: 0}
     - target: {fileID: 9179242101021406245, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -25
+      value: -24.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 9179242101021406245, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 149.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
