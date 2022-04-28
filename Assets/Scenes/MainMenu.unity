@@ -1262,6 +1262,14 @@ PrefabInstance:
       propertyPath: KeysPressed.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8192212038699333402, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 49.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192212038699333402, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -23.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8490908903379967278, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
       propertyPath: availableMoves.Array.size
       value: 6
@@ -1292,11 +1300,11 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 7140594141f4a6e49b2d622f35875200, type: 2}
     - target: {fileID: 9179242101021406245, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 125.4
+      value: 10.2
       objectReference: {fileID: 0}
     - target: {fileID: 9179242101021406245, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.5
+      value: -24.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b4ee1a0a86eb06438af4204e6258169, type: 3}
