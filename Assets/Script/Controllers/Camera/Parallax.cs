@@ -40,6 +40,8 @@ public class Parallax : MonoBehaviour
 
         if (Camera.main.transform.position.x <= -39.9)
             return;
+        if (Camera.main.transform.position.x >= 119.9)
+            return;
 
         UpdateX();
         
