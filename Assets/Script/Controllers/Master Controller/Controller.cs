@@ -126,6 +126,10 @@ public class Controller : MonoBehaviour
                         Debug.Log("Playing Move HitAS0!");
                         ani.SetTrigger("HitAS0");
                     break;
+                case Moveset.HitAS1:
+                    Debug.Log("Playing Move HitAS1!");
+                    ani.SetTrigger("HitAS1");
+                    break;
                 case Moveset.HitAS2:
                     Debug.Log("Playing Move HitAS2!");
                     ani.SetTrigger("HitAS2");
