@@ -19,7 +19,10 @@ public class Parallax : MonoBehaviour
     private float tempx,
         tempy,
         distancex,
-        distancey;
+        distancey,
+        prevCamX,
+        prevCamY;
+        
     // Start is called before the first frame update
     void Start()
     {
@@ -32,19 +35,34 @@ public class Parallax : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        tempy = cam.transform.position.y * (1 - parallaxFactorY);
-        distancey = cam.transform.position.y * parallaxFactorY;
-        tempx = cam.transform.position.x * (1 - parallaxFactorX);
-        distancex = cam.transform.position.x * parallaxFactorX;
-        UpdateY();
-
-        if (Camera.main.transform.position.x <= -39.9)
-            return;
-        if (Camera.main.transform.position.x >= 119.9)
-            return;
-
-        UpdateX();
+        prevCamX = transform.position.x;
+        prevCamY = transform.position.y;
         
+        
+        //no parallaxing
+        if (prevCamY == Camera.main.transform.position.y && prevCamX == Camera.main.transform.position.x)
+            return;
+        else if (prevCamX != Camera.main.transform.position.x)
+        {
+            tempx = cam.transform.position.x * (1 - parallaxFactorX);
+            distancex = cam.transform.position.x * parallaxFactorX;
+            UpdateX();
+        }
+        else if (prevCamY != Camera.main.transform.position.y)
+        {
+            tempy = cam.transform.position.y * (1 - parallaxFactorY);
+            distancey = cam.transform.position.y * parallaxFactorY;
+            UpdateY();
+        }
+        
+        
+
+        
+
+        
+        
+        
+
     }
     void UpdateX()
     {
