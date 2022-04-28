@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
+using Cinemachine.Utility;
 
 public class Parallax : MonoBehaviour
 {
@@ -16,6 +18,7 @@ public class Parallax : MonoBehaviour
     public GameObject cam;
     [Header("PPU"), Tooltip("This should match the pixels per unit of the project")]
     public float pixelsPerUnit;
+    [SerializeField]
     private float tempx,
         tempy,
         distancex,
@@ -35,54 +38,50 @@ public class Parallax : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        prevCamX = transform.position.x;
-        prevCamY = transform.position.y;
-        
-        
-        //no parallaxing
-        if (prevCamY == Camera.main.transform.position.y && prevCamX == Camera.main.transform.position.x)
-            return;
-        else if (prevCamX != Camera.main.transform.position.x)
+        tempy = cam.transform.position.y * (1 - parallaxFactorY);
+        distancey = cam.transform.position.y * parallaxFactorY;
+        tempx = cam.transform.position.x * (1 - parallaxFactorX);
+        distancex = cam.transform.position.x * parallaxFactorX;
+
+        if (Camera.main.transform.position.x <= -39.9)
         {
-            tempx = cam.transform.position.x * (1 - parallaxFactorX);
-            distancex = cam.transform.position.x * parallaxFactorX;
-            UpdateX();
-        }
-        else if (prevCamY != Camera.main.transform.position.y)
-        {
-            tempy = cam.transform.position.y * (1 - parallaxFactorY);
-            distancey = cam.transform.position.y * parallaxFactorY;
             UpdateY();
+            return;
         }
-        
-        
-
-        
-
-        
-        
-        
+        if (Camera.main.transform.position.x >= 119.9)
+        {
+            UpdateY();
+            return;
+        }
+        UpdateX();
+        UpdateY();
 
     }
     void UpdateX()
     {
         Vector3 newPosition = new Vector3(startposx + distancex, transform.position.y, transform.position.z);
         transform.position = PixelPerfectClamp(newPosition, pixelsPerUnit);
-
-        if (tempx > startposx + (lengthx / 2))
-            startposx += lengthx;
-        else if (tempx < startposx - (lengthx / 2))
-            startposx -= lengthx;
+       
+            if (tempx > startposx + (lengthx / 2))
+                startposx += lengthx;
+            else if (tempx < startposx - (lengthx / 2))
+                startposx -= lengthx;
+       
+        
     }
     void UpdateY()
     {
+        
+
         Vector3 newPosition = new Vector3(transform.position.x, startposy + distancey, transform.position.z);
         transform.position = PixelPerfectClamp(newPosition, pixelsPerUnit);
-
-        if (tempy > startposy + (lengthy / 1.5))
-            startposy += lengthy;
-        else if (tempy < startposy - (lengthy / 1.5))
-            startposy -= lengthy;
+       
+            if (tempy > startposy + (lengthy / 1.5))
+                startposy += lengthy;
+            else if (tempy < startposy - (lengthy / 1.5))
+                startposy -= lengthy;
+       
+        
     }
     private Vector3 PixelPerfectClamp(Vector3 locationVector, float pixelsPerUnit)
     {
