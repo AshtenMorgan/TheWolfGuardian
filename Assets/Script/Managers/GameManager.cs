@@ -137,10 +137,11 @@ public class GameManager : MonoBehaviour
     {
         if (scene.name != "Main Menu")//make sure we should have stuff
         {
+            UpdateHealthBar();
             current = Time.time;//for testing purposes  delete after tests are complete
             CheckSpawn();       //see if it is time to spawn player  //maybe trigger this on death
-            CheckEnemySpawn();  //checking if we should spawn an enemy.
-            UpdateHealthBar();
+            //CheckEnemySpawn();  //checking if we should spawn an enemy.
+            
         }
         
     }
@@ -245,7 +246,6 @@ public class GameManager : MonoBehaviour
 
     }
     #endregion
-    
     #region Enemy Spawn Checks
     public void CheckEnemySpawn()
     {

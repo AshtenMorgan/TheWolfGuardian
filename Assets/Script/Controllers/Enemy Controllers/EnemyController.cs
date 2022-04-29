@@ -87,13 +87,23 @@ public class EnemyController : Controller
     protected override void Start()
     {
         base.Start();//call parents start function
-        pawn = GetComponent<EnemyPawn>();//refrence this objects enemy pawn
-        health = GetComponent<Health>();//get health object
-        ani = GetComponent<Animator>();//get animator component
-        eCombat = GetComponent<ECombat>();
-        target = GameManager.Instance.Player;//get player from game manager
-        facingDirection = 1;//face right
+        
+        
+       
 ;
+    }
+    protected override void Awake()
+    {
+        if (GameManager.Instance.scene.name != "Main Menu")
+        {
+            target = GameManager.Instance.Player;//get player from game manager
+            pawn = GetComponent<EnemyPawn>();//refrence this objects enemy pawn
+            health = GetComponent<Health>();//get health object
+            ani = GetComponent<Animator>();//get animator component
+            eCombat = GetComponent<ECombat>();
+            facingDirection = 1;//face right
+        }
+        
     }
 
     // Update is called once per frame
