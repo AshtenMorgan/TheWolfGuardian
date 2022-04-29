@@ -47,6 +47,7 @@ public class UIManager : MonoBehaviour
         BackgroundImage,
         HUD;
     public GameObject optionsBKG;
+    public GameObject optionsBKGMain;
 
     public bool isPaused = false;
     #endregion
@@ -206,12 +207,14 @@ public class UIManager : MonoBehaviour
     public void EnableOptionsMain()
     { 
         optionsCanvas.gameObject.SetActive(true);
+        optionsBKGMain.gameObject.SetActive(true);
         optionsBKG.SetActive(false);
         cameFrom = 1;
     }
     public void EnableOptionsPlay()
     {
         optionsCanvas.gameObject.SetActive(true);
+        optionsBKGMain.SetActive(false);
         optionsBKG.SetActive(true);
         cameFrom = 2;
     }
@@ -223,6 +226,7 @@ public class UIManager : MonoBehaviour
             case 1://Main menu
                 mainMenu.gameObject.SetActive(true);
                 optionsCanvas.gameObject.SetActive(false);
+                optionsBKGMain.gameObject.SetActive(false);
                 cameFrom = 0;
                 break;
 
@@ -441,6 +445,8 @@ public class UIManager : MonoBehaviour
         mainMenu = GameObject.Find("MainMenuCanvas").GetComponent<Canvas>();
         optionsCanvas = GameObject.FindGameObjectWithTag("OptionsCanvas").GetComponent<Canvas>();
         optionsBKG = GameObject.FindGameObjectWithTag("OptionsBKG");
+        optionsBKGMain = GameObject.FindGameObjectWithTag("OptionsBKGMain");
+
         BackgroundImage = GameObject.FindGameObjectWithTag("BackgroundCanvas").GetComponent<Canvas>();
         pauseMenu = GameObject.FindGameObjectWithTag("PauseCanvas").GetComponent<Canvas>();
         gameOverMenu = GameObject.FindGameObjectWithTag("GameOverCanvas").GetComponent<Canvas>();
