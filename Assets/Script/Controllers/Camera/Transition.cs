@@ -21,7 +21,14 @@ public class Transition : MonoBehaviour
         {
             confiner.m_BoundingShape2D = from;
         }
+        StartCoroutine(UpdateSpawn(0.2f));
+
+        IEnumerator UpdateSpawn(float seconds)
+        {
+
+            yield return new WaitForSeconds(seconds);
+            GameManager.Instance.playerSpawn.transform.position = GameManager.Instance.player.transform.position;
+        }
+
     }
-
-
 }

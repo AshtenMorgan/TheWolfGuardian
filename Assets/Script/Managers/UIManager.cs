@@ -271,7 +271,10 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1.0f;//start time
         GameManager.Instance.Player.Lives = 4;//give some lives back
         GameManager.Instance.lives = 4;//match gm lives
+        GameManager.Instance.ResetSpawn();
+        GameManager.Instance.SpawnPlayer();
         GameManager.Instance.gameOver = false;//not game over any more
+        
     }
     public void DisableGameOver()
     {

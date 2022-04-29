@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Cinemachine;
+using Cinemachine.Utility;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,6 +40,8 @@ public class GameManager : MonoBehaviour
         enemy5Spawn,
         enemy6Spawn,
         enemy7Spawn;
+    public CompositeCollider2D room1;
+    public CinemachineConfiner confiner;
     #endregion
 
     #region Spawn Numbers
@@ -50,7 +54,6 @@ public class GameManager : MonoBehaviour
         enemy6Max,
         enemy7Max;
     #endregion
-
     #region Spawn Timing
     [Header("Timers"), SerializeField, Tooltip("Time delay between spawns")]
     private float _nextEnemySpawn,//the time when the next spawn will occur
@@ -153,13 +156,12 @@ public class GameManager : MonoBehaviour
 
     public void VarCheck()
     {
-
         //set objects
         playerPrefab = Resources.Load("Prefabs/Pawn Prefabs/Player Prefabs/Ashlynn");
         //instantiation point
         instanPoint = GameObject.FindGameObjectWithTag("InstanPoint").transform;
         //spawn points
-        playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform;
+        playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").gameObject.transform.GetChild(0);
         //set these to individual spawn points once we have them set up, for now they all default to 1 enemy spawn point
         if (enemy1Spawn.Length > 0)
         {
@@ -244,6 +246,14 @@ public class GameManager : MonoBehaviour
             GameOver();
         }
 
+    }
+    public void ResetSpawn()
+    {
+        confiner = FindObjectOfType<CinemachineConfiner>();
+        room1 = GameObject.FindGameObjectWithTag("Room1").GetComponent<CompositeCollider2D>();
+
+        playerSpawn.position = playerSpawn.parent.position;
+         confiner.m_BoundingShape2D = room1;
     }
     #endregion
     #region Enemy Spawn Checks

@@ -39,6 +39,7 @@ TagManager:
   - Inputs
   - CombatManager
   - OptionsBKGMain
+  - Room1
   layers:
   - Default
   - TransparentFX
