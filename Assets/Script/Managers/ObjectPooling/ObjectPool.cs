@@ -78,12 +78,10 @@ public class ObjectPool : MonoBehaviour
             {
                 case Enemies.Redcap:
                     _prefabLocation[i] = "Prefabs/Pawn Prefabs/Beastiary Prefabs/Unseelie Fey/Beast_UF_Redcap";
-                    Debug.Log(_prefabLocation[i]);
                     break;
 
                 case Enemies.ShadowWidow:
                     _prefabLocation[i] = "Prefabs/Pawn Prefabs/Beastiary Prefabs/Spiders/Beast_SP_Shadow";
-                    Debug.Log(_prefabLocation[i]);
                     break;
 
                 default:
