@@ -51,7 +51,6 @@ public class EnemyController : Controller
     protected int facingDirection,
         damageDirection;
 
-    [SerializeField]
     protected float patrolRange = 5.0f,
         groundCheckDistance = 1.0f,
         wallCheckDistance = 1.0f,
@@ -62,7 +61,6 @@ public class EnemyController : Controller
         rangedDistance = 3.0f,
         fleeDistance = 5.0f;
 
-    [SerializeField]
     public bool isGroundDetected = true,
         isWallDetected = false,
         shouldMove = false,

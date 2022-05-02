@@ -37,14 +37,13 @@ public class Health : Pickups
     public AudioClip deathSound;//clip to play on death
     #endregion
     #endregion
-    [SerializeField]
-    public float currentHealth //the accessor for _currentHealth
+  
+    public float CurrentHealth //the accessor for _currentHealth
     {
         get => _health;
         set { _health = value; }
     }
-    [SerializeField]
-    public float maxHealth //the accessor for _currentHealth
+    public float MaxHealth //the accessor for _currentHealth
     {
         get => _maxHealth;
         set { _maxHealth = value; }
@@ -74,15 +73,15 @@ public class Health : Pickups
     {
         damage = Mathf.Max(damage, 0);//make sure damage is a positive number
 
-        if (damage > currentHealth)//if damage is greater than current health
+        if (damage > CurrentHealth)//if damage is greater than current health
         {
-            overKill = damage - currentHealth;//get the amount of overkill damage
-            currentHealth = Mathf.Clamp(currentHealth - damage, 0f, currentHealth);//subtract damage from health, making sure not to subtract more than current health value
+            overKill = damage - CurrentHealth;//get the amount of overkill damage
+            CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0f, CurrentHealth);//subtract damage from health, making sure not to subtract more than current health value
         }
         else//damage not more than current health
         {
             overKill = 0;//output 0
-            currentHealth = Mathf.Clamp(currentHealth - damage, 0f, currentHealth);//subtract damage from health, making sure not to subtract more than current health value
+            CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0f, CurrentHealth);//subtract damage from health, making sure not to subtract more than current health value
         }
 
         SendMessage("OnDamage", SendMessageOptions.DontRequireReceiver);
@@ -100,15 +99,15 @@ public class Health : Pickups
     {
         heal = Mathf.Max(heal, 0);//make sure the number is positive
 
-        if (heal > (maxHealth - currentHealth))//if the ammount healed would put the target over max health
+        if (heal > (MaxHealth - CurrentHealth))//if the ammount healed would put the target over max health
         {
-            overHeal = heal - (maxHealth - currentHealth);//get amount of overhealing
+            overHeal = heal - (MaxHealth - CurrentHealth);//get amount of overhealing
         }
         else//if healing does not result in over heal
         {
             overHeal = 0;//no overheal
         }
-        currentHealth = Mathf.Clamp(currentHealth + heal, 0, maxHealth);//heal for an ammount not to exceed max health
+        CurrentHealth = Mathf.Clamp(CurrentHealth + heal, 0, MaxHealth);//heal for an ammount not to exceed max health
         SendMessage("OnHeal", SendMessageOptions.DontRequireReceiver);//tell every object this is attched to to look for its onDie method no error if not found
         onHeal.Invoke();
     }
@@ -130,7 +129,7 @@ public class Health : Pickups
 
     public void Respawn()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = MaxHealth;
         isDead = false;
     }
     #endregion

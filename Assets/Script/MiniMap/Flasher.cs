@@ -14,9 +14,9 @@ public class Flasher : MonoBehaviour
         
         if (collision.GetComponent<PlayerPawn>())
         {
+            hasEntered = true;
             cam = GameObject.FindGameObjectWithTag("MapCam").GetComponent<Camera>();
             cam.transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y, -10.0f);
-            hasEntered = true;
             sprite = GetComponent<SpriteRenderer>();
             sprite.color = Color.green;
             //StopAllCoroutines();

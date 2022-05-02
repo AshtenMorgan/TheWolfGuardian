@@ -7,14 +7,16 @@ public class ObjectPool : MonoBehaviour
     #region variables
     public enum Enemies
     {
-        Redcap
+        Redcap,
+        ShadowWidow
     }
 
     #region Pools
     [HideInInspector]
     public List<GameObject> enemyPool;
-    [Header("All enemies you wish to spawn"), Tooltip("Redcap is at: Prefabs/Pawn Prefabs/Beastiary Prefabs/Unseelie Fey/Beast_UF_Redcap")]
-    public string[] _prefabLocation = new string[1] { "Prefabs/Pawn Prefabs/Beastiary Prefabs/Unseelie Fey/Beast_UF_Redcap" };
+    private string[] _prefabLocation;
+    [Header("All enemies you wish to spawn"), Tooltip("Select 1 type per enemy spawn")]
+    public Enemies[] m_enemies;
     
     
     #endregion
@@ -35,6 +37,7 @@ public class ObjectPool : MonoBehaviour
     #region Functions
     private void Start()
     {
+        EnumToString();
         PoolSetup();
     }
     #region Enemy Pool checks
@@ -66,7 +69,28 @@ public class ObjectPool : MonoBehaviour
        
         #endregion
     }
-    
+    void EnumToString()
+    {
+        _prefabLocation = new string[m_enemies.Length];
+        for (int i = 0; i < m_enemies.Length; i++)
+        {
+            switch (m_enemies[i])
+            {
+                case Enemies.Redcap:
+                    _prefabLocation[i] = "Prefabs/Pawn Prefabs/Beastiary Prefabs/Unseelie Fey/Beast_UF_Redcap";
+                    Debug.Log(_prefabLocation[i]);
+                    break;
+
+                case Enemies.ShadowWidow:
+                    _prefabLocation[i] = "Prefabs/Pawn Prefabs/Beastiary Prefabs/Spiders/Beast_SP_Shadow";
+                    Debug.Log(_prefabLocation[i]);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
   
     #endregion
     #endregion

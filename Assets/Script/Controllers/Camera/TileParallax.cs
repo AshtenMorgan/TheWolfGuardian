@@ -7,11 +7,11 @@ public class TileParallax : MonoBehaviour
 {
     protected float length,
         startpos;
-    [Header("How fast this section moves"), SerializeField, Tooltip("The closer the section, the lower the number should be")]
+    [Header("How fast this section moves"), Tooltip("The closer the section, the lower the number should be")]
     public float parallaxFactor;
-    [Header("Camera to add parallax to"), SerializeField, Tooltip("This should be the Cinemachine Virtual Camera, NOT Main Camera.")]
+    [Header("Camera to add parallax to"), Tooltip("This should be the Cinemachine Virtual Camera, NOT Main Camera.")]
     public GameObject cam;
-    [Header("PPU"), SerializeField, Tooltip("This should match the pixels per unit of the project")]
+    [Header("PPU"), Tooltip("This should match the pixels per unit of the project")]
     public float pixelsPerUnit;
     // Start is called before the first frame update
     void Start()

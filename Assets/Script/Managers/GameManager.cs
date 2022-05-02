@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     #region Variables
 
     #region Player/enemy Object
-    [Header("Objects"), SerializeField, Tooltip("Drag prefabs onto these")]
+    [Header("Objects"), Tooltip("Drag prefabs onto these")]
     public PlayerPawn Player;
     public GameObject player;//Delete this one later
     public Health playerHealth;
@@ -29,9 +29,9 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Spawn Points
-    [Header("Initial Spawn Point"), SerializeField, Tooltip("This is where the initial instantiated objects will be placed")]
+    [Header("Initial Spawn Point"), Tooltip("This is where the initial instantiated objects will be placed")]
     public Transform instanPoint;
-    [Header("Spawn Points"), SerializeField, Tooltip("All the places where the enemies or player will be spawned")]
+    [Header("Spawn Points"), Tooltip("All the places where the enemies or player will be spawned")]
     public Transform playerSpawn;
     
     public CompositeCollider2D room1;
@@ -50,10 +50,9 @@ public class GameManager : MonoBehaviour
     public float currentHealth;
     #endregion
 
-    [Header("Game Over tracker"), SerializeField, Tooltip("Tracks weather or not a game over has occured")]
+    [Header("Game Over tracker"), Tooltip("Tracks weather or not a game over has occured")]
     public bool gameOver;
 
-    [SerializeField]
     public Scene scene;
     //private string mainMenu = "James Test"; //name of the main menu scene as a string
     #endregion
@@ -139,7 +138,7 @@ public class GameManager : MonoBehaviour
         //instantiation point
         instanPoint = GameObject.FindGameObjectWithTag("InstanPoint").transform;
         //spawn points
-        playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").gameObject.transform.GetChild(0);
+        playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform.GetChild(0);
 
         //set up player
         if (player == null)
@@ -149,7 +148,7 @@ public class GameManager : MonoBehaviour
             playerHealth = Player.GetComponent<Health>();
             lives = Player.Lives;
             hitACollider = GameObject.FindGameObjectWithTag("HitA");
-            player.gameObject.SetActive(false);//everything is inactivated on initial spawn
+            player.SetActive(false);//everything is inactivated on initial spawn
         }
 
     }
@@ -170,7 +169,7 @@ public class GameManager : MonoBehaviour
             playerHealth.Respawn();//return player to max health
 
             //return current health to max value
-            player.gameObject.SetActive(true);//Appear the player
+            player.SetActive(true);//Appear the player
             Player.Lives--;//decrement lives
             lives = Player.Lives;//track how many lives
         }
@@ -194,8 +193,8 @@ public class GameManager : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         if (scene.name != "MainMenu")
         {
-            currentHealth = playerHealth.currentHealth;
-            maxHealth = playerHealth.maxHealth;
+            currentHealth = playerHealth.CurrentHealth;
+            maxHealth = playerHealth.MaxHealth;
             percent = currentHealth / maxHealth;
         }
         else
