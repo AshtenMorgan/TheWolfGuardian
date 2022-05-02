@@ -33,7 +33,7 @@ public class PlayerController : Controller
         jumpTimeCounter = jumpTime; //sets the jumpTimeCounter
 
         #region Player Action Subscriptions
-        PlayerInputActions playerInputActions = new PlayerInputActions(); //initializes te players inputs
+        playerInputActions = new PlayerInputActions(); //initializes te players inputs
         playerInputActions.PlayerHuman.Enable(); //enables the players input from the specfied input actions
         playerInputActions.PlayerHuman.JumpStart.performed += JumpStart; //subscribes to the JumpStart function
         playerInputActions.PlayerHuman.JumpEnd.performed += JumpEnd; //subscribes to the JumpEnd function
@@ -202,4 +202,20 @@ public class PlayerController : Controller
     }
     #endregion
     #endregion
+    private void OnDestroy()
+    {
+        
+        
+        playerInputActions.PlayerHuman.JumpStart.performed -= JumpStart; //subscribes to the JumpStart function
+        playerInputActions.PlayerHuman.JumpEnd.performed -= JumpEnd; //subscribes to the JumpEnd function
+        playerInputActions.PlayerHuman.Move.performed -= Move; // subscribes to the Move function
+        playerInputActions.PlayerHuman.SprintStart.performed -= SprintStart; //Subscribes to the SprintStart function
+        playerInputActions.PlayerHuman.SprintEnd.performed -= SprintEnd; //Subscribes to the SprintEnd function
+        playerInputActions.PlayerHuman.CrouchStart.performed -= CrouchStart; //Subscribes to the CrouchStart function
+        playerInputActions.PlayerHuman.CrouchEnd.performed -= CrouchEnd; //Subscribes to the CrouchStart function
+        playerInputActions.PlayerHuman.LightPunch.performed -= LightPunch; //subscribes to the LightPunch function
+        playerInputActions.PlayerHuman.HeavyPunch.performed -= HeavyPunch; //subscribes to the HeavyPunch function
+        playerInputActions.PlayerHuman.Kick.performed -= Kick; //subscribes to the HeavyPunch function
+        playerInputActions.PlayerHuman.Disable(); //enables the players input from the specfied input actions
+    }
 }

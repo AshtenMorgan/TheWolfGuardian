@@ -5,37 +5,23 @@ using UnityEngine.Tilemaps;
 
 public class TileParallax : MonoBehaviour
 {
-    protected float length,
-        startpos;
     [Header("How fast this section moves"), Tooltip("The closer the section, the lower the number should be")]
     public float parallaxFactor;
     [Header("Camera to add parallax to"), Tooltip("This should be the Cinemachine Virtual Camera, NOT Main Camera.")]
     public GameObject cam;
     [Header("PPU"), Tooltip("This should match the pixels per unit of the project")]
     public float pixelsPerUnit;
-    // Start is called before the first frame update
-    void Start()
-    {
-        startpos = transform.position.x;
-        length = GetComponent<TilemapRenderer>().bounds.size.x; 
-    }
 
     // Update is called once per frame
     void Update()
     {
         if (Camera.main.transform.position.x <= -39.9)
             return;
-        float temp = cam.transform.position.x * (1 - parallaxFactor);
+
         float distance = cam.transform.position.x * parallaxFactor;
-        
 
-        Vector3 newPosition = new Vector3(startpos + distance, transform.position.y, transform.position.z);
-        transform.position = PixelPerfectClamp(newPosition, pixelsPerUnit);
-
-        if (temp > startpos + (length / 2))
-            startpos += length;
-        else if (temp < startpos - (length / 2))
-            startpos -= length;
+        Vector3 newPosition = new Vector3(distance, transform.position.y, transform.position.z);
+        transform.position = PixelPerfectClamp(newPosition, pixelsPerUnit);  
     }
     private Vector3 PixelPerfectClamp(Vector3 locationVector, float pixelsPerUnit)
     {

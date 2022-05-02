@@ -146,8 +146,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2570019570025961821}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.081, y: -0.952, z: 0}
-  m_LocalScale: {x: -0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: -0.159, y: -0.469, z: 0}
+  m_LocalScale: {x: -0.9360671, y: 0.39207, z: 0.78414}
   m_Children: []
   m_Father: {fileID: 5058408611307330618}
   m_RootOrder: 2
@@ -622,7 +622,6 @@ GameObject:
   - component: {fileID: 5193430195961739065}
   - component: {fileID: 9159454563489009013}
   - component: {fileID: 9159454563489009012}
-  - component: {fileID: 8571718124276898114}
   - component: {fileID: 3273928682880558778}
   m_Layer: 7
   m_Name: Beast_SP_Shadow
@@ -940,65 +939,6 @@ MonoBehaviour:
   isDead: 0
   audiosource: {fileID: 5193430195961739065}
   deathSound: {fileID: 8300000, guid: 7b555ced7bb240d45aaba2b63c90b4a1, type: 3}
---- !u!114 &8571718124276898114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9159454563489009014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca32f423db76b6a46ba276707e2a023b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb2d: {fileID: 9159454563489009011}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  jumpTime: 0
-  groundCheck: {fileID: 4422180026672391475}
-  boxSize: {x: 0, y: 0}
-  noFriction: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
-  fullFriction: {fileID: 6200000, guid: 48626c08f0a6277489a9387662b457ac, type: 2}
-  ani: {fileID: 3094173669411308063}
-  inputRecorder: {fileID: 0}
-  move: 0
-  currentState: 0
-  target: {fileID: 0}
-  pawn: {fileID: 0}
-  health: {fileID: 0}
-  eCombat: {fileID: 0}
-  eyeball: {fileID: 5046184464393793190}
-  eGroundCheck: {fileID: 2658141955838687322}
-  playerCheck: {fileID: 6392934006830648748}
-  movement: {x: 0, y: 0}
-  knockBack: {x: 0, y: 0}
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  facingDirection: 0
-  damageDirection: 0
-  patrolRange: 5
-  groundCheckDistance: 0.5
-  wallCheckDistance: 0.1
-  enemyCheckDistance: 1
-  harmStart: 0
-  harmDuration: 0
-  meleeDistance: 1
-  rangedDistance: 2
-  fleeDistance: 5
-  isGroundDetected: 1
-  isWallDetected: 0
-  shouldMove: 0
-  isPlayerDetected: 0
-  hasRangedAttack: 0
-  isInMeleeRange: 0
-  isInRangedRange: 0
-  playerCheckDistance: {x: 5.64, y: 2, z: 0}
 --- !u!114 &3273928682880558778
 MonoBehaviour:
   m_ObjectHideFlags: 0

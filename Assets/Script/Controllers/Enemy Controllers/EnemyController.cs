@@ -26,7 +26,7 @@ public class EnemyController : Controller
     #region objects
     [Header("Enemy Variables")]
     [SerializeField]
-    protected PlayerPawn target;
+    protected Transform target;
     [SerializeField]
     protected EnemyPawn pawn;
     [SerializeField]
@@ -94,7 +94,7 @@ public class EnemyController : Controller
     {
         if (GameManager.Instance.scene.name != "Main Menu")
         {
-            target = GameManager.Instance.player;//get player from game manager
+            target = GameManager.Instance.player.transform;//get player from game manager
             pawn = GetComponent<EnemyPawn>();//refrence this objects enemy pawn
             health = GetComponent<Health>();//get health object
             ani = GetComponent<Animator>();//get animator component

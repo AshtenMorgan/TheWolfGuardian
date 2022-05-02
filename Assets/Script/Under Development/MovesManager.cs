@@ -8,10 +8,14 @@ public class MovesManager : MonoBehaviour
     [SerializeField] Controller controller;
     [SerializeField] InputRecorder inputRecorder;
     // Start is called before the first frame update
-    void Awake()
+    void OnEnable()
     {
-        controller = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        inputRecorder = GameObject.FindGameObjectWithTag("Player").GetComponent<InputRecorder>();
+        if(GameManager.Instance.player != null)
+        {
+            controller = GameManager.Instance.player.GetComponent<PlayerController>();
+            inputRecorder = GameManager.Instance.player.GetComponent<InputRecorder>();
+        }
+        
 
         availableMoves.Sort(Compare); //Sorts all the moves based on their priority
     }
