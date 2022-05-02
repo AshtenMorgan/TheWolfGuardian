@@ -7,17 +7,19 @@ public class InputDisplay : MonoBehaviour
 {
     [SerializeField] TMPro.TMP_Text inputText; //prints the pressed controls so that I can see whats happening
     [SerializeField] InputRecorder inputRecorder;
-    void Awake()
+    void OnEnable()
     {
         if (inputText == null)
             inputText = GameObject.FindGameObjectWithTag("Inputs").GetComponent<TMPro.TMP_Text>();
-        if (inputRecorder == null)
-            inputRecorder = GameObject.FindGameObjectWithTag("Player").GetComponent<InputRecorder>();
+        // GetComponent input recorder changed to fix a bug
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (inputRecorder == null)
+            inputRecorder = GameManager.Instance.playerRecorder;
         PrintControls();
     }
     public virtual void PrintControls() //this prints the inputs recorded on the screen

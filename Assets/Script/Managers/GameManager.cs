@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     public float percent;
     public float maxHealth;
     public float currentHealth;
+    public InputRecorder playerRecorder;
     #endregion
 
     [Header("Game Over tracker"), Tooltip("Tracks weather or not a game over has occured")]
@@ -172,6 +173,7 @@ public class GameManager : MonoBehaviour
             player.SetActive(true);//Appear the player
             Player.Lives--;//decrement lives
             lives = Player.Lives;//track how many lives
+            playerRecorder = player.GetComponent<InputRecorder>();
         }
         else
         {
