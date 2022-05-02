@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class KillTest : MonoBehaviour
 {
+    public float testDamage = 10.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,8 +16,9 @@ public class KillTest : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            GameManager.Instance.Player.GetComponent<Health>().Damage(10);
+            GameManager.Instance.player.GetComponent<Health>().Damage(testDamage);
             Debug.Log("Health smack");
+            GameManager.Instance.UpdateHealthBar();
         } 
     }
 }

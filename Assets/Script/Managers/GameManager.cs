@@ -10,23 +10,17 @@ public class GameManager : MonoBehaviour
 {
     #region Variables
 
-    #region Player/enemy Object
+    #region Player Object
     [Header("Objects"), Tooltip("Drag prefabs onto these")]
-    public PlayerPawn Player;
-    public GameObject player;//Delete this one later
-    public Health playerHealth;
+    public PlayerPawn player;
+    #endregion
+
     #region Hitboxes
     public GameObject hitACollider; //stores colliders for HitA
     #endregion
-    public EnemyPawn[] enemy;
 
-    #endregion
-
-    #region Enemy objects for spawning/moving
     [Header("Prefabs"), Tooltip("These are the pre-build player and enemy objects")]
     public Object playerPrefab;
-
-    #endregion
 
     #region Spawn Points
     [Header("Initial Spawn Point"), Tooltip("This is where the initial instantiated objects will be placed")]
@@ -38,12 +32,12 @@ public class GameManager : MonoBehaviour
     public CinemachineConfiner confiner;
     #endregion
 
-    
-   
+
     #region instance
     public static GameManager Instance { get; private set; }//allow other classes to access GM
     #endregion
     #region PlayerVars
+    public Health playerHealth;
     public int lives;
     public float percent;
     public float maxHealth;
@@ -57,7 +51,6 @@ public class GameManager : MonoBehaviour
     public Scene scene;
     //private string mainMenu = "James Test"; //name of the main menu scene as a string
     #endregion
-
 
     #region Functions
 
@@ -99,12 +92,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Use this for initialization
-    private void Start()
-    {
-        VarCheck();
-    }
-
     // Update is called once per frame
     private void Update()
     {
@@ -127,7 +114,6 @@ public class GameManager : MonoBehaviour
         }
         if (scene.name != "MainMenu")//make sure we should have stuff
         {
-            UpdateHealthBar();
             CheckSpawn();       //see if it is time to spawn player  //maybe trigger this on death
         }
     }
@@ -144,12 +130,11 @@ public class GameManager : MonoBehaviour
         //set up player
         if (player == null)
         {
-            player = (GameObject)Instantiate(playerPrefab, instanPoint.position, instanPoint.rotation) as GameObject;//spawn player
-            Player = player.GetComponent<PlayerPawn>();
-            playerHealth = Player.GetComponent<Health>();
-            lives = Player.Lives;
+            player = Instantiate(playerPrefab, instanPoint.position, instanPoint.rotation) as PlayerPawn;//spawn player
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPawn>();
+            playerHealth = player.GetComponent<Health>();
             hitACollider = GameObject.FindGameObjectWithTag("HitA");
-            player.SetActive(false);//everything is inactivated on initial spawn
+            player.gameObject.SetActive(false);//everything is inactivated on initial spawn
         }
 
     }
@@ -157,23 +142,24 @@ public class GameManager : MonoBehaviour
     void CheckSpawn()
     {
         if (player != null)
-            if (player.activeInHierarchy != true)
+            if (player.gameObject.activeInHierarchy != true)
                     if (gameOver == false)//no player active and it is not game over
                         SpawnPlayer();//run player spawn function
     }
 
     public void SpawnPlayer()
     {
-        if (lives > 0)
+        if (player.Lives > 0)
         {
             player.transform.SetPositionAndRotation(playerSpawn.transform.position, playerSpawn.transform.rotation);//Set player position/rotation
             playerHealth.Respawn();//return player to max health
 
             //return current health to max value
-            player.SetActive(true);//Appear the player
-            Player.Lives--;//decrement lives
-            lives = Player.Lives;//track how many lives
+            player.gameObject.SetActive(true);//Appear the player
+            player.Lives--;//decrement lives
+            lives = player.Lives;//track how many lives
             playerRecorder = player.GetComponent<InputRecorder>();
+            UpdateHealthBar();
         }
         else
         {
@@ -183,11 +169,15 @@ public class GameManager : MonoBehaviour
     }
     public void ResetSpawn()
     {
+        player.Lives = 4;
+
         confiner = FindObjectOfType<CinemachineConfiner>();
         room1 = GameObject.FindGameObjectWithTag("Room1").GetComponent<CompositeCollider2D>();
 
         playerSpawn.position = playerSpawn.parent.position;
         confiner.m_BoundingShape2D = room1;
+        
+        SpawnPlayer();
     }
     #endregion
     public void UpdateHealthBar()
@@ -198,6 +188,7 @@ public class GameManager : MonoBehaviour
             currentHealth = playerHealth.CurrentHealth;
             maxHealth = playerHealth.MaxHealth;
             percent = currentHealth / maxHealth;
+            GameSettings.Instance.healthBarSlider.value = percent;
         }
         else
         {
@@ -207,8 +198,8 @@ public class GameManager : MonoBehaviour
     //handle game over
     public void GameOver()
     {
-        Time.timeScale = 0.0f;//stop time;//stop time
-        //UIManager.Instance.EnableGameOverMenu();//show gameover
+        Time.timeScale = 0.0f;//stop time
+        GameSettings.Instance.SelectMenu("GameOverCanvas");
     }
 
 

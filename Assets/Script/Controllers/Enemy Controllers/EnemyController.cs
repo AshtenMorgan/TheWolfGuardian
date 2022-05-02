@@ -94,7 +94,7 @@ public class EnemyController : Controller
     {
         if (GameManager.Instance.scene.name != "Main Menu")
         {
-            target = GameManager.Instance.Player;//get player from game manager
+            target = GameManager.Instance.player;//get player from game manager
             pawn = GetComponent<EnemyPawn>();//refrence this objects enemy pawn
             health = GetComponent<Health>();//get health object
             ani = GetComponent<Animator>();//get animator component

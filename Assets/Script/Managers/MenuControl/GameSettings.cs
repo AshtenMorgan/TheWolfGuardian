@@ -42,12 +42,13 @@ public class GameSettings : MonoBehaviour
     #endregion
     #region Canvas Components
     [Header("Elements")]
-    public Slider masterVolumeSlider;
-    public Slider musicVolumeSlider;
-    public Slider effectsVolumeSlider;
+    public Slider masterVolumeSlider,
+        musicVolumeSlider,
+        effectsVolumeSlider,
+        healthBarSlider;
     public Toggle fullScreenToggle;
-    public TMPro.TMP_Dropdown resolutionDropDown;
-    public TMPro.TMP_Dropdown qualityDropDown;
+    public TMPro.TMP_Dropdown resolutionDropDown,
+    qualityDropDown;
     public List<Resolution> resolutions;
     #endregion
     [Header("Menus")]
@@ -273,9 +274,9 @@ public class GameSettings : MonoBehaviour
     }
     public void ResumeGame()
     {
-        GameManager.Instance.lives = 4;
         GameManager.Instance.ResetSpawn();
-        GameManager.Instance.SpawnPlayer();
+        SelectMenu("HUD Canvas");
+        Time.timeScale = 1.0f;
         activeMenu = ActiveMenu.Game;
     }
     #endregion
