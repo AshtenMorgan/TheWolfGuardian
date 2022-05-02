@@ -5,6 +5,10 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     #region variables
+    public enum Enemies
+    {
+        Redcap
+    }
 
     #region Pools
     [HideInInspector]
@@ -16,7 +20,6 @@ public class ObjectPool : MonoBehaviour
     #endregion
 
     #region Game Objects
-    [Header("Ensure these are set")]
     [Header("The NUMBER of enemy spawns"), Tooltip("Do not set game objects, just the number")]
     public GameObject[] enemy;
     [Header("Instantiation point - 1 per room")]

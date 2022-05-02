@@ -135,7 +135,7 @@ public class GameSettings : MonoBehaviour
         //load whatever scene our zone1 is
         SceneManager.LoadSceneAsync((int)SceneIndexes.Zone_1);
         //display HUD canvas
-        SelectMenu("HUD");
+        SelectMenu("HUD Canvas");
         //Set enum to Game (Used to tell what screen is active)
         activeMenu = ActiveMenu.Game;
         Camera.main.GetComponent<AudioSource>().clip = scene1;
