@@ -17,15 +17,15 @@ public class ObjectPool : MonoBehaviour
     private string[] _prefabLocation;
     [Header("All enemies you wish to spawn"), Tooltip("Select 1 type per enemy spawn")]
     public Enemies[] m_enemies;
-    
-    
+
+
     #endregion
 
     #region Game Objects
-    [Header("The NUMBER of enemy spawns"), Tooltip("Do not set game objects, just the number")]
-    public GameObject[] enemy;
     [Header("Instantiation point - 1 per room")]
     public Transform instanPoint;
+    [HideInInspector]
+    public GameObject[] enemy;
     [Header("Spawn Points - Match this to the number of enemies you set Up there ^^")]
     public Transform[] spawnPoint;
 
@@ -37,7 +37,9 @@ public class ObjectPool : MonoBehaviour
     #region Functions
     private void Start()
     {
+        enemy = new GameObject[m_enemies.Length];
         EnumToString();
+
     }
     #region Enemy Pool checks
     public void PoolSetup()
