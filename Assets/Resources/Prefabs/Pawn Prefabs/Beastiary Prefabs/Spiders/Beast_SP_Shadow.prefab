@@ -146,7 +146,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2570019570025961821}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.159, y: -0.469, z: 0}
+  m_LocalPosition: {x: -0.183, y: -0.511, z: 0}
   m_LocalScale: {x: -0.9360671, y: 0.39207, z: 0.78414}
   m_Children: []
   m_Father: {fileID: 5058408611307330618}
@@ -242,7 +242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4574550702325116354}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.174, y: -0.993, z: 0}
+  m_LocalPosition: {x: -0.122, y: -0.551, z: 0}
   m_LocalScale: {x: -0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 5058408611307330618}
@@ -387,7 +387,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7770428065822788010}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.251, y: -0.074, z: 0}
+  m_LocalPosition: {x: 0.75, y: -0.116, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5058408611307330618}
@@ -418,7 +418,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7840273092711694165}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.346, y: -0.084, z: 0}
+  m_LocalPosition: {x: 0.737, y: -0.093, z: 0}
   m_LocalScale: {x: -0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 5058408611307330618}
@@ -623,6 +623,8 @@ GameObject:
   - component: {fileID: 9159454563489009013}
   - component: {fileID: 9159454563489009012}
   - component: {fileID: 3273928682880558778}
+  - component: {fileID: 3603052018605925440}
+  - component: {fileID: 9098149105415088652}
   m_Layer: 7
   m_Name: Beast_SP_Shadow
   m_TagString: Enemy
@@ -638,7 +640,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9159454563489009014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 333.378, y: -54.767677, z: 0.7000027}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5591907049054595264}
@@ -964,3 +966,104 @@ MonoBehaviour:
   hitBVector: {x: 0.26, y: -0.13, z: 0}
   hitCPos: {fileID: 3983440230818481920}
   hitCVector: {x: 0.26, y: -0.13, z: 0}
+--- !u!114 &3603052018605925440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9159454563489009014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
+--- !u!114 &9098149105415088652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9159454563489009014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca32f423db76b6a46ba276707e2a023b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb2d: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  jumpTime: 0
+  groundCheck: {fileID: 4422180026672391475}
+  boxSize: {x: 0, y: 0}
+  noFriction: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
+  fullFriction: {fileID: 6200000, guid: 48626c08f0a6277489a9387662b457ac, type: 2}
+  ani: {fileID: 3094173669411308063}
+  inputRecorder: {fileID: 0}
+  move: 0
+  currentState: 0
+  target: {fileID: 0}
+  pawn: {fileID: 9159454563489009013}
+  health: {fileID: 9159454563489009012}
+  eCombat: {fileID: 3273928682880558778}
+  eyeball: {fileID: 5046184464393793190}
+  eGroundCheck: {fileID: 2658141955838687322}
+  playerCheck: {fileID: 6392934006830648748}
+  movement: {x: 0, y: 0}
+  knockBack: {x: 0, y: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  facingDirection: 0
+  damageDirection: 0
+  patrolRange: 5
+  groundCheckDistance: 1
+  wallCheckDistance: 1
+  enemyCheckDistance: 1
+  harmStart: 0
+  harmDuration: 0
+  meleeDistance: 1
+  rangedDistance: 3
+  fleeDistance: 5
+  chaseDistance: 5
+  isGroundDetected: 1
+  isWallDetected: 0
+  shouldMove: 0
+  hasRangedAttack: 0
+  isInMeleeRange: 0
+  isInRangedRange: 0
+  playerCheckDistance: {x: 0, y: 0, z: 0}
+  direction: {x: 0, y: 0}
+  force: {x: 0, y: 0}
+  seekDistance: 5
+  pathUpdateSeconds: 0.5
+  speed: 200
+  nextWayPointDistance: 3
+  jumpNodeHeightRequirement: 0.8
+  jumpModifier: 0.3
+  jumpCheckOffset: 0.1
+  isFollowEnabled: 1
+  isJumpEnabled: 1
+  isDirectionLookEnabled: 1
+  seeker: {fileID: 3603052018605925440}
+  currentWaypoint: 0

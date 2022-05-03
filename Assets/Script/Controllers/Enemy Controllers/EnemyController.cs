@@ -51,7 +51,7 @@ public class EnemyController : Controller
     [SerializeField]
     protected int facingDirection,
         damageDirection;
-
+    [SerializeField]
     protected float patrolRange = 5.0f,
         groundCheckDistance = 1.0f,
         wallCheckDistance = 1.0f,
@@ -73,6 +73,7 @@ public class EnemyController : Controller
 
     [SerializeField]
     protected Vector3 playerCheckDistance;
+    [SerializeField]
     protected Vector2 direction,
         force;
 
@@ -94,8 +95,9 @@ public class EnemyController : Controller
 
     [SerializeField]
     private Path path;
+    [SerializeField]
     private Seeker seeker;
-
+    [SerializeField]
     private int currentWaypoint = 0;
 
 
@@ -108,15 +110,16 @@ public class EnemyController : Controller
     // Start is called before the first frame update
     protected override void Start()
     {
-        seeker = GetComponent<Seeker>();
-        rb2d = GetComponent<Rigidbody2D>();
-        InvokeRepeating(nameof(UpdatePath), 0f, pathUpdateSeconds);
+
         base.Start();
     }
     protected override void Awake()
     {
         if (GameManager.Instance.scene.name != "Main Menu")
         {
+           seeker = GetComponent<Seeker>();
+            rb2d = GetComponent<Rigidbody2D>();
+            InvokeRepeating(nameof(UpdatePath), 0f, pathUpdateSeconds);
             target = GameManager.Instance.player.transform;//get player from game manager
             pawn = GetComponent<EnemyPawn>();//refrence this objects enemy pawn
             health = GetComponent<Health>();//get health object
