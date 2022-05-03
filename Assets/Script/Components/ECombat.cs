@@ -95,7 +95,7 @@ public class ECombat : MonoBehaviour
     #region Combo Attack Functions
     public void ECombo1()
    {
-        if (EC.IsGrounded)
+        if (EC.IsGrounded())
         {
             if (_canAttack && (Time.time < comboTimer))//timer has not run out
             {

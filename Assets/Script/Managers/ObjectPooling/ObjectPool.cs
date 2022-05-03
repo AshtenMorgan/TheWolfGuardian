@@ -38,7 +38,6 @@ public class ObjectPool : MonoBehaviour
     private void Start()
     {
         EnumToString();
-        PoolSetup();
     }
     #region Enemy Pool checks
     public void PoolSetup()
@@ -88,6 +87,7 @@ public class ObjectPool : MonoBehaviour
                     break;
             }
         }
+        PoolSetup();
     }
   
     #endregion

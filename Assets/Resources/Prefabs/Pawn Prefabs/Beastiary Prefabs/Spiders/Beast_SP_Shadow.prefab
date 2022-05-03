@@ -242,7 +242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4574550702325116354}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.122, y: -0.551, z: 0}
+  m_LocalPosition: {x: 0.657, y: -0.499, z: 0}
   m_LocalScale: {x: -0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 5058408611307330618}
@@ -710,7 +710,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDrag: 2
   m_AngularDrag: 1
   m_GravityScale: 2
@@ -980,11 +980,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   drawGizmos: 1
-  detailedGizmos: 0
+  detailedGizmos: 1
   startEndModifier:
     addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
+    exactStartPoint: 1
+    exactEndPoint: 1
     useRaycasting: 0
     mask:
       serializedVersion: 2
@@ -1006,64 +1006,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca32f423db76b6a46ba276707e2a023b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb2d: {fileID: 0}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  jumpTime: 0
-  groundCheck: {fileID: 4422180026672391475}
-  boxSize: {x: 0, y: 0}
-  noFriction: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
-  fullFriction: {fileID: 6200000, guid: 48626c08f0a6277489a9387662b457ac, type: 2}
-  ani: {fileID: 3094173669411308063}
-  inputRecorder: {fileID: 0}
-  move: 0
   currentState: 0
   target: {fileID: 0}
-  pawn: {fileID: 9159454563489009013}
-  health: {fileID: 9159454563489009012}
-  eCombat: {fileID: 3273928682880558778}
-  eyeball: {fileID: 5046184464393793190}
-  eGroundCheck: {fileID: 2658141955838687322}
-  playerCheck: {fileID: 6392934006830648748}
-  movement: {x: 0, y: 0}
-  knockBack: {x: 0, y: 0}
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  facingDirection: 0
-  damageDirection: 0
-  patrolRange: 5
-  groundCheckDistance: 1
-  wallCheckDistance: 1
-  enemyCheckDistance: 1
-  harmStart: 0
-  harmDuration: 0
-  meleeDistance: 1
-  rangedDistance: 3
-  fleeDistance: 5
-  chaseDistance: 5
-  isGroundDetected: 1
-  isWallDetected: 0
-  shouldMove: 0
-  hasRangedAttack: 0
-  isInMeleeRange: 0
-  isInRangedRange: 0
-  playerCheckDistance: {x: 0, y: 0, z: 0}
-  direction: {x: 0, y: 0}
-  force: {x: 0, y: 0}
-  seekDistance: 5
-  pathUpdateSeconds: 0.5
-  speed: 200
-  nextWayPointDistance: 3
+  activateDistance: 5
+  updateSeconds: 0.5
+  speed: 500
+  nextWPDistance: 3
   jumpNodeHeightRequirement: 0.8
   jumpModifier: 0.3
   jumpCheckOffset: 0.1
   isFollowEnabled: 1
-  isJumpEnabled: 1
-  isDirectionLookEnabled: 1
+  jumpEnabled: 1
+  isFlipEnabled: 1
+  currentWP: 0
   seeker: {fileID: 3603052018605925440}
-  currentWaypoint: 0
+  rb: {fileID: 0}
+  animator: {fileID: 0}
+  direction: {x: 0, y: 0}
