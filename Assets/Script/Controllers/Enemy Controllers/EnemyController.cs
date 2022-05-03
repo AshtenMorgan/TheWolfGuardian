@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Pathfinding;
 
 public class EnemyController : Controller
 {
@@ -59,36 +60,58 @@ public class EnemyController : Controller
         harmDuration,
         meleeDistance = 1.0f,
         rangedDistance = 3.0f,
-        fleeDistance = 5.0f;
+        fleeDistance = 5.0f,
+        chaseDistance = 5.0f;
+
 
     public bool isGroundDetected = true,
         isWallDetected = false,
         shouldMove = false,
-        isPlayerDetected = false,
         hasRangedAttack = false,
         isInMeleeRange = false,
         isInRangedRange = false;
 
     [SerializeField]
     protected Vector3 playerCheckDistance;
+    protected Vector2 direction,
+        force;
+
+    [Header("Pathfinding")]
+    public float seekDistance,
+        pathUpdateSeconds = 0.5f;
+
+    [Header("Physics")]
+    public float speed = 200.0f,
+        nextWayPointDistance = 3f,
+        jumpNodeHeightRequirement = 0.8f,
+        jumpModifier = 0.3f,
+        jumpCheckOffset = 0.1f;
+
+    [Header("Custom Behavior")]
+    public bool isFollowEnabled = true,
+        isJumpEnabled = true,
+        isDirectionLookEnabled = true;
+
+    [SerializeField]
+    private Path path;
+    private Seeker seeker;
+
+    private int currentWaypoint = 0;
 
 
     #endregion
 
     #endregion
-
     #region functions
 
     #region start/update
     // Start is called before the first frame update
-
     protected override void Start()
     {
-        base.Start();//call parents start function
-        
-        
-       
-;
+        seeker = GetComponent<Seeker>();
+        rb2d = GetComponent<Rigidbody2D>();
+        InvokeRepeating(nameof(UpdatePath), 0f, pathUpdateSeconds);
+        base.Start();
     }
     protected override void Awake()
     {
@@ -138,7 +161,8 @@ public class EnemyController : Controller
                 break;
         }
         #endregion
-        base.FixedUpdate();//call parent function   
+        
+        base.FixedUpdate();
     }
     #endregion
 
@@ -354,12 +378,25 @@ public class EnemyController : Controller
     #region Motions
     protected virtual void Flip()
     {
-        Vector2 flip = gameObject.transform.localScale;
+        //detect flip
+        if (isDirectionLookEnabled)
+        {
+            if (rb2d.velocity.x > 0.05f)
+                transform.localScale = new Vector3(-1 * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            if (rb2d.velocity.x < -0.05f)
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
+        }
+        /* 
+         * 
+         * //old flip
+         Vector2 flip = gameObject.transform.localScale;
         flip.x *= -1;
         gameObject.transform.localScale = flip;
         facingDirection *= -1;
         movement.Set(pawn.WalkSpeed * facingDirection, rb2d.velocity.y);//set speed to walk
         rb2d.velocity = movement;//set velocity to movement speed/direction
+        */
     }
     protected virtual void StepDetection()
     {
@@ -370,12 +407,11 @@ public class EnemyController : Controller
     {
         if (isGrounded)//only do actions while on the ground
         {
-            Locate();//look for obstacles
             if (!isGroundDetected || isWallDetected)//there is no ground or there is a wall
             {
                 Flip();//turn around
             }
-            else if (isPlayerDetected)//we see the player
+            else if (TargetInDistance())//we see the player
             {
                 StateManager(State.Chase);
             }
@@ -388,41 +424,18 @@ public class EnemyController : Controller
     }
     protected virtual void Chase()
     {
-        Locate();//continue looking for player
-        if (isPlayerDetected)
+        if (TargetInDistance() && isFollowEnabled)
         {
-            FacePlayer();//look at player
-            RangeCheck();//check distance
-            MoveRangeCheck();
-            StepDetection();
-            if (shouldMove)
-            {
-                movement.Set(pawn.RunSpeed * facingDirection, rb2d.velocity.y);//set movement speed to run
-                rb2d.velocity = movement;//set velocity to movement speed/direction
-
-
-                if (!isGroundDetected)
-                {
-                    Jump();//should attempt to jump gaps
-                }
-            }
-        }
-        else if (!isPlayerDetected)
-        {
-            StateManager(State.Patrol);//return to patrol if we cant see player anymore
-        }
-    }
-    protected virtual void Locate()
-    {
-        Collider2D Collider = Physics2D.OverlapBox(playerCheck.position, playerCheckDistance, 0, playerLayer);
-        if (Collider != null)//overlap hit something
-        {
-            isPlayerDetected = Physics2D.Raycast(eyeball.transform.position, target.transform.position, playerLayer);
+            if ((path == null) || (currentWaypoint >= path.vectorPath.Count))
+                return;
+            NextMove();
+            Jump();
+            rb2d.AddForce(force);
+            NextWaypoint();
         }
         else
-        {
-            isPlayerDetected = false;
-        }
+            StateManager(State.Patrol);//return to patrol if we cant see player anymore
+      
     }
     protected virtual void FacePlayer()
     {
@@ -447,21 +460,18 @@ public class EnemyController : Controller
     {
         isInRangedRange = Physics2D.OverlapCircle(eyeball.position, rangedDistance, playerLayer);
         isInMeleeRange = Physics2D.OverlapCircle(eyeball.position, meleeDistance, playerLayer);
-        Locate();
 
-        if (isInMeleeRange && isPlayerDetected)
+        if (isInMeleeRange && TargetInDistance())
         {
             StateManager(State.MeleeAttack);
             
         }
-        else if (isInRangedRange && isPlayerDetected)
+        else if (isInRangedRange && TargetInDistance())
         {
             if (hasRangedAttack == true)
             {
                 StateManager(State.RangedAttack);
-
             }
-            
         }
         else
         {
@@ -484,11 +494,9 @@ public class EnemyController : Controller
     }
     protected virtual void Jump()
     {
-        if (isGrounded) //must be on the ground
-        {
-            verticalVelocity = pawn.JumpHeight;//how high to jump
-            rb2d.velocity = new Vector2(rb2d.velocity.x, verticalVelocity);
-        }
+        if (isJumpEnabled && IsGrounded)
+            if (direction.y > jumpNodeHeightRequirement)
+                rb2d.AddForce(pawn.JumpHeight * speed * Vector2.up); 
     }
     protected virtual void Flee()
     {
@@ -518,6 +526,41 @@ public class EnemyController : Controller
         Gizmos.DrawWireCube(playerCheck.position, playerCheckDistance);
     }
     #endregion
+
+    void UpdatePath()
+    {
+        if (isFollowEnabled && TargetInDistance() && seeker.IsDone())
+            seeker.StartPath(rb2d.position, target.position, OnPathComplete);
+    }
+
+    void NextWaypoint()
+    {
+        float distance = Vector2.Distance(rb2d.position, path.vectorPath[currentWaypoint]);
+        if (distance < nextWayPointDistance)
+            currentWaypoint++;
+    }
+    bool TargetInDistance()
+    {
+        return Vector2.Distance(transform.position, target.position) < chaseDistance;
+    }
+    bool InRangedRange()
+    {
+        return Vector2.Distance(transform.position, target.position) < rangedDistance;
+    }
+    void OnPathComplete(Path p)
+    {
+        if (!p.error)
+        {
+            path = p;
+            currentWaypoint = 0;
+        }
+    }
+     protected void NextMove()
+    {
+        //direction calculation
+        direction = ((Vector2)path.vectorPath[currentWaypoint] - rb2d.position);
+        force = speed * Time.deltaTime * direction;
+    }
 
     #endregion
 }

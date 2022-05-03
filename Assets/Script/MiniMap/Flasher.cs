@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class Flasher : MonoBehaviour
 {
+    public Color unEntered,
+        entered,
+        flashA,
+        flashB;
     bool hasEntered = false;
     SpriteRenderer sprite;
     Camera cam;
 
-
+    private void Awake()
+    {
+        sprite = GetComponent<SpriteRenderer>();
+        if (!hasEntered)
+            sprite.color = unEntered;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
@@ -17,8 +26,8 @@ public class Flasher : MonoBehaviour
             hasEntered = true;
             cam = GameObject.FindGameObjectWithTag("MapCam").GetComponent<Camera>();
             cam.transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y, -10.0f);
-            sprite = GetComponent<SpriteRenderer>();
-            sprite.color = Color.green;
+            
+            sprite.color = entered;
             //StopAllCoroutines();
             //StartCoroutine(Flashy());
         }
@@ -26,22 +35,23 @@ public class Flasher : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
+        
 
         if (collision.GetComponent<PlayerPawn>())
         {
-            if (sprite.color == Color.red)
-                sprite.color = Color.green;
+            if (sprite.color == flashA)
+                sprite.color = flashB;
             else
-                sprite.color = Color.red;
+                sprite.color = flashA;
         }
-
+        
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerPawn>())
         {
-            //StopAllCoroutines();
-            sprite.color = Color.green;
+           //StopAllCoroutines();
+            sprite.color = entered;
         }
     }
     IEnumerator Flashy()
@@ -50,11 +60,12 @@ public class Flasher : MonoBehaviour
         WaitForSeconds waitTime = new WaitForSeconds(intermissionDelay);
         while (true)
         {
-            if (sprite.color == Color.red)
-                sprite.color = Color.green;
+            if (sprite.color == flashA)
+                sprite.color = flashB;
             else
-                sprite.color = Color.red;
+                sprite.color = flashA;
             yield return waitTime;
+            StartCoroutine(Flashy());
         }
     }
 }
