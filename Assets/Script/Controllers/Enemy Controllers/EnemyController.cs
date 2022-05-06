@@ -27,8 +27,10 @@ public class EnemyController : MonoBehaviour
     protected State currentState = State.Patrol;
     #endregion
     [Header("Pathfinding")]
-    public Transform target;
+    public Transform target,
+        patrolTarget;
     public float activateDistance,
+        patrolDistance = 5.0f,
         updateSeconds;
 
     [Header("Physics")]
@@ -41,13 +43,16 @@ public class EnemyController : MonoBehaviour
     [Header("Other")]
     public bool isFollowEnabled = true,
         jumpEnabled = true,
-        isFlipEnabled = true;
-
-
+        isFlipEnabled = true,
+        patrolResume = false,
+        isMovingRight = false;
+        
     [SerializeField]
     private Path path;
     [SerializeField]
     private int currentWP = 0;
+    [SerializeField]
+    private Transform[] wayPoints;
     [SerializeField]
     private Seeker seeker;
     [SerializeField]
@@ -61,11 +66,13 @@ public class EnemyController : MonoBehaviour
 
 
 
+
     #endregion
     #region functions
     #region start/update
     protected void OnEnable()
     {
+        patrolTarget = transform.GetChild(0);
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -120,6 +127,7 @@ public class EnemyController : MonoBehaviour
     }
     protected virtual void UpdatePatrolState()
     {
+
         Patrol();
         
         Debug.Log("Patrol Done");
@@ -143,7 +151,7 @@ public class EnemyController : MonoBehaviour
     }
     protected virtual void ExitChaseState()
     {
-
+        patrolResume = true;
     }
     #endregion
     #region Flee
@@ -300,9 +308,39 @@ public class EnemyController : MonoBehaviour
     }
     protected void Patrol()
     {
-        //wp navigation?
+        float distance = Vector2.Distance(rb.transform.position, patrolTarget.position);
+
         if (TargetInDistance())
             StateManager(State.Chase);
+
+        if (patrolResume)
+        {
+            if (patrolTarget.position != rb.transform.position)
+            {
+                rb.velocity = MoveTowards();
+                return;
+            }
+            else
+            {
+                patrolResume = false;
+                isMovingRight = true;
+            }
+                
+        }
+
+        if((!patrolResume) && (patrolDistance < distance))
+        {
+            rb.velocity = MoveAway();
+            return;
+        }
+        else if ((!patrolResume) && (patrolDistance >= distance))
+        {
+            patrolResume = true;
+            rb.velocity = MoveTowards();
+        }
+
+       
+
     }
     #endregion
 
@@ -362,7 +400,7 @@ public class EnemyController : MonoBehaviour
 
         //jump
         Jump();
-        rb.velocity = (GetForce());
+        rb.velocity = GetForce();
 
         //look for next waypoint
         GetNextWP();
@@ -383,6 +421,18 @@ public class EnemyController : MonoBehaviour
     protected Vector2 GetForce()
     {
         direction = ((Vector2)path.vectorPath[currentWP] - rb.position).normalized;
+        Vector2 force = speed * Time.deltaTime * direction;
+        return force;
+    }
+    protected Vector2 MoveAway()
+    {
+        direction = ((Vector2)patrolTarget.position + rb.position).normalized;
+        Vector2 force = speed * Time.deltaTime * direction;
+        return force;
+    }
+    protected Vector2 MoveTowards()
+    {
+        direction = ((Vector2)patrolTarget.position - rb.position).normalized;
         Vector2 force = speed * Time.deltaTime * direction;
         return force;
     }
@@ -410,6 +460,8 @@ public class EnemyController : MonoBehaviour
     }
     protected void OnDisable()
     {
+        patrolTarget.transform.parent = this.transform;
+        
         CancelInvoke();
     }
 

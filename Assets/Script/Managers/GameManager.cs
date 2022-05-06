@@ -63,18 +63,21 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene loaded, LoadSceneMode mode)
     {
         scene = loaded;//update what scene we are in
-
-        if (scene.name != "MainMenu")
+        if(GameSettings.Instance != null)
         {
-            GameSettings.Instance.activeMenu = ActiveMenu.Game;
+            if (scene.name != "MainMenu")
+            {
+                GameSettings.Instance.activeMenu = ActiveMenu.Game;
+                VarCheck();
+
+            }
+            else if (scene.name == "MainMenu")
+            {
+
+            }
+        }
+        else
             VarCheck();
-
-        }
-        else if (scene.name == "MainMenu")
-        {
-            
-        }
-
     }
 
     //Singleton  only one instance
@@ -95,23 +98,27 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (GameSettings.Instance != null)
         {
-
-            switch (GameSettings.Instance.activeMenu)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                case ActiveMenu.Game:
-                    GameSettings.Instance.PauseUnpause();
-                    break;
 
-                case ActiveMenu.Pause:
-                    GameSettings.Instance.PauseUnpause();
-                    break;
+                switch (GameSettings.Instance.activeMenu)
+                {
+                    case ActiveMenu.Game:
+                        GameSettings.Instance.PauseUnpause();
+                        break;
 
-                default:
-                    break;
+                    case ActiveMenu.Pause:
+                        GameSettings.Instance.PauseUnpause();
+                        break;
+
+                    default:
+                        break;
+                }
             }
         }
+        
         if (scene.name != "MainMenu")//make sure we should have stuff
         {
             CheckSpawn();       //see if it is time to spawn player  //maybe trigger this on death
@@ -159,7 +166,11 @@ public class GameManager : MonoBehaviour
             player.Lives--;//decrement lives
             lives = player.Lives;//track how many lives
             playerRecorder = player.GetComponent<InputRecorder>();
-            UpdateHealthBar();
+            if (GameSettings.Instance != null)
+            {
+                UpdateHealthBar();
+            }
+            
         }
         else
         {
@@ -198,9 +209,13 @@ public class GameManager : MonoBehaviour
     //handle game over
     public void GameOver()
     {
-        Time.timeScale = 0.0f;//stop time
-        GameSettings.Instance.SelectMenu("GameOverCanvas");
+        if (GameSettings.Instance != null)
+        {
+            Time.timeScale = 0.0f;//stop time
+            GameSettings.Instance.SelectMenu("GameOverCanvas");
+        }
     }
+        
 
 
     public void OnDisable()

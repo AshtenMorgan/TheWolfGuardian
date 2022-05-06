@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!82 &499932281 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7629283231742760298, guid: 4d0db746bbd77a84895866b68de56948, type: 3}
+  m_PrefabInstance: {fileID: 622326223}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &622326223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -215,6 +220,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2229830412935952346, guid: 384eb0105ab7bf642831d34e3007438b, type: 3}
+      propertyPath: musicSource
+      value: 
+      objectReference: {fileID: 499932281}
     - target: {fileID: 4003495801548821514, guid: 384eb0105ab7bf642831d34e3007438b, type: 3}
       propertyPath: m_Name
       value: MasterCanvas
