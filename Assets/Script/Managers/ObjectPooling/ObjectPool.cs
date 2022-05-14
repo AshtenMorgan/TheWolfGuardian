@@ -10,15 +10,13 @@ public class ObjectPool : MonoBehaviour
         Redcap,
         ShadowWidow
     }
-
+    
     #region Pools
     [HideInInspector]
     public List<GameObject> enemyPool;
     private string[] _prefabLocation;
     [Header("All enemies you wish to spawn"), Tooltip("Select 1 type per enemy spawn")]
     public Enemies[] m_enemies;
-
-
     #endregion
 
     #region Game Objects
@@ -39,7 +37,6 @@ public class ObjectPool : MonoBehaviour
     {
         enemy = new GameObject[m_enemies.Length];
         EnumToString();
-
     }
     #region Enemy Pool checks
     public void PoolSetup()
