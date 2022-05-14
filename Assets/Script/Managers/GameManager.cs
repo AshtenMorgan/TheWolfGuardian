@@ -127,6 +127,8 @@ public class GameManager : MonoBehaviour
 
     public void VarCheck()
     {
+        if (confiner.m_BoundingShape2D == null)
+            confiner.m_BoundingShape2D = room1;
         //set objects
         playerPrefab = Resources.Load("Prefabs/Pawn Prefabs/Player Prefabs/Ashlynn");
         //instantiation point
