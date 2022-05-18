@@ -1,41 +1,62 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pickup : MonoBehaviour
+public abstract class Pickup : MonoBehaviour
 {
-    //TODO: MAKE THIS SHIT WURK
-    public PowerUp powerup; //variable to hold the powerup that this pick up has
-    public AudioClip feedback; //to hold our audio feedback when a pickup is picked up
-    public Transform tf; //for pickup's position
+    [Header("Pickup Settings")]
+    protected Vector3 axis = Vector3.up; //the axis the object will rotate on
+    [SerializeField, Tooltip("This is the speed at which the pickup rotates")]
+    protected float rotationSpeed = 90f; // variable for pick up rotation
+    [SerializeField, Tooltip("This is how long the pickup remains in the scene before destroying itself")]
+    protected float lifespan = 15f; //amount of time the pickup remains until it is destroyed
+    [SerializeField, Tooltip("If this boolean is true the pickup will decay after it's designer set lifepsan. If it is false then the pickup will not decay.")]
+    protected bool canDecay = true; //boolean for allowing a pickup to not decay
+    public virtual void Awake()
+    {
+        if (canDecay == true)
+        {
+            StartCoroutine(Decay()); 
+        }
+    }
 
     // Start is called before the first frame update
-    void Awake()
+    public virtual void Start()
     {
-        tf = GetComponent<Transform>();
+
     }
 
-    public void OnTriggerEnter(Collider other) 
+    // Update is called once per frame
+    protected virtual void Update()
     {
-        //store object's PowerUpManager if it has one
-        PowerUpManager powMan = other.GetComponent<PowerUpManager>();
+        //rotate the pickup as it sits on the ground
+        //transform.rotation *= Quaternion.AngleAxis(rotationSpeed * Time.deltaTime, axis);
+    }
 
-        //if the other object has a PowerUpManager
-        if (powMan != null) 
+    protected void OnTriggerEnter2D(Collider collider)
+    {
+        //check to see if what collided with pickup is a HumanoidPawn
+        GameObject entity = collider.gameObject;
+        //if it is
+        if (entity.CompareTag("Player"))
         {
-            //Add the PowerUp
-            powMan.Add(powerup);
-
-            if (feedback != null) 
-            {
-                AudioSource.PlayClipAtPoint(feedback, tf.position, 1.0f);
-            }
-            
+            //call on pickup
+            OnPickUp(entity);
         }
+    }
 
-        //decrement the number of powerups in the game
-        //GameManager.instance.currentPowerUps--;
-        //Destroy this pickup
+    protected virtual void OnPickUp(GameObject entity)
+    {
+        //GameManager.instance.pickups.Remove(gameObject);
+        //GameManager.instance.currentPickups--;
         Destroy(gameObject);
     }
+    IEnumerator Decay()
+    {
+        yield return new WaitForSeconds(lifespan);
+        //GameManager.instance.pickups.Remove(gameObject);
+        //GameManager.instance.currentPickups--;
+        Destroy(gameObject);
+    }
+
 }

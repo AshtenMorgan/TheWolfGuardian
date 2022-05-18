@@ -127,7 +127,14 @@ public class Health : Pickups
         float percent = _health / _maxHealth;
         return percent;
     }
-
+    public float GetHealth() 
+    {
+        return _health;
+    }
+    public float GetMaxHealth() 
+    {
+        return _maxHealth;
+    }
     public void Respawn()
     {
         currentHealth = maxHealth;
