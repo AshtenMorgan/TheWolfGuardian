@@ -8,7 +8,8 @@ public class Flasher : MonoBehaviour
         entered,
         flashA,
         flashB;
-    bool hasEntered = false;
+    bool hasEntered = false,
+        isOverlapping = false;
     SpriteRenderer sprite;
     Camera cam;
 
@@ -17,27 +18,26 @@ public class Flasher : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         if (!hasEntered)
             sprite.color = unEntered;
+        cam = GameObject.FindGameObjectWithTag("MapCam").GetComponent<Camera>();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         
-        if (collision.GetComponent<PlayerPawn>())
+        if (other.CompareTag("PlayerFlasher"))
         {
             hasEntered = true;
-            cam = GameObject.FindGameObjectWithTag("MapCam").GetComponent<Camera>();
-            cam.transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y, -10.0f);
-            
+            //isOverlapping = true;
+            cam.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, -10.0f);
             sprite.color = entered;
+
             //StopAllCoroutines();
             //StartCoroutine(Flashy());
         }
         
     }
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        
-
-        if (collision.GetComponent<PlayerPawn>())
+        if (other.CompareTag("PlayerFlasher"))
         {
             if (sprite.color == flashA)
                 sprite.color = flashB;
@@ -46,11 +46,12 @@ public class Flasher : MonoBehaviour
         }
         
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if (collision.GetComponent<PlayerPawn>())
+        if (other.CompareTag("PlayerFlasher"))
         {
-           //StopAllCoroutines();
+            //StopAllCoroutines();
+            //isOverlapping = false;
             sprite.color = entered;
         }
     }
