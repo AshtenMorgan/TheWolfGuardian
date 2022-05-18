@@ -6778,7 +6778,6 @@ GameObject:
   m_Component:
   - component: {fileID: 929456131755110249}
   - component: {fileID: 929456131755109682}
-  - component: {fileID: 929456131755109672}
   - component: {fileID: 929456131755109671}
   - component: {fileID: 733802376760380475}
   - component: {fileID: 7759576159973897724}
@@ -6872,18 +6871,6 @@ MonoBehaviour:
   gameOver: 0
   scene:
     m_Handle: 0
---- !u!114 &929456131755109672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929456131755109972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abc65fb6fb707024bb2733a70cf815c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &929456131755109671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6963,7 +6950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   availableMoves: []
-  controller: {fileID: 0}
+  controller: {fileID: 2283205010652522384, guid: ee412642b752bde4faab2815a382abea, type: 3}
   inputRecorder: {fileID: 0}
 --- !u!1 &929456131755109973
 GameObject:
