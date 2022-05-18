@@ -28,7 +28,7 @@ public class HealthPickup : Pickup
     {
         //get the entity that we collided with's health component
         Health entityHealth = entity.GetComponent<Health>();
-        if (entity.GetComponent<Health>() == null)
+        if (entity.GetComponent<Health>() != null)
         {
             if (entityHealth.GetHealth() < entityHealth.GetMaxHealth())
             {

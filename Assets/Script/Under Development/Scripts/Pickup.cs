@@ -33,15 +33,16 @@ public abstract class Pickup : MonoBehaviour
         //transform.rotation *= Quaternion.AngleAxis(rotationSpeed * Time.deltaTime, axis);
     }
 
-    protected void OnTriggerEnter2D(Collider collider)
+    protected void OnTriggerEnter2D(Collider2D collider)
     {
         //check to see if what collided with pickup is a HumanoidPawn
-        GameObject entity = collider.gameObject;
+        //GameObject entity = collider.gameObject;
         //if it is
-        if (entity.CompareTag("Player"))
+        if (collider.CompareTag("Player"))
         {
+            Debug.Log("Health touched");
             //call on pickup
-            OnPickUp(entity);
+            OnPickUp(collider.gameObject);
         }
     }
 
