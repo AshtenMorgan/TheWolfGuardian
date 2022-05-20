@@ -224,6 +224,10 @@ PrefabInstance:
       propertyPath: musicSource
       value: 
       objectReference: {fileID: 499932281}
+    - target: {fileID: 3415259114137053979, guid: 384eb0105ab7bf642831d34e3007438b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4003495801548821514, guid: 384eb0105ab7bf642831d34e3007438b, type: 3}
       propertyPath: m_Name
       value: MasterCanvas
