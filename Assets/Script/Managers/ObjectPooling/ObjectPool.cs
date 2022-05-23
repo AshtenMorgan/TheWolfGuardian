@@ -8,7 +8,8 @@ public class ObjectPool : MonoBehaviour
     public enum Enemies
     {
         Redcap,
-        ShadowWidow
+        Shadow_Widow,
+        Spider_Test
     }
     
     #region Pools
@@ -78,8 +79,13 @@ public class ObjectPool : MonoBehaviour
                     _prefabLocation[i] = "Prefabs/Pawn Prefabs/Beastiary Prefabs/Unseelie Fey/Beast_UF_Redcap";
                     break;
 
-                case Enemies.ShadowWidow:
+                case Enemies.Shadow_Widow:
                     _prefabLocation[i] = "Prefabs/Pawn Prefabs/Beastiary Prefabs/Spiders/Beast_SP_Shadow";
+                    break;
+
+                case Enemies.Spider_Test:
+                    _prefabLocation[i] = "Prefabs/Test Prefabs/Test Enemies/SpiderNewTest";
+                
                     break;
 
                 default:

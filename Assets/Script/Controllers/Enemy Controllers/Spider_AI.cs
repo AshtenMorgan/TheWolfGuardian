@@ -4,15 +4,5 @@ using UnityEngine;
 //using Pathfinding;
 
 public class Spider_AI : EnemyController
-{/*
-  * 
-  * 
-  * 
-  * 
-  * 
-  * 
-  * 
-  * 
-  *     
-  */
+{
 }
