@@ -1,3 +1,8 @@
+/*
+ * Master Chase State
+ * Things that may be useful for all chase states
+ * nothing really here yet
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +10,7 @@ using UnityEngine;
 public class ChaseState : State
 {
     protected Data_ChaseState stateData;
-    public ChaseState(Entity ent, FiniteStateMachine fsm, Data_ChaseState chaseStateData) : base(ent, fsm)
+    public ChaseState(Entity ent, StateMachine fsm, Data_ChaseState chaseStateData) : base(ent, fsm)
     {
         stateData = chaseStateData;
     }

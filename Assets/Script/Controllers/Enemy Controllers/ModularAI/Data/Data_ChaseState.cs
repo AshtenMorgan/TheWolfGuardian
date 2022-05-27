@@ -1,3 +1,8 @@
+/*
+ * Data object for Chase State
+ * This holds variables used
+ * while entity is in the chase state
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

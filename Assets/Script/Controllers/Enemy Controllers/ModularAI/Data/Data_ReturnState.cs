@@ -1,3 +1,8 @@
+/*
+ * Data object for Return State
+ * This holds variables used
+ * while entity is in the return state
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,10 +1,9 @@
-/* 
- * To be used as an intermediary between state repetition
- * for example patrol -> idle -> patrol
- * 
- * This currently just waits for a random amount of time and flips
- * on exiting state (if flip was turned on)
- * 
+/*
+ * Master Idle State
+ * Things that may be useful for all idle states
+ * Currently stops entity, determines an idle time,
+ * then flips the sprite (if it should be flipped) 
+ * on exit
  */
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +17,7 @@ public class IdleState : State
     protected float idleTime;
 
 
-    public IdleState(Entity ent, FiniteStateMachine fsm, Data_IdleState data) : base(ent, fsm)
+    public IdleState(Entity ent, StateMachine fsm, Data_IdleState data) : base(ent, fsm)
     {
         stateData = data;
     }

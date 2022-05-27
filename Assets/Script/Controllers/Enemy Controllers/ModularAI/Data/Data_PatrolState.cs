@@ -1,3 +1,8 @@
+/*
+ * Data object for Patrol State
+ * This holds variables used
+ * while entity is in the patrol state
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

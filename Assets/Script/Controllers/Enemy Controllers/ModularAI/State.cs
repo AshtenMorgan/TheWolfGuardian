@@ -1,3 +1,10 @@
+/*
+ * Master State
+ * Things that may be useful for all states
+ * right now only sets start time upon state
+ * entry
+ * 
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,14 +12,14 @@ using UnityEngine;
 public class State
 {
     #region Vars
-    protected FiniteStateMachine stateMachine;
+    protected StateMachine stateMachine;
     protected Entity entity;
 
     protected float startTime;
 
     #endregion
     #region Constructor
-    public State(Entity ent, FiniteStateMachine fsm)
+    public State(Entity ent, StateMachine fsm)
     {
         entity = ent;
         stateMachine = fsm;

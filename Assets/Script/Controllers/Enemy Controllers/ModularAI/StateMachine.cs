@@ -1,12 +1,20 @@
+/* 
+ * 
+ * The manager for the State Machine
+ * holds functions for entering,
+ * exiting, or changing states
+ * 
+ * 
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FiniteStateMachine
+public class StateMachine
 {
     public State currentState { get; private set; }
 
-
+    //the starting state
     public void Initialize(State startingState)
     {
         currentState = startingState;
@@ -17,6 +25,6 @@ public class FiniteStateMachine
     {
         currentState.Exit();//exit state
         currentState = newState;//change state
-        currentState.Enter();//start new state
+        currentState.Enter();//begin state
     }
 }

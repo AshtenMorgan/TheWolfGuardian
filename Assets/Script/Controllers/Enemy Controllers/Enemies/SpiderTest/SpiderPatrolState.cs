@@ -12,7 +12,7 @@ using UnityEngine;
 public class SpiderPatrolState : PatrolState
 {
     private SpiderTest enemy;
-    public SpiderPatrolState(Entity ent, FiniteStateMachine fsm, Data_PatrolState patrolStateData, SpiderTest testEnemy) : base(ent, fsm, patrolStateData)
+    public SpiderPatrolState(Entity ent, StateMachine fsm, Data_PatrolState patrolStateData, SpiderTest testEnemy) : base(ent, fsm, patrolStateData)
     {
         enemy = testEnemy;
     }

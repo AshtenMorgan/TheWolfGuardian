@@ -1,3 +1,9 @@
+/*
+ * Data object for all Enemies
+ * This holds variables used
+ * for all or most enemies
+ * not including health
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

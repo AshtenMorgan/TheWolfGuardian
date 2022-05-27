@@ -1,3 +1,10 @@
+/*
+ * Master Entity Class
+ * includes functions for things such as AI sences,
+ * enemies components (rigidbody, animator, health, etc)
+ * along with the movement and flip functions 
+ * 
+ */
 #region Include
 using System.Collections;
 using System.Collections.Generic;
@@ -15,7 +22,7 @@ public class Entity : MonoBehaviour
 {
     #region Variables
     #region Components
-    public FiniteStateMachine fsm;
+    public StateMachine fsm;
     public Rigidbody2D rb { get; private set; }
     public Animator ani { get; private set; }
     public Health health { get; private set; }
@@ -41,7 +48,7 @@ public class Entity : MonoBehaviour
         health = GetComponent<Health>();
         target = GameManager.Instance.player.gameObject;
 
-        fsm = new FiniteStateMachine();//Create state machine
+        fsm = new StateMachine();//Create state machine
 
         facingDirection = 1;
     }
