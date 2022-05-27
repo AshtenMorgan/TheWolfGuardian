@@ -20,6 +20,9 @@ TagManager:
   - Room1
   - MapCam
   - PlayerFlasher
+  - HUDCanvas
+  - EnemySpawnPoint
+  - Vcam
   layers:
   - Default
   - TransparentFX

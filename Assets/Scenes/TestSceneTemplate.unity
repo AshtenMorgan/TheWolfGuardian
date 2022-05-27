@@ -17386,7 +17386,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPool: []
   m_enemies: 0000000000000000000000000100000001000000010000000000000001000000
-  instanPoint: {fileID: 263058219353871457}
   enemy:
   - {fileID: 0}
   - {fileID: 0}
@@ -17926,7 +17925,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPool: []
   m_enemies: 
-  instanPoint: {fileID: 897349116939496278}
   enemy:
   - {fileID: 0}
   - {fileID: 0}
@@ -19128,8 +19126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 669c028ef5eeb5a478349725fa1ad9d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  from: {fileID: 263058219353871470}
-  to: {fileID: 897349116939496281}
+  a: {fileID: 0}
+  b: {fileID: 0}
   confiner: {fileID: 1570171803432931061}
 --- !u!1 &3484000299945174751
 GameObject:
@@ -19262,7 +19260,7 @@ GameObject:
   - component: {fileID: 1570171803432931061}
   m_Layer: 0
   m_Name: Parallaxing VCam
-  m_TagString: Untagged
+  m_TagString: Vcam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21313,7 +21311,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPool: []
   m_enemies: 
-  instanPoint: {fileID: 4824505857168318631}
   enemy:
   - {fileID: 0}
   - {fileID: 0}
@@ -45146,12 +45143,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  hitACollider: {fileID: 0}
   playerPrefab: {fileID: 0}
+  hitACollider: {fileID: 0}
   instanPoint: {fileID: 0}
   playerSpawn: {fileID: 8258506168527801700}
   room1: {fileID: 0}
+  currentRoom: {fileID: 0}
   confiner: {fileID: 0}
+  currentMap: {fileID: 0}
   playerHealth: {fileID: 0}
   lives: 3
   percent: 0
@@ -45210,8 +45209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 669c028ef5eeb5a478349725fa1ad9d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  from: {fileID: 263058219353871470}
-  to: {fileID: 4824505857168318628}
+  a: {fileID: 0}
+  b: {fileID: 0}
   confiner: {fileID: 1570171803432931061}
 --- !u!1 &8658013165937618443
 GameObject:

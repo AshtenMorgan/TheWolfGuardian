@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(RoomManager))]
 public class ObjectPool : MonoBehaviour
 {
     #region variables
@@ -21,8 +22,7 @@ public class ObjectPool : MonoBehaviour
     #endregion
 
     #region Game Objects
-    [Header("Instantiation point - 1 per room")]
-    public Transform instanPoint;
+    private Transform instanPoint;
     [HideInInspector]
     public GameObject[] enemy;
     [Header("Spawn Points - Match this to the number of enemies you set Up there ^^")]
@@ -37,6 +37,7 @@ public class ObjectPool : MonoBehaviour
     private void Start()
     {
         enemy = new GameObject[m_enemies.Length];
+        instanPoint = this.transform;
         EnumToString();
     }
     #region Enemy Pool checks
