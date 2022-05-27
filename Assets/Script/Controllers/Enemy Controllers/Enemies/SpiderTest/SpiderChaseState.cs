@@ -39,4 +39,5 @@ public class SpiderChaseState : ChaseState
         base.PhysicsUpdate();
         entity.SetVelocity(stateData.runSpeed);
     }
+    
 }

@@ -513,6 +513,7 @@ GameObject:
   - component: {fileID: 6989839788639063055}
   - component: {fileID: 4223090793318626295}
   - component: {fileID: -4432103013385893944}
+  - component: {fileID: 9203416880892862957}
   m_Layer: 7
   m_Name: Beast_UF_Redcap
   m_TagString: Enemy
@@ -602,7 +603,7 @@ Rigidbody2D:
   m_LinearDrag: 2
   m_AngularDrag: 1
   m_GravityScale: 2
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -776,7 +777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d4ef9076b25f2f4daa7053ffdca4d1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkSpeed: 2
+  _walkSpeed: 5
   _runSpeed: 4
   _jumpHeight: 6
   _damageA: 2
@@ -843,9 +844,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   target: {fileID: 0}
+  patrolTarget: {fileID: 0}
   activateDistance: 5
+  patrolDistance: 5
   updateSeconds: 0.5
-  speed: 200
+  speed: 400
   nextWPDistance: 3
   jumpNodeHeightRequirement: 2
   jumpModifier: 0.3
@@ -853,10 +856,14 @@ MonoBehaviour:
   isFollowEnabled: 1
   jumpEnabled: 1
   isFlipEnabled: 1
+  patrolResume: 0
+  isMovingRight: 0
   currentWP: 0
+  wayPoints: []
   seeker: {fileID: -4432103013385893944}
   rb: {fileID: 7559521895278942270}
   animator: {fileID: 4396794124818487122}
+  direction: {x: 0, y: 0}
 --- !u!114 &4223090793318626295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -910,6 +917,32 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!61 &9203416880892862957
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559521895278942267}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.75, y: 1.75}
+    newSize: {x: 0.875, y: 0.875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.75, y: 1.75}
+  m_EdgeRadius: 0
 --- !u!1 &8879414767259118104
 GameObject:
   m_ObjectHideFlags: 0
