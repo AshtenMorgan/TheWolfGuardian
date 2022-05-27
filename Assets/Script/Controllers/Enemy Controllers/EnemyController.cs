@@ -46,7 +46,7 @@ public class EnemyController : MonoBehaviour
         isFlipEnabled = true,
         patrolResume = false,
         isMovingRight = false;
-        
+
     [SerializeField]
     private Path path;
     [SerializeField]
@@ -129,7 +129,7 @@ public class EnemyController : MonoBehaviour
     {
 
         Patrol();
-        
+
         Debug.Log("Patrol Done");
     }
     protected virtual void ExitPatrolState()
@@ -299,11 +299,11 @@ public class EnemyController : MonoBehaviour
     }
     protected void Jump()
     {
-        
+
         if (jumpEnabled && IsGrounded())
             if (direction.y > jumpNodeHeightRequirement)
                 rb.velocity = new Vector2(rb.velocity.x, jumpModifier * speed);
-        
+
 
     }
     protected void Patrol()
@@ -325,10 +325,10 @@ public class EnemyController : MonoBehaviour
                 patrolResume = false;
                 isMovingRight = true;
             }
-                
+
         }
 
-        if((!patrolResume) && (patrolDistance < distance))
+        if ((!patrolResume) && (patrolDistance < distance))
         {
             rb.velocity = MoveAway();
             return;
@@ -339,7 +339,7 @@ public class EnemyController : MonoBehaviour
             rb.velocity = MoveTowards();
         }
 
-       
+
 
     }
     #endregion
@@ -461,7 +461,7 @@ public class EnemyController : MonoBehaviour
     protected void OnDisable()
     {
         patrolTarget.transform.parent = this.transform;
-        
+
         CancelInvoke();
     }
 

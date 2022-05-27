@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f62cb018bba2f8849a9564b4b9f437df, type: 3}
-  m_Name: Spider Move
+  m_Script: {fileID: 11500000, guid: 629e41fd9417e2c4eba80bf05066b4bf, type: 3}
+  m_Name: Spider Idle Data
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  minIdleTime: 0.5
+  maxIdleTime: 2

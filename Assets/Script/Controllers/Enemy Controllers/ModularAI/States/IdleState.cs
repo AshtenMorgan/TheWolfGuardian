@@ -1,3 +1,11 @@
+/* 
+ * To be used as an intermediary between state repetition
+ * for example patrol -> idle -> patrol
+ * 
+ * This currently just waits for a random amount of time and flips
+ * on exiting state (if flip was turned on)
+ * 
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,7 +46,7 @@ public class IdleState : State
     public override void Exit()
     {
         base.Exit();
-        if (shouldFlip)
+        if (shouldFlip)//flip if flip is on
             entity.Flip();
     }
     public void SetFlip(bool flip)

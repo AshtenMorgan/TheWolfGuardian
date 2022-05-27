@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 629e41fd9417e2c4eba80bf05066b4bf, type: 3}
-  m_Name: Spider Idle
+  m_Script: {fileID: 11500000, guid: a8769bbbc337b2a4cb9bc07f536e6bee, type: 3}
+  m_Name: Spider Patrol Data
   m_EditorClassIdentifier: 
-  minIdleTime: 1
-  maxIdleTime: 3
+  waypoints: []

@@ -20,6 +20,7 @@ public class Entity : MonoBehaviour
     public Animator ani { get; private set; }
     public Health health { get; private set; }
     public Data_Entity entityData;
+    public GameObject target { get; private set; }
 
     #endregion
     #region Movement
@@ -38,8 +39,11 @@ public class Entity : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
         health = GetComponent<Health>();
+        target = GameManager.Instance.player.gameObject;
 
         fsm = new FiniteStateMachine();//Create state machine
+
+        facingDirection = 1;
     }
 
     public virtual void Update()
@@ -63,13 +67,28 @@ public class Entity : MonoBehaviour
     }
     public virtual bool CheckLedge()
     {
-        return Physics2D.Raycast(ledgeCheck.position, ledgeCheck.transform.right, entityData.ledgeCheckDistance, entityData.whatIsGround);
+        return Physics2D.Raycast(ledgeCheck.position, Vector2.down, entityData.ledgeCheckDistance, entityData.whatIsGround);
+    }
+    public bool TargetInDistance()
+    {
+        return Vector2.Distance(transform.position, target.transform.position) < entityData.viewDistance;
+    }
+    public bool CanSeeTarget()
+    {
+        return Physics2D.Raycast(wallCheck.position, wallCheck.position - target.transform.position, entityData.viewDistance, entityData.whatIsPlayer);
     }
     public virtual void Flip()
     {
         facingDirection *= -1;
         transform.Rotate(0f, 180f, 0f);
     }
+    #region Gizmos
 
+    public virtual void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(wallCheck.position, wallCheck.position + (Vector3)(entityData.wallCheckDistance * facingDirection * Vector2.right));
+        Gizmos.DrawLine(ledgeCheck.position, ledgeCheck.position + (Vector3)(Vector2.down * entityData.ledgeCheckDistance));
+    }
+    #endregion
 }
 #endregion
