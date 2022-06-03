@@ -26,6 +26,7 @@ public class RoomManager : MonoBehaviour
                 Health healthReset = _spawnedEnemy.GetComponent<Health>();//store health component
                 healthReset.Respawn();//restore health to max
                 _spawnedEnemy.SetActive(true);//activate enemy
+                
             }
             
         }
@@ -35,6 +36,7 @@ public class RoomManager : MonoBehaviour
     {
         //track which confiner room player is currently in
         gm.currentRoom = roomCollider;
+        gm.confiner.m_BoundingShape2D = this.GetComponent<CompositeCollider2D>();
     }
     public virtual void OnTriggerExit2D(Collider2D collision)
     {if (collision.GetComponent<PlayerPawn>())

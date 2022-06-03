@@ -169,6 +169,7 @@ public class GameManager : MonoBehaviour
             player.Lives--;//decrement lives
             lives = player.Lives;//track how many lives
             playerRecorder = player.GetComponent<InputRecorder>();
+            confiner.m_BoundingShape2D = currentRoom.GetComponent<PolygonCollider2D>();
             if (GameSettings.Instance != null)
             {
                 UpdateHealthBar();
@@ -179,7 +180,7 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
         }
-
+        
     }
     public void ResetSpawn()
     {
