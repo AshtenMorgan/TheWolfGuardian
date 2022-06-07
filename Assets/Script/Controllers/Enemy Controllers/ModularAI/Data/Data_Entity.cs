@@ -13,7 +13,7 @@ public class Data_Entity : ScriptableObject
 {
     public float wallCheckDistance = 0.1f,
         ledgeCheckDistance = 0.5f,
-        viewDistance = 10.0f;
+        viewDistance = 5.0f;
 
 
     public LayerMask whatIsGround,

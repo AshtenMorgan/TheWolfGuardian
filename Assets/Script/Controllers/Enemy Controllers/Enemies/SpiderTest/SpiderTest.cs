@@ -14,7 +14,7 @@ public class SpiderTest : Entity
     //list all available states for this entity
     public SpiderIdleState idleState { get; private set; }
     public SpiderPatrolState patrolState { get; private set; }
-    public SpiderChaseState chaseState { get; private set; }    
+    public SpiderChaseState chaseState { get; private set; }
     
     //state data
     [SerializeField]
