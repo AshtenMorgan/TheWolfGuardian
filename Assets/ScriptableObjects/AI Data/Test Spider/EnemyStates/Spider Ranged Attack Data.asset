@@ -9,15 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b43b7936c252d7442a3cf03ff0ea5cf9, type: 3}
-  m_Name: TestSpider
+  m_Script: {fileID: 11500000, guid: 780fe635c64e7df4295687bae12873c2, type: 3}
+  m_Name: Spider Ranged Attack Data
   m_EditorClassIdentifier: 
-  wallCheckDistance: 0.1
-  ledgeCheckDistance: 0.6
-  viewDistance: 10
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 8
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 64

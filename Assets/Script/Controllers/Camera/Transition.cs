@@ -10,8 +10,12 @@ public class Transition : RoomManager
 
     public override void OnTriggerExit2D(Collider2D collision)
     {
-        StartCoroutine(UpdateSpawn(0.2f));
-        StartCoroutine(UpdateConfiner(0.1f));
+        if(collision.CompareTag("Player"))
+        {
+            StartCoroutine(UpdateSpawn(0.2f));
+            StartCoroutine(UpdateConfiner(0.1f));
+        }
+        
     }
     IEnumerator UpdateSpawn(float seconds)
     {

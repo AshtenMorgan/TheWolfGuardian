@@ -33,6 +33,7 @@ public class Entity : MonoBehaviour
     #region Movement
     public int facingDirection { get; private set; }
     private Vector2 tempV2;
+    
 
     [SerializeField]
     private Transform wallCheck,
@@ -76,13 +77,38 @@ public class Entity : MonoBehaviour
     {
         return Physics2D.Raycast(ledgeCheck.position, Vector2.down, entityData.ledgeCheckDistance, entityData.whatIsGround);
     }
-    public bool TargetInDistance()
+    public virtual bool TargetInDistance()
     {
         return Vector2.Distance(transform.position, target.transform.position) < entityData.viewDistance;
     }
-    public bool CanSeeTarget()
+    public virtual bool CanSeeTarget()
     {
-        return Physics2D.Raycast(wallCheck.position, wallCheck.position - target.transform.position, entityData.viewDistance, entityData.whatIsPlayer);
+        return Vector2.Distance(transform.position, target.transform.position) < entityData.viewDistance;//this is a simple range check
+    }
+    public virtual bool LeftRight()
+    {
+        if (target.transform.position.x > transform.position.x)//target is on right side of entity, should be facing right
+        {
+            if (facingDirection == 1)//entity is facing right
+            {
+                return false;//no flip needed
+            }
+            else
+            {
+                return true;//need to flip
+            }
+        }
+        else//target is on the left (or on top of) entity
+        {
+            if(facingDirection == -1)//entity facing left
+            {
+                return false;//no flip
+            }
+            else//entity facing right
+            {
+                return true;//flip
+            }
+        }
     }
     public virtual void Flip()
     {

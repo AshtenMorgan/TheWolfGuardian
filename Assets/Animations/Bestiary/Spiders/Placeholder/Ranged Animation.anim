@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ANI_SP_OLDShadowWidow_Walk
+  m_Name: Ranged Animation
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,13 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 0ec53026256d63841af51e3c7f3f6d46, type: 3}
+      value: {fileID: 21300000, guid: 62b9bec988f66894aa1a402e7b7e64e9, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: c8900e72f1ec9b24294b32a00e285aff, type: 3}
-    - time: 0.16666667
-      value: {fileID: 21300000, guid: 89e8c57dca4878744ab0a8169e32342f, type: 3}
-    - time: 0.25
-      value: {fileID: 21300000, guid: 705ae8be40b40ab43af68ded7ac52f4d, type: 3}
+      value: {fileID: 21300000, guid: 3d6460022adfc1243a072fc1e2e53c38, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,16 +42,14 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 0ec53026256d63841af51e3c7f3f6d46, type: 3}
-    - {fileID: 21300000, guid: c8900e72f1ec9b24294b32a00e285aff, type: 3}
-    - {fileID: 21300000, guid: 89e8c57dca4878744ab0a8169e32342f, type: 3}
-    - {fileID: 21300000, guid: 705ae8be40b40ab43af68ded7ac52f4d, type: 3}
+    - {fileID: 21300000, guid: 62b9bec988f66894aa1a402e7b7e64e9, type: 3}
+    - {fileID: 21300000, guid: 3d6460022adfc1243a072fc1e2e53c38, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.33333334
+    m_StopTime: 0.16666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

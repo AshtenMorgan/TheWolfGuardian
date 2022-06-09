@@ -15,6 +15,7 @@ public class State
     protected StateMachine stateMachine;
     protected Entity entity;
 
+    protected bool shouldFlip;
     protected float startTime;
 
     #endregion
@@ -41,5 +42,9 @@ public class State
     public virtual void Exit()
     {
 
+    }
+    public virtual void SetFlip(bool flip)
+    {
+        shouldFlip = flip;
     }
 }
