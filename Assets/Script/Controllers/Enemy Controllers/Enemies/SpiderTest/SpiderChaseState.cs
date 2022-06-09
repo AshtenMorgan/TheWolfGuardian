@@ -32,9 +32,15 @@ public class SpiderChaseState : ChaseState
 
     public override void LogicUpdate()
     {
-        base.LogicUpdate();
+        shouldFlip = entity.LeftRight();
+
+        
         if (!enemy.CanSeeTarget())
             stateMachine.ChangeState(enemy.idleState);
+        
+        if (shouldFlip)
+            entity.Flip();
+        base.LogicUpdate();
     }
 
     public override void PhysicsUpdate()
