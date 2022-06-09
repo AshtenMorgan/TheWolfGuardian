@@ -24,6 +24,10 @@ public class SpiderPatrolState : PatrolState
 
     public override void LogicUpdate()
     {
+        shouldFlip = entity.LeftRight();
+        if (shouldFlip)
+            entity.Flip();
+
         if (entity.PerformDetection() && entity.TargetInDistance())
             stateMachine.ChangeState(enemy.chaseState);
 
@@ -37,6 +41,7 @@ public class SpiderPatrolState : PatrolState
 
         base.LogicUpdate();
     }
+
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
