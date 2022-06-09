@@ -14,8 +14,7 @@ public class SpiderTest : Entity
     //list all available states for this entity
     public SpiderIdleState idleState { get; private set; }
     public SpiderPatrolState patrolState { get; private set; }
-    public SpiderChaseState chaseState { get; private set; }    
-    public SpiderRangedAttack rangedAttackState { get; private set; }
+    public SpiderChaseState chaseState { get; private set; }
     
     //state data
     [SerializeField]
@@ -24,8 +23,6 @@ public class SpiderTest : Entity
     private Data_PatrolState patrolStateData;
     [SerializeField]
     private Data_ChaseState chaseStateData;
-    [SerializeField]
-    private Data_RangedAttackState rangedAttackStateData;
 
 
     public override void Start()
@@ -34,7 +31,6 @@ public class SpiderTest : Entity
         idleState = new SpiderIdleState(this, fsm, idleStateData, this);
         patrolState = new SpiderPatrolState(this, fsm, patrolStateData, this);
         chaseState = new SpiderChaseState(this, fsm, chaseStateData, this);
-        rangedAttackState = new SpiderRangedAttack(this, fsm, rangedAttackStateData, this);
 
         fsm.Initialize(patrolState);
     }
