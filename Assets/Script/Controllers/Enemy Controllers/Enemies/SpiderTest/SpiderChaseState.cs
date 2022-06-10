@@ -34,12 +34,15 @@ public class SpiderChaseState : ChaseState
     {
         shouldFlip = entity.LeftRight();
 
-        
         if (!enemy.CanSeeTarget())
             stateMachine.ChangeState(enemy.idleState);
         
         if (shouldFlip)
             entity.Flip();
+
+        if (Vector2.Distance(entity.transform.position, GameManager.Instance.player.transform.position) <= entity.entityData.ranged)//is player within ranged attack distance
+            stateMachine.ChangeState(enemy.rangedAttackState);
+
         base.LogicUpdate();
     }
 

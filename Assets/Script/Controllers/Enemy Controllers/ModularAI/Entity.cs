@@ -56,8 +56,12 @@ public class Entity : MonoBehaviour
     private Vector2 tempV2;
 
     [SerializeField]
-    private Transform wallCheck,
+    protected Transform wallCheck,
         ledgeCheck;
+    #endregion
+    #region Attacks
+    public Transform originAttackA;
+    public Transform originAttackB;
     #endregion
 
     #endregion
@@ -71,10 +75,12 @@ public class Entity : MonoBehaviour
         target = GameManager.Instance.player.gameObject;
 
         fsm = new StateMachine();//Create state machine
-
-        facingDirection = 1;
     }
 
+    public virtual void OnEnable()
+    {
+        facingDirection = 1;
+    }
     public virtual void Update()
     {
         fsm.currentState.LogicUpdate();//call logic update in update
@@ -155,6 +161,7 @@ public class Entity : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
     #region Gizmos
+    
 
     public virtual void OnDrawGizmos()
     {

@@ -120,6 +120,36 @@ Transform:
   m_Children:
   - {fileID: 3657566681204043356}
   m_Father: {fileID: 5591907049054595264}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2141995456579751251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8976051869255263364}
+  m_Layer: 7
+  m_Name: VenomShooter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8976051869255263364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141995456579751251}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.736, y: -0.193, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5591907049054595264}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2570019570025961821
@@ -182,6 +212,8 @@ Transform:
   - {fileID: 4715249692972345294}
   - {fileID: 3307013912957785433}
   - {fileID: 3983440230818481920}
+  - {fileID: 5215585018920791278}
+  - {fileID: 8976051869255263364}
   - {fileID: 5058408611307330618}
   - {fileID: 773119161747144557}
   m_Father: {fileID: 9159454563489009009}
@@ -360,6 +392,36 @@ Transform:
   - {fileID: 5046184464393793190}
   - {fileID: 4422180026672391475}
   - {fileID: 6392934006830648748}
+  m_Father: {fileID: 5591907049054595264}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6561093741508421534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5215585018920791278}
+  m_Layer: 7
+  m_Name: WebShooter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5215585018920791278
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6561093741508421534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.839, y: -0.014, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
   m_Father: {fileID: 5591907049054595264}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -930,6 +992,9 @@ MonoBehaviour:
   entityData: {fileID: 11400000, guid: f344947593957a344a3d187dda420fac, type: 2}
   wallCheck: {fileID: 5046184464393793190}
   ledgeCheck: {fileID: 2658141955838687322}
+  originAttackA: {fileID: 8976051869255263364}
+  originAttackB: {fileID: 5215585018920791278}
   idleStateData: {fileID: 11400000, guid: 4fbcbbf4858cd50449f1278b17ba8b60, type: 2}
   patrolStateData: {fileID: 11400000, guid: 27f8974209d28324daebf3c92e3d4bc8, type: 2}
   chaseStateData: {fileID: 11400000, guid: bbda2a20244e93c49b3d4139fa9c7e71, type: 2}
+  rangedAttackStateData: {fileID: 11400000, guid: 489c45f490a0dfe4ca78992e93768b91, type: 2}

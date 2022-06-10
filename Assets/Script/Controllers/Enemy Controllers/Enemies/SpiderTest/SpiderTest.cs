@@ -15,7 +15,7 @@ public class SpiderTest : Entity
     public SpiderIdleState idleState { get; private set; }
     public SpiderPatrolState patrolState { get; private set; }
     public SpiderChaseState chaseState { get; private set; }
-    public SpiderRangedAttack rangedAttackState { get; private set; }
+    public SpiderRangedAttackState rangedAttackState { get; private set; }
 
     //state data
     [SerializeField]
@@ -34,8 +34,23 @@ public class SpiderTest : Entity
         idleState = new SpiderIdleState(this, fsm, idleStateData, this);
         patrolState = new SpiderPatrolState(this, fsm, patrolStateData, this);
         chaseState = new SpiderChaseState(this, fsm, chaseStateData, this);
-        rangedAttackState = new SpiderRangedAttack(this, fsm, rangedAttackStateData, this);
+        rangedAttackState = new SpiderRangedAttackState(this, fsm, rangedAttackStateData, this);
 
         fsm.Initialize(patrolState);
+    }
+
+    public void RangedAttackA()
+    {
+        GameObject firedShot = Instantiate(rangedAttackStateData.projectilePrefabA, originAttackA.position, Quaternion.identity);
+        Rigidbody2D rb = firedShot.GetComponent<Rigidbody2D>();
+        rb.AddForce(wallCheck.forward * rangedAttackStateData.projectialSpeedA);
+        //play sound
+    }
+    public void RangedAttackB()
+    {
+        GameObject firedShot = Instantiate(rangedAttackStateData.projectilePrefabB, originAttackB.position, Quaternion.identity);
+        Rigidbody2D rb = firedShot.GetComponent<Rigidbody2D>();
+        rb.AddForce(wallCheck.forward * rangedAttackStateData.projectialSpeedB);
+        //play sound
     }
 }

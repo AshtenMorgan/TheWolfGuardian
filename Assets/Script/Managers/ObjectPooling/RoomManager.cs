@@ -17,7 +17,7 @@ public class RoomManager : MonoBehaviour
     }
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<PlayerPawn>())
+        if (other.CompareTag("Player"))
         {
             for (int i = 0; i < _pool.enemyPool.Count; i++)
             {
@@ -35,11 +35,17 @@ public class RoomManager : MonoBehaviour
     public virtual void OnTriggerStay2D(Collider2D collision)
     {
         //track which confiner room player is currently in
-        gm.currentRoom = roomCollider;
-        gm.confiner.m_BoundingShape2D = this.GetComponent<CompositeCollider2D>();
+        if (collision.CompareTag("Player"))
+        {
+            gm.currentRoom = roomCollider;
+            gm.confiner.m_BoundingShape2D = this.GetComponent<CompositeCollider2D>();
+        }
+        
     }
+
     public virtual void OnTriggerExit2D(Collider2D collision)
-    {if (collision.GetComponent<PlayerPawn>())
+    {
+        if (collision.CompareTag("Player"))
         {
             for (int i = 0; i < _pool.enemyPool.Count; i++)
             {
