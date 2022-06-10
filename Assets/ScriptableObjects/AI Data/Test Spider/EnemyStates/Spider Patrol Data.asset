@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Spider Patrol Data
   m_EditorClassIdentifier: 
   waypoints: []
+  walkSpeed: 3
