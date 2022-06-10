@@ -111,6 +111,7 @@ public class GameSettings : MonoBehaviour
     }
     public void ButtonClick()
     {
+        if (!fxSource.isPlaying)
         fxSource.PlayOneShot(buttonClick);
     }
     public int BoolToInt(bool value)
