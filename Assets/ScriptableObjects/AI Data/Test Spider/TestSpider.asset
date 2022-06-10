@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallCheckDistance: 0.1
   ledgeCheckDistance: 0.6
-  viewDistance: 10
+  viewDistance: 5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8

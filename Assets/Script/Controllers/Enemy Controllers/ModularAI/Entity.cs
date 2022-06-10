@@ -72,6 +72,10 @@ public class Entity : MonoBehaviour
 
         fsm = new StateMachine();//Create state machine
 
+    }
+
+    public virtual void OnEnable()
+    {
         facingDirection = 1;
     }
 
