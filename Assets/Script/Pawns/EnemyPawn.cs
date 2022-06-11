@@ -29,7 +29,7 @@ public class EnemyPawn : Pawn
     {
         if (collision.collider.CompareTag("Player"))
         {
-            Debug.Log("It Hit");
+            //Debug.Log("It Hit");
         }
     }
 

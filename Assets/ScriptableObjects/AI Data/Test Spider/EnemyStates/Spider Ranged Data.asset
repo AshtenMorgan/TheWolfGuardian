@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780fe635c64e7df4295687bae12873c2, type: 3}
+  m_Name: Spider Ranged Data
+  m_EditorClassIdentifier: 
+  damage: 5
+  projectialSpeedA: 200
+  projectialSpeedB: 100
+  attackCooldown: 2
+  projectilePrefabA: {fileID: 1776005185504496754, guid: 34dd54c2c12cce14e8f4ac31297ee475, type: 3}
+  projectilePrefabB: {fileID: 2633900943779659241, guid: cc28e0c77cc49d14680be2ed684c60ae, type: 3}

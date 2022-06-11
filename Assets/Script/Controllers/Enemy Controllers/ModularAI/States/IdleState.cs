@@ -12,8 +12,7 @@ using UnityEngine;
 public class IdleState : State
 {
     protected Data_IdleState stateData;
-    protected bool shouldFlip,
-        isIdleOver;
+    protected bool isIdleOver;
     protected float idleTime;
 
 
@@ -24,6 +23,7 @@ public class IdleState : State
 
     public override void Enter()
     {
+        entity.ani.SetBool("isIdling", true);//play idle animation
         base.Enter();
 
         entity.SetVelocity(0f);//stop moving
@@ -44,13 +44,10 @@ public class IdleState : State
     }
     public override void Exit()
     {
+        entity.ani.SetBool("isIdling", false);//resume walk animation
         base.Exit();
         if (shouldFlip)//flip if flip is on
             entity.Flip();
-    }
-    public void SetFlip(bool flip)
-    {
-        shouldFlip = flip;
     }
     private void SetRandomIdleTime()
     {

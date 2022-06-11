@@ -28,7 +28,6 @@ public class PatrolState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-
     }
     public override void Exit()
     {

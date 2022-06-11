@@ -120,6 +120,36 @@ Transform:
   m_Children:
   - {fileID: 3657566681204043356}
   m_Father: {fileID: 5591907049054595264}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2141995456579751251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8976051869255263364}
+  m_Layer: 7
+  m_Name: VenomShooter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8976051869255263364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141995456579751251}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.413, y: -0.427, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5591907049054595264}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2570019570025961821
@@ -146,7 +176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2570019570025961821}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.183, y: -0.472, z: 0}
+  m_LocalPosition: {x: 0.979, y: -0.96, z: 0}
   m_LocalScale: {x: -0.9360671, y: 0.39207, z: 0.78414}
   m_Children: []
   m_Father: {fileID: 5058408611307330618}
@@ -182,6 +212,8 @@ Transform:
   - {fileID: 4715249692972345294}
   - {fileID: 3307013912957785433}
   - {fileID: 3983440230818481920}
+  - {fileID: 5215585018920791278}
+  - {fileID: 8976051869255263364}
   - {fileID: 5058408611307330618}
   - {fileID: 773119161747144557}
   m_Father: {fileID: 9159454563489009009}
@@ -242,7 +274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4574550702325116354}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.753, y: -0.115, z: 0}
+  m_LocalPosition: {x: 1.09, y: -0.982, z: 0}
   m_LocalScale: {x: -0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 5058408611307330618}
@@ -361,6 +393,36 @@ Transform:
   - {fileID: 4422180026672391475}
   - {fileID: 6392934006830648748}
   m_Father: {fileID: 5591907049054595264}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6561093741508421534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5215585018920791278}
+  m_Layer: 7
+  m_Name: WebShooter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5215585018920791278
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6561093741508421534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.499, y: -0.777, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5591907049054595264}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7462079403227877609
@@ -417,7 +479,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7770428065822788010}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.753, y: -0.115, z: 0}
+  m_LocalPosition: {x: 0.58, y: -0.397, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5058408611307330618}
@@ -448,7 +510,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7840273092711694165}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.753, y: -0.115, z: 0}
+  m_LocalPosition: {x: 1.014, y: -0.308, z: 0}
   m_LocalScale: {x: -0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 5058408611307330618}
@@ -714,9 +776,9 @@ SpriteRenderer:
   m_SortingLayerID: -1221803277
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4f3bc20a233033341b8270f7b0eae756, type: 3}
+  m_Sprite: {fileID: 21300000, guid: afc6ecc03f94a8842aa9c46409c5ff44, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.875, y: 0.875}
@@ -759,9 +821,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.10128093, y: -0.012991309}
+  m_Offset: {x: 0.4555074, y: -0.49102485}
   serializedVersion: 2
-  m_Radius: 0.5320984
+  m_Radius: 0.51834214
 --- !u!95 &3094173669411308063
 Animator:
   serializedVersion: 3
@@ -919,9 +981,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b474c15fc861d0f47ac77fc5ab204b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerDetected: 0
+  detectorOrigin: {fileID: 0}
+  detectorSize: {x: 5, y: 1}
+  detectorOriginOffset: {x: 0, y: 0}
+  detectionDelay: 0.3
+  gizmoIdleColor: {r: 0, g: 1, b: 0, a: 0.39215687}
+  gizmoDetectedColor: {r: 1, g: 0, b: 0, a: 0.39215687}
+  showGizmos: 1
   entityData: {fileID: 11400000, guid: f344947593957a344a3d187dda420fac, type: 2}
   wallCheck: {fileID: 5046184464393793190}
   ledgeCheck: {fileID: 2658141955838687322}
+  originAttackA: {fileID: 8976051869255263364}
+  originAttackB: {fileID: 5215585018920791278}
   idleStateData: {fileID: 11400000, guid: 4fbcbbf4858cd50449f1278b17ba8b60, type: 2}
   patrolStateData: {fileID: 11400000, guid: 27f8974209d28324daebf3c92e3d4bc8, type: 2}
   chaseStateData: {fileID: 11400000, guid: bbda2a20244e93c49b3d4139fa9c7e71, type: 2}
+  rangedAttackStateData: {fileID: 11400000, guid: 489c45f490a0dfe4ca78992e93768b91, type: 2}

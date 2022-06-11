@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fceeeb0a4bd5b9a4986f655f6b01f6ba, type: 3}
   m_Name: Spider Chase Data
   m_EditorClassIdentifier: 
-  runSpeed: 10
+  runSpeed: 8

@@ -187,6 +187,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7629283231742760298, guid: 4d0db746bbd77a84895866b68de56948, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1d89dc162879bba4ab38837957b93750, type: 3}
     - target: {fileID: 7629283231742760596, guid: 4d0db746bbd77a84895866b68de56948, type: 3}
       propertyPath: m_LocalPosition.x
       value: -27
@@ -220,6 +224,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2229830412935952346, guid: 384eb0105ab7bf642831d34e3007438b, type: 3}
+      propertyPath: buttonClick
+      value: 
+      objectReference: {fileID: 8300000, guid: 009577967165d3e41b6a5e7afe55e1d5, type: 3}
     - target: {fileID: 2229830412935952346, guid: 384eb0105ab7bf642831d34e3007438b, type: 3}
       propertyPath: musicSource
       value: 

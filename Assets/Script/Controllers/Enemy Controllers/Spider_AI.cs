@@ -17,12 +17,4 @@ public class Spider_AI : EnemyController
     }
 
 
-
-
-
-
-
-
-
-
 }
