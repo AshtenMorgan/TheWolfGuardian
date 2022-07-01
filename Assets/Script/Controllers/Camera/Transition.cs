@@ -12,11 +12,16 @@ public class Transition : RoomManager
     {
         if(collision.CompareTag("Player"))
         {
+            StartCoroutine(UpdateSpawn(0.2f));
             StartCoroutine(UpdateConfiner(0.1f));
         }
         
     }
-    
+    IEnumerator UpdateSpawn(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        GameManager.Instance.playerSpawn.transform.position = GameManager.Instance.player.transform.position;
+    }
     IEnumerator UpdateConfiner(float seconds)
     {
         yield return new WaitForSeconds(seconds);

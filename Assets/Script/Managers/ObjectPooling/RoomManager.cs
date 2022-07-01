@@ -19,7 +19,6 @@ public class RoomManager : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(UpdateSpawn(0.2f));
             for (int i = 0; i < _pool.enemyPool.Count; i++)
             {
                 _spawnedEnemy = _pool.enemyPool[i];
@@ -56,11 +55,5 @@ public class RoomManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    IEnumerator UpdateSpawn(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        GameManager.Instance.playerSpawn.transform.position = GameManager.Instance.player.transform.position;
     }
 }

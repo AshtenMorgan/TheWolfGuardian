@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     public bool gameOver;
 
     public Scene scene;
+    //private string mainMenu = "James Test"; //name of the main menu scene as a string
     #endregion
 
     #region Functions
