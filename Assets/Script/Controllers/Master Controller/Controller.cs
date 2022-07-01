@@ -18,7 +18,7 @@ public class Controller : MonoBehaviour
     #region Jump Variables
     [Header("Jump Variables")]
     protected float verticalVelocity; //the vertical acceleration of the player pawn
-    protected bool isGrounded; //determines if the pawn is touching the ground or not
+    //protected bool isGrounded; //determines if the pawn is touching the ground or not
     protected bool isCrouching; //determines if the pawn is crouching
     [SerializeField]
     protected float jumpTime; //the time we set in the editor for the maximum amount of time we can jump into the air before we start falling
@@ -53,10 +53,10 @@ public class Controller : MonoBehaviour
     [SerializeField]
     Moveset move; //stores the Moveset enum
     #region Full Properties
-    public bool IsGrounded
-    {
-        get { return isGrounded; }
-    }
+   // public bool IsGrounded
+   // {
+   //     get { return isGrounded; }
+    //}
     public bool IsCrouching
     {
         get { return isCrouching; }
@@ -87,23 +87,23 @@ public class Controller : MonoBehaviour
 
     protected virtual void Update()
     {
-        isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer); //this update checks to see if the pawn is grounded
+        //isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer); //this update checks to see if the pawn is grounded
         PlayMove(move, ComboPriority);
     }
     protected virtual void FixedUpdate()
     {
 
     }
-    protected void SlopeStick()
+    protected virtual void SlopeStick()
     {
-        if (isGrounded && inputX == 0)
-        {
-            rb2d.sharedMaterial = fullFriction; //changes Physics Material 2D of the rigidbody to our Full Friction material
-        }
-        else
-        {
-            rb2d.sharedMaterial = noFriction; //changes Physics Material 2D of the rigidbody to our No Friction material
-        }
+        //if (NewGrounded && inputX == 0)
+       // {
+        //    rb2d.sharedMaterial = fullFriction; //changes Physics Material 2D of the rigidbody to our Full Friction material
+      //  }
+       // else
+       // {
+      //      rb2d.sharedMaterial = noFriction; //changes Physics Material 2D of the rigidbody to our No Friction material
+      //  }
     }
     #region Combat Functions
     public void PlayMove(Moveset move, int ComboPriority) //Get the Move and the Priorty
