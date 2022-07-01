@@ -6,47 +6,28 @@ using UnityEngine.Animations;
 
 public class CombatTest : MonoBehaviour
 {
+    public static CombatTest PlayerCombatInstance;
+    #region Variables
     public Animator anim;
     protected Pawn pawn;
-    public bool isAttacking = false;
-    
+    protected Controller controller;
+    protected PlayerController playercontroller; 
     public PlayerInputActions playerLightAttack;
-
-    /*Attempt to unsubscribe*/
-    //public PlayerInputActions StopMovement;
-
     private InputAction lightPunch;
+    public bool isAttacking = false;
 
-    /*Attempt to unsubscribe*/
-    //private InputAction stopMove;
+    [SerializeField]
+    private Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayers;
+    #endregion
 
-    public static CombatTest PlayerCombatInstance;
-
+    #region Functions
     private void Awake()
     {
         PlayerCombatInstance = this;
         playerLightAttack = new PlayerInputActions();
         anim = GetComponent<Animator>();
-    }
-
-    private void OnEnable()
-    {
-        lightPunch = playerLightAttack.PlayerHuman.LightPunch;
-        playerLightAttack.Enable();
-        lightPunch.performed += LightPunch;
-
-
-        /*Attempt to unsubscribe*/
-        //stopMove = StopMovement.PlayerHuman.Move;
-        //StopMovement.Enable();
-        //stopMove.performed -= UnSubMove;
-    }
-    private void OnDisable()
-    {
-        playerLightAttack.Disable();
-
-        /*Attempt to unsubscribe*/
-        //StopMovement.Disable();
     }
 
     // Start is called before the first frame update
@@ -58,23 +39,53 @@ public class CombatTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    private void LightPunch(InputAction.CallbackContext context)
-    {
-        //Debug.Log(context);
-        
-        if (!isAttacking)
+        if (isAttacking)
         {
-            isAttacking = true;
+            GroundLightAttackAOE();
         }
     }
 
-    /*Attempt to unsubscribe*/
-    //private void UnSubMove(InputAction.CallbackContext context)
-    //{
+    #region Input Actions
+    private void OnEnable()
+    {
+        lightPunch = playerLightAttack.PlayerHuman.LightPunch;
+        playerLightAttack.Enable();
+        lightPunch.performed += LightPunch;
 
-    //}
+    }
+    private void OnDisable()
+    {
+        playerLightAttack.Disable();
+    }
+    private void LightPunch(InputAction.CallbackContext context)
+    {
+        //Debug.Log(context);
 
+        if (!isAttacking)
+            isAttacking = true;
+    }
+    #endregion
+
+    #region CombatAOE
+    void GroundLightAttackAOE()
+    {
+            Collider2D[] assetsHit = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+            foreach(Collider2D Enemy in assetsHit)
+            {
+                Debug.Log("We hit" + Enemy.name);
+            }
+    }
+    #endregion
+    #region Gizmos
+    private void OnDrawGizmos()
+    {
+        if (attackPoint == null)
+            return;
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+    #endregion
+
+    #endregion
 }

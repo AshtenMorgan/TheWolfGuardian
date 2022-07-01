@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : Controller
 {
+    //Unsub From movement test
+    //CombatTest combatTest;
+
     #region Variables
     #region General Player Variables
     [Header("General Player Variables")]
@@ -91,16 +94,16 @@ public class PlayerController : Controller
         SlopeStick();
         if(!isCrouching)
         
+        {
+            if (!pawn.IsSprinting && isGrounded)
             {
-                if (!pawn.IsSprinting && isGrounded)
-                {
-                    currentVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
-                }
-                if (pawn.IsSprinting && isGrounded)
-                {
-                    currentVelocity = pawn.RunSpeed; //sets the runVelocity variable equal to that of the protected variable _runSpeed on the playerpawn
-                }
+                currentVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
             }
+            if (pawn.IsSprinting && isGrounded)
+            {
+                currentVelocity = pawn.RunSpeed; //sets the runVelocity variable equal to that of the protected variable _runSpeed on the playerpawn
+            }
+        }
         FlipSprite(inputX); //flips the sprite of the character when moving left
         #endregion
     }
@@ -132,6 +135,22 @@ public class PlayerController : Controller
         }
         //animator
         ani.SetFloat("Speed", Mathf.Abs(inputX));//tell the animator we are moving
+
+        ///*Attempt to stop movement*/
+        //if (CombatTest.PlayerCombatInstance.isAttacking)
+        //{
+        //    Debug.Log("Move isAttacking");
+        //    pawn.WalkSpeed = 0;
+        //    pawn.RunSpeed = 0;
+        //    //rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
+        //}
+        //else
+        //{
+        //    Debug.Log("Else isAttacking");
+        //    //rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+        //    pawn.WalkSpeed = 4;
+        //    pawn.RunSpeed = 10;
+        //}
     }
     public virtual void SprintStart(InputAction.CallbackContext context)
     {
