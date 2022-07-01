@@ -316,7 +316,7 @@ Transform:
   m_GameObject: {fileID: 2189888768002241676}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 11.25, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2189888767707909718}
   - {fileID: 2189888767358059599}
@@ -395,6 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPool: []
   m_enemies: 00000000
+  instanPoint: {fileID: 2189888768002241677}
   enemy:
   - {fileID: 0}
   - {fileID: 0}
