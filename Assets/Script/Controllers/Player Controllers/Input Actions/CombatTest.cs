@@ -112,6 +112,8 @@ public class CombatTest : MonoBehaviour
      */
     public void DamageOverlap(int f)//define f on animation frame event (int)
     {
+        //TODO: Move the overlap box with the animation, need to include a check for weather or not damage has occured
+        //during this button press.
         switch (f)
         {
             case 0:
