@@ -713,7 +713,6 @@ GameObject:
   - component: {fileID: 5193430195961739065}
   - component: {fileID: -2874366071448257198}
   - component: {fileID: -8464213008661385059}
-  - component: {fileID: 20444851315352758}
   m_Layer: 7
   m_Name: SpiderNewTest
   m_TagString: Enemy
@@ -960,19 +959,7 @@ MonoBehaviour:
       m_Calls: []
   onDie:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -2874366071448257198}
-        m_TargetAssemblyTypeName: Health, Assembly-CSharp
-        m_MethodName: Death
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onRespawn:
     m_PersistentCalls:
       m_Calls: []
@@ -1011,29 +998,3 @@ MonoBehaviour:
   patrolStateData: {fileID: 11400000, guid: 27f8974209d28324daebf3c92e3d4bc8, type: 2}
   chaseStateData: {fileID: 11400000, guid: bbda2a20244e93c49b3d4139fa9c7e71, type: 2}
   rangedAttackStateData: {fileID: 11400000, guid: 489c45f490a0dfe4ca78992e93768b91, type: 2}
---- !u!61 &20444851315352758
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9159454563489009014}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.8769692, y: 0.085977525}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 2}
-    newSize: {x: 0.875, y: 0.875}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6090522, y: 0.7137787}
-  m_EdgeRadius: 0

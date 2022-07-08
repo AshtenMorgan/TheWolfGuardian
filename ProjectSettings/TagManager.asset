@@ -10,6 +10,7 @@ TagManager:
   - GameManager
   - UIAudio
   - HealthSlider
+  - HitA
   - OptionsBKG
   - InstanPoint
   - Enemy
