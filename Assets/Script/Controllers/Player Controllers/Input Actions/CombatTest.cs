@@ -7,7 +7,7 @@ using UnityEngine.Animations;
 public class CombatTest : MonoBehaviour
 {
     public Animator anim;
-    protected Pawn pawn;
+    protected PlayerPawn pawn;
     public bool isAttacking = false;
     
     public PlayerInputActions playerLightAttack;
@@ -22,18 +22,45 @@ public class CombatTest : MonoBehaviour
 
     public static CombatTest PlayerCombatInstance;
 
+    #region Hitboxes
+    public LayerMask enemyLayer;//define player's layer
+    /*  2 variables each hitbox (frame)
+     *  var 1 defines the game object, var 2 is for the size
+     */
+    [SerializeField, Tooltip("the first position of Hit A's hitbox.")]
+    protected Transform hitAPos0;
+    [SerializeField, Tooltip("the first size of hit A's hitbox")]
+    protected Vector3 hitAVector0;
+    #endregion
+
     private void Awake()
     {
-        PlayerCombatInstance = this;
-        playerLightAttack = new PlayerInputActions();
-        anim = GetComponent<Animator>();
+        //Moved this section to onEnable()
+        //PlayerCombatInstance = this;
+        //playerLightAttack = new PlayerInputActions();
+        //anim = GetComponent<Animator>();
+        //pawn = GetComponent<PlayerPawn>();
+        //#region HitBoxSetup
+        //hitAPos0 = transform.GetChild(0);//Get the 2nd child object on player pawn
+        //#endregion
     }
 
     private void OnEnable()
     {
+        PlayerCombatInstance = this;
+        playerLightAttack = new PlayerInputActions();
+        anim = GetComponent<Animator>();
+        pawn = GetComponent<PlayerPawn>();
+        #region HitBoxSetup
+        hitAPos0 = transform.GetChild(0).GetChild(0);//Do not re-organize Ashlynn prefab without editing this line
+        #endregion
+
+
         lightPunch = playerLightAttack.PlayerHuman.LightPunch;
         playerLightAttack.Enable();
         lightPunch.performed += LightPunch;
+
+
 
 
         /*Attempt to unsubscribe*/
@@ -77,4 +104,48 @@ public class CombatTest : MonoBehaviour
 
     //}
 
+    /*
+     *  Damage attempt 1 
+     *  Enables a raycast box based on animation frame
+     *  This can be cleaned up at a later date
+     * 
+     */
+    public void DamageOverlap(int f)//define f on animation frame event (int)
+    {
+        switch (f)
+        {
+            case 0:
+                //create a circle and return all the colliders within the area into an array
+                Collider2D[] enemiesToDamage0 = Physics2D.OverlapBoxAll(hitAPos0.position, hitAVector0, 0, enemyLayer);
+                //for every collider in that array
+                if (enemiesToDamage0.Length > 0)
+                {
+                    for (int i = 0; i < enemiesToDamage0.Length; i++)
+                    {
+                        enemiesToDamage0[i].GetComponent<Health>().Damage(pawn.DamageA);
+                    }
+                }
+                
+
+                break;
+            case 1:
+                //create a circle and return all the colliders within the area into an array
+                Collider2D[] enemiesToDamage1 = Physics2D.OverlapBoxAll(hitAPos0.position, hitAVector0, 0, enemyLayer);
+                //for every collider in that array
+                for (int i = 0; i < enemiesToDamage1.Length; i++)
+                {
+                    enemiesToDamage1[i].GetComponent<Health>().Damage(pawn.DamageA);
+                }
+                break;
+        }
+    }
+    protected void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red; //makes Gizmo for Hitboxes red
+        #region Hitbox A Gizmos
+        Gizmos.DrawWireCube(hitAPos0.position, hitAVector0); //displays the size and shape of hitbox
+        //Gizmos.DrawWireCube(hitAJumpPos.position, hitAJumpVector); //displays the size and shape of hitbox A in the air
+        //Gizmos.DrawWireCube(hitACrouchPos.position, hitACrouchVector); //displays the size and shape of hitbox A while crouching
+        #endregion
+    }
 }
