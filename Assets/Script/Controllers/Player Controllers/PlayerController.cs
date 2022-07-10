@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : Controller
 {
+    //Unsub From movement test
+    //CombatTest combatTest;
+
     #region Variables
     #region General Player Variables
     [Header("General Player Variables")]
@@ -12,11 +15,7 @@ public class PlayerController : Controller
     protected PlayerInputActions playerInputActions; //variable for storing the input schemes the pawn will be using
     protected PlayerPawn pawn;//variable for storing the pawn
     private bool _interactRange = false;
-    private float currentVelocity; //stores the player's current velocity
-    private CapsuleCollider2D capsuleCollider2d;
-    [SerializeField]
-    private float extraHeightText = 0.1f;
-
+    private float currentVelocity; //stores the player's current velocity 
     public bool InteractRange 
     {
         get { return _interactRange; }
@@ -30,7 +29,6 @@ public class PlayerController : Controller
     protected override void Awake()
     {
         pawn = GetComponent<PlayerPawn>(); //defines the pawn needed for all stats
-        capsuleCollider2d = GetComponent<CapsuleCollider2D>(); //Fix for no movement temp
         rb2d = GetComponent<Rigidbody2D>(); //defines the Rigidbody needed for pawn physics
         playerInput = GetComponent<PlayerInput>(); //defines the initial input system being used by the pawn
         ani = GetComponent<Animator>(); //defines the animator for the pawn
@@ -57,18 +55,6 @@ public class PlayerController : Controller
     {
         base.Start();
     }
-    //WIP
-    protected override void SlopeStick()
-    {
-        if (NewGrounded() && inputX == 0)
-        {
-            rb2d.sharedMaterial = fullFriction; //changes Physics Material 2D of the rigidbody to our Full Friction material
-        }
-        else
-        {
-            rb2d.sharedMaterial = noFriction; //changes Physics Material 2D of the rigidbody to our No Friction material
-        }
-    }
 
     // Update is called once per frame
     protected override void Update()
@@ -76,43 +62,15 @@ public class PlayerController : Controller
         base.Update();
     }
 
-    //This NewGrounded bool is experimental *****
-    protected bool NewGrounded()
-        //does nothing yet, trying to get this to replace the isGrounded functions or to addon to them. Will be trying to use this in order to fix the can't jump up hill issue.
-        //Will use raycast to detect ground and display a green line from th3e capsule to show the player is on ground, will have to remove the debug lines oince complete.
-        //Use the codemonkey video on "3 ways to groundcheck in unity" for further help on this.
-    {
-        
-
-        RaycastHit2D raycastHit = Physics2D.Raycast(capsuleCollider2d.bounds.center, Vector2.down, capsuleCollider2d.bounds.extents.y + extraHeightText, groundLayer);
-        Color rayColor;
-        if (raycastHit.collider != null)
-        {
-            rayColor = Color.green;
-        }
-        else
-        {
-            rayColor = Color.red;
-        }
-        Debug.DrawRay(capsuleCollider2d.bounds.center, Vector2.down * (capsuleCollider2d.bounds.extents.y + extraHeightText), rayColor);
-        Debug.Log(raycastHit.collider);
-        return raycastHit.collider != null;
-    }
-    //End of experimental code ****
-
-
-    //This is the original code
     protected override void FixedUpdate()
     {
         #region Jumping Updates
-        //boxSize, 0, groundLayer
-
-        //isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer); //this update checks to see if the player is grounded
-        ani.SetBool("Grounded", NewGrounded());//match bools
+        isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer); //this update checks to see if the player is grounded
+        ani.SetBool("Grounded", isGrounded);//match bools
 
         rb2d.velocity = new Vector2(inputX * currentVelocity, rb2d.velocity.y); //moves the pawn left and right based on player input and running speed
 
-        if (!isNotJumping && !NewGrounded()) //if we are jumping
+        if (!isNotJumping && !isGrounded) //if we are jumping
         {
             if (jumpTimeCounter > 0) //and our jump counter hasnt reached zero
             {
@@ -122,7 +80,7 @@ public class PlayerController : Controller
                 jumpTimeCounter -= Time.fixedDeltaTime; // subtracts time from the jumpTimeCounter
             }
         }
-        else if (NewGrounded())
+        else if (isGrounded)
         {
             ani.SetBool("Jumping", false);
         }
@@ -136,16 +94,16 @@ public class PlayerController : Controller
         SlopeStick();
         if(!isCrouching)
         
+        {
+            if (!pawn.IsSprinting && isGrounded)
             {
-                if (!pawn.IsSprinting && NewGrounded())
-                {
-                    currentVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
-                }
-                if (pawn.IsSprinting && NewGrounded())
-                {
-                    currentVelocity = pawn.RunSpeed; //sets the runVelocity variable equal to that of the protected variable _runSpeed on the playerpawn
-                }
+                currentVelocity = pawn.WalkSpeed; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
             }
+            if (pawn.IsSprinting && isGrounded)
+            {
+                currentVelocity = pawn.RunSpeed; //sets the runVelocity variable equal to that of the protected variable _runSpeed on the playerpawn
+            }
+        }
         FlipSprite(inputX); //flips the sprite of the character when moving left
         #endregion
     }
@@ -155,7 +113,7 @@ public class PlayerController : Controller
     {
         if (context.performed)
         {
-            if (NewGrounded()&& !isCrouching) //only allows the player to jump if they're on the ground
+            if (isGrounded && !isCrouching) //only allows the player to jump if they're on the ground
             {
                 jumpTimeCounter = jumpTime; //if we are grounded, it sets the jumpTimeCounter back to the jumpTime variable
                 isNotJumping = false; //sets the stoppedJumping bool to false so that we have !stoppedJumping
@@ -177,6 +135,22 @@ public class PlayerController : Controller
         }
         //animator
         ani.SetFloat("Speed", Mathf.Abs(inputX));//tell the animator we are moving
+
+        ///*Attempt to stop movement*/
+        //if (CombatTest.PlayerCombatInstance.isAttacking)
+        //{
+        //    Debug.Log("Move isAttacking");
+        //    pawn.WalkSpeed = 0;
+        //    pawn.RunSpeed = 0;
+        //    //rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
+        //}
+        //else
+        //{
+        //    Debug.Log("Else isAttacking");
+        //    //rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+        //    pawn.WalkSpeed = 4;
+        //    pawn.RunSpeed = 10;
+        //}
     }
     public virtual void SprintStart(InputAction.CallbackContext context)
     {
@@ -195,7 +169,7 @@ public class PlayerController : Controller
 
     public virtual void CrouchStart(InputAction.CallbackContext context) 
     {
-        if (NewGrounded())
+        if (isGrounded)
         {
             isCrouching = true; //sets the crouching bool to true
             ani.SetBool("Crouched",true);
@@ -204,7 +178,7 @@ public class PlayerController : Controller
 
     public virtual void CrouchEnd(InputAction.CallbackContext context)
     {
-        if (NewGrounded())
+        if (isGrounded)
         {
             isCrouching = false; //sets the crouching bool to false
             ani.SetBool("Crouched", false);

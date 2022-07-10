@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class Combat : MonoBehaviour
 { //temporarily disabling class until new mechanics are put in place
-    /*
+   /* 
     #region Variables
     #region General Variables
     [Header("General Pawn Attributes")]
@@ -92,13 +92,13 @@ public class Combat : MonoBehaviour
     {
         _canAttack = true; //gives us permission to hit the things
     }
-    /*
+    
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         var hit = other.GetComponent<Health>();
         if (hit != null && _canAttack) 
         {
-            hit.Damage(damage);
+            hit.Damage(damageC);
             _canAttack = false;
         }
     }
@@ -217,6 +217,7 @@ public class Combat : MonoBehaviour
     }
     #endregion
     #endregion
-    */
+   */
+    
 }
 

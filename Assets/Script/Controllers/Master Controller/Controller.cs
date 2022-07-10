@@ -10,7 +10,6 @@ public class Controller : MonoBehaviour
     [Header("General Variables")]
     [SerializeField]
     protected Rigidbody2D rb2d; //the rigidbody of the test character
-    
     protected Combat combat; //stores the combat script for the pawn
     [SerializeField]
     protected LayerMask groundLayer; //The layer mask for what is considered "the ground" in the game
