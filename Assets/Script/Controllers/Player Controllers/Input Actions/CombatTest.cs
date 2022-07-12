@@ -17,7 +17,11 @@ public class CombatTest : MonoBehaviour
     public bool isAttacking = false;
 
     [SerializeField]
-    private Transform attackPoint;
+    private Transform attackPointIdle;
+    [SerializeField]
+    private Transform attackPointCrouched;
+    [SerializeField]
+    private Transform attackPointDownAir;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
     #endregion
@@ -39,9 +43,17 @@ public class CombatTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isAttacking)
+        if (isAttacking && anim.GetBool("Grounded"))
         {
             GroundLightAttackAOE();
+        }
+        else if(isAttacking && anim.GetBool("Crouched"))
+        {
+            CrouchedAttackAOE();
+        }
+        else if(isAttacking && !anim.GetBool("Grounded"))
+        {
+            DownAirAttackAOE();
         }
     }
 
@@ -69,21 +81,55 @@ public class CombatTest : MonoBehaviour
     #region CombatAOE
     void GroundLightAttackAOE()
     {
-            Collider2D[] assetsHit = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+            Collider2D[] assetsHitIdle = Physics2D.OverlapCircleAll(attackPointIdle.position, attackRange, enemyLayers);
 
-            foreach(Collider2D Enemy in assetsHit)
+            foreach(Collider2D Enemy in assetsHitIdle)
             {
                 Debug.Log("We hit" + Enemy.name);
             }
+    }
+
+    void CrouchedAttackAOE()
+    {
+        Collider2D[] assetsHitCrouched = Physics2D.OverlapCircleAll(attackPointCrouched.position, attackRange, enemyLayers);
+
+        foreach (Collider2D Enemy in assetsHitCrouched)
+        {
+            Debug.Log("We hit" + Enemy.name);
+        }
+    }
+    void DownAirAttackAOE()
+    {
+        Collider2D[] assetsHitDownAir = Physics2D.OverlapCircleAll(attackPointDownAir.position, attackRange, enemyLayers);
+
+        foreach (Collider2D Enemy in assetsHitDownAir)
+        {
+            Debug.Log("We hit" + Enemy.name);
+        }
     }
     #endregion
     #region Gizmos
     private void OnDrawGizmos()
     {
-        if (attackPoint == null)
+        if (attackPointIdle == null)
             return;
-
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        if (attackPointCrouched == null)
+            return;
+        if (attackPointDownAir == null)
+            return;
+        if (isAttacking && !anim.GetBool("Crouched") && anim.GetBool("Grounded"))
+        {
+            Gizmos.DrawWireSphere(attackPointIdle.position, attackRange);
+        }
+        if (isAttacking && anim.GetBool("Crouched"))
+        {
+            Gizmos.DrawWireSphere(attackPointCrouched.position, attackRange);
+        }
+        if (isAttacking && !anim.GetBool("Grounded"))
+        {
+            Gizmos.DrawWireSphere(attackPointDownAir.position, attackRange);
+        }
+        
     }
     #endregion
 

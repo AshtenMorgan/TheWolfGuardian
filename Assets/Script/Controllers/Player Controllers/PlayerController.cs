@@ -31,7 +31,7 @@ public class PlayerController : Controller
         pawn = GetComponent<PlayerPawn>(); //defines the pawn needed for all stats
         rb2d = GetComponent<Rigidbody2D>(); //defines the Rigidbody needed for pawn physics
         playerInput = GetComponent<PlayerInput>(); //defines the initial input system being used by the pawn
-        ani = GetComponent<Animator>(); //defines the animator for the pawn
+        anim = GetComponent<Animator>(); //defines the animator for the pawn
         combat = GetComponent<Combat>(); //gets the combat script on the pawn
         jumpTimeCounter = jumpTime; //sets the jumpTimeCounter
 
@@ -66,7 +66,7 @@ public class PlayerController : Controller
     {
         #region Jumping Updates
         isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer); //this update checks to see if the player is grounded
-        ani.SetBool("Grounded", isGrounded);//match bools
+        anim.SetBool("Grounded", isGrounded);//match bools
 
         rb2d.velocity = new Vector2(inputX * currentVelocity, rb2d.velocity.y); //moves the pawn left and right based on player input and running speed
 
@@ -74,7 +74,7 @@ public class PlayerController : Controller
         {
             if (jumpTimeCounter > 0) //and our jump counter hasnt reached zero
             {
-                ani.SetBool("Jumping", true);//tell the animator to start jumping
+                anim.SetBool("Jumping", true);//tell the animator to start jumping
                 verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on playerpawn
                 rb2d.velocity += new Vector2(0, verticalVelocity);
                 jumpTimeCounter -= Time.fixedDeltaTime; // subtracts time from the jumpTimeCounter
@@ -82,7 +82,7 @@ public class PlayerController : Controller
         }
         else if (isGrounded)
         {
-            ani.SetBool("Jumping", false);
+            anim.SetBool("Jumping", false);
         }
         else
         {
@@ -134,7 +134,7 @@ public class PlayerController : Controller
             inputX = context.ReadValue<Vector2>().x; //reads the value of the x input the player is using
         }
         //animator
-        ani.SetFloat("Speed", Mathf.Abs(inputX));//tell the animator we are moving
+        anim.SetFloat("Speed", Mathf.Abs(inputX));//tell the animator we are moving
 
         ///*Attempt to stop movement*/
         //if (CombatTest.PlayerCombatInstance.isAttacking)
@@ -157,14 +157,14 @@ public class PlayerController : Controller
        //if (isGrounded)
         //{
             pawn.IsSprinting = true; //sets the isSprinting variable on the pawn to true
-            ani.SetBool("Sprinting", true);  //tell the animator we are sprinting
+            anim.SetBool("Sprinting", true);  //tell the animator we are sprinting
         //}
     }
     public virtual void SprintEnd(InputAction.CallbackContext context)
     {
         //removed grounded check here to fix a bug
         pawn.IsSprinting = false; //sets the isSprinting variable on the pawn to false
-        ani.SetBool("Sprinting", false);//tell the animator to stop sprinting
+        anim.SetBool("Sprinting", false);//tell the animator to stop sprinting
     }
 
     public virtual void CrouchStart(InputAction.CallbackContext context) 
@@ -172,7 +172,7 @@ public class PlayerController : Controller
         if (isGrounded)
         {
             isCrouching = true; //sets the crouching bool to true
-            ani.SetBool("Crouched",true);
+            anim.SetBool("Crouched",true);
         }
     }
 
@@ -181,7 +181,7 @@ public class PlayerController : Controller
         if (isGrounded)
         {
             isCrouching = false; //sets the crouching bool to false
-            ani.SetBool("Crouched", false);
+            anim.SetBool("Crouched", false);
         }
     }
 

@@ -42,7 +42,7 @@ public class Controller : MonoBehaviour
     #endregion
     #region Animator Variables
     [Header("Animator Variables")]
-    public Animator ani;//animator code
+    public Animator anim;//animator code
     #endregion
     #region Combat Variables
     [SerializeField]InputRecorder inputRecorder; //assigns the input recorder script so the controller can properly do combos
@@ -73,8 +73,8 @@ public class Controller : MonoBehaviour
             movesManager = FindObjectOfType<MovesManager>();
         rb2d = GetComponent<Rigidbody2D>(); //defines the Rigidbody needed for pawn physics
         combat = GetComponent<Combat>();
-        if (ani == null)
-            ani = GetComponent<Animator>();
+        if (anim == null)
+            anim = GetComponent<Animator>();
         jumpTimeCounter = jumpTime; //sets the jumpTimeCounter
         
     }
@@ -123,31 +123,31 @@ public class Controller : MonoBehaviour
             {
                 case Moveset.HitAS0:
                         Debug.Log("Playing Move HitAS0!");
-                        ani.SetTrigger("HitAS0");
+                        anim.SetTrigger("HitAS0");
                     break;
                 case Moveset.HitAS1:
                     Debug.Log("Playing Move HitAS1!");
-                    ani.SetTrigger("HitAS1");
+                    anim.SetTrigger("HitAS1");
                     break;
                 case Moveset.HitAS2:
                     Debug.Log("Playing Move HitAS2!");
-                    ani.SetTrigger("HitAS2");
+                    anim.SetTrigger("HitAS2");
                     break;
                 case Moveset.HitAS3:
                     Debug.Log("Playing Move HitAS3!");
-                    ani.SetTrigger("HitAS3");
+                    anim.SetTrigger("HitAS3");
                     break;
                 case Moveset.HitAA0:
                         Debug.Log("Playing Move HitAA0!");
-                        ani.SetTrigger("HitAA0");
+                        anim.SetTrigger("HitAA0");
                     break;
                 case Moveset.HitAC0:
                         Debug.Log("Playing Move HitAC0!");
-                        ani.SetTrigger("HitAC0");
+                        anim.SetTrigger("HitAC0");
                     break;
                 case Moveset.HitCS0:
                     Debug.Log("Playing Move HitCS0!");
-                    ani.SetTrigger("HitCS0");
+                    anim.SetTrigger("HitCS0");
                     break;
             }
 
@@ -156,9 +156,9 @@ public class Controller : MonoBehaviour
     }
     void ResetTriggers() //Reset All the Animation Triggers so we don't have overlapping animations
     {
-        foreach (AnimatorControllerParameter parameter in ani.parameters)
+        foreach (AnimatorControllerParameter parameter in anim.parameters)
         {
-            ani.ResetTrigger(parameter.name);
+            anim.ResetTrigger(parameter.name);
         }
     }
     #endregion
