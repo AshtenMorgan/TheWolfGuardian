@@ -228,7 +228,7 @@ MonoBehaviour:
   ani: {fileID: 1336663593021864652}
   inputRecorder: {fileID: 7504848257521320223}
   move: 0
-  extraHeightText: 0.101
+  extraHeightText: 0.054
 --- !u!114 &2845223548025021877
 MonoBehaviour:
   m_ObjectHideFlags: 0
