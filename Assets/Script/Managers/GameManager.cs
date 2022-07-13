@@ -13,26 +13,26 @@ public class GameManager : MonoBehaviour
     #region Player Object
     [Header("Objects"), Tooltip("Drag prefabs onto these")]
     public PlayerPawn player;
+    [Header("Prefabs"), Tooltip("These are the pre-build player and enemy objects")]
+    public Object playerPrefab;
     #endregion
-
     #region Hitboxes
     public GameObject hitACollider; //stores colliders for HitA
     #endregion
-
-    [Header("Prefabs"), Tooltip("These are the pre-build player and enemy objects")]
-    public Object playerPrefab;
-
     #region Spawn Points
     [Header("Initial Spawn Point"), Tooltip("This is where the initial instantiated objects will be placed")]
     public Transform instanPoint;
     [Header("Spawn Points"), Tooltip("All the places where the enemies or player will be spawned")]
     public Transform playerSpawn;
-    
-    public CompositeCollider2D room1;
+    #endregion
+    #region Camera Control
+    public CompositeCollider2D room1,
+        currentRoom;
     public CinemachineConfiner confiner;
     #endregion
-
-
+    #region MiniMap
+    public BoxCollider2D currentMap;
+    #endregion
     #region instance
     public static GameManager Instance { get; private set; }//allow other classes to access GM
     #endregion
@@ -49,7 +49,6 @@ public class GameManager : MonoBehaviour
     public bool gameOver;
 
     public Scene scene;
-    //private string mainMenu = "James Test"; //name of the main menu scene as a string
     #endregion
 
     #region Functions
@@ -133,6 +132,9 @@ public class GameManager : MonoBehaviour
         instanPoint = GameObject.FindGameObjectWithTag("InstanPoint").transform;
         //spawn points
         playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform.GetChild(0);
+        //vcam
+        confiner = GameObject.FindWithTag("Vcam").GetComponent<CinemachineConfiner>();
+        room1 = GameObject.FindWithTag("Room1").GetComponent<CompositeCollider2D>();
 
         //set up player
         if (player == null)
@@ -166,6 +168,7 @@ public class GameManager : MonoBehaviour
             player.Lives--;//decrement lives
             lives = player.Lives;//track how many lives
             playerRecorder = player.GetComponent<InputRecorder>();
+            confiner.m_BoundingShape2D = currentRoom.GetComponent<PolygonCollider2D>();
             if (GameSettings.Instance != null)
             {
                 UpdateHealthBar();
@@ -176,7 +179,7 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
         }
-
+        
     }
     public void ResetSpawn()
     {

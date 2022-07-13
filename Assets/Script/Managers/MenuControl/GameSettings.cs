@@ -9,7 +9,9 @@ using UnityEngine.SceneManagement;
 public enum SceneIndexes
 {
     Main_Menu = 0,
-    Zone_1 = 1,
+    Epilogue = 1, 
+    Zone_1 = 2,
+
 }
 public enum ActiveMenu
 {
@@ -95,7 +97,7 @@ public class GameSettings : MonoBehaviour
     public void StartGame()
     {
         //load whatever scene our zone1 is
-        SceneManager.LoadSceneAsync((int)SceneIndexes.Zone_1);
+        SceneManager.LoadSceneAsync((int)SceneIndexes.Epilogue);
         //display HUD canvas
         SelectMenu("HUD Canvas");
         //Set enum to Game (Used to tell what screen is active)
@@ -111,6 +113,7 @@ public class GameSettings : MonoBehaviour
     }
     public void ButtonClick()
     {
+        if (!fxSource.isPlaying)
         fxSource.PlayOneShot(buttonClick);
     }
     public int BoolToInt(bool value)

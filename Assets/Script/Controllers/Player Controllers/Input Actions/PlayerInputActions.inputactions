@@ -361,6 +361,17 @@
                 },
                 {
                     "name": "",
+                    "id": "a9f16a0a-4aa1-48c4-b80e-8bfa270e3efd",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LightPunch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "6b6104fe-6478-451f-ba8a-a964a9dff6d9",
                     "path": "<Keyboard>/k",
                     "interactions": "",
@@ -377,6 +388,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
+                    "action": "HeavyPunch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5548c94d-bce4-4066-a371-302e5352de92",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "HeavyPunch",
                     "isComposite": false,
                     "isPartOfComposite": false

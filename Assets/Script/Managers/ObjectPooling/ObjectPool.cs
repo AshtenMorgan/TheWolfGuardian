@@ -2,28 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(RoomManager))]
 public class ObjectPool : MonoBehaviour
 {
     #region variables
     public enum Enemies
     {
         Redcap,
-        ShadowWidow
+        Shadow_Widow,
+        Spider_Test
     }
-
+    
     #region Pools
     [HideInInspector]
     public List<GameObject> enemyPool;
     private string[] _prefabLocation;
     [Header("All enemies you wish to spawn"), Tooltip("Select 1 type per enemy spawn")]
     public Enemies[] m_enemies;
-
-
     #endregion
 
     #region Game Objects
-    [Header("Instantiation point - 1 per room")]
-    public Transform instanPoint;
+    private Transform instanPoint;
     [HideInInspector]
     public GameObject[] enemy;
     [Header("Spawn Points - Match this to the number of enemies you set Up there ^^")]
@@ -38,8 +37,8 @@ public class ObjectPool : MonoBehaviour
     private void Start()
     {
         enemy = new GameObject[m_enemies.Length];
+        instanPoint = this.transform;
         EnumToString();
-
     }
     #region Enemy Pool checks
     public void PoolSetup()
@@ -81,8 +80,13 @@ public class ObjectPool : MonoBehaviour
                     _prefabLocation[i] = "Prefabs/Pawn Prefabs/Beastiary Prefabs/Unseelie Fey/Beast_UF_Redcap";
                     break;
 
-                case Enemies.ShadowWidow:
+                case Enemies.Shadow_Widow:
                     _prefabLocation[i] = "Prefabs/Pawn Prefabs/Beastiary Prefabs/Spiders/Beast_SP_Shadow";
+                    break;
+
+                case Enemies.Spider_Test:
+                    _prefabLocation[i] = "Prefabs/Test Prefabs/Test Enemies/SpiderNewTest";
+                
                     break;
 
                 default:

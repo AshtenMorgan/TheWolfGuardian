@@ -4,31 +4,22 @@ using UnityEngine;
 using Cinemachine;
 using Cinemachine.Utility;
 
-public class Transition : MonoBehaviour
-{   [Header("Rooms to transition")]
-    public CompositeCollider2D from,
-        to;
-    public CinemachineConfiner confiner;
+public class Transition : RoomManager
+{   public CinemachineConfiner confiner;
 
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public override void OnTriggerExit2D(Collider2D collision)
     {
-        if(confiner.m_BoundingShape2D == from)
+        if(collision.CompareTag("Player"))
         {
-            confiner.m_BoundingShape2D = to;
+            StartCoroutine(UpdateConfiner(0.1f));
         }
-        else
-        {
-            confiner.m_BoundingShape2D = from;
-        }
-        StartCoroutine(UpdateSpawn(0.2f));
-
-        IEnumerator UpdateSpawn(float seconds)
-        {
-
-            yield return new WaitForSeconds(seconds);
-            GameManager.Instance.playerSpawn.transform.position = GameManager.Instance.player.transform.position;
-        }
-
+        
+    }
+    
+    IEnumerator UpdateConfiner(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        confiner.m_BoundingShape2D = gm.currentRoom;
     }
 }
