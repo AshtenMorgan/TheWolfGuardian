@@ -2,30 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleBehavior : StateMachineBehaviour
+public class IdleCrouchBehavior : StateMachineBehaviour
 {
-
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
     //    
     //}
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (CombatTest.PlayerCombatInstance.isAttacking)
         {
-            CombatTest.PlayerCombatInstance.anim.Play("Atk1");
+            CombatTest.PlayerCombatInstance.anim.Play("CrouchPunch1");
             //animator.SetBool("isAttacking", true);
         }
-
     }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         CombatTest.PlayerCombatInstance.isAttacking = false;
+        //CombatTest.PlayerCombatInstance.anim.Play("Crouch Idle");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

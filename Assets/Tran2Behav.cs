@@ -13,8 +13,11 @@ public class Tran2Behav : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(CombatTest.PlayerCombatInstance.isAttacking)
+        if (CombatTest.PlayerCombatInstance.isAttacking)
+        {
             CombatTest.PlayerCombatInstance.anim.Play("Atk3");
+            //animator.SetBool("isAttacking", true);
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
