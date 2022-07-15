@@ -224,7 +224,7 @@ MonoBehaviour:
   ani: {fileID: 1336663593021864652}
   inputRecorder: {fileID: 0}
   move: 0
-  extraHeightText: 0.1
+  extraHeightText: 0.054
 --- !u!114 &7700208908291447054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,6 +239,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   isAttacking: 0
+  attackPointIdle: {fileID: 0}
+  attackPointCrouched: {fileID: 0}
+  attackPointDownAir: {fileID: 0}
+  attackRange: 0.5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
