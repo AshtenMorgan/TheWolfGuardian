@@ -17,7 +17,6 @@ public class Tran1Behav : StateMachineBehaviour
         {
             CombatTest.PlayerCombatInstance.anim.Play("Atk2");
             //animator.SetBool("isAttacking", true);
-
         }
     }
 

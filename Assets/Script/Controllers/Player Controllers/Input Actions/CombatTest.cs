@@ -111,7 +111,7 @@ public class CombatTest : MonoBehaviour
     private void LightPunch(InputAction.CallbackContext context)
     {
         //Debug.Log(context);
-        
+
         if (!isAttacking)
             isAttacking = true;
     }

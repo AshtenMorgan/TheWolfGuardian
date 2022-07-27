@@ -18,6 +18,11 @@ public class JumpBehav : StateMachineBehaviour
         if (CombatTest.PlayerCombatInstance.isAttacking && !animator.GetBool("Grounded"))
         {
             CombatTest.PlayerCombatInstance.anim.Play("JumpPunch1");
+            //Debug.Log("We are stuck in update");
+        }
+        else if (CombatTest.PlayerCombatInstance.isAttacking && animator.GetBool("Grounded"))
+        {
+            CombatTest.PlayerCombatInstance.anim.Play("Atk1");
         }
     }
 
@@ -29,15 +34,23 @@ public class JumpBehav : StateMachineBehaviour
             if (animator.GetFloat("Speed") > speedParameter)
             {
                 CombatTest.PlayerCombatInstance.anim.Play("Jump A");
+                //Debug.Log("RunJump");
+                if (animator.GetBool("Grounded"))
+                    CombatTest.PlayerCombatInstance.isAttacking = false;
             }
             else if (animator.GetFloat("Speed") < speedParameter)
             {
                 CombatTest.PlayerCombatInstance.anim.Play("Jump B");
+                //Debug.Log("walkJump");
+                if (animator.GetBool("Grounded"))
+                    CombatTest.PlayerCombatInstance.isAttacking = false;
             }
         }
         else
         {
+            //Debug.Log(CombatTest.PlayerCombatInstance.isAttacking);
             CombatTest.PlayerCombatInstance.isAttacking = false;
+            animator.SetBool("isAttacking", false);
         }
 
     }
