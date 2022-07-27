@@ -10,7 +10,7 @@ public class Controller : MonoBehaviour
     [Header("General Variables")]
     [SerializeField]
     protected Rigidbody2D rb2d; //the rigidbody of the test character
-    
+
     protected Combat combat; //stores the combat script for the pawn
     [SerializeField]
     protected LayerMask groundLayer; //The layer mask for what is considered "the ground" in the game
@@ -18,17 +18,14 @@ public class Controller : MonoBehaviour
     #region Jump Variables
     [Header("Jump Variables")]
     protected float verticalVelocity; //the vertical acceleration of the player pawn
-    //protected bool isGrounded; //determines if the pawn is touching the ground or not
     protected bool isCrouching; //determines if the pawn is crouching
     [SerializeField]
     protected float jumpTime; //the time we set in the editor for the maximum amount of time we can jump into the air before we start falling
     protected float jumpTimeCounter; //the counter that keeps track of jumpTime
     protected bool isNotJumping = true; //decides whether the player has stopped jumping
     [SerializeField]
-    protected Transform groundCheck; //the specified location that decides whether the pawn is touching the ground or not
-    [SerializeField]
     protected Vector2 boxSize; //the size of the square for the groundCheck detection box
- 
+
     #endregion
     #region Lateral Movement Variables
     [Header("Lateral Movement Variables")]
@@ -46,16 +43,16 @@ public class Controller : MonoBehaviour
     public Animator ani;//animator code
     #endregion
     #region Combat Variables
-    [SerializeField]InputRecorder inputRecorder; //assigns the input recorder script so the controller can properly do combos
+    [SerializeField] InputRecorder inputRecorder; //assigns the input recorder script so the controller can properly do combos
     MovesManager movesManager;
     int CurrentComboPriority = 0;
     int ComboPriority;
     [SerializeField]
     Moveset move; //stores the Moveset enum
     #region Full Properties
-   // public bool IsGrounded
-   // {
-   //     get { return isGrounded; }
+    // public bool IsGrounded
+    // {
+    //     get { return isGrounded; }
     //}
     public bool IsCrouching
     {
@@ -68,16 +65,16 @@ public class Controller : MonoBehaviour
     #region Functions
     protected virtual void Awake()
     {
-        if (inputRecorder == null)
-            inputRecorder = FindObjectOfType<InputRecorder>();
-        if (movesManager == null)
-            movesManager = FindObjectOfType<MovesManager>();
+        //if (inputRecorder == null)
+        //    inputRecorder = FindObjectOfType<InputRecorder>();
+        //if (movesManager == null)
+        //    movesManager = FindObjectOfType<MovesManager>();
         rb2d = GetComponent<Rigidbody2D>(); //defines the Rigidbody needed for pawn physics
         combat = GetComponent<Combat>();
         if (ani == null)
             ani = GetComponent<Animator>();
         jumpTimeCounter = jumpTime; //sets the jumpTimeCounter
-        
+
     }
 
     protected virtual void Start()
@@ -97,13 +94,13 @@ public class Controller : MonoBehaviour
     protected virtual void SlopeStick()
     {
         //if (NewGrounded && inputX == 0)
-       // {
+        // {
         //    rb2d.sharedMaterial = fullFriction; //changes Physics Material 2D of the rigidbody to our Full Friction material
-      //  }
-       // else
-       // {
-      //      rb2d.sharedMaterial = noFriction; //changes Physics Material 2D of the rigidbody to our No Friction material
-      //  }
+        //  }
+        // else
+        // {
+        //      rb2d.sharedMaterial = noFriction; //changes Physics Material 2D of the rigidbody to our No Friction material
+        //  }
     }
     #region Combat Functions
     public void PlayMove(Moveset move, int ComboPriority) //Get the Move and the Priorty
@@ -123,8 +120,8 @@ public class Controller : MonoBehaviour
             switch (move)
             {
                 case Moveset.HitAS0:
-                        Debug.Log("Playing Move HitAS0!");
-                        ani.SetTrigger("HitAS0");
+                    Debug.Log("Playing Move HitAS0!");
+                    ani.SetTrigger("HitAS0");
                     break;
                 case Moveset.HitAS1:
                     Debug.Log("Playing Move HitAS1!");
@@ -139,12 +136,12 @@ public class Controller : MonoBehaviour
                     ani.SetTrigger("HitAS3");
                     break;
                 case Moveset.HitAA0:
-                        Debug.Log("Playing Move HitAA0!");
-                        ani.SetTrigger("HitAA0");
+                    Debug.Log("Playing Move HitAA0!");
+                    ani.SetTrigger("HitAA0");
                     break;
                 case Moveset.HitAC0:
-                        Debug.Log("Playing Move HitAC0!");
-                        ani.SetTrigger("HitAC0");
+                    Debug.Log("Playing Move HitAC0!");
+                    ani.SetTrigger("HitAC0");
                     break;
                 case Moveset.HitCS0:
                     Debug.Log("Playing Move HitCS0!");
@@ -164,5 +161,5 @@ public class Controller : MonoBehaviour
     }
     #endregion
     #endregion
-    
+
 }

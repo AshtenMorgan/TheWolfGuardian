@@ -250,7 +250,7 @@ public class PlayerController : Controller
         Debug.DrawRay(capsuleCollider2d.bounds.center, Vector2.down * (capsuleCollider2d.bounds.extents.y + extraHeightText), rayColor);
         Debug.Log(raycastHit.collider);
        
-        Gizmos.DrawCube(groundCheck.position, boxSize); //draws a square around our ground check empty so that we can visualize it
+        //Gizmos.DrawCube(groundCheck.position, boxSize); //draws a square around our ground check empty so that we can visualize it
     }
     #endregion
     #endregion
