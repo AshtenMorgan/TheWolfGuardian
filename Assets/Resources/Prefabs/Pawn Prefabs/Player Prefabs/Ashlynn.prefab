@@ -42,13 +42,13 @@ GameObject:
   - component: {fileID: 1336663593021864654}
   - component: {fileID: 1336663593021864649}
   - component: {fileID: 1336663593021864648}
-  - component: {fileID: 2283205010652522384}
   - component: {fileID: 7700208908291447054}
   - component: {fileID: 1281415155016603649}
   - component: {fileID: 1336663593021864645}
   - component: {fileID: 1336663593021864652}
   - component: {fileID: 6745210005853773866}
   - component: {fileID: 6904395141196890448}
+  - component: {fileID: -6369864885502870290}
   m_Layer: 6
   m_Name: Ashlynn
   m_TagString: Player
@@ -200,31 +200,6 @@ MonoBehaviour:
   comboMeterMax: 0
   _lives: 3
   _maxLives: 5
---- !u!114 &2283205010652522384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1336663593021864644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bc5719613eaf974c8d0e6d3519d891f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb2d: {fileID: 1336663593021864645}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  jumpTime: 0.08
-  groundCheck: {fileID: 1336663592562666403}
-  boxSize: {x: 0.565, y: 0.01}
-  noFriction: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
-  fullFriction: {fileID: 6200000, guid: 48626c08f0a6277489a9387662b457ac, type: 2}
-  ani: {fileID: 1336663593021864652}
-  inputRecorder: {fileID: 0}
-  move: 0
-  extraHeightText: 0.1
 --- !u!114 &7700208908291447054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,6 +413,32 @@ CapsuleCollider2D:
   m_Offset: {x: 0.016, y: -0.015110831}
   m_Size: {x: 0.594, y: 1.968938}
   m_Direction: 0
+--- !u!114 &-6369864885502870290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336663593021864644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bc5719613eaf974c8d0e6d3519d891f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb2d: {fileID: 1336663593021864645}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  jumpTime: 0.1
+  groundCheck: {fileID: 1336663592562666403}
+  boxSize: {x: 0.565, y: 0.01}
+  noFriction: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
+  fullFriction: {fileID: 6200000, guid: 48626c08f0a6277489a9387662b457ac, type: 2}
+  ani: {fileID: 1336663593021864652}
+  inputRecorder: {fileID: 0}
+  move: 0
+  extraHeightText: 0.1
+  slopeCheckDistance: 0
 --- !u!1 &1845089198985879403
 GameObject:
   m_ObjectHideFlags: 0

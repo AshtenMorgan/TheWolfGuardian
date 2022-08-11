@@ -14,9 +14,22 @@ public class PlayerController : Controller
     private bool _interactRange = false;
     private float currentVelocity; //stores the player's current velocity
     private CapsuleCollider2D capsuleCollider2d;
+    private bool isOnSlope;
     protected bool isGrounded;
     [SerializeField]
     private float extraHeightText = 0.1f;
+    private LayerMask whatIsGround;
+
+    private float slopeDownAngle;
+    private float slopeDownAngleOld;
+
+    private Vector2 slopeNormalPerp;
+    private Vector2 colliderSize;
+
+    [SerializeField]
+    private float slopeCheckDistance;
+
+
 
     public bool InteractRange 
     {
@@ -31,7 +44,7 @@ public class PlayerController : Controller
     protected override void Awake()
     {
         pawn = GetComponent<PlayerPawn>(); //defines the pawn needed for all stats
-        capsuleCollider2d = GetComponent<CapsuleCollider2D>(); //Fix for no movement temp
+        capsuleCollider2d = GetComponent<CapsuleCollider2D>(); //defines the player capsule used for movement.
         rb2d = GetComponent<Rigidbody2D>(); //defines the Rigidbody needed for pawn physics
         playerInput = GetComponent<PlayerInput>(); //defines the initial input system being used by the pawn
         ani = GetComponent<Animator>(); //defines the animator for the pawn
@@ -56,6 +69,7 @@ public class PlayerController : Controller
 
     protected override void Start()
     {
+        colliderSize = capsuleCollider2d.size;
         base.Start();
     }
     //WIP
@@ -70,6 +84,45 @@ public class PlayerController : Controller
             rb2d.sharedMaterial = noFriction; //changes Physics Material 2D of the rigidbody to our No Friction material
         }
     }
+
+    //SlopeCheck attempt***
+    private void SlopeCheck()
+    {
+        Vector2 checkPos = transform.position - new Vector3(0.0f, colliderSize.y / 2);
+
+        SlopeCheckVertical(checkPos);
+    }
+    private void SlopeCheckHorizontal(Vector2 checkPos)
+    {
+
+    }
+
+    private void SlopeCheckVertical(Vector2 checkPos)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, whatIsGround);
+        if (hit)
+        {
+            slopeNormalPerp = Vector2.Perpendicular(hit.normal);
+
+            slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
+
+            if(slopeDownAngle != slopeDownAngleOld)
+            {
+                isOnSlope = true;
+            }
+
+            slopeDownAngleOld = slopeDownAngle;
+
+            Debug.DrawRay(hit.point, slopeNormalPerp,Color.red);
+            Debug.DrawRay(hit.point, hit.normal, Color.green);
+        }
+    }
+    private void CheckInput()
+    {
+
+    }
+
+
 
     // Update is called once per frame
     protected override void Update()
