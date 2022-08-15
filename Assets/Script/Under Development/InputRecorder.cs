@@ -51,7 +51,7 @@ public class InputRecorder : MonoBehaviour
     IEnumerator ResetComboTimer() //resets the timer for combos
     {
         yield return new WaitForSeconds(ComboResetTime);
-        movesManager.PlayMove(KeysPressed);
+        //movesManager.PlayMove(KeysPressed);
         KeysPressed.Clear();
     }
 
