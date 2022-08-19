@@ -12,7 +12,7 @@ public class MovesManager : MonoBehaviour
     {
         if(GameManager.Instance.player != null)
         {
-            controller = GameManager.Instance.player.GetComponent<PlayerController>();
+            controller = GameManager.Instance.player.GetComponent<PlayerControllerV2>();
             inputRecorder = GameManager.Instance.player.GetComponent<InputRecorder>();
         }
         
@@ -30,17 +30,17 @@ public class MovesManager : MonoBehaviour
         return false;
     }
 
-    public void PlayMove(List<KeyCode> keycodes) 
-    {
-        foreach (Move move in availableMoves) 
-        {
-            if (move.IsMoveAvailable(keycodes)) 
-            {
-                controller.PlayMove(move.GetMove(), move.GetMoveComboPriority());
-                break;
-            }
-        }
-    }
+    //public void PlayMove(List<KeyCode> keycodes) 
+    //{
+    //    foreach (Move move in availableMoves) 
+    //    {
+    //        if (move.IsMoveAvailable(keycodes)) 
+    //        {
+    //            controller.PlayMove(move.GetMove(), move.GetMoveComboPriority());
+    //            break;
+    //        }
+    //    }
+    //}
 
     public int Compare(Move move1, Move move2) 
     {

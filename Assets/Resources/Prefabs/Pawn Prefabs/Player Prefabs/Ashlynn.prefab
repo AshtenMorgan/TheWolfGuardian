@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 1336663593021864654}
   - component: {fileID: 1336663593021864649}
   - component: {fileID: 1336663593021864648}
-  - component: {fileID: 2283205010652522384}
+  - component: {fileID: 7972859833928551473}
   - component: {fileID: 7700208908291447054}
   - component: {fileID: 1281415155016603649}
   - component: {fileID: 1336663593021864645}
@@ -113,7 +113,7 @@ SpriteRenderer:
   m_SortingLayerID: 1563904803
   m_SortingLayer: 5
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: ca762680c3560cd469e442a5da84a1e4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ccc7b30b5f400414a9ee4b4723a3220b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -186,9 +186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32376d0ab1a550f44b172168efae69cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkSpeed: 4
-  _runSpeed: 10
-  _jumpHeight: 5
+  _walkSpeed: 6
+  _runMult: 1.5
+  _jumpHeight: 6
   _damageA: 5
   _damageB: 10
   _damageC: 25
@@ -200,7 +200,7 @@ MonoBehaviour:
   comboMeterMax: 0
   _lives: 3
   _maxLives: 5
---- !u!114 &2283205010652522384
+--- !u!114 &7972859833928551473
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,22 +209,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 1336663593021864644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bc5719613eaf974c8d0e6d3519d891f, type: 3}
+  m_Script: {fileID: 11500000, guid: 283076cc70643e44c8532791e93979b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb2d: {fileID: 1336663593021864645}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  jumpTime: 0.08
-  groundCheck: {fileID: 1336663592562666403}
-  boxSize: {x: 0.565, y: 0.01}
-  noFriction: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
-  fullFriction: {fileID: 6200000, guid: 48626c08f0a6277489a9387662b457ac, type: 2}
-  ani: {fileID: 1336663593021864652}
+  ani: {fileID: 0}
   inputRecorder: {fileID: 0}
   move: 0
-  extraHeightText: 0.054
+  rb2d: {fileID: 0}
+  noFriction: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
+  fullFriction: {fileID: 6200000, guid: 48626c08f0a6277489a9387662b457ac, type: 2}
+  walkSpeed: 0
+  runMult: 0
+  jumpForce: 0
+  jumpTime: 0.04
+  slopeCheckDistance: 0.5
+  isOnSlope: 0
+  isGrounded: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
+  capsuleCollider2d: {fileID: 0}
+  belowCheck: 0.2
+  colCount: 0
+  maxGroundAngle: 180
+  colSize: {x: 0, y: 0}
 --- !u!114 &7700208908291447054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,13 +247,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   isAttacking: 0
-  attackPointIdle: {fileID: 0}
-  attackPointCrouched: {fileID: 0}
-  attackPointDownAir: {fileID: 0}
-  attackRange: 0.5
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -309,7 +310,7 @@ Rigidbody2D:
   m_LinearDrag: 1.7
   m_AngularDrag: 16
   m_GravityScale: 5
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -438,7 +439,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 1336663593021864644}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

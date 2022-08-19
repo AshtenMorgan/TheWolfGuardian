@@ -23,7 +23,7 @@ public class DoorInteractPressurePlate : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.GetComponent<PlayerController>() != null)
+        if (collider.GetComponent<PlayerControllerV2>() != null)
         {
             //Player entered collider
             door.OpenDoor();
@@ -32,7 +32,7 @@ public class DoorInteractPressurePlate : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collider)
     {
-        if (collider.GetComponent<PlayerController>() != null)
+        if (collider.GetComponent<PlayerControllerV2>() != null)
         {
             //Player still on top of collider!
             timer = 1f;
