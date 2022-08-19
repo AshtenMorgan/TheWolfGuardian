@@ -12,7 +12,7 @@ public class MovesManager : MonoBehaviour
     {
         if(GameManager.Instance.player != null)
         {
-            controller = GameManager.Instance.player.GetComponent<PlayerController>();
+            controller = GameManager.Instance.player.GetComponent<PlayerControllerV2>();
             inputRecorder = GameManager.Instance.player.GetComponent<InputRecorder>();
         }
         

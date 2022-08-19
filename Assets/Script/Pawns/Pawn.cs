@@ -8,9 +8,9 @@ public class Pawn : MonoBehaviour
     #region General Pawn Attributes
     [Header("General Pawn Attributes")]
     [SerializeField, Tooltip("How fast the pawn walks")]
-    protected int _walkSpeed; //this determines the walk speed of the pawn
-    [SerializeField, Tooltip("How fast the pawn runs")]
-    protected int _runSpeed; //this determines the run speed of the pawn
+    protected float _walkSpeed; //this determines the walk speed of the pawn
+    [SerializeField, Tooltip("Walk Speed * RunMult = sprint speed")]
+    protected float _runMult; //this determines the run speed of the pawn
     [SerializeField, Tooltip("This determines how high the pawn can jump")]
     protected float _jumpHeight; //this determines how high the pawn will jump
     [SerializeField, Tooltip("The base damage the pawn does with each HITA")]
@@ -31,15 +31,15 @@ public class Pawn : MonoBehaviour
         get { return _jumpHeight; }
         set { _jumpHeight = value; }
     }
-    public int WalkSpeed //the accessor for _walkSpeed
+    public float WalkSpeed //the accessor for _walkSpeed
     {
         get { return _walkSpeed; }
         set { _walkSpeed = value; }
     }
-    public int RunSpeed //the accessor for _runSpeed
+    public float RunMult //the accessor for _runSpeed
     {
-        get { return _runSpeed;  }
-        set { _runSpeed = value; }
+        get { return _runMult;  }
+        set { _runMult = value; }
     }
     public int DamageA 
     {
