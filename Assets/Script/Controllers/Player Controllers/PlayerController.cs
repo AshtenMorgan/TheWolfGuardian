@@ -155,6 +155,7 @@ public class PlayerController : Controller
                 isNotJumping = false; //sets the stoppedJumping bool to false so that we have !stoppedJumping
                 verticalVelocity = pawn.JumpHeight; //sets the verticalVelocity variable equal to that of the protected variable jumpHeight on PlayerPawn
                 rb2d.velocity = new Vector2(0, verticalVelocity);
+                Debug.Log("JumpStarted");
             }
         }
     }
@@ -162,6 +163,7 @@ public class PlayerController : Controller
     {
         jumpTimeCounter = 0; //resets the jumpTimeCounter to zero
         isNotJumping = true; //sets the stoppedJumping bool to true, cause we have stopped jumping
+        Debug.Log("JumpEnded");
     }
     public virtual void Move(InputAction.CallbackContext context)
     {

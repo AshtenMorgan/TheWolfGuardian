@@ -63,8 +63,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336663593021864644}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -19.163126, y: -24.029999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7872396869264081400}
@@ -198,7 +198,7 @@ MonoBehaviour:
   rb: {fileID: 1336663593021864645}
   comboMeterCurrent: 0
   comboMeterMax: 0
-  _lives: 3
+  _lives: 0
   _maxLives: 5
 --- !u!114 &2283205010652522384
 MonoBehaviour:
@@ -280,7 +280,7 @@ MonoBehaviour:
   onRespawn:
     m_PersistentCalls:
       m_Calls: []
-  _health: 0
+  _health: 100
   _maxHealth: 100
   percent: 100
   isDead: 0
