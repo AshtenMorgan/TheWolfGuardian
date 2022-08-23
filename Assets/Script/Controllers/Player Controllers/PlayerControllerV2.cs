@@ -12,7 +12,7 @@ public class PlayerControllerV2 : Controller
     protected PlayerInputActions playerInputActions; //variable for storing the input schemes the pawn will be using
     protected PlayerPawn pawn;//variable for storing the pawn
     [SerializeField] protected Rigidbody2D rb2d; //the rigidbody of the test character
-
+    private bool isAttacking;
 
     private bool _interactRange = false;
 
@@ -155,7 +155,7 @@ public class PlayerControllerV2 : Controller
         {
             //do nothing
         }
-        #endregion
+        
         base.FixedUpdate();
     }
     #endregion
@@ -163,57 +163,61 @@ public class PlayerControllerV2 : Controller
     #region Movement
     protected override void ApplyMovement()
     {
-        if (!isCrouching)
+        if (!isAttacking)
         {
-            if (!isOnSlope)
+
+
+            if (!isCrouching)
             {
-                if (!pawn.IsSprinting)
+                if (!isOnSlope)
                 {
-                    if (isGrounded)
+                    if (!pawn.IsSprinting)
                     {
-                        newVelocity.Set(walkSpeed * inputX, rb2d.velocity.y);
-                        rb2d.velocity = newVelocity; ; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
+                        if (isGrounded)
+                        {
+                            newVelocity.Set(walkSpeed * inputX, rb2d.velocity.y);
+                            rb2d.velocity = newVelocity; ; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
+                        }
+                        else
+                        {
+                            newVelocity.Set(walkSpeed * inputX, rb2d.velocity.y);
+                            rb2d.velocity = newVelocity; ; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
+                        }
                     }
-                    else
+                    if (pawn.IsSprinting)
                     {
-                        newVelocity.Set(walkSpeed * inputX, rb2d.velocity.y);
-                        rb2d.velocity = newVelocity; ; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
+                        if (isGrounded)
+                        {
+                            newVelocity.Set(walkSpeed * runMult * inputX, rb2d.velocity.y);
+                            rb2d.velocity = newVelocity; ; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
+                        }
+                        else
+                        {
+                            newVelocity.Set(walkSpeed * runMult * inputX, rb2d.velocity.y);
+                            rb2d.velocity = newVelocity; ; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
+                        }
                     }
-                }
-                if (pawn.IsSprinting)
-                {
-                    if (isGrounded)
-                    {
-                        newVelocity.Set(walkSpeed * runMult * inputX, rb2d.velocity.y);
-                        rb2d.velocity = newVelocity; ; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
-                    }
-                    else
-                    {
-                        newVelocity.Set(walkSpeed * runMult * inputX, rb2d.velocity.y);
-                        rb2d.velocity = newVelocity; ; //sets the walkVelocity variable equal to that of the protected variable _walkSpeed on the playerpawn
-                    }
-                }              
-            }
-            else
-            {
-                if (!isNotJumping)
-                {
-                    newVelocity.Set(rb2d.velocity.x, rb2d.velocity.y);
-                }
-                else if (!pawn.IsSprinting)
-                {
-                        newVelocity.Set(walkSpeed * slopeNormalPerp.x * -inputX, walkSpeed * slopeNormalPerp.y * -inputX);
-                        rb2d.velocity = newVelocity;
                 }
                 else
                 {
-                    newVelocity.Set(walkSpeed * runMult * slopeNormalPerp.x * -inputX, walkSpeed * runMult * slopeNormalPerp.y * -inputX);
-                    rb2d.velocity = newVelocity;
+                    if (!isNotJumping)
+                    {
+                        newVelocity.Set(rb2d.velocity.x, rb2d.velocity.y);
+                    }
+                    else if (!pawn.IsSprinting)
+                    {
+                        newVelocity.Set(walkSpeed * slopeNormalPerp.x * -inputX, walkSpeed * slopeNormalPerp.y * -inputX);
+                        rb2d.velocity = newVelocity;
+                    }
+                    else
+                    {
+                        newVelocity.Set(walkSpeed * runMult * slopeNormalPerp.x * -inputX, walkSpeed * runMult * slopeNormalPerp.y * -inputX);
+                        rb2d.velocity = newVelocity;
+                    }
+
                 }
-                
             }
         }
-
     }
     #endregion
 
@@ -367,6 +371,10 @@ public class PlayerControllerV2 : Controller
     {
         //Draw a line from the center of player capsule collider straight down to the bottom of the collider
         //with an additional "belowLength"
+        //**********FIXED*********//
+        if (!isNotJumping)
+            isGrounded = false;
+        else if(isNotJumping)
         isGrounded = Physics2D.Raycast(capsuleCollider2d.bounds.center, Vector2.down, capsuleCollider2d.bounds.extents.y + belowCheck, whatIsGround);
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -392,7 +400,6 @@ public class PlayerControllerV2 : Controller
     }
     #endregion
 
-
     #region Cleanup
     private void OnDestroy()
     {
@@ -413,6 +420,21 @@ public class PlayerControllerV2 : Controller
         playerInputActions.PlayerHuman.Disable();
     }
     #endregion
+
+    #region StopMovement
+    private void StopMovement()
+    {
+        isAttacking = true;
+        newVelocity.Set(0, 0);
+        rb2d.velocity.Set(newVelocity.x, newVelocity.y);
+    }
+
+    private void ResumeMovement()
+    {
+        isAttacking = false;
+    }
+    #endregion
+
     #region Gizmos
     private void OnDrawGizmos()
     {
@@ -430,5 +452,5 @@ public class PlayerControllerV2 : Controller
         //Debug.Log(raycastHit.collider);
     }
     #endregion
-    
+    #endregion
 }
