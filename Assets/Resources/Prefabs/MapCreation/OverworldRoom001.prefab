@@ -1,91 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2189888767147279048
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2189888767147279049}
-  - component: {fileID: 2189888767147279054}
-  m_Layer: 8
-  m_Name: A*Grid
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2189888767147279049
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2189888767147279048}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2189888768002241677}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2189888767147279054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2189888767147279048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  data:
-    dataString: UEsDBBQAAAgIAACIn+s6eK81eAIAADMFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VEtz2jAQ/iuMzoWxiUni3lpCSA8kTGgnF19keY01yJJHknkkw3/vSn4Bnfpi+dvXt9+u/EW4NBUwq/RS82ylMiDfR8SdybfRYHyBI90queGf0Pl88MwWzol6n3dquUI8dGFGlWA1Zz/kVjjnAMFa8lzpcpFtYa6MNQjnVBhAk1bWRUuEvkbkiK9x7EJOeJo+uNMnnuJgdMYjA2lBD6538SSK8ZlGbcQ4fGgjppPZ/SyYxQ/hYhxOfXQtmaBlBZlrZUgSPoaTWRAE4awre+fdJTbbegYTZ2NKCG5arsSeKq/FpipAgxMj4xRb9/ycEgXwbWHbjz72Lc8N2D6npqcnrlHDJi35qRphS2p2DcU9FbUr9OhJNUlX/7HmWpUvfdnAqWcLznbv9MSocaDVNdygT9e0a3mgYkdTAR8FyFe11KqW2RBaG5g+DZ99Y/MC2G7AG6Id2E27rgbduyl3Mx6Ho/PZt36cC16mXqOoATZCebX9aoDGyfxCxn5xTJsCUUfjj4HfdHu5Ya3hmWtj0dS2KR2/VNXauZKF18y1U9u50hI83LZSgaTCntaYxl5N8F/bRdkbyzN1d6kt3tq6K3IT4uHBPwhuTGt16KdlCnVYgSneaiu4hIG0M7yiTnMlZbNel5p0YZta55RdctjWPLteLRKl91Ga0xCvE8vzPBrfxXGGVytiLJiFYZoSv3xcYqNUrBumrT44NjmQkrhp3T9mtNS08rueaXpY8s9SXWjOZa42TAPItyZDzxw0FsFrmS0yjgptwFou/cDJV0KEYjvIkj5R4ltdHK2myZAlIRXfK+uQhMz9TyUhDu63ea1hz+HginfJzuT8F1BLAwQUAAAICAAAiJ/rnC9n7m0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0kkmSmUlSWqKhqYFpclpamomusaVlioGppUlysoGpoWFSklIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAiJ/rOnivNXgCAAAzBQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAiJ/rnC9n7m0AAAB4AAAACQAkAAAAAAAAAAAAAADFAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAH0DAAAAAA==
-    upgradeData: 
-    file_cachedStartup: {fileID: 0}
-    data_cachedStartup: 
-    cacheStartup: 0
-  showNavGraphs: 1
-  showUnwalkableNodes: 1
-  debugMode: 0
-  debugFloor: 0
-  debugRoof: 1
-  manualDebugFloorRoof: 0
-  showSearchTree: 0
-  unwalkableNodeDebugSize: 0.3
-  logPathResults: 1
-  maxNearestNodeDistance: 100
-  scanOnStartup: 1
-  fullGetNearestSearch: 0
-  prioritizeGraphs: 0
-  prioritizeGraphsLimit: 1
-  colorSettings:
-    _SolidColor: {r: 0.11764706, g: 0.4, b: 0.7882353, a: 0.9}
-    _UnwalkableNode: {r: 1, g: 0, b: 0, a: 0.5}
-    _BoundsHandles: {r: 0.29, g: 0.454, b: 0.741, a: 0.9}
-    _ConnectionLowLerp: {r: 0, g: 1, b: 0, a: 0.5}
-    _ConnectionHighLerp: {r: 1, g: 0, b: 0, a: 0.5}
-    _MeshEdgeColor: {r: 0, g: 0, b: 0, a: 0.5}
-    _AreaColors:
-    - {r: 0, g: 0, b: 0, a: 0}
-  tagNames: []
-  heuristic: 2
-  heuristicScale: 1
-  threadCount: 1
-  maxFrameTime: 1
-  batchGraphUpdates: 0
-  graphUpdateBatchingInterval: 0.2
-  euclideanEmbedding:
-    mode: 0
-    seed: 0
-    pivotPointRoot: {fileID: 0}
-    spreadOutCount: 1
-  showGraphs: 1
 --- !u!1 &2189888767358059598
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +234,6 @@ Transform:
   m_Children:
   - {fileID: 2189888767707909718}
   - {fileID: 2189888767358059599}
-  - {fileID: 2189888767147279049}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -365,20 +278,20 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 2189888767734468753}
     m_ColliderPaths:
-    - - X: 499999707
-        Y: -56250000
-      - X: 499999707
-        Y: 56250000
-      - X: 300000000
-        Y: 56249707
-      - X: 300000293
-        Y: -56250000
+    - - X: 9999999707
+        Y: -632812480
+      - X: 9999999707
+        Y: 632812480
+      - X: 6000000000
+        Y: 632812187
+      - X: 6000000293
+        Y: -632812480
   m_CompositePaths:
     m_Paths:
-    - - {x: 49.999943, y: -5.625}
-      - {x: 49.999943, y: 5.625}
-      - {x: 30, y: 5.624942}
-      - {x: 30.000057, y: -5.625}
+    - - {x: 999.99994, y: -63.28125}
+      - {x: 999.99994, y: 63.28125}
+      - {x: 600, y: 63.281193}
+      - {x: 600.00006, y: -63.28125}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!114 &2189888768002241665

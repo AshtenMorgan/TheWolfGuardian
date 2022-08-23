@@ -111,7 +111,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1563904803
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ccc7b30b5f400414a9ee4b4723a3220b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -186,9 +186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32376d0ab1a550f44b172168efae69cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkSpeed: 6
-  _runMult: 1.5
-  _jumpHeight: 6
+  _walkSpeed: 4
+  _runMult: 2.5
+  _jumpHeight: 8
   _damageA: 5
   _damageB: 10
   _damageC: 25
@@ -219,17 +219,17 @@ MonoBehaviour:
   noFriction: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
   fullFriction: {fileID: 6200000, guid: 48626c08f0a6277489a9387662b457ac, type: 2}
   walkSpeed: 0
-  runMult: 0
-  jumpForce: 0
+  runMult: 1.5
+  jumpForce: 12
   jumpTime: 0.04
-  slopeCheckDistance: 0.5
+  slopeCheckDistance: 0.3
   isOnSlope: 0
   isGrounded: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
   capsuleCollider2d: {fileID: 0}
-  belowCheck: 0.2
+  belowCheck: 0.05
   colCount: 0
   maxGroundAngle: 180
   colSize: {x: 0, y: 0}
@@ -247,6 +247,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   isAttacking: 0
+  attackPointIdle: {fileID: 0}
+  attackPointCrouched: {fileID: 0}
+  attackPointDownAir: {fileID: 0}
+  attackRange: 0.5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -578,7 +585,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1563904803
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 25
   m_Sprite: {fileID: 21300000, guid: ef8ce2b3d35e5154483d1ca1b08fd70f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
