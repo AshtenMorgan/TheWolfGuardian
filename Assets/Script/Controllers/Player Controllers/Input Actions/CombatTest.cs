@@ -22,6 +22,15 @@ public class CombatTest : MonoBehaviour
 
     public static CombatTest PlayerCombatInstance;
 
+    [SerializeField]
+    private Transform attackPointIdle;
+    [SerializeField]
+    private Transform attackPointCrouched;
+    [SerializeField]
+    private Transform attackPointDownAir;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayers;
+
     #region Hitboxes
     public LayerMask enemyLayer;//define player's layer
     /*  2 variables each hitbox (frame)
@@ -85,7 +94,18 @@ public class CombatTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (isAttacking && anim.GetBool("Grounded"))
+        {
+            GroundLightAttackAOE();
+        }
+        else if (isAttacking && anim.GetBool("Crouched"))
+        {
+            CrouchedAttackAOE();
+        }
+        else if (isAttacking && !anim.GetBool("Grounded"))
+        {
+            DownAirAttackAOE();
+        }
     }
 
     private void LightPunch(InputAction.CallbackContext context)
@@ -93,9 +113,7 @@ public class CombatTest : MonoBehaviour
         //Debug.Log(context);
         
         if (!isAttacking)
-        {
             isAttacking = true;
-        }
     }
 
     /*Attempt to unsubscribe*/
@@ -140,7 +158,64 @@ public class CombatTest : MonoBehaviour
                 }
                 break;
         }
+
     }
+
+    #region CombatAOE
+    void GroundLightAttackAOE()
+    {
+        Collider2D[] assetsHitIdle = Physics2D.OverlapCircleAll(attackPointIdle.position, attackRange, enemyLayers);
+
+        foreach (Collider2D Enemy in assetsHitIdle)
+        {
+            Debug.Log("We hit" + Enemy.name);
+        }
+    }
+
+    void CrouchedAttackAOE()
+    {
+        Collider2D[] assetsHitCrouched = Physics2D.OverlapCircleAll(attackPointCrouched.position, attackRange, enemyLayers);
+
+        foreach (Collider2D Enemy in assetsHitCrouched)
+        {
+            Debug.Log("We hit" + Enemy.name);
+        }
+    }
+    void DownAirAttackAOE()
+    {
+        Collider2D[] assetsHitDownAir = Physics2D.OverlapCircleAll(attackPointDownAir.position, attackRange, enemyLayers);
+
+        foreach (Collider2D Enemy in assetsHitDownAir)
+        {
+            Debug.Log("We hit" + Enemy.name);
+        }
+    }
+    
+  
+
+    private void OnDrawGizmos()
+    {
+        if (attackPointIdle == null)
+            return;
+        if (attackPointCrouched == null)
+            return;
+        if (attackPointDownAir == null)
+            return;
+        if (isAttacking && !anim.GetBool("Crouched") && anim.GetBool("Grounded"))
+        {
+            Gizmos.DrawWireSphere(attackPointIdle.position, attackRange);
+        }
+        if (isAttacking && anim.GetBool("Crouched"))
+        {
+            Gizmos.DrawWireSphere(attackPointCrouched.position, attackRange);
+        }
+        if (isAttacking && !anim.GetBool("Grounded"))
+        {
+            Gizmos.DrawWireSphere(attackPointDownAir.position, attackRange);
+        }
+
+    }
+    #endregion
     protected void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red; //makes Gizmo for Hitboxes red

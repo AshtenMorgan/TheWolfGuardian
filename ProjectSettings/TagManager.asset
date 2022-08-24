@@ -22,6 +22,7 @@ TagManager:
   - HUDCanvas
   - EnemySpawnPoint
   - Vcam
+  - HitA
   layers:
   - Default
   - TransparentFX
@@ -65,6 +66,9 @@ TagManager:
   - name: Decals Back
     uniqueID: 3417238943
     locked: 0
+  - name: Ground
+    uniqueID: 2855587509
+    locked: 0
   - name: Decals Front
     uniqueID: 4276989641
     locked: 0
@@ -73,7 +77,4 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1563904803
-    locked: 0
-  - name: Ground
-    uniqueID: 2855587509
     locked: 0
