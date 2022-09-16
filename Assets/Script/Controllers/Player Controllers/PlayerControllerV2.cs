@@ -143,7 +143,6 @@ public class PlayerControllerV2 : Controller
                 ani.SetBool("Jumping", true);//tell the animator to start jumping
 
                 rb2d.velocity += newForce;
-                Debug.Log("adding" + newForce + "to velocity -- New Velocity is " + rb2d.velocity);
                 jumpTimeCounter -= Time.fixedDeltaTime; // subtracts time from the jumpTimeCounter
             }
         }

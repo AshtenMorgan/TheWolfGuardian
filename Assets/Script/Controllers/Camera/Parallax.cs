@@ -6,7 +6,7 @@ using Cinemachine.Utility;
 
 public class Parallax : MonoBehaviour
 {
-    
+    private GameManager gm;
     protected float lengthx,
         lengthy,
         startposx,
@@ -28,7 +28,10 @@ public class Parallax : MonoBehaviour
         lastX,
         lastY;
 
-        
+    private void OnEnable()
+    {
+        gm = GameManager.Instance;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -41,20 +44,25 @@ public class Parallax : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        tempy = cam.transform.position.y * (1 - parallaxFactorY);
+        tempy = gm.cam.transform.position.y * (1 - parallaxFactorY);
         distancey = cam.transform.position.y * parallaxFactorY;
         tempx = cam.transform.position.x * (1 - parallaxFactorX);
         distancex = cam.transform.position.x * parallaxFactorX;
         
           
         
-        if (lastX != cam.transform.position.x || lastY != cam.transform.position.y)
+        if (lastX != gm.cam.transform.position.x || lastY != gm.cam.transform.position.y)
         {
             UpdateX();
             UpdateY();
         }
-        lastX = cam.transform.position.x;
-        lastY = cam.transform.position.y;
+        
+    }
+    void FixedUpdate()
+    {
+        lastX = gm.cam.transform.position.x;
+        Debug.Log("Cam X = " + lastX);
+        lastY = gm.cam.transform.position.y;
     }
     void UpdateX()
     {

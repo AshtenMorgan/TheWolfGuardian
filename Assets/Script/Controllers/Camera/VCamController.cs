@@ -17,6 +17,7 @@ public class VCamController : MonoBehaviour
    
         gm = GameManager.Instance; //assign gm var
         vcam = GetComponent<CinemachineVirtualCamera>(); //find virtual cam component
+        gm.cam = vcam;
         vcam.LookAt = gm.player.transform; // set lookat target
         vcam.Follow = gm.player.transform; // set follow target
     }

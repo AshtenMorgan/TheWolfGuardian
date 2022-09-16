@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public CompositeCollider2D room1,
         currentRoom;
     public CinemachineConfiner confiner;
+    public CinemachineVirtualCamera cam;
     #endregion
     #region MiniMap
     public BoxCollider2D currentMap;
