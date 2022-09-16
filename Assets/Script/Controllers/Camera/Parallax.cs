@@ -24,7 +24,9 @@ public class Parallax : MonoBehaviour
         distancex,
         distancey,
         prevCamX,
-        prevCamY;
+        prevCamY,
+        lastX,
+        lastY;
         
     // Start is called before the first frame update
     void Start()
@@ -53,12 +55,22 @@ public class Parallax : MonoBehaviour
             UpdateY();
             return;
         }
-        UpdateX();
-        UpdateY();
+        lastX = cam.transform.position.x;
+        lastY = cam.transform.position.y;
+        if (lastX != cam.transform.position.x)
+        {
+            UpdateX();
+        }
+        if (lastY != cam.transform.position.y)
+        {
+            UpdateY();
+        }
+        
 
     }
     void UpdateX()
     {
+
         Vector3 newPosition = new Vector3(startposx + distancex, transform.position.y, transform.position.z);
         transform.position = PixelPerfectClamp(newPosition, pixelsPerUnit);
        
