@@ -27,6 +27,7 @@ public class Parallax : MonoBehaviour
         prevCamY,
         lastX,
         lastY;
+
         
     // Start is called before the first frame update
     void Start()
@@ -44,28 +45,15 @@ public class Parallax : MonoBehaviour
         distancey = cam.transform.position.y * parallaxFactorY;
         tempx = cam.transform.position.x * (1 - parallaxFactorX);
         distancex = cam.transform.position.x * parallaxFactorX;
-
-        if (Camera.main.transform.position.x <= -39.9)
-        {
-            UpdateY();
-            return;
-        }
-        if (Camera.main.transform.position.x >= 119.9)
-        {
-            UpdateY();
-            return;
-        }
         lastX = cam.transform.position.x;
         lastY = cam.transform.position.y;
-        if (lastX != cam.transform.position.x)
+          
+        
+        if (lastX != cam.transform.position.x || lastY != cam.transform.position.y)
         {
             UpdateX();
-        }
-        if (lastY != cam.transform.position.y)
-        {
             UpdateY();
         }
-        
 
     }
     void UpdateX()
