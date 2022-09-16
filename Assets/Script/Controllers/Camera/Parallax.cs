@@ -61,7 +61,6 @@ public class Parallax : MonoBehaviour
     void FixedUpdate()
     {
         lastX = gm.cam.transform.position.x;
-        Debug.Log("Cam X = " + lastX);
         lastY = gm.cam.transform.position.y;
     }
     void UpdateX()

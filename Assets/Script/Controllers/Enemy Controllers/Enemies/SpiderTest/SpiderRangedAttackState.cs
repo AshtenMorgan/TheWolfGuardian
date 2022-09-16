@@ -51,13 +51,11 @@ public class SpiderRangedAttackState : RangedAttackState
         int check = Random.Range(0, 101);
         if(check > 49)
         {
-            Debug.Log("Attack A");
             enemy.RangedAttackA();
             attackTime = Time.time;
         }
         else
         {
-            Debug.Log("Attack B");
             enemy.RangedAttackB();
             attackTime = Time.time;
         }

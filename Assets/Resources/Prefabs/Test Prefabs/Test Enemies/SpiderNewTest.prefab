@@ -775,7 +775,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1221803277
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f839379ea2959db4e9ae20be800ed309, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1005,12 +1005,14 @@ MonoBehaviour:
   entityData: {fileID: 11400000, guid: f344947593957a344a3d187dda420fac, type: 2}
   wallCheck: {fileID: 5046184464393793190}
   ledgeCheck: {fileID: 2658141955838687322}
-  originAttackA: {fileID: 8976051869255263364}
-  originAttackB: {fileID: 5215585018920791278}
+  originAttackA: {fileID: 5215585018920791278}
+  originAttackB: {fileID: 8976051869255263364}
   idleStateData: {fileID: 11400000, guid: 4fbcbbf4858cd50449f1278b17ba8b60, type: 2}
   patrolStateData: {fileID: 11400000, guid: 27f8974209d28324daebf3c92e3d4bc8, type: 2}
   chaseStateData: {fileID: 11400000, guid: bbda2a20244e93c49b3d4139fa9c7e71, type: 2}
   rangedAttackStateData: {fileID: 11400000, guid: 489c45f490a0dfe4ca78992e93768b91, type: 2}
+  webShot: {fileID: 7432091805471575169, guid: ddec5ff66a83fc1468f41bbdbc29f630, type: 3}
+  venomShot: {fileID: 4231968617421759367, guid: bd14d689c84719d49999d6f42a4bafa4, type: 3}
 --- !u!61 &20444851315352758
 BoxCollider2D:
   m_ObjectHideFlags: 0

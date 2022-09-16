@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Spider Ranged Data
   m_EditorClassIdentifier: 
   damage: 5
-  projectialSpeedA: 200
-  projectialSpeedB: 100
+  projectialSpeedA: 15
+  projectialSpeedB: 20
   attackCooldown: 2
-  projectilePrefabA: {fileID: 1776005185504496754, guid: 34dd54c2c12cce14e8f4ac31297ee475, type: 3}
-  projectilePrefabB: {fileID: 2633900943779659241, guid: cc28e0c77cc49d14680be2ed684c60ae, type: 3}
+  projectilePrefabA: {fileID: 4760858275055127561, guid: bd14d689c84719d49999d6f42a4bafa4, type: 3}
+  projectilePrefabB: {fileID: 7432091805471575178, guid: ddec5ff66a83fc1468f41bbdbc29f630, type: 3}

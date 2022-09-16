@@ -27,6 +27,11 @@ public class SpiderTest : Entity
     [SerializeField]
     private Data_RangedAttackState rangedAttackStateData;
 
+    //Projectiles
+    [SerializeField]
+    private Rigidbody2D webShot;
+    [SerializeField]
+    private Rigidbody2D venomShot;
 
     public override void Start()
     {
@@ -41,16 +46,15 @@ public class SpiderTest : Entity
 
     public void RangedAttackA()
     {
-        GameObject firedShot = Instantiate(rangedAttackStateData.projectilePrefabA, originAttackA.position, Quaternion.identity);
-        Rigidbody2D rb = firedShot.GetComponent<Rigidbody2D>();
-        rb.AddForce(wallCheck.forward * rangedAttackStateData.projectialSpeedA);
+        webShot = Instantiate(webShot, originAttackA.position, Quaternion.identity);
+        webShot.velocity = new Vector3(facingDirection *rangedAttackStateData.projectialSpeedA, 0, 0);
         //play sound
     }
     public void RangedAttackB()
     {
-        GameObject firedShot = Instantiate(rangedAttackStateData.projectilePrefabB, originAttackB.position, Quaternion.identity);
-        Rigidbody2D rb = firedShot.GetComponent<Rigidbody2D>();
-        rb.AddForce(wallCheck.forward * rangedAttackStateData.projectialSpeedB);
+        
+        venomShot = Instantiate(venomShot, originAttackB.position, Quaternion.identity);
+        venomShot.velocity = new Vector3(facingDirection * rangedAttackStateData.projectialSpeedB,0,0);
         //play sound
     }
 }
