@@ -45,8 +45,7 @@ public class Parallax : MonoBehaviour
         distancey = cam.transform.position.y * parallaxFactorY;
         tempx = cam.transform.position.x * (1 - parallaxFactorX);
         distancex = cam.transform.position.x * parallaxFactorX;
-        lastX = cam.transform.position.x;
-        lastY = cam.transform.position.y;
+        
           
         
         if (lastX != cam.transform.position.x || lastY != cam.transform.position.y)
@@ -54,7 +53,8 @@ public class Parallax : MonoBehaviour
             UpdateX();
             UpdateY();
         }
-
+        lastX = cam.transform.position.x;
+        lastY = cam.transform.position.y;
     }
     void UpdateX()
     {
