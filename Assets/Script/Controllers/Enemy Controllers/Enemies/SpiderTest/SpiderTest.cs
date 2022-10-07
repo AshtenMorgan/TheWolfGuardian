@@ -46,15 +46,15 @@ public class SpiderTest : Entity
 
     public void RangedAttackA()
     {
-        webShot = Instantiate(webShot, originAttackA.position, Quaternion.identity);
-        webShot.velocity = new Vector3(facingDirection *rangedAttackStateData.projectialSpeedA, 0, 0);
+        Rigidbody2D newwebShot = Instantiate(webShot, originAttackA.position, Quaternion.identity);
+        newwebShot.velocity = new Vector3(facingDirection *rangedAttackStateData.projectialSpeedA, 0, 0);
         //play sound
     }
     public void RangedAttackB()
     {
         
-        venomShot = Instantiate(venomShot, originAttackB.position, Quaternion.identity);
-        venomShot.velocity = new Vector3(facingDirection * rangedAttackStateData.projectialSpeedB,0,0);
+        Rigidbody2D newvenomShot = Instantiate(venomShot, originAttackB.position, Quaternion.identity);
+        newvenomShot.velocity = new Vector3(facingDirection * rangedAttackStateData.projectialSpeedB,0,0);
         //play sound
     }
 }
