@@ -128,11 +128,20 @@ public class Entity : MonoBehaviour
 
     public bool CanSeeTarget()
     {
-            return Vector2.Distance(transform.position, target.transform.position) <= entityData.viewDistance;
+        if (!LeftRight())
+       {
+            return Vector2.Distance(transform.position, target.transform.position) <= entityData.viewDistance;//If it is facing towards the target, returns the distance to the target
+        }
+       else
+        {
+            Flip();//If it is not facing the target it will flip, and then return the distance.
+            return Vector2.Distance(transform.position, target.transform.position) < entityData.viewDistance;
+        }
+   
     }
     public virtual bool LeftRight()
     {
-        if (target.transform.position.x > transform.position.x)//target is on right side of entity, should be facing right
+        if (target.transform.position.x > transform.position.x && target.transform.position.x - transform.position.x > .5)//target is on right side of entity, should be facing right, plus margin for being on top.
         {
             if (facingDirection == 1)//entity is facing right
             {
@@ -143,7 +152,7 @@ public class Entity : MonoBehaviour
                 return true;//need to flip
             }
         }
-        else//target is on the left (or on top of) entity
+        else if (target.transform.position.x < transform.position.x && transform.position.x - target.transform.position.x > .5)//target is on the left (or on top of) entity, plus margin for being on top.
         {
             if (facingDirection == -1)//entity facing left
             {
@@ -153,6 +162,10 @@ public class Entity : MonoBehaviour
             {
                 return true;//flip
             }
+        }
+        else
+        { 
+            return false;//If it is on top, returns false as to not get stuck in an infinite loop. 
         }
     }
     public virtual void Flip()
