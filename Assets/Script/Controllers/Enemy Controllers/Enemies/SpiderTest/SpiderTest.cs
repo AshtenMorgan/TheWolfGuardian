@@ -16,6 +16,7 @@ public class SpiderTest : Entity
     public SpiderPatrolState patrolState { get; private set; }
     public SpiderChaseState chaseState { get; private set; }
     public SpiderRangedAttackState rangedAttackState { get; private set; }
+    public SpiderMeleeAttackState meleeAttackState { get; private set; }
 
     //state data
     [SerializeField]
@@ -26,6 +27,8 @@ public class SpiderTest : Entity
     private Data_ChaseState chaseStateData;
     [SerializeField]
     private Data_RangedAttackState rangedAttackStateData;
+    [SerializeField]
+    private Data_MeleeAttackState meleeAttackStateData;
 
     //Projectiles
     [SerializeField]
@@ -40,6 +43,7 @@ public class SpiderTest : Entity
         patrolState = new SpiderPatrolState(this, fsm, patrolStateData, this);
         chaseState = new SpiderChaseState(this, fsm, chaseStateData, this);
         rangedAttackState = new SpiderRangedAttackState(this, fsm, rangedAttackStateData, this);
+        meleeAttackState = new SpiderMeleeAttackState(this, fsm, meleeAttackStateData, this);
 
         fsm.Initialize(patrolState);
     }
@@ -56,5 +60,9 @@ public class SpiderTest : Entity
         Rigidbody2D newvenomShot = Instantiate(venomShot, originAttackB.position, Quaternion.identity);
         newvenomShot.velocity = new Vector3(facingDirection * rangedAttackStateData.projectialSpeedB,0,0);
         //play sound
+    }
+    public void MeleeAttack()
+    {
+        //code to switch animations to melee atack, also to add lunge physics
     }
 }

@@ -1,20 +1,20 @@
-/* 
- * Ranged Attack state, rolls a random number, used to determine
- * attack A or B, then creates prefab and "throws" it in direction
- * entity is facing 
+﻿/*
+ * This is the AI "Controller"
+ * If a state should be available to a specific enemy, it
+ * should be listed here
  * 
+ * Under developement
  */
-using System.Collections;
-using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 
-public class SpiderRangedAttackState : RangedAttackState
+public class SpiderMeleeAttackState: MeleeAttackState
 {
+  
     private float attackTime;
-    
- 
+
     private SpiderTest enemy;
-    public SpiderRangedAttackState(Entity ent, StateMachine fsm, Data_RangedAttackState data, SpiderTest testEnemy) : base(ent, fsm, data)
+    public SpiderMeleeAttackState(Entity ent, StateMachine fsm, Data_MeleeAttackState data, SpiderTest testEnemy) : base(ent, fsm, data)
     {
         enemy = testEnemy;
     }
@@ -34,16 +34,12 @@ public class SpiderRangedAttackState : RangedAttackState
 
     public override void LogicUpdate()
     {
-        shouldFlip = entity.LeftRight();
-        if (shouldFlip)
-            entity.lagFlip(1.0f);
-
         if (!enemy.CanSeeTarget())
             stateMachine.ChangeState(enemy.idleState);
 
-        if (Time.time >= (attackTime + stateData.attackCooldown) && enemy.CanSeeTarget()) 
+        if (Time.time >= (attackTime + stateData.attackCooldown))
             DetermineAttack();
- 
+
         base.LogicUpdate();
     }
 
@@ -54,7 +50,7 @@ public class SpiderRangedAttackState : RangedAttackState
     private void DetermineAttack()
     {
         int check = Random.Range(0, 101);
-        if(check > 49)
+        if (check > 49)
         {
             enemy.RangedAttackA();
             attackTime = Time.time;

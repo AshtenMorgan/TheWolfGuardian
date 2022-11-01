@@ -269,7 +269,7 @@ public class PlayerControllerV2 : Controller
             Debug.DrawRay(hit.point, hit.normal, Color.green);
             Debug.DrawRay(hit.point, slopeNormalPerp, Color.red);
         }
-        Debug.Log(inputX);
+        //Debug.Log(inputX);
         if (isOnSlope && inputX == 0)
         {
             rb2d.sharedMaterial = fullFriction;
@@ -297,7 +297,7 @@ public class PlayerControllerV2 : Controller
                 newForce.Set(0.0f, pawn.JumpHeight);
                 newVelocity.Set(currentVelocity.x, jumpForce);
                 rb2d.velocity = newVelocity;
-                Debug.Log(rb2d.velocity + "Should be jumping");
+                //Debug.Log(rb2d.velocity + "Should be jumping");
             }
         }
     }

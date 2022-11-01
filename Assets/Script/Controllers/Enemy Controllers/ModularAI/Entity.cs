@@ -9,6 +9,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System.IO;
+using System.Threading.Tasks;
 #endregion
 
 #region Requirements
@@ -25,7 +28,7 @@ public class Entity : MonoBehaviour
 
     public bool PlayerDetected;
 
-    //Moved to SpiderChaseSate
+    //Moved to SpiderChaseState
     //public bool PlayerDetected = false;
     [SerializeField, Header("OverlapBox parameters")]
     private Transform detectorOrigin;
@@ -39,9 +42,18 @@ public class Entity : MonoBehaviour
     public Color gizmoIdleColor = Color.green;
     public Color gizmoDetectedColor = Color.red;
     public bool showGizmos = true;
+    [SerializeField] protected float delay=1.0f;
 
     #endregion
     #region Variables
+    #region slope stuff
+    [SerializeField] protected float slopeCheckDistance;
+    protected float slopeDownAngle;
+    protected float slodeDownAngleOld;
+    protected float slopeSideAngle;
+    protected Vector2 slopeNormalPerp;
+    [SerializeField] protected bool isOnSlope;
+    #endregion
     #region Components
     public StateMachine fsm;
     public Rigidbody2D rb { get; private set; }
@@ -49,6 +61,10 @@ public class Entity : MonoBehaviour
     public Health health { get; private set; }
     public Data_Entity entityData;
     public GameObject target { get; private set; }
+
+    private GameObject floatingTextPrefab;
+    public GameObject fTp;
+    private Vector3 bump = new Vector3(0, 2, 0.5f);
 
     #endregion
     #region Movement
@@ -69,11 +85,12 @@ public class Entity : MonoBehaviour
     public virtual void Start()
     {
         //get components
+        
         rb = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
         health = GetComponent<Health>();
         target = GameManager.Instance.player.gameObject;
-
+        floatingTextPrefab = Instantiate(fTp);
         fsm = new StateMachine();//Create state machine
     }
 
@@ -89,6 +106,8 @@ public class Entity : MonoBehaviour
     public virtual void FixedUpdate()
     {
         fsm.currentState.PhysicsUpdate();//call physics update in fixedupdate
+        floatingTextPrefab.transform.localPosition = base.transform.position+bump;
+        floatingTextPrefab.GetComponentInChildren <TextMeshPro>().text = transform.position.ToString()+"\n"+fsm.currentState.ToString();
     }
 
     //create a box to see if player is near entity
@@ -134,7 +153,7 @@ public class Entity : MonoBehaviour
         }
        else
         {
-            Flip();//If it is not facing the target it will flip, and then return the distance.
+            lagFlip(1.0f);//If it is not facing the target it will flip, and then return the distance.
             return Vector2.Distance(transform.position, target.transform.position) < entityData.viewDistance;
         }
    
@@ -168,11 +187,17 @@ public class Entity : MonoBehaviour
             return false;//If it is on top, returns false as to not get stuck in an infinite loop. 
         }
     }
+    public virtual void lagFlip(float delay)
+    {
+        Invoke("Flip", delay);
+        Debug.Log("delayed flip called "+delay);
+    }
     public virtual void Flip()
     {
         facingDirection *= -1;
         transform.Rotate(0f, 180f, 0f);
     }
+   
     #region Gizmos
     
 
