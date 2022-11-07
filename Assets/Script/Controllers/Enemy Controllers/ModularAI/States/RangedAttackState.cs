@@ -18,11 +18,13 @@ public class RangedAttackState : State
 
     public override void Enter()
     {
+        Debug.Log("Ranged Attack State Entered");
         base.Enter();
     }
 
     public override void Exit()
     {
+        Debug.Log("Ranged Attack State Exited");
         base.Exit();
     }
 

@@ -10,5 +10,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewChaseStateData", menuName = "Data/State Data/ChaseState Data")]
 public class Data_ChaseState : ScriptableObject
 {
+    //Spider Run Speed
     public float runSpeed = 10.0f;
+
+    //Redcap Run Speed
+    public float redRunSpeed = 15.0f;
 }
