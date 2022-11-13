@@ -9,9 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 3612d45bceed6794d99671a95672a979
   - enabled: 1
-    path: Assets/Scenes/Epilogue.unity
+    path: Assets/Scenes/Prologue.unity
     guid: 2a11cec55129d0049b1412ca057d01d5
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Zone 1.unity
-    guid: cbd0fd95e0b4aec4cb1ad2f348f8afa4
+    path: Assets/Scenes/Designer Scenes/Orlando/TestScene.unity
+    guid: 9501a1d51ea04bd42b856d38e0eff1f2
+  - enabled: 1
+    path: Assets/Scenes/Christopher's Test Scenes/TestTemplate.unity
+    guid: c7a582dd05979bc44804ba0cf9119394
   m_configObjects: {}
