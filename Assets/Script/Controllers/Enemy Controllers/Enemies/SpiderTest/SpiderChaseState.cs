@@ -30,16 +30,16 @@ public class SpiderChaseState : ChaseState
         entity.PlayerDetected = false;
     }
 
-    public override void LogicUpdate()
+    public override void LogicUpdate() 
     {
         shouldFlip = entity.LeftRight();
 
-        if (!enemy.CanSeeTarget())
+        if (!enemy.CanSeeTarget()) 
             stateMachine.ChangeState(enemy.idleState);
+                    
+        if (shouldFlip) 
+            entity.lagFlip(1.0f); //delayed version of Flip, see entity.cs
         
-        if (shouldFlip)
-            entity.Flip();
-
         if (Vector2.Distance(entity.transform.position, GameManager.Instance.player.transform.position) <= entity.entityData.ranged)//is player within ranged attack distance
             stateMachine.ChangeState(enemy.rangedAttackState);
 
@@ -51,5 +51,7 @@ public class SpiderChaseState : ChaseState
         base.PhysicsUpdate();
         entity.SetVelocity(stateData.runSpeed);
     }
+
+ 
     
 }

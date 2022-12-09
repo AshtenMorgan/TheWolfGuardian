@@ -130,7 +130,7 @@ public class EnemyController : MonoBehaviour
 
         Patrol();
 
-        Debug.Log("Patrol Done");
+        //Debug.Log("Patrol Done");
     }
     protected virtual void ExitPatrolState()
     {
@@ -141,11 +141,11 @@ public class EnemyController : MonoBehaviour
     //Chase State
     protected virtual void EnterChaseState()
     {
-        Debug.Log("Chase Started");
+       // Debug.Log("Chase Started");
     }
     protected virtual void UpdateChaseState()
     {
-        Debug.Log("Chasing");
+       // Debug.Log("Chasing");
         Chase();
 
     }
