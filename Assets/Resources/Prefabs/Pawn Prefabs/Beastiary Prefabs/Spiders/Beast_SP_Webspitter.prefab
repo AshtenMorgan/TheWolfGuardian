@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: -8464213008661385059}
   - component: {fileID: 20444851315352758}
   m_Layer: 7
-  m_Name: SpiderNewTest
+  m_Name: Beast_SP_Webspitter
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

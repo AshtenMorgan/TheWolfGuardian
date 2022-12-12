@@ -23,6 +23,18 @@ TagManager:
   - EnemySpawnPoint
   - Vcam
   - HitA
+  - GameOverCanvas
+  - BackgroundCanvas
+  - PauseCanvas
+  - MainMenuCanvas
+  - MasterSlider
+  - QualityDrop
+  - OptionsCanvas
+  - FSToggle
+  - ResolutionDrop
+  - EffectsSlider
+  - MusicSlider
+  - EnemySpawn
   layers:
   - Default
   - TransparentFX
