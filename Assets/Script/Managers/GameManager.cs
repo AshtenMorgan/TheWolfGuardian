@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using Cinemachine;
 using Cinemachine.Utility;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IDataPersistence
 {
     #region Variables
 
@@ -24,6 +24,10 @@ public class GameManager : MonoBehaviour
     public Transform instanPoint;
     [Header("Spawn Points"), Tooltip("All the places where the enemies or player will be spawned")]
     public Transform playerSpawn;
+    [Header("Checkpoint Respawn Point"), Tooltip("This is the last checkpoint the player Passed")]
+    public Transform lastCheckPoint;
+
+    public string lastCheckPointName;
     #endregion
     #region Camera Control
     public CompositeCollider2D room1,
@@ -52,7 +56,31 @@ public class GameManager : MonoBehaviour
     public Scene scene;
     #endregion
 
+    #region SaveData
+    public void LoadData(GameData Data)
+    {
+        lastCheckPoint = Data.lastCheckPoint;
+        lastCheckPointName = Data.lastCheckPointName;
+        Debug.Log("Loaded lastCheckPoint Data at " + lastCheckPoint);
+    }
+
+    public void SaveData(ref GameData Data)
+    {
+        Data.lastCheckPoint = lastCheckPoint;
+        Data.lastCheckPointName = lastCheckPointName;
+        Debug.Log("Saved lastCheckPoint at " + lastCheckPoint);
+    }
+
+    #endregion
     #region Functions
+
+    private void Start()
+    {
+        if (lastCheckPoint == null)
+        {
+            lastCheckPoint = playerSpawn;
+        }
+    }
 
     private void OnEnable()
     {
@@ -161,7 +189,7 @@ public class GameManager : MonoBehaviour
     {
         if (player.Lives > 0)
         {
-            player.transform.SetPositionAndRotation(playerSpawn.transform.position, playerSpawn.transform.rotation);//Set player position/rotation
+            player.transform.SetPositionAndRotation(lastCheckPoint.transform.position, lastCheckPoint.transform.rotation);//Set player position/rotation
             playerHealth.Respawn();//return player to max health
 
             //return current health to max value
@@ -170,6 +198,7 @@ public class GameManager : MonoBehaviour
             lives = player.Lives;//track how many lives
             playerRecorder = player.GetComponent<InputRecorder>();
             confiner.m_BoundingShape2D = currentRoom.GetComponent<PolygonCollider2D>();
+            Debug.Log("Respawned Player at" + lastCheckPoint.transform.position);
             if (GameSettings.Instance != null)
             {
                 UpdateHealthBar();
@@ -227,6 +256,8 @@ public class GameManager : MonoBehaviour
         //just because it is proper to unsub delegates
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+
+    
 
     #endregion
 }
