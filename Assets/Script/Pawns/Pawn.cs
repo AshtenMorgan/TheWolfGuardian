@@ -23,10 +23,12 @@ public class Pawn : MonoBehaviour
     protected float _meleeAttackRange; //determines the range of the pawns melee attack
     [SerializeField, Tooltip("What is the attack range of pawn")]
     protected float _rangedAttackRange; //determines the range of the pawns ranged attack
+
+    private Transform lastSavedPosition;
     #endregion
 
     #region Full Properties
-     public float JumpHeight //the accessor for _jumpHeight
+    public float JumpHeight //the accessor for _jumpHeight
     {
         get { return _jumpHeight; }
         set { _jumpHeight = value; }
@@ -83,7 +85,8 @@ public class Pawn : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        
+
     }
+
     #endregion
 }
