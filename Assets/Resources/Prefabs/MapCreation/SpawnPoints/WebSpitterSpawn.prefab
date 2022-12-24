@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -8939586460115305604}
   - component: {fileID: 8739945172520981323}
   m_Layer: 8
-  m_Name: WebSpitter
+  m_Name: WebSpitterSpawn
   m_TagString: EnemySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 6495591570032910033}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.06, y: 0.06, z: 1}
+  m_LocalScale: {x: 0.0297942, y: 0.0309732, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
