@@ -13,12 +13,12 @@ public class InputRecorder : MonoBehaviour
 {
     [SerializeField] float ComboResetTime; //this is the timer that resets combos when it reaches zero
     [SerializeField] public List<KeyCode> KeysPressed; //lists all the keys pressed by the pawn 
-    [SerializeField] MovesManager movesManager;
+    //[SerializeField] MovesManager movesManager;
 
     void Awake()
     {
-        if (movesManager == null)
-            movesManager = FindObjectOfType<MovesManager>(); //assigns a moves manager script if one is not assigned
+        //if (movesManager == null)
+        //    movesManager = FindObjectOfType<MovesManager>(); //assigns a moves manager script if one is not assigned
     }
 
    
@@ -35,8 +35,8 @@ public class InputRecorder : MonoBehaviour
             {
                 KeysPressed.Add(kcode); //add it to the list
 
-                if (!movesManager.IsMoveAvailable(KeysPressed)) //if there are no moves available from the buttons pressed, reset the list
-                    StopAllCoroutines();
+                //if (!movesManager.IsMoveAvailable(KeysPressed)) //if there are no moves available from the buttons pressed, reset the list
+                //   StopAllCoroutines();
 
                     StartCoroutine(ResetComboTimer()); //this starts the list reset
             }

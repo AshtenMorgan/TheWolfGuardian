@@ -593,6 +593,10 @@ PrefabInstance:
       propertyPath: parallaxFactor
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 568589382191816637, guid: c18a1df1d36cd7346a156676ea229786, type: 3}
+      propertyPath: parallaxFactorX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 568589382231121317, guid: c18a1df1d36cd7346a156676ea229786, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -4537,6 +4541,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 671355318, guid: 4d0db746bbd77a84895866b68de56948, type: 3}
+      propertyPath: m_TagString
+      value: CMPipe
+      objectReference: {fileID: 0}
     - target: {fileID: 3086752093406043408, guid: 4d0db746bbd77a84895866b68de56948, type: 3}
       propertyPath: room1
       value: 
@@ -4641,7 +4649,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -22.494972
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5593403280914777566, guid: 4d0db746bbd77a84895866b68de56948, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4d0db746bbd77a84895866b68de56948, type: 3}
 --- !u!4 &3748686689602822780
 Transform:

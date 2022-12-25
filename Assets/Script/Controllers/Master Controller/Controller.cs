@@ -15,9 +15,9 @@ public class Controller : MonoBehaviour
     protected float verticalVelocity; //the vertical acceleration of the player pawn
     protected bool isCrouching; //determines if the pawn is crouching
     #endregion
-    
+
     #endregion
-    
+
 
     #region Animator Variables
     [Header("Animator Variables")]
@@ -26,7 +26,7 @@ public class Controller : MonoBehaviour
 
     #region Combat Variables
     [SerializeField] InputRecorder inputRecorder; //assigns the input recorder script so the controller can properly do combos
-    MovesManager movesManager;
+    //MovesManager movesManager;
     int CurrentComboPriority = 0;
     int ComboPriority;
     [SerializeField]
@@ -48,9 +48,9 @@ public class Controller : MonoBehaviour
         //    inputRecorder = FindObjectOfType<InputRecorder>();
         //if (movesManager == null)
         //    movesManager = FindObjectOfType<MovesManager>();
-        
+
         combat = GetComponent<Combat>();
-          
+
     }
 
     protected virtual void Start()
@@ -64,7 +64,7 @@ public class Controller : MonoBehaviour
     }
     protected virtual void FixedUpdate()
     {
-       
+
     }
 
     #region Slope
@@ -75,7 +75,7 @@ public class Controller : MonoBehaviour
     #endregion
 
     protected virtual void ApplyMovement()
-    { 
+    {
     }
 
     #region Combat Functions
@@ -130,9 +130,9 @@ public class Controller : MonoBehaviour
     }
     #endregion
 
-   
 
-    
+
+
 
     #endregion
 }
