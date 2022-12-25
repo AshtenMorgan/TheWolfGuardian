@@ -11,10 +11,8 @@ public class GameData
     
     public GameData()
     {
-        Debug.Log("New Game Data");
         this.lastCheckPoint = null;
         this.lastCheckPointName = null;
-        Debug.Log("Initialized lastCheckPoint at " + lastCheckPoint);
     }
 
 }

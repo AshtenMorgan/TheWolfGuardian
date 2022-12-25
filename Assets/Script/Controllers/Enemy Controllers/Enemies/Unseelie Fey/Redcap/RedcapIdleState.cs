@@ -12,7 +12,6 @@ public class RedcapIdleState : IdleState
     }
     public override void Enter()
     {
-        Debug.Log("Idle State Entered");
         base.Enter();
     }
     public override void LogicUpdate()
@@ -25,7 +24,6 @@ public class RedcapIdleState : IdleState
     }
     public override void Exit()
     {
-        Debug.Log("Idle State Exited");
         base.Exit();
     }
     public override void PhysicsUpdate()

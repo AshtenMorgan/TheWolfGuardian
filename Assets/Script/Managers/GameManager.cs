@@ -61,14 +61,12 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         lastCheckPoint = Data.lastCheckPoint;
         lastCheckPointName = Data.lastCheckPointName;
-        Debug.Log("Loaded lastCheckPoint Data at " + lastCheckPoint);
     }
 
     public void SaveData(ref GameData Data)
     {
         Data.lastCheckPoint = lastCheckPoint;
         Data.lastCheckPointName = lastCheckPointName;
-        Debug.Log("Saved lastCheckPoint at " + lastCheckPoint);
     }
 
     #endregion
@@ -198,7 +196,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
             lives = player.Lives;//track how many lives
             playerRecorder = player.GetComponent<InputRecorder>();
             confiner.m_BoundingShape2D = currentRoom.GetComponent<PolygonCollider2D>();
-            Debug.Log("Respawned Player at" + lastCheckPoint.transform.position);
+
             if (GameSettings.Instance != null)
             {
                 UpdateHealthBar();

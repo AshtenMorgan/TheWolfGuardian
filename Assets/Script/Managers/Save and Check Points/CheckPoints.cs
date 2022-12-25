@@ -14,7 +14,6 @@ public class CheckPoints : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other);
         if (other.gameObject.name == "Ashlynn(Clone)")
         {
             GameManager.Instance.lastCheckPoint = CheckpointLocation;

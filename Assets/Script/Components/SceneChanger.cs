@@ -27,10 +27,8 @@ public class SceneChanger : MonoBehaviour
     {
         target = collision.gameObject;
         controller = target.GetComponent<PlayerControllerV2>();
-        Debug.Log("Made it to getting component");
         if (controller != null)
         {
-            Debug.Log("Should Change");
             SceneManager.LoadScene(Destination);
         }
     }

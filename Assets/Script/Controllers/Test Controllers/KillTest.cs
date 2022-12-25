@@ -17,7 +17,6 @@ public class KillTest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             GameManager.Instance.player.GetComponent<Health>().Damage(testDamage);
-            Debug.Log("Health smack");
             GameManager.Instance.UpdateHealthBar();
         } 
     }

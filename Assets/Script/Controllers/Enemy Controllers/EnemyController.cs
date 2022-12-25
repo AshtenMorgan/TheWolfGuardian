@@ -127,27 +127,20 @@ public class EnemyController : MonoBehaviour
     }
     protected virtual void UpdatePatrolState()
     {
-
         Patrol();
-
-        Debug.Log("Patrol Done");
     }
     protected virtual void ExitPatrolState()
     {
-
     }
     #endregion
     #region Chase
     //Chase State
     protected virtual void EnterChaseState()
     {
-        Debug.Log("Chase Started");
     }
     protected virtual void UpdateChaseState()
     {
-        Debug.Log("Chasing");
         Chase();
-
     }
     protected virtual void ExitChaseState()
     {

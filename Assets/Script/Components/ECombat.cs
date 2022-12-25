@@ -105,19 +105,16 @@ public class ECombat : MonoBehaviour
                         HitA();
                         nextHit = 1;
                         comboTimer = Time.time + decayDelay;
-                        Debug.Log("Hit A done");
                         break;
                     case 1:
                         HitB();
                         nextHit = 2;
                         comboTimer = Time.time + decayDelay;
-                        Debug.Log("Hit B done");
                         break;
                     case 2:
                         HitC();
                         nextHit = 0;
                         comboTimer = Time.time + decayDelay;
-                        Debug.Log("Hit C done");
                         break;
                 }
             }
@@ -126,7 +123,6 @@ public class ECombat : MonoBehaviour
                 HitA();
                 comboTimer = Time.time + decayDelay;
                 nextHit = 1;
-                Debug.Log("Hit A done");
             }
         }
     }
