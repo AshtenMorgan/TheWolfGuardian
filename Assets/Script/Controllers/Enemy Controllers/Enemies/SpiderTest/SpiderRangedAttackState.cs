@@ -20,8 +20,10 @@ public class SpiderRangedAttackState : RangedAttackState
 
     public override void Enter()
     {
-        enemy.ani.SetBool("insideAttackDistance", true);
-        enemy.ani.SetTrigger("fireRangedAttack");
+        //TODO:  Set up animations for spider attacking
+
+        //enemy.ani.SetBool("insideAttackDistance", true);
+        //enemy.ani.SetTrigger("fireRangedAttack");
         attackTime = Time.time;
         base.Enter();
     }
