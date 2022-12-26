@@ -243,7 +243,6 @@ public class PlayerControllerV2 : Controller
         if (slopeHitFront)
         {
             slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
-            Debug.Log("Slope front " + slopeSideAngle);
             if (slopeSideAngle > 89)
             {
                 isOnSlope = false;
@@ -258,7 +257,6 @@ public class PlayerControllerV2 : Controller
         else if (slopeHitBack)
         {
             slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
-            Debug.Log("Slope Back " + slopeSideAngle);
 
             if (slopeSideAngle > 89)
             {
@@ -272,7 +270,6 @@ public class PlayerControllerV2 : Controller
         }
         else
         {
-            Debug.Log("Zero Slope");
             slopeSideAngle = 0.0f;
             isOnSlope = false;
         }
