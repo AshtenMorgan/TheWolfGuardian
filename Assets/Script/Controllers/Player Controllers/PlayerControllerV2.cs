@@ -68,6 +68,7 @@ public class PlayerControllerV2 : Controller
 
     [SerializeField]
     protected float maxGroundAngle = 50.0f;
+    protected float angleTolerance;
     public Vector2 colSize;
     #endregion
     #endregion
@@ -241,16 +242,37 @@ public class PlayerControllerV2 : Controller
 
         if (slopeHitFront)
         {
-            isOnSlope = true;
             slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
+            Debug.Log("Slope front " + slopeSideAngle);
+            if (slopeSideAngle > 89)
+            {
+                isOnSlope = false;
+            }
+            else
+            {
+                isOnSlope = true;
+            }
+            
+           
         }
         else if (slopeHitBack)
         {
-            isOnSlope = true;
             slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
+            Debug.Log("Slope Back " + slopeSideAngle);
+
+            if (slopeSideAngle > 89)
+            {
+                isOnSlope = false;
+            }
+            else
+            {
+                isOnSlope = true;
+            }
+            
         }
         else
         {
+            Debug.Log("Zero Slope");
             slopeSideAngle = 0.0f;
             isOnSlope = false;
         }
@@ -263,7 +285,7 @@ public class PlayerControllerV2 : Controller
             slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
             slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
 
-            if (slopeDownAngle >= 89)
+            if ((slopeDownAngle <= angleTolerance)&&(slopeDownAngle != 0))
             {
                 Debug.Log(slopeDownAngle);
                 if (slopeDownAngle != slopeDownAngleOld)
@@ -379,7 +401,11 @@ public class PlayerControllerV2 : Controller
         //with an additional "belowLength"
         //**********FIXED*********//
         if (isJumping)
+        {
+            isOnSlope = false;
             return false;
+        }
+            
         else
             return Physics2D.Raycast(capsuleCollider2d.bounds.center, Vector2.down, capsuleCollider2d.bounds.extents.y + belowCheck, whatIsGround);
     }
@@ -389,7 +415,7 @@ public class PlayerControllerV2 : Controller
     }
     void OnCollisionStay2D(Collision2D coll)
     {
-        float angleTolerance = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
+        angleTolerance = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
 
         foreach (ContactPoint2D contact in coll.contacts)
         {
