@@ -11,7 +11,6 @@ public class RedcapPatrolState : PatrolState
     }
     public override void Enter()
     {
-        Debug.Log("Patrol State Entered");
         base.Enter();
     }
     public override void LogicUpdate()
@@ -43,7 +42,6 @@ public class RedcapPatrolState : PatrolState
     }
     public override void Exit()
     {
-        Debug.Log("Patrol State Exited");
         base.Exit();
     }
 }

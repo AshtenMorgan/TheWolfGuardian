@@ -80,7 +80,6 @@ public class ObjectPool : MonoBehaviour
 
         for (int i = 0; i < _allPoints.Count; i++)
         {
-            Debug.Log("Loop " + i + " of " + _allPoints.Count);
             if (_allPoints[i].GetComponent<Beast_UF_Redcap>())//redcap
                 _prefabLocation.Add("Prefabs/Pawn Prefabs/Beastiary Prefabs/Unseelie Fey/Beast_UF_Redcap");
             

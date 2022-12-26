@@ -212,26 +212,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283076cc70643e44c8532791e93979b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ani: {fileID: 0}
+  ani: {fileID: 1336663593021864652}
   inputRecorder: {fileID: 0}
   move: 0
-  rb2d: {fileID: 0}
+  rb2d: {fileID: 1336663593021864645}
   noFriction: {fileID: 6200000, guid: a7d07c8865247894690a7e2ac137a251, type: 2}
   fullFriction: {fileID: 6200000, guid: 48626c08f0a6277489a9387662b457ac, type: 2}
-  walkSpeed: 0
+  walkSpeed: 1
   runMult: 1.5
   jumpForce: 12
   jumpTime: 0.04
-  slopeCheckDistance: 0.3
+  isJumping: 0
+  slopeCheckDistance: 0.5
   isOnSlope: 0
   isGrounded: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
-  capsuleCollider2d: {fileID: 0}
-  belowCheck: 0.05
+  capsuleCollider2d: {fileID: 6904395141196890448}
+  belowCheck: 0.5
   colCount: 0
-  maxGroundAngle: 180
+  maxGroundAngle: 90
   colSize: {x: 0, y: 0}
 --- !u!114 &7700208908291447054
 MonoBehaviour:

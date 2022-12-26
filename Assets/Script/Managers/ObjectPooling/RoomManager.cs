@@ -19,6 +19,7 @@ public class RoomManager : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            gm.currentRoom = roomCollider;
             StartCoroutine(UpdateSpawn(0.2f));
             for (int i = 0; i < _pool.enemyPool.Count; i++)
             {

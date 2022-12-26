@@ -35,6 +35,7 @@ TagManager:
   - EffectsSlider
   - MusicSlider
   - EnemySpawn
+  - CMPipe
   layers:
   - Default
   - TransparentFX

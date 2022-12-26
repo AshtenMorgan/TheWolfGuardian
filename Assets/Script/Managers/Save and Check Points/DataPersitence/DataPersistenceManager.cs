@@ -20,9 +20,8 @@ public class DataPersistenceManager : MonoBehaviour
     private void Awake()
     {
         //Checks to see if a Manager already exists
-        if(instance != null)
+        if (instance != null)
         {
-            Debug.LogError("Already a Data Persistence Manager in the Game");
         }
 
         //Else it creates a new one
@@ -40,23 +39,20 @@ public class DataPersistenceManager : MonoBehaviour
     //Creates a new Instance of Game Data to start a new Game
     public void NewGame()
     {
-        Debug.Log("Starting New Game");
+        //TODO: New Game Popup
         this.GameData = new GameData();
     }
 
     //Loads previous data of a game
     public void LoadGame()
     {
-        Debug.Log("Loading Game");
         this.GameData = FileDataHandler.Load();
 
-        if(this.GameData == null)
+        if (this.GameData == null)
         {
-            Debug.LogError("No Data Found, Initializing to defualt");
             NewGame();
         }
 
-        Debug.Log("Loading assets");
         foreach (IDataPersistence dataPersitentObj in IDataPersistenceObjects)
         {
             dataPersitentObj.LoadData(GameData);
@@ -76,7 +72,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()
     {
-        IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>(); 
+        IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>();
         IEnumerable<IDataPersistence> controllerDataPersistenceObjects = FindObjectsOfType<Controller>().OfType<IDataPersistence>();
 
         return new List<IDataPersistence>(dataPersistenceObjects);

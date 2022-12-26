@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         currentRoom;
     public CinemachineConfiner confiner;
     public CinemachineVirtualCamera cam;
+    public Camera cameraMain;
     #endregion
     #region MiniMap
     public BoxCollider2D currentMap;
@@ -56,58 +57,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public Scene scene;
     #endregion
 
-    #region SaveData
-    public void LoadData(GameData Data)
-    {
-        lastCheckPoint = Data.lastCheckPoint;
-        lastCheckPointName = Data.lastCheckPointName;
-        Debug.Log("Loaded lastCheckPoint Data at " + lastCheckPoint);
-    }
-
-    public void SaveData(ref GameData Data)
-    {
-        Data.lastCheckPoint = lastCheckPoint;
-        Data.lastCheckPointName = lastCheckPointName;
-        Debug.Log("Saved lastCheckPoint at " + lastCheckPoint);
-    }
-
-    #endregion
-    #region Functions
-
-    private void Start()
-    {
-        if (lastCheckPoint == null)
-        {
-            lastCheckPoint = playerSpawn;
-        }
-    }
-
-    private void OnEnable()
-    {
-        //check what scene and run scenloaded functions.  This should load every time a scene change occurs
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene loaded, LoadSceneMode mode)
-    {
-        scene = loaded;//update what scene we are in
-        if(GameSettings.Instance != null)
-        {
-            if (scene.name != "MainMenu")
-            {
-                GameSettings.Instance.activeMenu = ActiveMenu.Game;
-                VarCheck();
-
-            }
-            else if (scene.name == "MainMenu")
-            {
-
-            }
-        }
-        else
-            VarCheck();
-    }
-
+    //DO NOT PUT ANYTHING ABOVE OR BETWEEN UNITY EVENTS, THEY SHOULD STAY IN ORDER OF EXECUTION!!!!
+    #region Unity Events
     //Singleton  only one instance
     private void Awake()
     {
@@ -120,6 +71,20 @@ public class GameManager : MonoBehaviour, IDataPersistence
         else
         {
             Destroy(gameObject);
+        }
+    }
+    private void OnEnable()
+    {
+        //check what scene and run scenloaded functions.  This should load every time a scene change occurs
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        cameraMain = Camera.main;
+    }
+
+    private void Start()
+    {
+        if (lastCheckPoint == null)
+        {
+            lastCheckPoint = playerSpawn;
         }
     }
 
@@ -146,13 +111,67 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 }
             }
         }
-        
+
         if (scene.name != "MainMenu")//make sure we should have stuff
         {
             CheckSpawn();       //see if it is time to spawn player  //maybe trigger this on death
         }
     }
+    #endregion
 
+
+
+
+
+
+
+
+
+
+
+    #region SaveData
+    public void LoadData(GameData Data)
+    {
+        lastCheckPoint = Data.lastCheckPoint;
+        lastCheckPointName = Data.lastCheckPointName;
+    }
+
+    public void SaveData(ref GameData Data)
+    {
+        Data.lastCheckPoint = lastCheckPoint;
+        Data.lastCheckPointName = lastCheckPointName;
+    }
+
+    #endregion
+    #region Functions
+
+   
+
+    
+
+    private void OnSceneLoaded(Scene loaded, LoadSceneMode mode)
+    {
+        scene = loaded;//update what scene we are in
+        if(GameSettings.Instance != null)
+        {
+            if (scene.name != "MainMenu")
+            {
+                GameSettings.Instance.activeMenu = ActiveMenu.Game;
+                VarCheck();
+
+            }
+            else if (scene.name == "MainMenu")
+            {
+
+            }
+        }
+        else
+            VarCheck();
+    }
+
+    
+
+    
     public void VarCheck()
     {
         //set objects
@@ -198,7 +217,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
             lives = player.Lives;//track how many lives
             playerRecorder = player.GetComponent<InputRecorder>();
             confiner.m_BoundingShape2D = currentRoom.GetComponent<PolygonCollider2D>();
-            Debug.Log("Respawned Player at" + lastCheckPoint.transform.position);
+
             if (GameSettings.Instance != null)
             {
                 UpdateHealthBar();
@@ -256,8 +275,5 @@ public class GameManager : MonoBehaviour, IDataPersistence
         //just because it is proper to unsub delegates
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-
-    
-
     #endregion
 }

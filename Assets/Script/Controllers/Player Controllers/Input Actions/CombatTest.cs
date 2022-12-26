@@ -179,7 +179,6 @@ public class CombatTest : MonoBehaviour
 
         foreach (Collider2D Enemy in assetsHitIdle)
         {
-            Debug.Log("We hit" + Enemy.name);
         }
     }
 
@@ -189,7 +188,6 @@ public class CombatTest : MonoBehaviour
 
         foreach (Collider2D Enemy in assetsHitCrouched)
         {
-            Debug.Log("We hit" + Enemy.name);
         }
     }
     void DownAirAttackAOE()
@@ -198,7 +196,6 @@ public class CombatTest : MonoBehaviour
 
         foreach (Collider2D Enemy in assetsHitDownAir)
         {
-            Debug.Log("We hit" + Enemy.name);
         }
     }
     

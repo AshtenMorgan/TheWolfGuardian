@@ -19,14 +19,12 @@ public class RedcapChaseState : ChaseState
 
     public override void Enter()
     {
-        Debug.Log("Chase State Entered");
         base.Enter();
         enemy.PlayerDetected = true;
     }
 
     public override void Exit()
     {
-        Debug.Log("Chase State Exited");
         base.Exit();
         enemy.PlayerDetected = false;
     }
