@@ -1002,7 +1002,11 @@ MonoBehaviour:
   gizmoIdleColor: {r: 0, g: 1, b: 0, a: 0.39215687}
   gizmoDetectedColor: {r: 1, g: 0, b: 0, a: 0.39215687}
   showGizmos: 1
+  delay: 1
+  slopeCheckDistance: 0
+  isOnSlope: 0
   entityData: {fileID: 11400000, guid: f344947593957a344a3d187dda420fac, type: 2}
+  fTp: {fileID: 2629418363887221573, guid: e47106540a00ebd43b758dda4bff4518, type: 3}
   wallCheck: {fileID: 5046184464393793190}
   ledgeCheck: {fileID: 2658141955838687322}
   originAttackA: {fileID: 5215585018920791278}
@@ -1011,6 +1015,7 @@ MonoBehaviour:
   patrolStateData: {fileID: 11400000, guid: 27f8974209d28324daebf3c92e3d4bc8, type: 2}
   chaseStateData: {fileID: 11400000, guid: bbda2a20244e93c49b3d4139fa9c7e71, type: 2}
   rangedAttackStateData: {fileID: 11400000, guid: 489c45f490a0dfe4ca78992e93768b91, type: 2}
+  meleeAttackStateData: {fileID: 0}
   webShot: {fileID: 7432091805471575169, guid: ddec5ff66a83fc1468f41bbdbc29f630, type: 3}
   venomShot: {fileID: 4231968617421759367, guid: bd14d689c84719d49999d6f42a4bafa4, type: 3}
 --- !u!61 &20444851315352758

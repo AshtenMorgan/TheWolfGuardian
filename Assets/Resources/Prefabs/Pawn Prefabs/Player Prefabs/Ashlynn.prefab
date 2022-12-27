@@ -248,18 +248,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   isAttacking: 0
-  attackPointIdle: {fileID: 0}
-  attackPointCrouched: {fileID: 0}
-  attackPointDownAir: {fileID: 0}
+  attackPointIdle: {fileID: 651217628918886266}
+  attackPointCrouched: {fileID: 1582143866818022629}
+  attackPointDownAir: {fileID: 6504136024550080444}
   attackRange: 0.5
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   hitAPos0: {fileID: 651217628918886266}
   hitAVector0: {x: 0.72, y: 0.31, z: 0}
+  hitAJumpPos: {fileID: 0}
+  hitAJumpVector: {x: 0.6, y: 0.49, z: 0}
+  hitACrouchPos: {fileID: 0}
+  hitACrouchVector: {x: 0.72, y: 0.31, z: 0}
 --- !u!114 &1281415155016603649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,7 +468,7 @@ GameObject:
   m_Component:
   - component: {fileID: 651217628918886266}
   m_Layer: 6
-  m_Name: HitAPos0
+  m_Name: AttackIdle
   m_TagString: HitA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -478,7 +482,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845089198985879403}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.8441, y: 0.4374, z: 0}
+  m_LocalPosition: {x: 0.864, y: 0.583, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7872396869264081400}
@@ -609,7 +613,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1582143866818022629}
   m_Layer: 0
-  m_Name: HitBPos
+  m_Name: AttackCrouched
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -623,7 +627,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6907385764299168043}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.845, y: 0.282, z: 0}
+  m_LocalPosition: {x: 0.857, y: -0.034, z: 0}
   m_LocalScale: {x: 0.9946291, y: 0.98396146, z: 1}
   m_Children: []
   m_Father: {fileID: 7872396869264081400}
@@ -639,7 +643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6504136024550080444}
   m_Layer: 0
-  m_Name: HitCPos
+  m_Name: AttackAir
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -653,7 +657,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8603168553486982241}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.749, y: 0.687, z: -0.97746587}
+  m_LocalPosition: {x: 0.668, y: -0.231, z: -0.97746587}
   m_LocalScale: {x: 0.9946291, y: 0.98396146, z: 1}
   m_Children: []
   m_Father: {fileID: 7872396869264081400}

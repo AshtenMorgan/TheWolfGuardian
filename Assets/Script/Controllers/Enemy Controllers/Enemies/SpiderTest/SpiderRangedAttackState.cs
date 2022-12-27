@@ -38,7 +38,7 @@ public class SpiderRangedAttackState : RangedAttackState
     {
         shouldFlip = entity.LeftRight();
         if (shouldFlip)
-            entity.lagFlip(1.0f);
+            entity.LagFlip(1.0f);
 
         if (!enemy.CanSeeTarget())
             stateMachine.ChangeState(enemy.idleState);

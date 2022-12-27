@@ -24,6 +24,8 @@ using System.Threading.Tasks;
 public class Entity : MonoBehaviour
 {
 
+
+    #region Variables
     #region Box Raycast
 
     public bool PlayerDetected;
@@ -42,10 +44,9 @@ public class Entity : MonoBehaviour
     public Color gizmoIdleColor = Color.green;
     public Color gizmoDetectedColor = Color.red;
     public bool showGizmos = true;
-    [SerializeField] protected float delay=1.0f;
+    [SerializeField] protected float delay = 1.0f;
 
     #endregion
-    #region Variables
     #region slope stuff
     [SerializeField] protected float slopeCheckDistance;
     protected float slopeDownAngle;
@@ -62,14 +63,14 @@ public class Entity : MonoBehaviour
     public Data_Entity entityData;
     public GameObject target { get; private set; }
 
-    private GameObject floatingTextPrefab;
+    protected GameObject floatingTextPrefab;
     public GameObject fTp;
-    private Vector3 bump = new Vector3(0, 2, 0.5f);
+    protected Vector3 bump = new Vector3(0, 2, 0.5f);
 
     #endregion
     #region Movement
     public int facingDirection { get; private set; }
-    private Vector2 tempV2;
+    protected Vector2 tempV2;
 
     [SerializeField]
     protected Transform wallCheck,
@@ -153,7 +154,7 @@ public class Entity : MonoBehaviour
         }
        else
         {
-            lagFlip(1.0f);//If it is not facing the target it will flip, and then return the distance.
+            LagFlip(1.0f);//If it is not facing the target it will flip, and then return the distance.
             return Vector2.Distance(transform.position, target.transform.position) < entityData.viewDistance;
         }
    
@@ -187,9 +188,9 @@ public class Entity : MonoBehaviour
             return false;//If it is on top, returns false as to not get stuck in an infinite loop. 
         }
     }
-    public virtual void lagFlip(float delay)
+    public virtual void LagFlip(float delay)
     {
-        Invoke("Flip", delay);
+        Invoke(nameof(Flip), delay);
         Debug.Log("delayed flip called "+delay);
     }
     public virtual void Flip()
