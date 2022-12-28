@@ -228,9 +228,9 @@ public class CombatTest : MonoBehaviour
     {
         Gizmos.color = Color.red; //makes Gizmo for Hitboxes red
         #region Hitbox A Gizmos
-        Gizmos.DrawWireCube(hitAPos0.position, hitAVector0); //displays the size and shape of hitbox
-        Gizmos.DrawWireCube(hitAJumpPos.position, hitAJumpVector); //displays the size and shape of hitbox A in the air
-        Gizmos.DrawWireCube(hitACrouchPos.position, hitACrouchVector); //displays the size and shape of hitbox A while crouching
+        Gizmos.DrawWireCube(attackPointIdle.position, hitAVector0); //displays the size and shape of hitbox
+        Gizmos.DrawWireCube(attackPointDownAir.position, hitAJumpVector); //displays the size and shape of hitbox A in the air
+        Gizmos.DrawWireCube(attackPointCrouched.position, hitACrouchVector); //displays the size and shape of hitbox A while crouching
         #endregion
     }
 }

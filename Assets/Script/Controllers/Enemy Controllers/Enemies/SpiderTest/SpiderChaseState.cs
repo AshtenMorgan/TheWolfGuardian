@@ -38,7 +38,7 @@ public class SpiderChaseState : ChaseState
             stateMachine.ChangeState(enemy.idleState);
                     
         if (shouldFlip) 
-            entity.lagFlip(1.0f); //delayed version of Flip, see entity.cs
+            entity.LagFlip(1.0f); //delayed version of Flip, see entity.cs
         
         if (Vector2.Distance(entity.transform.position, GameManager.Instance.player.transform.position) <= entity.entityData.ranged)//is player within ranged attack distance
             stateMachine.ChangeState(enemy.rangedAttackState);

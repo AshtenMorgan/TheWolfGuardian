@@ -116,11 +116,19 @@ public class Health : Pickups
     {
         isDead = true;//let other things know this is dead.
 
-        audiosource.PlayOneShot(deathSound); //play death sound
+        PlayDeath(); //play death sound
 
         gameObject.SetActive(false);//set object inactive
     }
 
+    void PlayDeath()
+    {
+        audiosource = Instantiate(gameObject.AddComponent<AudioSource>());
+        audiosource.clip = deathSound;
+        audiosource.playOnAwake = false;
+        audiosource.PlayOneShot(deathSound);
+        DestroyObject(audiosource, 2.0f);
+    }
     public float GetPercent()
     {
         float percent = _health / _maxHealth;
